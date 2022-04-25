@@ -1,39 +1,37 @@
+from asyncio import tasks
+from mimetypes import read_mime_types
+from operator import itemgetter
 from re import sub
 import numpy as np
-
+import operator
 from . import AbstractModel
 from ..operators import Crossover, Mutation, Selection
 from ..tasks.function import AbstractFunc
 from ..EA import *
 import matplotlib.pyplot as plt
+import copy
 
 
-class model(AbstractModel.model): 
-    def compile(self, tasks: list[AbstractFunc], crossover: Crossover.AbstractCrossover, mutation: Mutation.AbstractMutation, selection: Selection.AbstractSelection, *args, **kwargs):
-        return super().compile(tasks, crossover, mutation, selection, *args, **kwargs)
+
+class model(AbstractModel.model):
+    def compile(self, 
+        IndClass: Type[Individual],
+        tasks: list[AbstractTask], 
+        crossover: Crossover.SBX_Crossover, mutation: Mutation.GaussMutation, selection: Selection.ElitismSelection, 
+        *args, **kwargs):
+        return super().compile(IndClass, tasks, crossover, mutation, selection, *args, **kwargs)
     
-    def findParentSameSkill(self, subpop: SubPopulation, ind):
-        ind2 = ind 
-        while ind2 is ind: 
-            ind2 = subpop.__getRandomItems__(size= 1)[0]
-        
-        return ind2 
-    
-    def Linear_population_size_reduction(self, evaluations, current_size_pop, max_eval_each_tasks, max_size, min_size):
-        for task in range(len(self.tasks)):
-            new_size = (min_size[task] - max_size[task]) * evaluations[task] / max_eval_each_tasks[task] + max_size[task] 
-
-            new_size= int(new_size) 
-            if new_size < current_size_pop[task]: 
-                current_size_pop[task] = new_size 
-        
-        return current_size_pop 
     def get_elite(self,pop,size):
         elite_subpops = []
         for i in range(len(pop)):
             idx = np.argsort(pop[i].factorial_rank)[:size].tolist()
             elite_subpops.append(pop[i][idx])
         return elite_subpops
+    def get_elite_transfer (self, pop, size) :
+        elite_transfer = []
+        idx = np.argsort(pop.factorial_rank)[:size].tolist()
+        elite_transfer += pop[idx]
+        return elite_transfer
     def distance(self,a,b):
         return np.linalg.norm(a-b)        
     def rank_distance(self,subpops,x:Individual):
@@ -52,7 +50,7 @@ class model(AbstractModel.model):
         return rmp
     def get_pop_intersection(self,subpops):
         k = len(self.tasks)
-        rmp = np.zeros((k,k))
+        rmp = np.zeros([k,k])
         for i in range(k):
             DT = 0           
             for u in range(20):
@@ -96,12 +94,13 @@ class model(AbstractModel.model):
         for i in range(len(self.tasks)):
             for j in range(len(self.tasks)):
                 x=[]
-                if i !=j:
-                    for k in range(1000):
+                # for k in range(1000):
+                for k in range(len(tmp)):
+                    if i!=j:
                         x.append(tmp[k][i][j])
-                    plt.subplot(int(np.ceil(len(self.tasks) / 3)), 3, i + 1)
-                    plt.plot(x,label= 'task: ' +str(j + 1))
-                    plt.legend()
+                        plt.subplot(int(np.ceil(len(self.tasks) / 3)), 3, i + 1)
+                        plt.plot(x,label= 'task: ' +str(j + 1))
+                        plt.legend()
               
             plt.title('task ' + str( i + 1))
             plt.xlabel("Epoch")
@@ -115,84 +114,79 @@ class model(AbstractModel.model):
         index =0 
         while tmp[index] < rand:
             index+=1
-            if index == 9:
+            if index == len(self.tasks) - 1:
                 return index
         return index 
-    def check(self,offspring,current_inds_each_task):
-        for i in range(len(offspring.ls_subPop)):
-            if len(offspring[i]) < current_inds_each_task[i]:
-                return True
-        return False
-    def fit(self, max_inds_each_task: list, nb_generations :int ,LSA = False,  bound = [0, 1], evaluate_initial_skillFactor = False,
+
+    def distance_to_pop (self,inv, pop_elite, fRank) :
+        sum = 0
+        for individual in pop_elite :
+            sum += self.distance(inv.genes, individual.genes)
+        tmp = 1/sum * (1+1/fRank)
+        return tmp
+    def get_max_IM (self,IM_i) :
+        b = {}
+        for i in range(len(self.tasks)) :
+            b[i] = IM_i[i]
+        temp = sorted(b.items(), key = operator.itemgetter(1), reverse=True)
+        return temp
+        
+
+
+    def fit(self, nb_inds_each_task: int, nb_inds_min:int,nb_generations :int , evaluate_initial_skillFactor = False,LSA= False,
             *args, **kwargs): 
         super().fit(*args, **kwargs)
-
-        current_inds_each_task = np.copy(max_inds_each_task) 
-
-
+        # initialize population
         population = Population(
-            nb_inds_tasks= current_inds_each_task, 
-            dim = self.dim_uss, 
-            bound = bound, 
-            list_tasks= self.tasks, 
-            evaluate_initial_skillFactor= evaluate_initial_skillFactor
+            self.IndClass,
+            nb_inds_tasks = [nb_inds_each_task] * len(self.tasks), 
+            dim = self.dim_uss,
+            list_tasks= self.tasks,
+            evaluate_initial_skillFactor = evaluate_initial_skillFactor
         )
+        #history
         self.IM = []
+        self.rmp_hist = []
+        self.inter_task = []
         len_task  = len(self.tasks)
-        for epoch in range(nb_generations):
-            offspring = Population(
+        inter =  [0.9]*len_task
+        intra =  [0.1]*len_task
+        rmp = np.zeros([len_task,len_task])
+
+        #SA param
+        nb_inds_tasks = [nb_inds_each_task]*len(self.tasks)
+        MAXEVALS = nb_generations * nb_inds_each_task * len(self.tasks)
+        epoch =0 
+        eval_k = np.zeros(len(self.tasks))
+
+        while np.sum(eval_k) <= MAXEVALS:
+            offsprings = Population(
+                self.IndClass,
                 nb_inds_tasks= [0] * len(self.tasks),
-                dim = self.dim_uss, 
-                bound = bound,
+                dim =  self.dim_uss, 
                 list_tasks= self.tasks,
             )
-            elite = self.get_elite(population.ls_subPop,20)
-            rmp = self.get_pop_intersection_v2(elite)
-            # create new offspring population 
-            # while self.check(offspring,current_inds_each_task): 
-            while len(offspring) <len(population):
-                # choose parent 
-                pa, pb = population.__getRandomInds__(size= 2) 
-                # crossover
-                if pa.skill_factor == pb.skill_factor or np.random.rand() < rmp[pa.skill_factor][pb.skill_factor]: 
-                    oa, ob = self.crossover(pa, pb) 
-                    oa.skill_factor, ob.skill_factor = np.random.choice([pa.skill_factor, pb.skill_factor], size= 2, replace= True)
-                    if pa.skill_factor != pb.skill_factor:
-                        oa.transfer =True
-                        ob.transfer =True
-                else: 
-                    pa1 = self.findParentSameSkill(population[pa.skill_factor], pa) 
-                    oa, _ = self.crossover(pa, pa1) 
-                    #3.oa = self.mutation(pa, return_newInd= True)
-                    oa.skill_factor = pa.skill_factor
-
-                    pb1 = self.findParentSameSkill(population[pb.skill_factor], pb) 
-                    ob, _ = self.crossover(pb, pb1) 
-                    #ob = self.mutation(pb, return_newInd= True)
-                    ob.skill_factor = pb.skill_factor 
-                # eval and append # addIndividual already has eval  
-                offspring.__addIndividual__(oa) 
-                offspring.__addIndividual__(ob) 
-            offspring.update_rank()
-              
-    
-               # merge and update rank
-            population = population + offspring 
-            population.update_rank()
-            # selection 
-            self.selection(population, current_inds_each_task)
-
-
-            # save history 
-            self.history_cost.append([ind.fcost for ind in population.get_solves()])
             
-            self.render_process((epoch + 1)/nb_generations, ["Cost"], [self.history_cost[-1]], use_sys= True)
-            self.IM.append(np.copy(rmp))
+            # merge and update rank
+            population = population + offsprings
+            population.update_rank()
+
+            # selection 
+            if LSA :
+                nb_inds_tasks = [int(
+                    # (nb_inds_min - nb_inds_each_task) / nb_generations * (epoch - 1) + nb_inds_each_task
+                    int(min((nb_inds_min - nb_inds_each_task)/(nb_generations - 1)* epoch  + nb_inds_each_task, nb_inds_each_task))
+                )] * len(self.tasks)
+            self.selection(population, nb_inds_tasks)
+           
+            # save history
+            self.history_cost.append([ind.fcost for ind in population.get_solves()])
+                
+            self.render_process(epoch/nb_generations, ['Pop_size', 'Cost'], [[len(u) for u in population.ls_subPop], self.history_cost[-1]], use_sys= True)
+
+            # self.IM.append(np.copy(IM))
+            self.rmp_hist.append(np.copy(rmp))
         print("End")
         # solve 
         self.last_pop = population 
         return self.last_pop.get_solves()
-
-
-
-

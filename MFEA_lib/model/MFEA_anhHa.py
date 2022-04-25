@@ -10,10 +10,13 @@ from ..EA import *
 import matplotlib.pyplot as plt
 import copy
 
-
-class model(AbstractModel.model): 
-    def compile(self, tasks: list[AbstractFunc], crossover: Crossover.AbstractCrossover, mutation: Mutation.AbstractMutation, selection: Selection.AbstractSelection, *args, **kwargs):
-        return super().compile(tasks, crossover, mutation, selection, *args, **kwargs)
+class model(AbstractModel.model):
+    def compile(self, 
+        IndClass: Type[Individual],
+        tasks: list[AbstractTask], 
+        crossover: Crossover.SBX_Crossover, mutation: Mutation.GaussMutation, selection: Selection.ElitismSelection, 
+        *args, **kwargs):
+        return super().compile(IndClass, tasks, crossover, mutation, selection, *args, **kwargs)
     
     def findParentSameSkill(self, subpop: SubPopulation, ind):
         ind2 = ind 
@@ -147,19 +150,19 @@ class model(AbstractModel.model):
             *args, **kwargs): 
         super().fit(*args, **kwargs)
         population = Population(
-            nb_inds_tasks= [nb_inds_each_task]*len(self.tasks), 
-            dim = self.dim_uss, 
-            bound = bound, 
-            list_tasks= self.tasks, 
-            evaluate_initial_skillFactor= evaluate_initial_skillFactor
+            self.IndClass,
+            nb_inds_tasks = [nb_inds_each_task] * len(self.tasks), 
+            dim = self.dim_uss,
+            list_tasks= self.tasks,
+            evaluate_initial_skillFactor = evaluate_initial_skillFactor
         )
         #history
         self.IM = []
         self.rmp_hist = []
         self.inter_task = []
         len_task  = len(self.tasks)
-        inter =  [1-1/len_task]*len_task
-        intra =  [1/len_task]*len_task
+        inter =  [0.9]*len_task
+        intra =  [0.1]*len_task
         rmp = np.zeros([len_task,len_task])
 
         #SA param
@@ -170,9 +173,9 @@ class model(AbstractModel.model):
 
         while np.sum(eval_k) <= MAXEVALS:
             offsprings = Population(
+                self.IndClass,
                 nb_inds_tasks= [0] * len(self.tasks),
-                dim = self.dim_uss, 
-                bound = bound,
+                dim =  self.dim_uss, 
                 list_tasks= self.tasks,
             )
             elite = self.get_elite(population.ls_subPop,20)
@@ -213,7 +216,7 @@ class model(AbstractModel.model):
                         pop_transfer = self.get_elite_transfer (population[j], transfer)
                         for inv in pop_transfer :
                             gen = np.copy(inv.genes)
-                            tmp_inv = Individual (gen)
+                            tmp_inv = self.IndClass (gen)
                             tmp_inv.skill_factor = i
                             tmp_inv.hybrid = False
                             eval_k[i] += 1
