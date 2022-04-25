@@ -124,7 +124,7 @@ class model(AbstractModel.model):
         index =0 
         while tmp[index] < rand:
             index+=1
-            if index == 9:
+            if index == len(self.tasks) - 1:
                 return index
         return index 
 
@@ -158,8 +158,8 @@ class model(AbstractModel.model):
         self.rmp_hist = []
         self.inter_task = []
         len_task  = len(self.tasks)
-        inter =  [0.5]*len_task
-        intra =  [0.5]*len_task
+        inter =  [1-1/len_task]*len_task
+        intra =  [1/len_task]*len_task
         rmp = np.zeros([len_task,len_task])
 
         #SA param
@@ -176,29 +176,30 @@ class model(AbstractModel.model):
                 list_tasks= self.tasks,
             )
             elite = self.get_elite(population.ls_subPop,20)
+            # IM =self.get_pop_intersection_v2(elite)
             measurement = np.zeros((len_task,len_task))
-            IM =self.get_pop_intersection_v2(elite)
             if np.sum(eval_k) >= epoch * nb_inds_each_task * len(self.tasks):
                     # save history 
                 self.history_cost.append([ind.fcost for ind in population.get_solves()])
                 
                 self.render_process(epoch/nb_generations, ['Pop_size', 'Cost'], [[len(u) for u in population.ls_subPop], self.history_cost[-1]], use_sys= True)
 
-                self.IM.append(np.copy(IM))
+                # self.IM.append(np.copy(IM))
                 self.rmp_hist.append(np.copy(rmp))
                 epoch+=1
       
-            for i in range(len_task):
-                for j in range(len_task):
-                    if i != j :
-                        for inv1 in range(20):
-                            measurement[i,j] += self.distance_to_pop(elite[j][inv1], elite[i], inv1 + 1)
-            for i in range(len_task):
-                sum_tmp = np.sum(measurement[i])
-                for j in range(len_task):
-                    if i != j:
-                        rmp[i,j] = measurement[i,j] / sum_tmp * inter[i]
-                rmp[i,i]= intra[i]
+            if (epoch % 5 == 0) : 
+                for i in range(len_task):
+                    for j in range(len_task):
+                        if i != j :
+                            for inv1 in range(20):
+                                measurement[i,j] += self.distance_to_pop(elite[j][inv1], elite[i], inv1 + 1)
+                for i in range(len_task):
+                    sum_tmp = np.sum(measurement[i])
+                    for j in range(len_task):
+                        if i != j:
+                            rmp[i,j] = measurement[i,j] / sum_tmp * inter[i]
+                    rmp[i,i]= intra[i]
 
 
             if (epoch % 20) == 19 :
@@ -271,10 +272,10 @@ class model(AbstractModel.model):
             population.update_rank()
 
             # selection 
-            nb_inds_tasks = [int(
-                # (nb_inds_min - nb_inds_each_task) / nb_generations * (epoch - 1) + nb_inds_each_task
-                int(min((nb_inds_min - nb_inds_each_task)/(nb_generations - 1)* epoch  + nb_inds_each_task, nb_inds_each_task))
-            )] * len(self.tasks)
+            # nb_inds_tasks = [int(
+            #     # (nb_inds_min - nb_inds_each_task) / nb_generations * (epoch - 1) + nb_inds_each_task
+            #     int(min((nb_inds_min - nb_inds_each_task)/(nb_generations - 1)* epoch  + nb_inds_each_task, nb_inds_each_task))
+            # )] * len(self.tasks)
             self.selection(population, nb_inds_tasks)
            
             # save history
@@ -282,7 +283,7 @@ class model(AbstractModel.model):
                 
             self.render_process(epoch/nb_generations, ['Pop_size', 'Cost'], [[len(u) for u in population.ls_subPop], self.history_cost[-1]], use_sys= True)
 
-            self.IM.append(np.copy(IM))
+            # self.IM.append(np.copy(IM))
             self.rmp_hist.append(np.copy(rmp))
         print("End")
         # solve 
