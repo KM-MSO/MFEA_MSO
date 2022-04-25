@@ -126,3 +126,17 @@ class PMD_Scale(AbstractMutation):
 
     def __call__(self, ind: Individual, return_newInd: bool, *arg, **kwargs) -> Individual:
         return super().__call__(ind, return_newInd, *arg, **kwargs)
+
+class IDPCEDU_Mutation(AbstractMutation):
+    def getInforTasks(self, IndClass: Type[Individual], tasks: list[AbstractTask], seed=None):
+        super().getInforTasks(IndClass, tasks, seed)
+        self.S_tasks = [np.amax(t.count_paths, axis= 1)  for t in tasks]
+    
+    def __call__(self, ind: Individual, return_newInd: bool, *arg, **kwargs) -> Individual:
+        i, j = np.random.randint(0, self.dim_uss, 2)
+        ind.genes[0, i], ind.genes[0, j] = ind.genes[0, j], ind.genes[0, i]
+
+        i = np.random.randint(0, self.dim_uss)
+        ind.genes[1, i] = self.S_tasks[ind.skill_factor][i]
+
+        return ind
