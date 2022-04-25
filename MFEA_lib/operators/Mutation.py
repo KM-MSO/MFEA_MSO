@@ -131,12 +131,23 @@ class IDPCEDU_Mutation(AbstractMutation):
     def getInforTasks(self, IndClass: Type[Individual], tasks: list[AbstractTask], seed=None):
         super().getInforTasks(IndClass, tasks, seed)
         self.S_tasks = [np.amax(t.count_paths, axis= 1)  for t in tasks]
-    
+        
+
     def __call__(self, ind: Individual, return_newInd: bool, *arg, **kwargs) -> Individual:
-        i, j = np.random.randint(0, self.dim_uss, 2)
-        ind.genes[0, i], ind.genes[0, j] = ind.genes[0, j], ind.genes[0, i]
+        if return_newInd:
+            new_genes:np.ndarray = np.copy(ind.genes)
 
-        i = np.random.randint(0, self.dim_uss)
-        ind.genes[1, i] = self.S_tasks[ind.skill_factor][i]
+            i, j = np.random.randint(0, self.dim_uss, 2)
+            new_genes[0, i], new_genes[0, j] = new_genes[0, j], new_genes[0, i]
+            i = np.random.randint(0, len(self.S_tasks[ind.skill_factor]))
+            new_genes[1, i] = np.random.randint(0, self.S_tasks[ind.skill_factor][i])
+            newInd = self.IndClass(genes= new_genes)
+            newInd.skill_factor = ind.skill_factor
+            return newInd
+        else:
+            i, j = np.random.randint(0, self.dim_uss, 2)
+            ind.genes[0, i], ind.genes[0, j] = ind.genes[0, j], ind.genes[0, i]
+            i = np.random.randint(0, len(self.S_tasks[ind.skill_factor]))
+            ind.genes[1, i] = np.random.randint(0, self.S_tasks[ind.skill_factor][i])
 
-        return ind
+            return ind
