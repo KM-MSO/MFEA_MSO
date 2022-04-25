@@ -210,9 +210,7 @@ class Population:
                 for i in range(np.sum(nb_inds_tasks))
             ]
             # matrix factorial cost and matrix rank
-            matrix_cost = np.array([np.apply_along_axis(t.__call__, 1, np.array([ind.genes for ind in ls_inds])) for t in list_tasks]).T
-            matrix_cost2 = np.array([[ind.eval(t) for ind in ls_inds] for t in list_tasks]).T
-            print(matrix_cost == matrix_cost2)
+            matrix_cost = np.array([[ind.eval(t) for ind in ls_inds] for t in list_tasks]).T
             matrix_rank_pop = np.argsort(np.argsort(matrix_cost, axis = 0), axis = 0) 
 
             count_inds = np.zeros((len(list_tasks),))
