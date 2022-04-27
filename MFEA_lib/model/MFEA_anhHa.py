@@ -146,7 +146,7 @@ class model(AbstractModel.model):
         
 
 
-    def fit(self, nb_inds_each_task: int, nb_inds_min:int,nb_generations :int ,  bound = [0, 1], evaluate_initial_skillFactor = False,
+    def fit(self, nb_inds_each_task: int, nb_inds_min:int,nb_generations :int ,  bound = [0, 1], evaluate_initial_skillFactor = False,LSA = False,
             *args, **kwargs): 
         super().fit(*args, **kwargs)
         population = Population(
@@ -161,8 +161,8 @@ class model(AbstractModel.model):
         self.rmp_hist = []
         self.inter_task = []
         len_task  = len(self.tasks)
-        inter =  [0.9]*len_task
-        intra =  [0.1]*len_task
+        inter =  [1-1/len_task]*len_task
+        intra =  [1/len_task]*len_task
         rmp = np.zeros([len_task,len_task])
 
         #SA param
@@ -191,18 +191,18 @@ class model(AbstractModel.model):
                 self.rmp_hist.append(np.copy(rmp))
                 epoch+=1
       
-            if (epoch % 5 == 0) : 
-                for i in range(len_task):
-                    for j in range(len_task):
-                        if i != j :
-                            for inv1 in range(20):
-                                measurement[i,j] += self.distance_to_pop(elite[j][inv1], elite[i], inv1 + 1)
-                for i in range(len_task):
-                    sum_tmp = np.sum(measurement[i])
-                    for j in range(len_task):
-                        if i != j:
-                            rmp[i,j] = measurement[i,j] / sum_tmp * inter[i]
-                    rmp[i,i]= intra[i]
+            # if (epoch % 5 == 0) : 
+            for i in range(len_task):
+                for j in range(len_task):
+                    if i != j :
+                        for inv1 in range(20):
+                            measurement[i,j] += self.distance_to_pop(elite[j][inv1], elite[i], inv1 + 1)
+            for i in range(len_task):
+                sum_tmp = np.sum(measurement[i])
+                for j in range(len_task):
+                    if i != j:
+                        rmp[i,j] = measurement[i,j] / sum_tmp * inter[i]
+                rmp[i,i]= intra[i]
 
 
             if (epoch % 20) == 19 :
@@ -275,10 +275,11 @@ class model(AbstractModel.model):
             population.update_rank()
 
             # selection 
-            # nb_inds_tasks = [int(
-            #     # (nb_inds_min - nb_inds_each_task) / nb_generations * (epoch - 1) + nb_inds_each_task
-            #     int(min((nb_inds_min - nb_inds_each_task)/(nb_generations - 1)* epoch  + nb_inds_each_task, nb_inds_each_task))
-            # )] * len(self.tasks)
+            if LSA is True:
+                nb_inds_tasks = [int(
+                    # (nb_inds_min - nb_inds_each_task) / nb_generations * (epoch - 1) + nb_inds_each_task
+                    int(min((nb_inds_min - nb_inds_each_task)/(nb_generations - 1)* epoch  + nb_inds_each_task, nb_inds_each_task))
+                )] * len(self.tasks)
             self.selection(population, nb_inds_tasks)
            
             # save history

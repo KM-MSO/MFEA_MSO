@@ -126,3 +126,39 @@ class PMD_Scale(AbstractMutation):
 
     def __call__(self, ind: Individual, return_newInd: bool, *arg, **kwargs) -> Individual:
         return super().__call__(ind, return_newInd, *arg, **kwargs)
+
+class Directional_Mutation(AbstractMutation):
+    '''
+    p in [0, 1]^n
+    '''
+    def __init__(self, *arg, **kwargs):
+        '''
+        nm: parameters of Polynomial_mutation
+        pm: prob mutate of Polynomial_mutation
+        '''
+        super().__init__(*arg, **kwargs)
+
+    def __call__(self, ind: Individual,return_newInd : bool, *arg, **kwargs) -> Individual:
+        r = np.random.rand()
+        beta1 = np.exp(r ** 2) *np.exp(r-2/r)
+        beta2 = np.exp(r-r ** 2) *np.exp(r-2/r)
+        upper = np.ones(self.dim_uss)
+        lower = np.zeros(self.dim_uss)
+        if(np.random.rand() < 0.5):
+            if return_newInd is True : 
+                newInd = self.IndClass(genes=ind.genes + beta1*(upper - ind.genes))
+                newInd.skill_factor = ind.skill_factor
+                return newInd
+            else:
+                newInd = self.IndClass(genes=ind.genes -beta1*(upper - ind.genes))
+                newInd.skill_factor = ind.skill_factor
+                return newInd
+        else:
+            if return_newInd is True : 
+                newInd = self.IndClass(genes=ind.genes - beta2*(ind.genes-lower))
+                newInd.skill_factor = ind.skill_factor
+                return newInd
+            else:
+                newInd = self.IndClass(genes=ind.genes +beta2* (ind.genes-lower)) 
+                newInd.skill_factor = ind.skill_factor
+                return newInd
