@@ -1,3 +1,9 @@
+*.mso
+RESULTS/**
+!/RESULTS/__static__/
+!/RESULTS/__static__/**
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
