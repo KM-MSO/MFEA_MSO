@@ -525,7 +525,7 @@ class TuningModel:
                       ) == 1, 'Benchmark weighs need sum up to 1'
 
         self.compile_kwargs = kwargs
-        self.ls_benchmark: [] = ls_benchmark
+        self.ls_benchmark: list[list[AbstractTask]] = ls_benchmark
         self.benchmark_weights = benchmark_weights
         self.name_benchmark = name_benchmark
         self.ls_IndClass = ls_IndClass
@@ -588,7 +588,7 @@ class TuningModel:
 
         return model
     
-    def compare_between_2_ls_model(self, ls_model1: [AbstractModel], ls_model2 : [AbstractModel], min_value= 0 ):
+    def compare_between_2_ls_model(self, ls_model1: list[AbstractModel.model], ls_model2 : list[AbstractModel.model], min_value= 0 ):
         '''
         compare the result between models and return best model 
         [[model1_cec, model1_gecco], [model2_cec, model2_gecco]]
@@ -607,7 +607,7 @@ class TuningModel:
         return np.argmax(point_model)  
 
 
-    def take_idx_best_lsmodel(self, set_ls_model: [[AbstractModel]], min_value = 0 ):
+    def take_idx_best_lsmodel(self, set_ls_model: list[list[AbstractModel.model]], min_value = 0 ):
         best_idx = 0  
         for idx, ls_model in enumerate(set_ls_model[1:],start= 1 ):
             better_idx = self.compare_between_2_ls_model(set_ls_model[best_idx], ls_model, min_value)
