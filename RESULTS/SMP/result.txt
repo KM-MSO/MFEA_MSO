@@ -1,1 +1,0 @@
-[["crossover", {"gamma": 0.6}], ["lr", 0.04], ["crossover", {"alpha": 5}]]

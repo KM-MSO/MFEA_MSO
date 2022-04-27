@@ -622,7 +622,10 @@ class TuningModel:
         end = compare.detail_compare_result()
         return np.argmax([float(point.split("/")[0]) for point in end.iloc[-1]])
 
-    def run(self, path="./RESULTS/SMP", replace_folder=False,min_value = 0,  **kwargs):
+    def run(self, path="./RESULTS/tuning", replace_folder=False,min_value = 0,  **kwargs):
+        if path[-1] != "/":
+            path += "/"
+        path = path + self.model_name.__name__.split('.')[-1]
         curr_fit_parameter = kwargs.copy()
         curr_compile_parameter = self.compile_kwargs.copy()
 
