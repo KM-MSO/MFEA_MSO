@@ -506,15 +506,15 @@ class TuningModel:
         self.nb_run = nb_run
 
     def compile(self, ls_benchmark=None, benchmark_weights=[], name_benchmark = [], ls_IndClass = [],  **kwargs):
-        if ls_benchmark is None:
-            ls_benchmark.append(kwargs['tasks'])
-            ls_IndClass.append(kwargs['IndClass'])
-            name_benchmark.append("default")
-        else:
-            if kwargs['tasks'] not in ls_benchmark and kwargs['tasks'] is not None:
-                ls_benchmark.append(kwargs['tasks']) 
-                ls_IndClass.append(kwargs['IndClass'])
-                name_benchmark.append("default")
+        # if ls_benchmark is None:
+        #     ls_benchmark.append(kwargs['tasks'])
+        #     ls_IndClass.append(kwargs['IndClass'])
+        #     name_benchmark.append("default")
+        # else:
+        #     if kwargs['tasks'] not in ls_benchmark and kwargs['tasks'] is not None:
+        #         ls_benchmark.append(kwargs['tasks']) 
+        #         ls_IndClass.append(kwargs['IndClass'])
+        #         name_benchmark.append("default")
 
         assert len(ls_benchmark) == len(
             benchmark_weights), 'len of ls benchmark and benchmark_weights must be same'
@@ -618,7 +618,7 @@ class TuningModel:
         end = compare.detail_compare_result()
         return np.argmax([float(point.split("/")[0]) for point in end.iloc[-1]])
 
-    def run(self, path="./RESULTS/SMP", replace_folder=False, **kwargs):
+    def run(self, path="./RESULTS/SMP", replace_folder=False,min_value = 0,  **kwargs):
         curr_fit_parameter = kwargs.copy()
         curr_compile_parameter = self.compile_kwargs.copy()
 
@@ -730,7 +730,7 @@ class TuningModel:
                             # set_ls_model.append(self.fit_multibenchmark(self.best_fit_parameter, curr_compile_parameter))
 
                         # TODO: take the best model and update best parameter
-                        value = para_value[self.take_idx_best_lsmodel(set_ls_model)]
+                        value = para_value[self.take_idx_best_lsmodel(set_ls_model, min_value= min_value)]
                         setattr(
                             self.best_compile_parameter[name_arg], name_para, value)
 
@@ -755,7 +755,7 @@ class TuningModel:
                         set_ls_model.append(self.fit_multibenchmark(
                             self.best_fit_parameter, curr_compile_parameter, save_path=value_folder_path))
                     # TODO: take the best model and update best parameter
-                    value = arg_value[self.take_idx_best_lsmodel(set_ls_model)]
+                    value = arg_value[self.take_idx_best_lsmodel(set_ls_model, min_value= min_value)]
                     self.best_compile_parameter[name_arg] = value
 
                     # save result
@@ -782,7 +782,7 @@ class TuningModel:
                             set_ls_model.append(self.fit_multibenchmark(
                                 curr_fit_parameter, self.best_compile_parameter, save_path=value_folder_path))
                         # TODO: take the best modle in update best parameter
-                        value = para_value[self.take_idx_best_lsmodel(set_ls_model)]
+                        value = para_value[self.take_idx_best_lsmodel(set_ls_model, min_value= min_value)]
                         setattr(
                             self.best_fit_parameter[name_arg], name_arg, value)
 
@@ -802,7 +802,7 @@ class TuningModel:
                         set_ls_model.append(self.fit_multibenchmark(
                             curr_fit_parameter, self.best_compile_parameter, save_path=value_folder_path))
                     # TODO: take the best model and update best fit parameter
-                    value = arg_value[self.take_idx_best_lsmodel(set_ls_model)]
+                    value = arg_value[self.take_idx_best_lsmodel(set_ls_model, min_value= min_value)]
                     self.best_fit_parameter[name_arg] = value
 
                     # save result
