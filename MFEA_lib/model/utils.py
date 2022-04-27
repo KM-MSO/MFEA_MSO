@@ -455,7 +455,7 @@ class CompareModel():
                     np.sum(result_table, axis=0), columns=name_col, index=name_row)
         return result_table
 
-    def detail_compare_result(self, min_value=0):
+    def detail_compare_result(self, min_value=0, round = 100):
         name_row = [str("Task" + str(i + 1))
                     for i in range(len(self.models[0].tasks))]
         name_col = self.label
@@ -464,6 +464,7 @@ class CompareModel():
             data.append(model.history_cost[-1])
 
         data = np.array(data).T
+        data = np.round(data, round)
         pre_data = pd.DataFrame(data)
         end_data = pd.DataFrame(data).astype(str)
 
