@@ -191,18 +191,18 @@ class model(AbstractModel.model):
                 self.rmp_hist.append(np.copy(rmp))
                 epoch+=1
       
-            # if (epoch % 5 == 0) : 
-            for i in range(len_task):
-                for j in range(len_task):
-                    if i != j :
-                        for inv1 in range(20):
-                            measurement[i,j] += self.distance_to_pop(elite[j][inv1], elite[i], inv1 + 1)
-            for i in range(len_task):
-                sum_tmp = np.sum(measurement[i])
-                for j in range(len_task):
-                    if i != j:
-                        rmp[i,j] = measurement[i,j] / sum_tmp * inter[i]
-                rmp[i,i]= intra[i]
+            if (epoch % 5 == 0) : 
+                for i in range(len_task):
+                    for j in range(len_task):
+                        if i != j :
+                            for inv1 in range(20):
+                                measurement[i,j] += self.distance_to_pop(elite[j][inv1], elite[i], inv1 + 1)
+                for i in range(len_task):
+                    sum_tmp = np.sum(measurement[i])
+                    for j in range(len_task):
+                        if i != j:
+                            rmp[i,j] = measurement[i,j] / sum_tmp * inter[i]
+                    rmp[i,i]= intra[i]
 
 
             if (epoch % 20) == 19 :

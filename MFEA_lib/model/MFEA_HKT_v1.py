@@ -157,8 +157,8 @@ class model(AbstractModel.model):
         inter =  [1-1/len_task]*len_task
         intra =  [1/len_task]*len_task
         rmp = np.zeros([len_task,len_task])
-        prev_mean = 0
-        curr_mean = 0
+        prev_mean = [0]*len_task
+        curr_mean = [0]*len_task
         #SA param
         nb_inds_tasks = [nb_inds_each_task]*len(self.tasks)
         MAXEVALS = nb_generations * nb_inds_each_task * len(self.tasks)
@@ -184,18 +184,27 @@ class model(AbstractModel.model):
                 # self.IM.append(np.copy(IM))
                 self.rmp_hist.append(np.copy(rmp))
                 epoch+=1
-            # if (epoch % 5 == 0) : 
-            for i in range(len_task):
-                for j in range(len_task):
-                    if i != j :
-                        for inv1 in range(20):
-                            measurement[i,j] += self.distance_to_pop(elite[j][inv1], elite[i], inv1 + 1)
-            for i in range(len_task):
-                sum_tmp = np.sum(measurement[i])
-                for j in range(len_task):
-                    if i != j:
-                        rmp[i,j] = measurement[i,j] / sum_tmp * inter[i]
-                rmp[i,i]= intra[i]
+            direction =[True]*len_task
+            if epoch >0:
+                idx = 0
+                for subpop in population.ls_subPop:
+                    curr_mean[idx] = np.sum(ind.fcost for ind in subpop.ls_inds)
+                    if curr_mean[idx] > prev_mean[idx]:
+                        direction[idx]=False
+                    prev_mean[idx]=curr_mean[idx]
+                    idx+=1     
+            if (epoch % 5 == 0) : 
+                for i in range(len_task):
+                    for j in range(len_task):
+                        if i != j :
+                            for inv1 in range(20):
+                                measurement[i,j] += self.distance_to_pop(elite[j][inv1], elite[i], inv1 + 1)
+                for i in range(len_task):
+                    sum_tmp = np.sum(measurement[i])
+                    for j in range(len_task):
+                        if i != j:
+                            rmp[i,j] = measurement[i,j] / sum_tmp * inter[i]
+                    rmp[i,i]= intra[i]
 
 
             if (epoch % 20) == 19 :
@@ -242,8 +251,8 @@ class model(AbstractModel.model):
                     oa.transfer = False
                     ob.transfer = False 
                 # mutate
-                oa = self.mutation(oa, return_newInd= True)
-                ob = self.mutation(ob, return_newInd= True)    
+                oa = self.mutation(oa, return_newInd= direction[oa.skill_factor])
+                ob = self.mutation(ob, return_newInd= direction[ob.skill_factor]) 
     
                 # eval and append # addIndividual already has eval  
                 offsprings.__addIndividual__(oa) 
