@@ -74,12 +74,13 @@ class MultiTimeModel:
                 print(f'can not convert {self.list_attri_avg[i]} to np.array')
                 continue
 
-    def print_result(self, print_attr = []):
+    def print_result(self, print_attr = [], print_time = True, print_name= True):
         # print time
         seconds = self.total_time
         minutes = seconds // 60
         seconds = seconds - minutes * 60
-        print("total time: %02dm %.02fs" % (minutes, seconds))
+        if print_time: 
+            print("total time: %02dm %.02fs" % (minutes, seconds))
 
         # print avg
         if self.list_attri_avg is None:
@@ -91,7 +92,8 @@ class MultiTimeModel:
         for i in range(len(print_attr)):
             try:
                 result = self.__getattribute__(print_attr[i])[-1]
-                print(f"{print_attr[i]} avg: ")
+                if print_name: 
+                    print(f"{print_attr[i]} avg: ")
                 np.set_printoptions(
                     formatter={'float': lambda x: format(x, '.2E')})
                 print(result)
@@ -101,7 +103,8 @@ class MultiTimeModel:
                         print_attr[i]) for model in self.ls_model]
                     result = np.array(result)
                     result = np.sum(result, axis=0) / len(self.ls_model)
-                    print(f"{print_attr[i]} avg: ")
+                    if print_name: 
+                        print(f"{print_attr[i]} avg: ")
                     np.set_printoptions(
                         formatter={'float': lambda x: format(x, '.2E')})
                     print(result)
@@ -452,7 +455,7 @@ class CompareModel():
                     np.sum(result_table, axis=0), columns=name_col, index=name_row)
         return result_table
 
-    def detail_compare_result(self, min_value=0):
+    def detail_compare_result(self, min_value=0, round = 100):
         name_row = [str("Task" + str(i + 1))
                     for i in range(len(self.models[0].tasks))]
         name_col = self.label
@@ -461,6 +464,7 @@ class CompareModel():
             data.append(model.history_cost[-1])
 
         data = np.array(data).T
+        data = np.round(data, round)
         pre_data = pd.DataFrame(data)
         end_data = pd.DataFrame(data).astype(str)
 
@@ -506,15 +510,15 @@ class TuningModel:
         self.nb_run = nb_run
 
     def compile(self, ls_benchmark=None, benchmark_weights=[], name_benchmark = [], ls_IndClass = [],  **kwargs):
-        if ls_benchmark is None:
-            ls_benchmark.append(kwargs['tasks'])
-            ls_IndClass.append(kwargs['IndClass'])
-            name_benchmark.append("default")
-        else:
-            if kwargs['tasks'] not in ls_benchmark and kwargs['tasks'] is not None:
-                ls_benchmark.append(kwargs['tasks']) 
-                ls_IndClass.append(kwargs['IndClass'])
-                name_benchmark.append("default")
+        # if ls_benchmark is None:
+        #     ls_benchmark.append(kwargs['tasks'])
+        #     ls_IndClass.append(kwargs['IndClass'])
+        #     name_benchmark.append("default")
+        # else:
+        #     if kwargs['tasks'] not in ls_benchmark and kwargs['tasks'] is not None:
+        #         ls_benchmark.append(kwargs['tasks']) 
+        #         ls_IndClass.append(kwargs['IndClass'])
+        #         name_benchmark.append("default")
 
         assert len(ls_benchmark) == len(
             benchmark_weights), 'len of ls benchmark and benchmark_weights must be same'
@@ -522,7 +526,7 @@ class TuningModel:
                       ) == 1, 'Benchmark weighs need sum up to 1'
 
         self.compile_kwargs = kwargs
-        self.ls_benchmark: [] = ls_benchmark
+        self.ls_benchmark: list[list[AbstractTask]] = ls_benchmark
         self.benchmark_weights = benchmark_weights
         self.name_benchmark = name_benchmark
         self.ls_IndClass = ls_IndClass
@@ -585,7 +589,7 @@ class TuningModel:
 
         return model
     
-    def compare_between_2_ls_model(self, ls_model1: [AbstractModel], ls_model2 : [AbstractModel], min_value= 0 ):
+    def compare_between_2_ls_model(self, ls_model1: list[AbstractModel.model], ls_model2 : list[AbstractModel.model], min_value= 0 ):
         '''
         compare the result between models and return best model 
         [[model1_cec, model1_gecco], [model2_cec, model2_gecco]]
@@ -604,7 +608,7 @@ class TuningModel:
         return np.argmax(point_model)  
 
 
-    def take_idx_best_lsmodel(self, set_ls_model: [[AbstractModel]], min_value = 0 ):
+    def take_idx_best_lsmodel(self, set_ls_model: list[list[AbstractModel.model]], min_value = 0 ):
         best_idx = 0  
         for idx, ls_model in enumerate(set_ls_model[1:],start= 1 ):
             better_idx = self.compare_between_2_ls_model(set_ls_model[best_idx], ls_model, min_value)
@@ -618,7 +622,10 @@ class TuningModel:
         end = compare.detail_compare_result()
         return np.argmax([float(point.split("/")[0]) for point in end.iloc[-1]])
 
-    def run(self, path="./RESULTS/SMP", replace_folder=False, **kwargs):
+    def run(self, path="./RESULTS/tuning", replace_folder=False,min_value = 0,  **kwargs):
+        if path[-1] != "/":
+            path += "/"
+        path = path + self.model_name.__name__.split('.')[-1]
         curr_fit_parameter = kwargs.copy()
         curr_compile_parameter = self.compile_kwargs.copy()
 
@@ -730,7 +737,7 @@ class TuningModel:
                             # set_ls_model.append(self.fit_multibenchmark(self.best_fit_parameter, curr_compile_parameter))
 
                         # TODO: take the best model and update best parameter
-                        value = para_value[self.take_idx_best_lsmodel(set_ls_model)]
+                        value = para_value[self.take_idx_best_lsmodel(set_ls_model, min_value= min_value)]
                         setattr(
                             self.best_compile_parameter[name_arg], name_para, value)
 
@@ -755,7 +762,7 @@ class TuningModel:
                         set_ls_model.append(self.fit_multibenchmark(
                             self.best_fit_parameter, curr_compile_parameter, save_path=value_folder_path))
                     # TODO: take the best model and update best parameter
-                    value = arg_value[self.take_idx_best_lsmodel(set_ls_model)]
+                    value = arg_value[self.take_idx_best_lsmodel(set_ls_model, min_value= min_value)]
                     self.best_compile_parameter[name_arg] = value
 
                     # save result
@@ -782,7 +789,7 @@ class TuningModel:
                             set_ls_model.append(self.fit_multibenchmark(
                                 curr_fit_parameter, self.best_compile_parameter, save_path=value_folder_path))
                         # TODO: take the best modle in update best parameter
-                        value = para_value[self.take_idx_best_lsmodel(set_ls_model)]
+                        value = para_value[self.take_idx_best_lsmodel(set_ls_model, min_value= min_value)]
                         setattr(
                             self.best_fit_parameter[name_arg], name_arg, value)
 
@@ -802,7 +809,7 @@ class TuningModel:
                         set_ls_model.append(self.fit_multibenchmark(
                             curr_fit_parameter, self.best_compile_parameter, save_path=value_folder_path))
                     # TODO: take the best model and update best fit parameter
-                    value = arg_value[self.take_idx_best_lsmodel(set_ls_model)]
+                    value = arg_value[self.take_idx_best_lsmodel(set_ls_model, min_value= min_value)]
                     self.best_fit_parameter[name_arg] = value
 
                     # save result
@@ -849,3 +856,42 @@ class TuningModel:
                     path += "/" + str(name_arg) + "/" + str(value)
                     index += 1
         return path
+
+class MultiBenchmark(): 
+    def __init__(self, ls_benchmark = [], name_benchmark = [], ls_IndClass = [], model : AbstractModel= None) :
+        self.ls_benchmark = ls_benchmark 
+        self.ls_name_benchmark = name_benchmark 
+        self.ls_IndClass = ls_IndClass 
+
+        self.model = model  
+        pass
+    
+    def compile(self, **kwargs): 
+        self.compile_kwargs = kwargs 
+    
+    def fit(self, **kwargs):
+        self.fit_kwargs = kwargs 
+    
+    def run(self,nb_run = 1, save_path = './RESULTS/result/'): 
+        self.ls_model = [] 
+        for idx, benchmark in enumerate(self.ls_benchmark): 
+            self.compile_kwargs['tasks'] = benchmark 
+            self.compile_kwargs['IndClass'] = self.ls_IndClass[idx] 
+
+            model = MultiTimeModel(model = self.model) 
+            model.compile(**self.compile_kwargs) 
+            model.fit(**self.fit_kwargs) 
+            model.run(nb_run = nb_run, save_path= save_path + self.ls_name_benchmark[idx] + ".mso") 
+            self.ls_model.append(model) 
+    
+    def print_result(self,print_attr = [],print_name = True, print_time = False, print_name_attr = False):
+        
+        for idx, model in enumerate(self.ls_model): 
+            if print_name : 
+                print(self.ls_name_benchmark[idx])
+            model.print_result(print_attr, print_time= print_time, print_name= print_name_attr) 
+
+
+        
+        
+
