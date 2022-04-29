@@ -16,10 +16,10 @@ class model(AbstractModel.model):
 
             #value const for intra
             self.p_const_intra = p_const_intra
-            self.lower_p = 0.01/self.nb_tasks
+            self.lower_p = 0.1/self.nb_tasks
 
             # smp without const_val of host
-            self.sum_not_host = 1 - 0.01 - p_const_intra
+            self.sum_not_host = 1 - 0.1 - p_const_intra
             self.SMP_not_host: np.ndarray = ((np.zeros((nb_tasks, )) + self.sum_not_host)/(nb_tasks))
             self.SMP_not_host[self.idx_host] += self.sum_not_host - np.sum(self.SMP_not_host)
 
