@@ -33,6 +33,7 @@ class IDPC_EDU_FUNC(AbstractTask):
         self.num_edges: int = int(file_name[:-5].split('x')[-1])
         self.edges: np.ndarray
         self.dim: int = int(file_name[5:].split('x')[0])
+        self.name = file_name.split('.')[0]
         self.read_data()
             
     def read_data(self):
