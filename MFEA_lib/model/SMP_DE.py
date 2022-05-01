@@ -59,8 +59,9 @@ class model(AbstractModel.model):
         IndClass: Type[Individual],
         tasks: list[AbstractTask], 
         crossover: Crossover.SBX_Crossover, mutation: Mutation.Polynomial_Mutation, selection: Selection.ElitismSelection, 
-        search: Search.AbstractSearch(), *args, **kwargs):
-        self.search = search 
+        search: Search.SHADE(), *args, **kwargs):
+        self.search = search
+        self.search.getInforTasks(tasks, seed = self.seed)
         return super().compile(IndClass, tasks, crossover, mutation, selection, *args, **kwargs)
     
     def render_smp(self,  shape = None, title = None, figsize = None, dpi = 100, step = 1, re_fig = False, label_shape= None, label_loc= None):
