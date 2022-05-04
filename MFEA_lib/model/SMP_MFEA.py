@@ -41,7 +41,7 @@ class model(AbstractModel.model):
 
             if np.sum(Delta_task) != 0:         
                 # newSMP = np.array(Delta_task) / (self.SMP_include_host)
-                newSMP = np.array(Delta_task) / (np.array(count_Delta_tasks) + 1e-100)
+                newSMP = (np.array(Delta_task) / (np.array(count_Delta_tasks) + 1e-50)) ** 2
                 newSMP = newSMP / (np.sum(newSMP) / self.sum_not_host)
 
                 self.SMP_not_host = self.SMP_not_host * (1 - self.lr) + newSMP * self.lr
@@ -220,7 +220,9 @@ class model(AbstractModel.model):
                     oa, ob = self.crossover(pa, pb, skf_pa, skf_pa)
                 else:
                     pa, pb = population.__getIndsTask__(skf_pa, type= 'random', size= 2)
-                    
+                    if pa < pb:
+                        pa, pb = pb, pa
+
                     oa = self.mutation(pa, return_newInd= True)
                     oa.skill_factor = skf_pa
 
@@ -242,10 +244,7 @@ class model(AbstractModel.model):
 
                 # update smp
                 if Delta1 > 0 or Delta2 > 0:
-                    if Delta1 > 0:
-                        Delta[skf_pa][skf_pb] += Delta1
-                    if Delta2 > 0:
-                        Delta[skf_pa][skf_pb] += Delta2
+                    Delta[skf_pa][skf_pb] += max([Delta1, Delta2, 0])
 
                     # swap
                     if swap_po:
