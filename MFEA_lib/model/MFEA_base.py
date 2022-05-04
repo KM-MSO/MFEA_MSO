@@ -68,6 +68,7 @@ class model(AbstractModel.model):
 
             # update operators
             self.crossover.update(population = population)
+            self.mutation.update(population = population)
 
             # save history
             self.history_cost.append([ind.fcost for ind in population.get_solves()])

@@ -202,6 +202,7 @@ class model(AbstractModel.model):
 
             # update operators
             self.crossover.update(population = population)
+            self.mutation.update(population = population)
             
             # save history 
             

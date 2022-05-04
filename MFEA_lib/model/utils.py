@@ -299,7 +299,7 @@ def loadModel(PATH: str, ls_tasks=None, set_attribute=False) -> AbstractModel:
 
 class CompareModel():
     # TODO so sánh
-    def __init__(self, models=list[AbstractModel.model], label: list[str] = None) -> None:
+    def __init__(self, models: list[AbstractModel.model], label: list[str] = None) -> None:
         self.models = models
         if label is None:
             label = [m.name for m in self.models]
