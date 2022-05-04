@@ -200,6 +200,9 @@ class model(AbstractModel.model):
             # selection 
             self.selection(population, current_inds_each_task)
 
+            # update operators
+            self.crossover.update(population = population)
+            
             # save history 
             
             

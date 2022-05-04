@@ -881,7 +881,7 @@ class MultiBenchmark():
             model = MultiTimeModel(model = self.model) 
             model.compile(**self.compile_kwargs) 
             model.fit(**self.fit_kwargs) 
-            model.run(nb_run = nb_run, save_path= save_path + self.ls_name_benchmark[idx] + ".mso") 
+            model.run(nb_run = nb_run, save_path= save_path + str(self.ls_name_benchmark[idx]) + ".mso") 
             self.ls_model.append(model) 
     
     def print_result(self,print_attr = [],print_name = True, print_time = False, print_name_attr = False):
