@@ -97,7 +97,7 @@ def HappyCat_func(x,dim):
     for i in range (dim):
         r2+=(x[i]-1) * (x[i]-1)
         sum +=x[i]-1
-    return  (r2-dim) **(2*alpha) +(0.5*r2+sum)/dim+0.5
+    return  np.abs(r2-dim) **(2*alpha) +(0.5*r2+sum)/dim+0.5
 @jit(nopython = True)
 def Hgbat_func(x,dim):
     r2= 0
