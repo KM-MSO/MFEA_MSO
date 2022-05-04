@@ -41,7 +41,7 @@ class model(AbstractModel.model):
 
             if np.sum(Delta_task) != 0:         
                 # newSMP = np.array(Delta_task) / (self.SMP_include_host)
-                newSMP = (np.array(Delta_task) / (np.array(count_Delta_tasks) + 1e-50)) ** 2
+                newSMP = (np.array(Delta_task) / (np.array(count_Delta_tasks) + 1e-50))
                 newSMP = newSMP / (np.sum(newSMP) / self.sum_not_host + 1e-50)
 
                 self.SMP_not_host = self.SMP_not_host * (1 - self.lr) + newSMP * self.lr
@@ -49,8 +49,6 @@ class model(AbstractModel.model):
                 self.SMP_not_host[self.idx_host] += self.sum_not_host - np.sum(self.SMP_not_host)
 
                 self.SMP_include_host = self.get_smp()
-            if np.isnan(np.sum(self.SMP_include_host)):
-                print()
             return self.SMP_include_host
     
     def __init__(self, seed=None, percent_print=2) -> None:
@@ -115,8 +113,8 @@ class model(AbstractModel.model):
             return fig
 
     def fit(self, nb_generations: int, nb_inds_each_task: int, nb_inds_min = None,
-        lr = 1, p_const_intra = 0.5, swap_po = True, p_mutate = 0.1, prob_search = 0.5,
-        nb_epochs_stop = 10, 
+        lr = 1, p_const_intra = 0.5, swap_po = True, prob_search = 0.5,
+        nb_epochs_stop = 50, 
         evaluate_initial_skillFactor = False,
         *args, **kwargs):
         super().fit(*args, **kwargs)
@@ -155,7 +153,6 @@ class model(AbstractModel.model):
         '''
         # prob choose first parent
         p_choose_father = np.ones((len(self.tasks), ))/ len(self.tasks)
-        tasks_waiting = np.zeros((len(self.tasks), ))
         # count_eval_stop: nums evals not decrease factorial cost
         # maxcount_es: max of count_eval_stop
         # if count_eval[i] == maxcount_es: p_choose_father[i] == 0
@@ -185,7 +182,7 @@ class model(AbstractModel.model):
             Delta:list[list[float]] = np.zeros((len(self.tasks), len(self.tasks) + 1)).tolist()
             count_Delta: list[list[float]] = np.zeros((len(self.tasks), len(self.tasks) + 1)).tolist()
 
-            while np.sum((1 - tasks_waiting) * turn_eval) < np.sum((1 - tasks_waiting) * nb_inds_tasks):
+            while np.sum( turn_eval) < np.sum(nb_inds_tasks):
                 if np.sum(eval_k) >= epoch * nb_inds_each_task * len(self.tasks):
                     # save history
                     self.history_cost.append([ind.fcost for ind in population.get_solves()])
@@ -246,9 +243,8 @@ class model(AbstractModel.model):
 
                 # update smp
                 if Delta1 > 0 or Delta2 > 0:
-                    Delta[skf_pa][skf_pb] += max([Delta1, Delta2, 0])
-                    if np.isnan(max([Delta1, Delta2, 0])):
-                        print()
+                    Delta[skf_pa][skf_pb] += max([Delta1, 0]) ** 2
+                    Delta[skf_pa][skf_pb] += max([Delta2, 0]) ** 2
 
                     # swap
                     if swap_po:
@@ -269,28 +265,11 @@ class model(AbstractModel.model):
                     # count eval not decrease cost
                     count_eval_stop[skf_pa] += 1
 
-                if count_eval_stop[skf_pa] == maxcount_es:
-                    tasks_waiting[skf_pa] = 1
-
-                    # if all tasks is waiting
-                    if np.sum(tasks_waiting) == len(self.tasks):
-                        tasks_waiting[np.where(np.array(self.history_cost[-1]) > 0)[0]] = 0
-                        if np.sum(tasks_waiting) == len(self.tasks):
-                            tasks_waiting[:] = 0
-                    
-                    idx_waiting = (tasks_waiting == 1)
-                    p_choose_father = np.where(idx_waiting, 0.1 * 1/len(self.tasks), p_choose_father)
-                    p_choose_father = np.where(idx_waiting, p_choose_father, (1 - np.sum(p_choose_father[idx_waiting]))/np.sum(1 - idx_waiting)) 
-                
+                if count_eval_stop[skf_pa] > maxcount_es:
+                    Delta[skf_pa][len(self.tasks)] += 1e-5
                 elif count_eval_stop[skf_pa] == 0:
-                    tasks_waiting[skf_pa] = 0
+                    pass
                     
-                    if np.sum(tasks_waiting) == len(self.tasks):
-                            tasks_waiting[:] = 0
-
-                    idx_waiting = (tasks_waiting == 1)
-                    p_choose_father = np.where(idx_waiting, 0.1 * 1/len(self.tasks), p_choose_father)
-                    p_choose_father = np.where(idx_waiting, p_choose_father, (1 - np.sum(p_choose_father[idx_waiting]))/np.sum(1 - idx_waiting))
 
             # merge
             population = population + offsprings

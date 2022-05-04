@@ -172,20 +172,23 @@ class Directional_Mutation(AbstractMutation):
             if self.direction[ind.skill_factor] is True : 
                 newInd = self.IndClass(genes=ind.genes + beta1*(upper - ind.genes))
                 newInd.skill_factor = ind.skill_factor
-                return newInd
             else:
                 newInd = self.IndClass(genes=ind.genes -beta1*(upper - ind.genes))
                 newInd.skill_factor = ind.skill_factor
-                return newInd
         else:
             if self.direction[ind.skill_factor] is True : 
                 newInd = self.IndClass(genes=ind.genes - beta2*(ind.genes-lower))
                 newInd.skill_factor = ind.skill_factor
-                return newInd
             else:
                 newInd = self.IndClass(genes=ind.genes +beta2* (ind.genes-lower)) 
                 newInd.skill_factor = ind.skill_factor
-                return newInd
+        if return_newInd:
+            return newInd
+        else:
+            ind.genes = newInd.genes
+            ind.fcost = newInd.fcost
+            return ind
+
     def update(self, population:Population):
         idx = 0
         for subpop in population.ls_subPop:
