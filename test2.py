@@ -6,10 +6,6 @@ print(sorted(a))
 # cost = []
 # tasks = IDPC_EDU_benchmark.get_tasks(1)[0]
 # for i in range(100):
-    
 
-#     idx =  np.random.randint(10)
-#     task = tasks[idx]
-#     sol = np.random.permutation(90).reshape(2,45)
-#     cost.append(task(sol))
-# print(cost, np.array(cost).mean(), np.array(cost).min())
+path = os.path.dirname(os.path.realpath(__file__))
+print(path)
