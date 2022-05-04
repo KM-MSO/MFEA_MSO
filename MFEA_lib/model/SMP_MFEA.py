@@ -42,13 +42,15 @@ class model(AbstractModel.model):
             if np.sum(Delta_task) != 0:         
                 # newSMP = np.array(Delta_task) / (self.SMP_include_host)
                 newSMP = (np.array(Delta_task) / (np.array(count_Delta_tasks) + 1e-50)) ** 2
-                newSMP = newSMP / (np.sum(newSMP) / self.sum_not_host)
+                newSMP = newSMP / (np.sum(newSMP) / self.sum_not_host + 1e-50)
 
                 self.SMP_not_host = self.SMP_not_host * (1 - self.lr) + newSMP * self.lr
                 
                 self.SMP_not_host[self.idx_host] += self.sum_not_host - np.sum(self.SMP_not_host)
 
                 self.SMP_include_host = self.get_smp()
+            if np.isnan(np.sum(self.SMP_include_host)):
+                print()
             return self.SMP_include_host
     
     def __init__(self, seed=None, percent_print=2) -> None:
@@ -239,12 +241,14 @@ class model(AbstractModel.model):
                 turn_eval[skf_pa] += 2
 
                 # Calculate the maximum improvement percetage
-                Delta1 = (pa.fcost - oa.fcost)/(pa.fcost + 1e-100)
-                Delta2 = (pa.fcost - ob.fcost)/(pa.fcost + 1e-100)
+                Delta1 = (pa.fcost - oa.fcost)/(pa.fcost + 1e-50)
+                Delta2 = (pa.fcost - ob.fcost)/(pa.fcost + 1e-50)
 
                 # update smp
                 if Delta1 > 0 or Delta2 > 0:
                     Delta[skf_pa][skf_pb] += max([Delta1, Delta2, 0])
+                    if np.isnan(max([Delta1, Delta2, 0])):
+                        print()
 
                     # swap
                     if swap_po:
@@ -301,6 +305,7 @@ class model(AbstractModel.model):
 
             # update operators
             self.crossover.update(population = population)
+            self.mutation.update(population = population)
 
             # update smp
             for skf in range(len(self.tasks)):
