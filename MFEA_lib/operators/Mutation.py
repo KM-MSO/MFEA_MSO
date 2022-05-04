@@ -128,15 +128,14 @@ class PMD_Scale(AbstractMutation):
         return super().__call__(ind, return_newInd, *arg, **kwargs)
 
 class Directional_Mutation(AbstractMutation):
-    '''
-    p in [0, 1]^n
-    '''
+
     def __init__(self, *arg, **kwargs):
-        '''
-        nm: parameters of Polynomial_mutation
-        pm: prob mutate of Polynomial_mutation
-        '''
         super().__init__(*arg, **kwargs)
+
+    def  getInforTasks(self, IndClass: Type[Individual], tasks: list[AbstractTask], seed = None):
+        super().getInforTasks(IndClass,tasks, seed)
+        self.direction = [True]*self.nb_tasks
+        self.prev_mean = [float('inf')]*self.nb_tasks
 
     def __call__(self, ind: Individual,return_newInd : bool, *arg, **kwargs) -> Individual:
         r = np.random.rand()
@@ -145,7 +144,7 @@ class Directional_Mutation(AbstractMutation):
         upper = np.ones(self.dim_uss)
         lower = np.zeros(self.dim_uss)
         if(np.random.rand() < 0.5):
-            if return_newInd is True : 
+            if self.direction[ind.skill_factor] is True : 
                 newInd = self.IndClass(genes=ind.genes + beta1*(upper - ind.genes))
                 newInd.skill_factor = ind.skill_factor
                 return newInd
@@ -154,7 +153,7 @@ class Directional_Mutation(AbstractMutation):
                 newInd.skill_factor = ind.skill_factor
                 return newInd
         else:
-            if return_newInd is True : 
+            if self.direction[ind.skill_factor] is True : 
                 newInd = self.IndClass(genes=ind.genes - beta2*(ind.genes-lower))
                 newInd.skill_factor = ind.skill_factor
                 return newInd
@@ -162,3 +161,13 @@ class Directional_Mutation(AbstractMutation):
                 newInd = self.IndClass(genes=ind.genes +beta2* (ind.genes-lower)) 
                 newInd.skill_factor = ind.skill_factor
                 return newInd
+    def update(self, population:Population):
+        idx = 0
+        for subpop in population.ls_subPop:
+            curr_mean = np.sum(ind.fcost for ind in subpop.ls_inds)
+            if curr_mean > self.prev_mean[idx]:
+                self.direction[idx]=False
+            self.prev_mean[idx]=curr_mean
+            idx+=1 
+        # print(self.direction)
+         
