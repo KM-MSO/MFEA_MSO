@@ -1,4 +1,5 @@
 from asyncio import tasks
+from operator import itemgetter
 from re import sub
 import numpy as np
 import operator
@@ -80,7 +81,7 @@ class model(AbstractModel.model):
         return rmp
     def get_pop_intersection_v2(self,subpops):
         k = len(self.tasks)
-        rmp = np.zeros((k,k))
+        rmp = np.ones((k,k))
         for i in range(k):
             DT = 0        
             for u in range(20):
@@ -90,7 +91,7 @@ class model(AbstractModel.model):
                 for u in range(20):
                     DA+=self.distance(subpops[i][0],subpops[j][u])
                 if j != i:
-                    if DA > 0 :
+                    if DA > DT : 
                         rmp[i][j] = np.float64( DT / DA)
                     else : 
                         rmp[i][j] = 1
@@ -126,7 +127,7 @@ class model(AbstractModel.model):
         index =0 
         while tmp[index] < rand:
             index+=1
-            if index == 9:
+            if index == len(self.tasks) - 1:
                 return index
         return index 
 
@@ -136,33 +137,14 @@ class model(AbstractModel.model):
             sum += self.distance(inv.genes, individual.genes)
         tmp = 1/sum * (1+1/fRank)
         return tmp
-    def get_rmp (self, elite) :
-        k = len(self.tasks)
-        rmp = np.zeros([k,k])
-        center = np.zeros([k,50])
-        for i in range(k) :
-            center_tmp = np.zeros(50) 
-            for inv in elite[i] :
-                center_tmp += inv.genes
-            center[i] = center_tmp / 20
-
-        measurement = np.zeros([k,k])
-        for i in range(k) :
-            for j in range(k) :
-                if i!= k :
-                    measurement[i,j] = 1/max(1e-10,self.distance(center[i], center[j]))
-        for i in range(k) :
-            sum_tmp = np.sum(measurement[i])
-            for j in range(k) :
-                rmp[i,j] = measurement[i,j] / sum_tmp
-        return rmp
-
     def get_max_IM (self,IM_i) :
         b = {}
         for i in range(len(self.tasks)) :
             b[i] = IM_i[i]
         temp = sorted(b.items(), key = operator.itemgetter(1), reverse=True)
         return temp
+        
+
 
     def fit(self, nb_inds_each_task: int, nb_inds_min:int,nb_generations :int ,  bound = [0, 1], evaluate_initial_skillFactor = False,
             *args, **kwargs): 
@@ -179,8 +161,8 @@ class model(AbstractModel.model):
         self.rmp_hist = []
         self.inter_task = []
         len_task  = len(self.tasks)
-        inter =  [0.5]*len_task
-        intra =  [0.5]*len_task
+        inter =  [1-1/len_task]*len_task
+        intra =  [1/len_task]*len_task
         rmp = np.zeros([len_task,len_task])
 
         #SA param
@@ -198,34 +180,36 @@ class model(AbstractModel.model):
             )
             elite = self.get_elite(population.ls_subPop,20)
             measurement = np.zeros((len_task,len_task))
-            # IM =self.get_pop_intersection_v2(elite)
             if np.sum(eval_k) >= epoch * nb_inds_each_task * len(self.tasks):
                     # save history 
                 self.history_cost.append([ind.fcost for ind in population.get_solves()])
                 
-                self.render_process(epoch/nb_generations, ['Pop_size', 'Cost'], [[len(population)], self.history_cost[-1]], use_sys= True)
+                self.render_process(epoch/nb_generations, ['Pop_size', 'Cost'], [[len(u) for u in population.ls_subPop], self.history_cost[-1]], use_sys= True)
 
-                # self.IM.append(np.copy(IM))
                 self.rmp_hist.append(np.copy(rmp))
                 epoch+=1
-        
-            # for i in range(len_task):
-            #     for j in range(len_task):
-            #         if i != j :
-            #             for inv1 in range(20):
-            #                 measurement[i,j] += self.distance_to_pop(elite[j][inv1], elite[i], inv1 + 1)
-            # for i in range(len_task):
-            #     sum_tmp = np.sum(measurement[i])
-            #     for j in range(len_task):
-            #         if i != j:
-            #             rmp[i,j] = measurement[i,j] / sum_tmp * inter[i]
-            #     rmp[i,i]= intra[i]
-
-            new_rmp = self.get_rmp(elite)
-            for i in range(len_task) :
-                for j in range(len_task) :
-                    rmp[i,j] = new_rmp[i,j] * inter[i]
-                rmp[i,i]= intra[i]
+      
+            if (epoch % 5 == 0) : 
+                center = np.zeros([len(self.tasks), 50])
+                for i in range(len_task): 
+                    tmp_center = np.zeros(50)
+                    for inv in elite[i] :
+                        tmp_center += inv.genes
+                    center[i] += tmp_center / 20
+                best = self.get_elite(population.ls_subPop,1)
+                for i in range(len_task):
+                    for j in range(len_task):
+                        if i != j :
+                            tmp_distance = 0
+                            for inv1 in range(20):
+                                tmp_distance += (1 + 1/(inv1 + 1)) * (self.distance(best[i][0].genes, elite[j][inv1].genes) + self.distance(center[i], elite[j][inv1].genes))
+                            measurement[i,j] = 1 / tmp_distance
+                for i in range(len_task):
+                    sum_tmp = np.sum(measurement[i])
+                    for j in range(len_task):
+                        if i != j:
+                            rmp[i,j] = measurement[i,j] / sum_tmp * inter[i]
+                    rmp[i,i]= intra[i]
 
 
             if (epoch % 20) == 19 :
@@ -234,7 +218,7 @@ class model(AbstractModel.model):
                     arr = self.get_max_IM(IM[i])
                     for t in arr :
                         j = int(t[0])
-                        transfer = min (3, int(IM[i,j] * nb_inds_tasks[i]) )
+                        transfer = min (3, int(IM[i,j] * nb_inds_tasks[i]))
                         transfer = max(1, transfer)
                         pop_transfer = self.get_elite_transfer (population[j], transfer)
                         for inv in pop_transfer :
@@ -254,7 +238,6 @@ class model(AbstractModel.model):
                             pa = population.__getIndsTask__(idx_task=i,type='tournament',tournament_size=1 )
                             oa = self.mutation(pa,return_newInd=True)
                             oa.skill_factor = pa.skill_factor
-                            oa.hybrid = False
                             offsprings.__addIndividual__(oa)
                             eval_k[oa.skill_factor]+=1
                         else:
@@ -270,31 +253,27 @@ class model(AbstractModel.model):
                             else :
                                 oa.transfer = False
                                 ob.transfer = False
-                            oa.hybrid = True
-                            ob.hybrid = True
                             offsprings.__addIndividual__(oa)
                             offsprings.__addIndividual__(ob)
                             eval_k[oa.skill_factor]+=1
                             eval_k[ob.skill_factor]+=1
             offsprings.update_rank()                
-            elite_off = self.get_elite(offsprings.ls_subPop,30)
+            elite_off = self.get_elite(offsprings.ls_subPop,40)
             for i in range(len(self.tasks)):
                 x = 0 #inter
                 y= 0 #intra
                 for inv in elite_off[i] :
-                    if inv.hybrid == True :
-                        if inv.transfer == True :
-                            x += 1
-                        else : 
-                            y += 1
-                if (x+y) > 0 : 
-                    y_tmp = y/(x+y)
-                    y_tmp = max(0.2,min(0.8,y_tmp))
-                    x_tmp = 1-y_tmp
+                    if inv.transfer == True :
+                        x += 1
+                    else : 
+                        y += 1
+                y_tmp = y/(x+y)
+                y_tmp = max(0.2,min(0.8,y_tmp))
+                x_tmp = 1-y_tmp
 
                    
-                    inter[i] =0.5*inter[i]+x_tmp*0.5
-                    intra[i] =0.5*intra[i]+y_tmp*0.5
+                inter[i] =0.5*inter[i]+x_tmp*0.5
+                intra[i] =0.5*intra[i]+y_tmp*0.5
             tmp_inter = copy.deepcopy(inter)
             self.inter_task.append(tmp_inter)
             # merge and update rank
@@ -303,16 +282,12 @@ class model(AbstractModel.model):
             population.update_rank()
 
             # selection 
-            nb_inds_tasks = [int(
-                # (nb_inds_min - nb_inds_each_task) / nb_generations * (epoch - 1) + nb_inds_each_task
-                int(min((nb_inds_min - nb_inds_each_task)/(nb_generations - 1)* epoch  + nb_inds_each_task, nb_inds_each_task))
-            )] * len(self.tasks)
             self.selection(population, nb_inds_tasks)
            
             # save history
             self.history_cost.append([ind.fcost for ind in population.get_solves()])
                 
-            self.render_process(epoch/nb_generations, ['Pop_size', 'Cost'], [[len(population)], self.history_cost[-1]], use_sys= True)
+            self.render_process(epoch/nb_generations, ['Pop_size', 'Cost'], [[len(u) for u in population.ls_subPop], self.history_cost[-1]], use_sys= True)
 
             # self.IM.append(np.copy(IM))
             self.rmp_hist.append(np.copy(rmp))
