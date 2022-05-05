@@ -1,5 +1,4 @@
-from re import S
-from tkinter import Y
+from typing import Tuple, Type
 import numpy as np
 import scipy.stats
 
@@ -11,10 +10,11 @@ class AbstractSearch():
         pass
     def __call__(self, *args, **kwargs) -> Individual:
         pass
-    def getInforTasks(self, tasks: list[AbstractTask], seed = None):
+    def getInforTasks(self, IndClass: Type[Individual], tasks: list[AbstractTask], seed = None):
         self.dim_uss = max([t.dim for t in tasks])
         self.nb_tasks = len(tasks)
         self.tasks = tasks
+        self.IndClass = IndClass
         #seed
         np.random.seed(seed)
         pass
@@ -33,8 +33,8 @@ class SHADE(AbstractSearch):
         self.p_ontop = p_ontop
         self.tournament_size = tournament_size
 
-    def getInforTasks(self, tasks: list[AbstractTask], seed=None):
-        super().getInforTasks(tasks, seed)
+    def getInforTasks(self, IndClass: Type[Individual], tasks: list[AbstractTask], seed = None):
+        super().getInforTasks(IndClass, tasks, seed= seed)
         # memory of cr and F
         self.M_cr = np.zeros(shape = (self.nb_tasks, self.len_mem, ), dtype= float) + 0.5
         self.M_F = np.zeros(shape= (self.nb_tasks, self.len_mem, ), dtype = float) + 0.5
@@ -97,15 +97,13 @@ class SHADE(AbstractSearch):
             u = np.zeros(shape= (self.dim_uss,))
             u[np.random.choice(self.dim_uss)] = 1
 
-        #FIXME: :)) 
-
         new_genes = np.where(u, 
             ind_best.genes + F * (ind_ran1.genes - ind_ran2.genes),
             ind.genes
         )
         new_genes = np.clip(new_genes, 0, 1)
 
-        new_ind = Individual(new_genes)
+        new_ind = self.IndClass(new_genes)
         new_ind.skill_factor = ind.skill_factor
         new_ind.fcost = new_ind.eval(self.tasks[new_ind.skill_factor])
 

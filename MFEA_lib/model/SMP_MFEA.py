@@ -58,9 +58,14 @@ class model(AbstractModel.model):
     def compile(self, 
         IndClass: Type[Individual],
         tasks: list[AbstractTask], 
-        crossover: Crossover.SBX_Crossover, mutation: Mutation.Polynomial_Mutation, selection: Selection.ElitismSelection, 
+        crossover: Crossover.SBX_Crossover, 
+        mutation: Mutation.Polynomial_Mutation, 
+        search: Search.SHADE,
+        selection: Selection.ElitismSelection, 
         *args, **kwargs):
-        return super().compile(IndClass, tasks, crossover, mutation, selection, *args, **kwargs)
+        super().compile(IndClass, tasks, crossover, mutation, selection, *args, **kwargs)
+        self.search = search
+        self.search.getInforTasks(IndClass, tasks, seed = self.seed)
     
     def render_smp(self,  shape = None, title = None, figsize = None, dpi = 100, step = 1, re_fig = False, label_shape= None, label_loc= None):
         
@@ -291,22 +296,22 @@ class model(AbstractModel.model):
                 M_smp[skf].update_SMP(Delta[skf], count_Delta[skf])
 
             '''
-            mutation or search
+            search
             '''
-            # for subPop in population:
-            #     for idx in range(len(subPop)):
-            #         if np.random.rand() < prob_search:
-            #             '''
-            #             DE
-            #             '''
-            #             new_ind = self.search(ind = subPop[idx], population = population)
-            #             if new_ind.fcost < subPop[idx].fcost:
-            #                 # subPop.__addIndividual__(new_ind)
-            #                 subPop.ls_inds[idx] = new_ind
-            #                 subPop.update_rank()
-            #             eval_k[subPop.skill_factor] += 1
-            #             turn_eval[subPop.skill_factor] += 1
-            # self.search.update()
+            for subPop in population:
+                for idx in range(len(subPop)):
+                    if np.random.rand() < prob_search:
+                        '''
+                        DE
+                        '''
+                        new_ind = self.search(ind = subPop[idx], population = population)
+                        if new_ind.fcost < subPop[idx].fcost:
+                            # subPop.__addIndividual__(new_ind)
+                            subPop.ls_inds[idx] = new_ind
+                            subPop.update_rank()
+                        eval_k[subPop.skill_factor] += 1
+                        turn_eval[subPop.skill_factor] += 1
+            self.search.update()
             
         #solve
         self.last_pop = population
