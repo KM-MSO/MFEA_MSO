@@ -904,7 +904,82 @@ class MultiBenchmark():
                 print(self.ls_name_benchmark[idx])
             model.print_result(print_attr, print_time= print_time, print_name= print_name_attr) 
 
-
+class CompareResultBenchmark:
+    '''
+    Show result multibenchmark
+    ''' 
+    def __init__(self, path_folder: str = None, ls_benchmark: list = [], ls_name_algo = [], nb_benchmark = None) -> None:
+        self.path_folder = path_folder 
+        self.ls_benchmark = ls_benchmark
+        self.ls_name_algo = ls_name_algo 
+        pass
+    
+    def load_folder(self): 
+        ls_algorithms = os.listdir(self.path_folder) 
+        if len(self.ls_name_algo) == 0: 
+            self.ls_name_algo = ls_algorithms.copy() 
+        for idx, name in enumerate(self.ls_name_algo): 
+            print(f"({idx} : {name})")
         
+    def show_compare_detail(self, min_value= 0, round= 1000):
+        # Step1: read folder 
+        algo_ls_model = np.empty(shape=(len(self.ls_name_algo), len(self.ls_benchmark))).tolist() 
+        ls_algorithms = os.listdir(self.path_folder) 
+        # Step2: Create ls model of each benchmark
+        for idx_algo, algorithm in enumerate(ls_algorithms): 
+            path_model = os.path.join(self.path_folder, algorithm) 
+            ls_models = os.listdir(path_model) 
+            for model_name in ls_models: 
+                idx_benchmark = (model_name.split(".")[0]).split("_")[-1] 
+                idx_benchmark = int(idx_benchmark)-1
+                # try:
+                model = loadModel(os.path.join(path_model, model_name), self.ls_benchmark[int(idx_benchmark)]) 
+                algo_ls_model[idx_algo][idx_benchmark] = model 
+                # except: 
+                #     print(f"Cannot load Model: {os.path.join(path_model, model_name)}")    
+                #     return
         
+        # Step3: use compare model for each model in benchmark  
+        for benchmark in range(len(self.ls_benchmark)): 
+            try: 
+                # compare = CompareModel([algo_ls_model[i][benchmark] for i in range(len(self.ls_name_algo))])
+                # print(compare.detail_compare_result(min_value= min_value, round = round))
+                name_row = [str("Tasks") + str(i+1) for i in range(len(self.ls_benchmark[0]))]
+                name_col = self.ls_name_algo
+                ls_models = [algo_ls_model[i][benchmark] for i in range(len(self.ls_name_algo))]
+                data = [] 
+                for model in ls_models: 
+                    data.append(model.history_cost[-1]) 
+                
+                data = np.array(data).T 
+                data = np.round(data, round) 
 
+                end_data = pd.DataFrame(data).astype(str) 
+
+                result_compare = np.zeros(shape=(len(name_col)), dtype=int).tolist() 
+
+                for task in range(len(name_row)): 
+                    argmin= np.argmin(data[task])
+                    min_value_ = max(data[task][argmin], min_value) 
+
+                    for col in range(len(name_col)): 
+                        if data[task][col] <= min_value_: 
+                            result_compare[col] += 1 
+                            end_data.iloc[task][col] = str("(+)") + end_data.iloc[task][col]
+                
+                for col in range(len(name_col)):
+                    result_compare[col] = str(result_compare[col]) + "/" + str(len(name_row))
+                
+                result_compare = pd.DataFrame([result_compare], index=["Compare"], columns= name_col) 
+                end_data.columns = name_col 
+                end_data.index = name_row 
+                pd.set_option('display.expand_frame_repr', False)
+                end_data = pd.concat([end_data, result_compare]) 
+                print(end_data)
+                print()
+            except: 
+                print(f"Cannot compare benchmark {benchmark+1}")
+                pass 
+        pass
+
+    
