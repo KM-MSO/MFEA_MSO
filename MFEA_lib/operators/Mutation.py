@@ -164,23 +164,22 @@ class Directional_Mutation(AbstractMutation):
 
     def __call__(self, ind: Individual,return_newInd : bool, *arg, **kwargs) -> Individual:
         r = np.random.rand()
-        beta1 = np.exp(r ** 2) *np.exp(r-2/r)
-        beta2 = np.exp(r-r ** 2) *np.exp(r-2/r)
-        upper = np.ones(self.dim_uss)
-        lower = np.zeros(self.dim_uss)
+        beta1 = np.exp(r ** 2) * np.exp(r - 2/r)
+        beta2 = np.exp(r - r ** 2) *np.exp(r - 2/r)
+
         if(np.random.rand() < 0.5):
             if self.direction[ind.skill_factor] is True : 
-                newInd = self.IndClass(genes=ind.genes + beta1*(upper - ind.genes))
+                newInd = self.IndClass(genes= ind.genes + beta1 * (1 - ind.genes))
                 newInd.skill_factor = ind.skill_factor
             else:
-                newInd = self.IndClass(genes=ind.genes -beta1*(upper - ind.genes))
+                newInd = self.IndClass(genes= np.clip(ind.genes - beta1 * (1 - ind.genes), 0, 1))
                 newInd.skill_factor = ind.skill_factor
         else:
             if self.direction[ind.skill_factor] is True : 
-                newInd = self.IndClass(genes=ind.genes - beta2*(ind.genes-lower))
+                newInd = self.IndClass(genes= ind.genes - beta2 * ind.genes)
                 newInd.skill_factor = ind.skill_factor
             else:
-                newInd = self.IndClass(genes=ind.genes +beta2* (ind.genes-lower)) 
+                newInd = self.IndClass(genes= np.clip(ind.genes + beta2 * ind.genes, 0, 1))
                 newInd.skill_factor = ind.skill_factor
         if return_newInd:
             return newInd
@@ -192,10 +191,10 @@ class Directional_Mutation(AbstractMutation):
     def update(self, population:Population):
         idx = 0
         for subpop in population.ls_subPop:
-            curr_mean = np.sum(ind.fcost for ind in subpop.ls_inds)
+            curr_mean = np.mean([ind.fcost for ind in subpop.ls_inds])
             if curr_mean > self.prev_mean[idx]:
-                self.direction[idx]=False
-            self.prev_mean[idx]=curr_mean
-            idx+=1 
+                self.direction[idx] = False
+            self.prev_mean[idx] = curr_mean
+            idx += 1 
         # print(self.direction)
          
