@@ -921,7 +921,7 @@ class CompareResultBenchmark:
         for idx, name in enumerate(self.ls_name_algo): 
             print(f"({idx} : {name})")
         
-    def show_compare_detail(self, min_value= 0, round= 1000):
+    def show_compare_detail(self, min_value= 0, round= 100, idx_main_algo= 0):
         # Step1: read folder 
         algo_ls_model = np.empty(shape=(len(self.ls_name_algo), len(self.ls_benchmark))).tolist() 
         ls_algorithms = os.listdir(self.path_folder) 
@@ -939,8 +939,14 @@ class CompareResultBenchmark:
                 #     print(f"Cannot load Model: {os.path.join(path_model, model_name)}")    
                 #     return
         
+        # swap 
+        algo_ls_model[0], algo_ls_model[idx_main_algo] = algo_ls_model[idx_main_algo], algo_ls_model[0] 
+        self.ls_name_algo[0], self.ls_name_algo[idx_main_algo] = self.ls_name_algo[idx_main_algo], self.ls_name_algo[0] 
+
+
         # Step3: use compare model for each model in benchmark  
         for benchmark in range(len(self.ls_benchmark)): 
+            print("Benchmark: ", benchmark + 1)
             try: 
                 # compare = CompareModel([algo_ls_model[i][benchmark] for i in range(len(self.ls_name_algo))])
                 # print(compare.detail_compare_result(min_value= min_value, round = round))
