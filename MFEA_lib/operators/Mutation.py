@@ -126,3 +126,76 @@ class PMD_Scale(AbstractMutation):
 
     def __call__(self, ind: Individual, return_newInd: bool, *arg, **kwargs) -> Individual:
         return super().__call__(ind, return_newInd, *arg, **kwargs)
+
+class IDPCEDU_Mutation(AbstractMutation):
+    def getInforTasks(self, IndClass: Type[Individual], tasks: list[AbstractTask], seed=None):
+        super().getInforTasks(IndClass, tasks, seed)
+        self.S_tasks = [np.amax(t.count_paths, axis= 1)  for t in tasks]
+        
+
+    def __call__(self, ind: Individual, return_newInd: bool, *arg, **kwargs) -> Individual:
+        if return_newInd:
+            new_genes:np.ndarray = np.copy(ind.genes)
+
+            i, j = np.random.randint(0, self.dim_uss, 2)
+            new_genes[0, i], new_genes[0, j] = new_genes[0, j], new_genes[0, i]
+            i = np.random.randint(0, len(self.S_tasks[ind.skill_factor]))
+            new_genes[1, i] = np.random.randint(0, self.S_tasks[ind.skill_factor][i])
+            newInd = self.IndClass(genes= new_genes)
+            newInd.skill_factor = ind.skill_factor
+            return newInd
+        else:
+            i, j = np.random.randint(0, self.dim_uss, 2)
+            ind.genes[0, i], ind.genes[0, j] = ind.genes[0, j], ind.genes[0, i]
+            i = np.random.randint(0, len(self.S_tasks[ind.skill_factor]))
+            ind.genes[1, i] = np.random.randint(0, self.S_tasks[ind.skill_factor][i])
+
+            return ind
+
+class Directional_Mutation(AbstractMutation):
+
+    def __init__(self, *arg, **kwargs):
+        super().__init__(*arg, **kwargs)
+
+    def  getInforTasks(self, IndClass: Type[Individual], tasks: list[AbstractTask], seed = None):
+        super().getInforTasks(IndClass,tasks, seed)
+        self.direction = [True]*self.nb_tasks
+        self.prev_mean = [float('inf')]*self.nb_tasks
+
+    def __call__(self, ind: Individual,return_newInd : bool, *arg, **kwargs) -> Individual:
+        r = np.random.rand()
+        beta1 = np.exp(r ** 2) *np.exp(r-2/r)
+        beta2 = np.exp(r-r ** 2) *np.exp(r-2/r)
+        upper = np.ones(self.dim_uss)
+        lower = np.zeros(self.dim_uss)
+        if(np.random.rand() < 0.5):
+            if self.direction[ind.skill_factor] is True : 
+                newInd = self.IndClass(genes=ind.genes + beta1*(upper - ind.genes))
+                newInd.skill_factor = ind.skill_factor
+            else:
+                newInd = self.IndClass(genes=ind.genes -beta1*(upper - ind.genes))
+                newInd.skill_factor = ind.skill_factor
+        else:
+            if self.direction[ind.skill_factor] is True : 
+                newInd = self.IndClass(genes=ind.genes - beta2*(ind.genes-lower))
+                newInd.skill_factor = ind.skill_factor
+            else:
+                newInd = self.IndClass(genes=ind.genes +beta2* (ind.genes-lower)) 
+                newInd.skill_factor = ind.skill_factor
+        if return_newInd:
+            return newInd
+        else:
+            ind.genes = newInd.genes
+            ind.fcost = newInd.fcost
+            return ind
+
+    def update(self, population:Population):
+        idx = 0
+        for subpop in population.ls_subPop:
+            curr_mean = np.sum(ind.fcost for ind in subpop.ls_inds)
+            if curr_mean > self.prev_mean[idx]:
+                self.direction[idx]=False
+            self.prev_mean[idx]=curr_mean
+            idx+=1 
+        # print(self.direction)
+         

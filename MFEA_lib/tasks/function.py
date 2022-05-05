@@ -226,6 +226,7 @@ class Rastrigin(AbstractFunc):
     def __call__(self, x):
         x = self.decode(x)
         return __class__.func(x, self.dim)
+        
 
 
 

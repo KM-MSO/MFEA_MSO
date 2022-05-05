@@ -66,6 +66,10 @@ class model(AbstractModel.model):
             # selection
             self.selection(population, [nb_inds_each_task] * len(self.tasks))
 
+            # update operators
+            self.crossover.update(population = population)
+            self.mutation.update(population = population)
+
             # save history
             self.history_cost.append([ind.fcost for ind in population.get_solves()])
 

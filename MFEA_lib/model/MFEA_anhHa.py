@@ -10,10 +10,13 @@ from ..EA import *
 import matplotlib.pyplot as plt
 import copy
 
-
-class model(AbstractModel.model): 
-    def compile(self, tasks: list[AbstractFunc], crossover: Crossover.AbstractCrossover, mutation: Mutation.AbstractMutation, selection: Selection.AbstractSelection, *args, **kwargs):
-        return super().compile(tasks, crossover, mutation, selection, *args, **kwargs)
+class model(AbstractModel.model):
+    def compile(self, 
+        IndClass: Type[Individual],
+        tasks: list[AbstractTask], 
+        crossover: Crossover.SBX_Crossover, mutation: Mutation.GaussMutation, selection: Selection.ElitismSelection, 
+        *args, **kwargs):
+        return super().compile(IndClass, tasks, crossover, mutation, selection, *args, **kwargs)
     
     def findParentSameSkill(self, subpop: SubPopulation, ind):
         ind2 = ind 
@@ -124,7 +127,7 @@ class model(AbstractModel.model):
         index =0 
         while tmp[index] < rand:
             index+=1
-            if index == 9:
+            if index == len(self.tasks) - 1:
                 return index
         return index 
 
@@ -143,23 +146,23 @@ class model(AbstractModel.model):
         
 
 
-    def fit(self, nb_inds_each_task: int, nb_inds_min:int,nb_generations :int ,  bound = [0, 1], evaluate_initial_skillFactor = False,
+    def fit(self, nb_inds_each_task: int, nb_inds_min:int,nb_generations :int ,  bound = [0, 1], evaluate_initial_skillFactor = False,LSA = False,
             *args, **kwargs): 
         super().fit(*args, **kwargs)
         population = Population(
-            nb_inds_tasks= [nb_inds_each_task]*len(self.tasks), 
-            dim = self.dim_uss, 
-            bound = bound, 
-            list_tasks= self.tasks, 
-            evaluate_initial_skillFactor= evaluate_initial_skillFactor
+            self.IndClass,
+            nb_inds_tasks = [nb_inds_each_task] * len(self.tasks), 
+            dim = self.dim_uss,
+            list_tasks= self.tasks,
+            evaluate_initial_skillFactor = evaluate_initial_skillFactor
         )
         #history
         self.IM = []
         self.rmp_hist = []
         self.inter_task = []
         len_task  = len(self.tasks)
-        inter =  [0.5]*len_task
-        intra =  [0.5]*len_task
+        inter =  [1-1/len_task]*len_task
+        intra =  [1/len_task]*len_task
         rmp = np.zeros([len_task,len_task])
 
         #SA param
@@ -170,35 +173,36 @@ class model(AbstractModel.model):
 
         while np.sum(eval_k) <= MAXEVALS:
             offsprings = Population(
+                self.IndClass,
                 nb_inds_tasks= [0] * len(self.tasks),
-                dim = self.dim_uss, 
-                bound = bound,
+                dim =  self.dim_uss, 
                 list_tasks= self.tasks,
             )
             elite = self.get_elite(population.ls_subPop,20)
+            # IM =self.get_pop_intersection_v2(elite)
             measurement = np.zeros((len_task,len_task))
-            IM =self.get_pop_intersection_v2(elite)
             if np.sum(eval_k) >= epoch * nb_inds_each_task * len(self.tasks):
                     # save history 
                 self.history_cost.append([ind.fcost for ind in population.get_solves()])
                 
                 self.render_process(epoch/nb_generations, ['Pop_size', 'Cost'], [[len(u) for u in population.ls_subPop], self.history_cost[-1]], use_sys= True)
 
-                self.IM.append(np.copy(IM))
+                # self.IM.append(np.copy(IM))
                 self.rmp_hist.append(np.copy(rmp))
                 epoch+=1
       
-            for i in range(len_task):
-                for j in range(len_task):
-                    if i != j :
-                        for inv1 in range(20):
-                            measurement[i,j] += self.distance_to_pop(elite[j][inv1], elite[i], inv1 + 1)
-            for i in range(len_task):
-                sum_tmp = np.sum(measurement[i])
-                for j in range(len_task):
-                    if i != j:
-                        rmp[i,j] = measurement[i,j] / sum_tmp * inter[i]
-                rmp[i,i]= intra[i]
+            if (epoch % 5 == 0) : 
+                for i in range(len_task):
+                    for j in range(len_task):
+                        if i != j :
+                            for inv1 in range(20):
+                                measurement[i,j] += self.distance_to_pop(elite[j][inv1], elite[i], inv1 + 1)
+                for i in range(len_task):
+                    sum_tmp = np.sum(measurement[i])
+                    for j in range(len_task):
+                        if i != j:
+                            rmp[i,j] = measurement[i,j] / sum_tmp * inter[i]
+                    rmp[i,i]= intra[i]
 
 
             if (epoch % 20) == 19 :
@@ -212,7 +216,7 @@ class model(AbstractModel.model):
                         pop_transfer = self.get_elite_transfer (population[j], transfer)
                         for inv in pop_transfer :
                             gen = np.copy(inv.genes)
-                            tmp_inv = Individual (gen)
+                            tmp_inv = self.IndClass (gen)
                             tmp_inv.skill_factor = i
                             tmp_inv.hybrid = False
                             eval_k[i] += 1
@@ -271,10 +275,11 @@ class model(AbstractModel.model):
             population.update_rank()
 
             # selection 
-            nb_inds_tasks = [int(
-                # (nb_inds_min - nb_inds_each_task) / nb_generations * (epoch - 1) + nb_inds_each_task
-                int(min((nb_inds_min - nb_inds_each_task)/(nb_generations - 1)* epoch  + nb_inds_each_task, nb_inds_each_task))
-            )] * len(self.tasks)
+            if LSA is True:
+                nb_inds_tasks = [int(
+                    # (nb_inds_min - nb_inds_each_task) / nb_generations * (epoch - 1) + nb_inds_each_task
+                    int(min((nb_inds_min - nb_inds_each_task)/(nb_generations - 1)* epoch  + nb_inds_each_task, nb_inds_each_task))
+                )] * len(self.tasks)
             self.selection(population, nb_inds_tasks)
            
             # save history
@@ -282,7 +287,7 @@ class model(AbstractModel.model):
                 
             self.render_process(epoch/nb_generations, ['Pop_size', 'Cost'], [[len(u) for u in population.ls_subPop], self.history_cost[-1]], use_sys= True)
 
-            self.IM.append(np.copy(IM))
+            # self.IM.append(np.copy(IM))
             self.rmp_hist.append(np.copy(rmp))
         print("End")
         # solve 
