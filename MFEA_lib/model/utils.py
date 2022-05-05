@@ -908,10 +908,12 @@ class CompareResultBenchmark:
     '''
     Show result multibenchmark
     ''' 
-    def __init__(self, path_folder: str = None, ls_benchmark: list = [], ls_name_algo = [], nb_benchmark = None) -> None:
+    def __init__(self, path_folder: str = None, ls_benchmark: list = [], ls_name_algo = [], load_folder = True) -> None:
         self.path_folder = path_folder 
         self.ls_benchmark = ls_benchmark
         self.ls_name_algo = ls_name_algo 
+        if load_folder is True: 
+            self.load_folder() 
         pass
 
     def load_folder(self): 
@@ -924,7 +926,11 @@ class CompareResultBenchmark:
     def show_compare_detail(self, min_value= 0, round= 100, idx_main_algo= 0):
         # Step1: read folder 
         algo_ls_model = np.empty(shape=(len(self.ls_name_algo), len(self.ls_benchmark))).tolist() 
-        ls_algorithms = os.listdir(self.path_folder) 
+        ls_algorithms = os.listdir(self.path_folder)
+
+        if len(self.ls_name_algo) == 0: 
+            self.ls_name_algo = ls_algorithms.copy()  
+        assert len(self.ls_name_algo) == len(ls_algorithms)
         # Step2: Create ls model of each benchmark
         for idx_algo, algorithm in enumerate(ls_algorithms): 
             path_model = os.path.join(self.path_folder, algorithm) 
