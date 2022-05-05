@@ -123,8 +123,21 @@ class MultiTimeModel:
         for name, value in kwargs.items():
             setattr(self, name, value)
 
-    def run(self, nb_run: int = None, save_path: str = None, seed_arr: list = None, random_seed: bool = False):
+    def run(self, nb_run: int = None, save_path: str = "./RESULTS/result/model.mso", seed_arr: list = None, random_seed: bool = False, replace_folder = True):
         print('Checking ...', end='\r')
+        # folder
+        idx = len(save_path) 
+        while save_path[idx-1] != "/": 
+            idx -= 1 
+
+        if os.path.isdir(save_path[:idx]) is True:
+            if replace_folder is True:
+                pass
+            else:
+                raise Exception("Folder is existed")
+        else:
+            os.makedirs(save_path[:idx])
+
         if self.status == 'NotRun':
             if nb_run is None:
                 self.nb_run = 1
