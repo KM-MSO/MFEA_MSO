@@ -178,10 +178,12 @@ class MultiTimeModel:
         for idx_seed in range(index_start, len(self.ls_seed)):
             try:
                 model = self.model(self.ls_seed[idx_seed])
+                
+                self.ls_model.append(model)
+                
                 model.compile(**self.compile_kwargs)
                 model.fit(*self.args, **self.kwargs)
 
-                self.ls_model.append(model)
                 self.total_time += model.time_end - model.time_begin
 
             except KeyboardInterrupt as e:
@@ -223,6 +225,8 @@ def saveModel(model: MultiTimeModel, PATH: str, remove_tasks=True):
 
     model.__class__ = MultiTimeModel
 
+    tasks = model.tasks 
+
     if remove_tasks is True:
         model.tasks = None
         model.compile_kwargs['tasks'] = None
@@ -244,11 +248,47 @@ def saveModel(model: MultiTimeModel, PATH: str, remove_tasks=True):
         f = open(PATH, 'wb')
         pickle.dump(model, f)
         f.close()
+
     except:
         cls = model.__class__
         model.__class__ = cls.__class__(cls.__name__, (cls, model.model), {})
 
+        if remove_tasks is True:
+            model.tasks = tasks 
+            model.compile_kwargs['tasks'] = None
+            for submodel in model.ls_model:
+                submodel.tasks = tasks
+                submodel.last_pop.ls_tasks = tasks 
+                for idx, subpop in enumerate(submodel.last_pop):
+                    subpop.task = tasks[idx]
+                if 'attr_tasks' in submodel.kwargs.keys():
+                    for attribute in submodel.kwargs['attr_tasks']:
+                        # setattr(submodel, getattr(subm, name), None)
+                        setattr(getattr(submodel, attribute), 'tasks', tasks)
+                        pass
+                else:
+                    submodel.crossover.tasks = tasks
+                    submodel.mutation.tasks = tasks 
         return 'Cannot Saved'
+
+    
+    if remove_tasks is True:
+        model.tasks = tasks 
+        model.compile_kwargs['tasks'] = None
+        for submodel in model.ls_model:
+            submodel.tasks = tasks
+            submodel.last_pop.ls_tasks = tasks 
+            for idx, subpop in enumerate(submodel.last_pop):
+                subpop.task = tasks[idx]
+            if 'attr_tasks' in submodel.kwargs.keys():
+                for attribute in submodel.kwargs['attr_tasks']:
+                    # setattr(submodel, getattr(subm, name), None)
+                    setattr(getattr(submodel, attribute), 'tasks', tasks)
+                    pass
+            else:
+                submodel.crossover.tasks = tasks
+                submodel.mutation.tasks = tasks 
+
 
     cls = model.__class__
     model.__class__ = cls.__class__(cls.__name__, (cls, model.model), {})
