@@ -179,7 +179,7 @@ class Directional_Mutation(AbstractMutation):
                     if np.random.rand() < 0.5: 
                         new_genes[idx] = ind.genes[idx] + beta1 * (1 - ind.genes[idx]) 
                     else: 
-                        new_genes[idx] = ind.genes[idx] - beta2 * (ind.genes[idx] - 0)         
+                        new_genes[idx] = ind.genes[idx] - beta2 * (ind.genes[idx] - 0)              
                 else: 
                     if np.random.rand() < 0.5: 
                         new_genes[idx] = ind.genes[idx] - beta1 * (1 - ind.genes[idx]) 
