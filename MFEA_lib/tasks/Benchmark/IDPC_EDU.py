@@ -16,7 +16,8 @@ class IDPC_EDU_benchmark:
     def get_tasks(ID_set: int):
         print('\rReading data...')
         tasks = []
-        for file_name in tqdm(os.listdir(path + '/__references__/IDPC_DU/IDPC_EDU/data/set' + str(ID_set))):
+        file_list = sorted(os.listdir(path + '/__references__/IDPC_DU/IDPC_EDU/data/set' + str(ID_set)))
+        for file_name in tqdm(file_list):
             tasks.append(IDPC_EDU_FUNC(path + '/__references__/IDPC_DU/IDPC_EDU/data/set' + str(ID_set), file_name))
         return tasks, Ind_EDU
 

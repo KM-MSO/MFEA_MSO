@@ -1,5 +1,7 @@
 import numpy as np
 import numba as nb
+import sys
+MAX_INT = sys.maxsize
 class AbstractTask():
     def __init__(self, *args, **kwargs) -> None:
         pass
@@ -31,6 +33,7 @@ class IDPC_EDU_FUNC(AbstractTask):
         self.num_edges: int = int(file_name[:-5].split('x')[-1])
         self.edges: np.ndarray
         self.dim: int = int(file_name[5:].split('x')[0])
+        self.name = file_name.split('.')[0]
         self.read_data()
             
     def read_data(self):
@@ -88,6 +91,7 @@ class IDPC_EDU_FUNC(AbstractTask):
         visited_vertex = [False for i in range(num_nodes)]
     
         curr = source
+        # path = []
         while(curr != target):
             visited_vertex[curr] = True
             stop = True
@@ -98,24 +102,27 @@ class IDPC_EDU_FUNC(AbstractTask):
                 if count_paths[curr][t] == 0:
                     continue
                 
-                k = gene[1][curr] % count_paths[curr][t]
+                k = gene[1][curr] % count_paths[curr][t] 
                 # key = get_key(curr, t, k)
                 key = '_'.join([str(curr), str(t), str(k)])
                 d = edges[key][1]
                 if left_domains[d]:
                     continue
                 cost += edges[key][0]
-                left_domains.append(d)
+                # path.append(key +  '_' + str(edges[key][0]) + '_' + str(d))
+                left_domains[d] = True
                 curr = t
                 stop = False
                 break
             if stop:
-                return -1
+                return MAX_INT
         return cost
         
     def __call__(self, gene: np.ndarray):
         # decode
-        gene = np.ascontiguousarray(gene[:, : self.dim])
+        # idx = np.argsort(gene[0])[:self.dim]
+        idx = np.arange(self.dim)
+        gene = np.ascontiguousarray(gene[:, idx])
         # eval
         return __class__.func(gene, self.source, self.target,
                          self.num_nodes, self.num_domains, self.edges, self.count_paths)

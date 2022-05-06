@@ -280,6 +280,7 @@ class WCCI22_benchmark():
             self.Lb = Lb
             self.SS = SS
             self.func_id =func_id
+            self.name = "func_id = " + str(func_id)
         def decode(self,x,sh_rate,rotation_matrix,shift):
             x_decode = x-shift
             x_decode = x_decode*sh_rate

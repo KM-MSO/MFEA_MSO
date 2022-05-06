@@ -16,11 +16,11 @@ class model(AbstractModel.model):
 
             #value const for intra
             self.p_const_intra = p_const_intra
-            self.lower_p = 0.01/self.nb_tasks
+            self.lower_p = 0.1/(self.nb_tasks + 1)
 
             # smp without const_val of host
-            self.sum_not_host = 1 - 0.01 - p_const_intra
-            self.SMP_not_host: np.ndarray = ((np.zeros((nb_tasks, )) + self.sum_not_host)/(nb_tasks))
+            self.sum_not_host = 1 - 0.1 - p_const_intra
+            self.SMP_not_host: np.ndarray = ((np.zeros((nb_tasks + 1, )) + self.sum_not_host)/(nb_tasks + 1))
             self.SMP_not_host[self.idx_host] += self.sum_not_host - np.sum(self.SMP_not_host)
 
             self.SMP_include_host = self.get_smp()
@@ -41,8 +41,8 @@ class model(AbstractModel.model):
 
             if np.sum(Delta_task) != 0:         
                 # newSMP = np.array(Delta_task) / (self.SMP_include_host)
-                newSMP = np.array(Delta_task) / (np.array(count_Delta_tasks) + 1e-100)
-                newSMP = newSMP / (np.sum(newSMP) / self.sum_not_host)
+                newSMP = (np.array(Delta_task) / (np.array(count_Delta_tasks) + 1e-50))
+                newSMP = newSMP / (np.sum(newSMP) / self.sum_not_host + 1e-50)
 
                 self.SMP_not_host = self.SMP_not_host * (1 - self.lr) + newSMP * self.lr
                 
@@ -95,8 +95,8 @@ class model(AbstractModel.model):
                 np.append(np.arange(0, len(his_smp), step), np.array([len(his_smp) - 1])),
                 [his_smp[
                     np.append(np.arange(0, len(his_smp), step), np.array([len(his_smp) - 1])), 
-                    idx_task, t] for t in range(len(self.tasks))],
-                labels = ['Task' + str(i + 1) for i in range(len(self.tasks))]
+                    idx_task, t] for t in range(len(self.tasks) + 1)],
+                labels = ['Task' + str(i + 1) for i in range(len(self.tasks))] + ["mutation"]
             )
             # plt.legend()
             fig.axes[idx_task].set_title('Task ' + str(idx_task + 1) +": " + task.name)
@@ -113,8 +113,8 @@ class model(AbstractModel.model):
             return fig
 
     def fit(self, nb_generations: int, nb_inds_each_task: int, nb_inds_min = None,
-        lr = 1, p_const_intra = 0.5, swap_po = True, p_mutate = 0.1, prob_search = 0.5,
-        nb_epochs_stop = 10, 
+        lr = 1, p_const_intra = 0.5, swap_po = True, prob_search = 0.5,
+        nb_epochs_stop = 50, 
         evaluate_initial_skillFactor = False,
         *args, **kwargs):
         super().fit(*args, **kwargs)
@@ -153,7 +153,6 @@ class model(AbstractModel.model):
         '''
         # prob choose first parent
         p_choose_father = np.ones((len(self.tasks), ))/ len(self.tasks)
-        tasks_waiting = np.zeros((len(self.tasks), ))
         # count_eval_stop: nums evals not decrease factorial cost
         # maxcount_es: max of count_eval_stop
         # if count_eval[i] == maxcount_es: p_choose_father[i] == 0
@@ -180,10 +179,10 @@ class model(AbstractModel.model):
             )
 
             # Delta epoch
-            Delta:list[list[float]] = np.zeros((len(self.tasks), len(self.tasks))).tolist()
-            count_Delta: list[list[float]] = np.zeros((len(self.tasks), len(self.tasks))).tolist()
+            Delta:list[list[float]] = np.zeros((len(self.tasks), len(self.tasks) + 1)).tolist()
+            count_Delta: list[list[float]] = np.zeros((len(self.tasks), len(self.tasks) + 1)).tolist()
 
-            while np.sum((1 - tasks_waiting) * turn_eval) < np.sum((1 - tasks_waiting) * nb_inds_tasks):
+            while np.sum( turn_eval) < np.sum(nb_inds_tasks):
                 if np.sum(eval_k) >= epoch * nb_inds_each_task * len(self.tasks):
                     # save history
                     self.history_cost.append([ind.fcost for ind in population.get_solves()])
@@ -197,18 +196,15 @@ class model(AbstractModel.model):
                     epoch += 1
 
                 # choose subpop of father pa
-                skf_pa = np.random.choice(np.arange(len(self.tasks)), p= p_choose_father)
+                skf_pa = np.random.choice(np.arange(len(p_choose_father)), p= p_choose_father)
 
-                if np.random.rand() >= p_mutate:
-                    '''
-                    crossover
-                    '''
-                    # get smp 
-                    smp = M_smp[skf_pa].get_smp()
+                # get smp 
+                smp = M_smp[skf_pa].get_smp()
 
-                    # choose subpop of mother pb
-                    skf_pb = np.random.choice(np.arange(len(self.tasks)), p= smp)
+                # choose subpop of mother pb
+                skf_pb = np.random.choice(np.arange(len(smp)), p= smp)
 
+                if skf_pb != len(self.tasks):
                     pa = population[skf_pa].__getRandomItems__()
                     pb = population[skf_pb].__getRandomItems__()
                     while pb is pa:
@@ -219,109 +215,61 @@ class model(AbstractModel.model):
                         
                     if pa < pb:
                         pa, pb = pb, pa
-                    
+                
                     oa, ob = self.crossover(pa, pb, skf_pa, skf_pa)
-
-                    # add oa, ob to offsprings population and eval fcost
-                    offsprings.__addIndividual__(oa)
-                    offsprings.__addIndividual__(ob)
-                    
-                    eval_k[skf_pa] += 2
-                    turn_eval[skf_pa] += 2
-
-                    # Calculate the maximum improvement percetage
-                    Delta1 = (pa.fcost - oa.fcost)/(pa.fcost + 1e-100)
-                    Delta2 = (pa.fcost - ob.fcost)/(pa.fcost + 1e-100)
-
-                    # update smp
-                    if Delta1 > 0 or Delta2 > 0:
-                        if Delta1 > 0:
-                            Delta[skf_pa][skf_pb] += Delta1
-                            count_Delta[skf_pa][skf_pb] += 1
-                        if Delta2 > 0:
-                            Delta[skf_pa][skf_pb] += Delta2
-                            count_Delta[skf_pa][skf_pb] += 1
-
-                        # swap
-                        if swap_po:
-                            if Delta1 > Delta2:
-                                # swap oa (-2) with pa 
-                                offsprings[skf_pa].ls_inds[-2], population[skf_pa].ls_inds[population[skf_pa].ls_inds.index(pa)] = pa, oa
-                                if Delta2 > 0 and skf_pa == skf_pb:
-                                    #swap ob (-1) with pb 
-                                    offsprings[skf_pa].ls_inds[-1], population[skf_pa].ls_inds[population[skf_pa].ls_inds.index(pb)] = pb, ob
-                            else:
-                                #swap ob (-1) with pa 
-                                offsprings[skf_pa].ls_inds[-1], population[skf_pa].ls_inds[population[skf_pa].ls_inds.index(pa)] = pa, ob
-                                if Delta1 > 0 and skf_pa == skf_pb:
-                                    offsprings[skf_pa].ls_inds[-2], population[skf_pa].ls_inds[population[skf_pa].ls_inds.index(pb)] = pb, oa
-                        # reset count_eval_stop
-                        count_eval_stop[skf_pa] = 0
-                    else:
-                        # count eval not decrease cost
-                        count_eval_stop[skf_pa] += 1
                 else:
-                    '''
-                    mutation
-                    '''
-
                     pa, pb = population.__getIndsTask__(skf_pa, type= 'random', size= 2)
+                    if pa < pb:
+                        pa, pb = pb, pa
 
                     oa = self.mutation(pa, return_newInd= True)
-                    oa.skill_factor = pa.skill_factor
+                    oa.skill_factor = skf_pa
 
                     ob = self.mutation(pb, return_newInd= True)
-                    ob.skill_factor = pb.skill_factor
+                    ob.skill_factor = skf_pa
 
-                    # add oa, ob to offsprings population and eval fcost
-                    offsprings.__addIndividual__(oa)
-                    offsprings.__addIndividual__(ob)
-                    
-                    eval_k[skf_pa] += 2
-                    turn_eval[skf_pa] += 2
+                count_Delta[skf_pa][skf_pb] += 2
 
-                    if pa.fcost > oa.fcost or pa.fcost > ob.fcost:
-                        if oa.fcost < ob.fcost:
-                            # swap
-                            if swap_po:
-                                offsprings[skf_pa].ls_inds[-2], population[skf_pa].ls_inds[population[skf_pa].ls_inds.index(pa)] = pa, oa
-                                if ob.fcost < pb.fcost:
-                                    offsprings[skf_pa].ls_inds[-1], population[skf_pa].ls_inds[population[skf_pa].ls_inds.index(pb)] = pb, ob
-                        else:
-                            # swap
-                            if swap_po:
-                                offsprings[skf_pa].ls_inds[-1], population[skf_pa].ls_inds[population[skf_pa].ls_inds.index(pa)] = pa, ob
-                                if oa.fcost < pb.fcost:
-                                    offsprings[skf_pa].ls_inds[-2], population[skf_pa].ls_inds[population[skf_pa].ls_inds.index(pb)] = pb, oa
-                        # reset count_eval_stop
-                        count_eval_stop[skf_pa] = 0
-                    else:
-                        # count eval not decrease cost
-                        count_eval_stop[skf_pa] += 1
-
-
-                if count_eval_stop[skf_pa] == maxcount_es:
-                    tasks_waiting[skf_pa] = 1
-
-                    # if all tasks is waiting
-                    if np.sum(tasks_waiting) == len(self.tasks):
-                        tasks_waiting[np.where(np.array(self.history_cost[-1]) > 0)[0]] = 0
-                        if np.sum(tasks_waiting) == len(self.tasks):
-                            tasks_waiting[:] = 0
-                    
-                    idx_waiting = (tasks_waiting == 1)
-                    p_choose_father = np.where(idx_waiting, 0.1 * 1/len(self.tasks), p_choose_father)
-                    p_choose_father = np.where(idx_waiting, p_choose_father, (1 - np.sum(p_choose_father[idx_waiting]))/np.sum(1 - idx_waiting)) 
+                # add oa, ob to offsprings population and eval fcost
+                offsprings.__addIndividual__(oa)
+                offsprings.__addIndividual__(ob)
                 
-                elif count_eval_stop[skf_pa] == 0:
-                    tasks_waiting[skf_pa] = 0
-                    
-                    if np.sum(tasks_waiting) == len(self.tasks):
-                            tasks_waiting[:] = 0
+                eval_k[skf_pa] += 2
+                turn_eval[skf_pa] += 2
 
-                    idx_waiting = (tasks_waiting == 1)
-                    p_choose_father = np.where(idx_waiting, 0.1 * 1/len(self.tasks), p_choose_father)
-                    p_choose_father = np.where(idx_waiting, p_choose_father, (1 - np.sum(p_choose_father[idx_waiting]))/np.sum(1 - idx_waiting))
+                # Calculate the maximum improvement percetage
+                Delta1 = (pa.fcost - oa.fcost)/(pa.fcost + 1e-50)
+                Delta2 = (pa.fcost - ob.fcost)/(pa.fcost + 1e-50)
+
+                # update smp
+                if Delta1 > 0 or Delta2 > 0:
+                    Delta[skf_pa][skf_pb] += max([Delta1, 0]) ** 2
+                    Delta[skf_pa][skf_pb] += max([Delta2, 0]) ** 2
+
+                    # swap
+                    if swap_po:
+                        if Delta1 > Delta2:
+                            # swap oa (-2) with pa 
+                            offsprings[skf_pa].ls_inds[-2], population[skf_pa].ls_inds[population[skf_pa].ls_inds.index(pa)] = pa, oa
+                            if Delta2 > 0 and skf_pa == skf_pb:
+                                #swap ob (-1) with pb 
+                                offsprings[skf_pa].ls_inds[-1], population[skf_pa].ls_inds[population[skf_pa].ls_inds.index(pb)] = pb, ob
+                        else:
+                            #swap ob (-1) with pa 
+                            offsprings[skf_pa].ls_inds[-1], population[skf_pa].ls_inds[population[skf_pa].ls_inds.index(pa)] = pa, ob
+                            if Delta1 > 0 and skf_pa == skf_pb:
+                                offsprings[skf_pa].ls_inds[-2], population[skf_pa].ls_inds[population[skf_pa].ls_inds.index(pb)] = pb, oa
+                    # reset count_eval_stop
+                    count_eval_stop[skf_pa] = 0
+                else:
+                    # count eval not decrease cost
+                    count_eval_stop[skf_pa] += 1
+
+                if count_eval_stop[skf_pa] > maxcount_es:
+                    Delta[skf_pa][len(self.tasks)] += 1e-5
+                elif count_eval_stop[skf_pa] == 0:
+                    pass
+                    
 
             # merge
             population = population + offsprings
@@ -336,6 +284,7 @@ class model(AbstractModel.model):
 
             # update operators
             self.crossover.update(population = population)
+            self.mutation.update(population = population)
 
             # update smp
             for skf in range(len(self.tasks)):
