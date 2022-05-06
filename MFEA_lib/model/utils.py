@@ -947,7 +947,7 @@ class CompareResultBenchmark:
         
         # swap 
         algo_ls_model[0], algo_ls_model[idx_main_algo] = algo_ls_model[idx_main_algo], algo_ls_model[0] 
-        self.ls_name_algo[0], self.ls_name_algo[idx_main_algo] = self.ls_name_algo[idx_main_algo], self.ls_name_algo[0] 
+        # self.ls_name_algo[0], self.ls_name_algo[idx_main_algo] = self.ls_name_algo[idx_main_algo], self.ls_name_algo[0] 
 
 
         # Step3: use compare model for each model in benchmark  
@@ -958,6 +958,9 @@ class CompareResultBenchmark:
                 # print(compare.detail_compare_result(min_value= min_value, round = round))
                 name_row = [str("Tasks") + str(i+1) for i in range(len(self.ls_benchmark[0]))]
                 name_col = self.ls_name_algo
+
+                name_col[0], name_col[idx_main_algo] = name_col[idx_main_algo], name_col[0]
+
                 ls_models = [algo_ls_model[i][benchmark] for i in range(len(self.ls_name_algo))]
                 data = [] 
                 for model in ls_models: 
