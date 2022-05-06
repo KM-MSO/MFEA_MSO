@@ -183,11 +183,32 @@ class model(AbstractModel.model):
                 self.rmp_hist.append(np.copy(rmp))
                 epoch+=1   
             if (epoch % 5 == 0) : 
+                # for i in range(len_task):
+                #     for j in range(len_task):
+                #         if i != j :
+                #             for inv1 in range(20):
+                #                 measurement[i,j] += self.distance_to_pop(elite[j][inv1], elite[i], inv1 + 1)
+                # for i in range(len_task):
+                #     sum_tmp = np.sum(measurement[i])
+                #     for j in range(len_task):
+                #         if i != j:
+                #             rmp[i,j] = measurement[i,j] / sum_tmp * inter[i]
+                #     rmp[i,i]= intra[i]
+
+                center = np.zeros([len(self.tasks), 50])
+                for i in range(len_task): 
+                    tmp_center = np.zeros(50)
+                    for inv in elite[i] :
+                        tmp_center += inv.genes
+                    center[i] += tmp_center / 20
+                best = self.get_elite(population.ls_subPop,1)
                 for i in range(len_task):
                     for j in range(len_task):
                         if i != j :
+                            tmp_distance = 0
                             for inv1 in range(20):
-                                measurement[i,j] += self.distance_to_pop(elite[j][inv1], elite[i], inv1 + 1)
+                                tmp_distance += (1 + 1/(inv1 + 1)) * (self.distance(best[i][0].genes, elite[j][inv1].genes) + self.distance(center[i], elite[j][inv1].genes))
+                            measurement[i,j] = 1 / tmp_distance
                 for i in range(len_task):
                     sum_tmp = np.sum(measurement[i])
                     for j in range(len_task):
@@ -196,58 +217,87 @@ class model(AbstractModel.model):
                     rmp[i,i]= intra[i]
 
 
-            if (epoch % 20) == 19 :
-                IM =self.get_pop_intersection_v2(elite)
-                for i in range(len(self.tasks)) :
-                    arr = self.get_max_IM(IM[i])
-                    for t in arr :
-                        j = int(t[0])
-                        transfer = min (3, int(IM[i,j] * nb_inds_tasks[i]))
-                        transfer = max(1, transfer)
-                        pop_transfer = self.get_elite_transfer (population[j], transfer)
-                        for inv in pop_transfer :
-                            gen = np.copy(inv.genes)
-                            tmp_inv = self.IndClass (gen)
-                            tmp_inv.skill_factor = i
-                            tmp_inv.hybrid = False
-                            eval_k[i] += 1
-                            offsprings.__addIndividual__(tmp_inv)
-                        if len(offsprings[i]) >= nb_inds_tasks[i] / 2 :
-                            break
-                self.IM.append(np.copy(IM))
+            # if (epoch % 20) == 19 :
+            #     IM =self.get_pop_intersection_v2(elite)
+            #     for i in range(len(self.tasks)) :
+            #         arr = self.get_max_IM(IM[i])
+            #         for t in arr :
+            #             j = int(t[0])
+            #             transfer = min (3, int(IM[i,j] * nb_inds_tasks[i]))
+            #             transfer = max(1, transfer)
+            #             pop_transfer = self.get_elite_transfer (population[j], transfer)
+            #             for inv in pop_transfer :
+            #                 gen = np.copy(inv.genes)
+            #                 tmp_inv = self.IndClass (gen)
+            #                 tmp_inv.skill_factor = i
+            #                 tmp_inv.hybrid = False
+            #                 eval_k[i] += 1
+            #                 offsprings.__addIndividual__(tmp_inv)
+            #             if len(offsprings[i]) >= nb_inds_tasks[i] / 2 :
+            #                 break
+            #     self.IM.append(np.copy(IM))
             # create new offspring population 
-            while len(offsprings) < len(population): 
-                # choose parent 
-                pa, pb = population.__getRandomInds__(size= 2) 
-                # crossover 
-                if pa.skill_factor == pb.skill_factor or np.random.rand() < rmp[pa.skill_factor][pb.skill_factor]: 
-                    skf_oa, skf_ob = np.random.choice([pa.skill_factor, pb.skill_factor], size= 2, replace= True) 
-                    oa, ob = self.crossover(pa, pb, skf_oa, skf_ob) 
-                else: 
-                    pa1 = population[pa.skill_factor].__getRandomItems__()
-                    while pa1 is pa:
-                        pa1 = population[pa.skill_factor].__getRandomItems__()
-                    oa, _ = self.crossover(pa, pa1, pa.skill_factor, pa.skill_factor) 
+            # while len(offsprings) < len(population): 
+            #     # choose parent 
+            #     pa, pb = population.__getRandomInds__(size= 2) 
+            #     # crossover 
+            #     if pa.skill_factor == pb.skill_factor or np.random.rand() < rmp[pa.skill_factor][pb.skill_factor]: 
+            #         skf_oa, skf_ob = np.random.choice([pa.skill_factor, pb.skill_factor], size= 2, replace= True) 
+            #         oa, ob = self.crossover(pa, pb, skf_oa, skf_ob) 
+            #     else: 
+            #         pa1 = population[pa.skill_factor].__getRandomItems__()
+            #         while pa1 is pa:
+            #             pa1 = population[pa.skill_factor].__getRandomItems__()
+            #         oa, _ = self.crossover(pa, pa1, pa.skill_factor, pa.skill_factor) 
 
-                    pb1 = population[pb.skill_factor].__getRandomItems__()
-                    while pb1 is pb:
-                        pb1 = population[pb.skill_factor].__getRandomItems__()
-                    ob, _ = self.crossover(pb, pb1, pb.skill_factor, pb.skill_factor) 
-                if oa.skill_factor != ob.skill_factor:
-                    oa.transfer = True
-                    ob.transfer = True
-                else:
-                    oa.transfer = False
-                    ob.transfer = False 
-                # mutate
-                oa = self.mutation(oa, return_newInd= False)
-                ob = self.mutation(ob, return_newInd= False) 
+            #         pb1 = population[pb.skill_factor].__getRandomItems__()
+            #         while pb1 is pb:
+            #             pb1 = population[pb.skill_factor].__getRandomItems__()
+            #         ob, _ = self.crossover(pb, pb1, pb.skill_factor, pb.skill_factor) 
+            #     if oa.skill_factor != ob.skill_factor:
+            #         oa.transfer = True
+            #         ob.transfer = True
+            #     else:
+            #         oa.transfer = False
+            #         ob.transfer = False 
+            #     # mutate
+            #     oa = self.mutation(oa, return_newInd= False) 
+            #     ob = self.mutation(ob, return_newInd= False) 
+            for i in range(len_task):
+                    while len(offsprings.ls_subPop[i]) < nb_inds_tasks[i] :
+                        if np.random.rand() < 0:
+                            pa = population.__getIndsTask__(idx_task=i,type='tournament',tournament_size=1 )
+                            oa = self.mutation(pa,return_newInd= False)
+                            oa.skill_factor = pa.skill_factor
+                            offsprings.__addIndividual__(oa)
+                            eval_k[oa.skill_factor]+=1
+                            
+                        else:
+                            k =self.RoutletWheel(rmp[i],np.random.rand())
+                            pa = population[i].__getRandomItems__()
+                            pb = population[k].__getRandomItems__()
+                            oa,ob = self.crossover(pa,pb,pa.skill_factor, pa.skill_factor)
+                            oa = self.mutation(oa,return_newInd= False)
+                            ob = self.mutation(ob,return_newInd= False)
+                            oa.hybrid = True
+                            ob.hybrid = True
+                            if i!=k:
+                                oa.transfer =True
+                                ob.transfer =True
+                            else :
+                                oa.transfer = False
+                                ob.transfer = False
+                            
+                            offsprings.__addIndividual__(oa)
+                            offsprings.__addIndividual__(ob)
+                            eval_k[oa.skill_factor]+=1
+                            eval_k[ob.skill_factor]+=1
     
                 # eval and append # addIndividual already has eval  
-                offsprings.__addIndividual__(oa) 
-                offsprings.__addIndividual__(ob)
-                eval_k[oa.skill_factor] +=1
-                eval_k[ob.skill_factor] +=1 
+                # offsprings.__addIndividual__(oa) 
+                # offsprings.__addIndividual__(ob)
+                # eval_k[oa.skill_factor] +=1
+                # eval_k[ob.skill_factor] +=1 
             offsprings.update_rank()                
             elite_off = self.get_elite(offsprings.ls_subPop,40)
 
@@ -255,10 +305,11 @@ class model(AbstractModel.model):
                 x = 0 #inter
                 y= 0 #intra
                 for inv in elite_off[i] :
-                    if inv.transfer == True :
-                        x += 1
-                    else : 
-                        y += 1
+                    if inv.hybrid == True :
+                        if inv.transfer == True :
+                            x += 1
+                        else : 
+                            y += 1
                 y_tmp = y/(x+y)
                 y_tmp = max(0.2,min(0.8,y_tmp))
                 x_tmp = 1-y_tmp
@@ -293,3 +344,7 @@ class model(AbstractModel.model):
         # solve 
         self.last_pop = population 
         return self.last_pop.get_solves()
+
+
+
+

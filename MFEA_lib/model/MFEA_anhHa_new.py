@@ -12,9 +12,14 @@ import copy
 
 
 class model(AbstractModel.model): 
-    def compile(self, tasks: list[AbstractFunc], crossover: Crossover.AbstractCrossover, mutation: Mutation.AbstractMutation, selection: Selection.AbstractSelection, *args, **kwargs):
-        return super().compile(tasks, crossover, mutation, selection, *args, **kwargs)
-    
+    # def compile(self, tasks: list[AbstractFunc], crossover: Crossover.AbstractCrossover, mutation: Mutation.AbstractMutation, selection: Selection.AbstractSelection, *args, **kwargs):
+    #     return super().compile(tasks, crossover, mutation, selection, *args, **kwargs)
+    def compile(self, 
+        IndClass: Type[Individual],
+        tasks: list[AbstractTask], 
+        crossover: Crossover.SBX_Crossover, mutation: Mutation.GaussMutation, selection: Selection.ElitismSelection, 
+        *args, **kwargs):
+        return super().compile(IndClass, tasks, crossover, mutation, selection, *args, **kwargs)
     def findParentSameSkill(self, subpop: SubPopulation, ind):
         ind2 = ind 
         while ind2 is ind: 
@@ -150,11 +155,11 @@ class model(AbstractModel.model):
             *args, **kwargs): 
         super().fit(*args, **kwargs)
         population = Population(
-            nb_inds_tasks= [nb_inds_each_task]*len(self.tasks), 
-            dim = self.dim_uss, 
-            bound = bound, 
-            list_tasks= self.tasks, 
-            evaluate_initial_skillFactor= evaluate_initial_skillFactor
+            self.IndClass,
+            nb_inds_tasks = [nb_inds_each_task] * len(self.tasks), 
+            dim = self.dim_uss,
+            list_tasks= self.tasks,
+            evaluate_initial_skillFactor = evaluate_initial_skillFactor
         )
         #history
         self.IM = []
@@ -173,11 +178,12 @@ class model(AbstractModel.model):
 
         while np.sum(eval_k) <= MAXEVALS:
             offsprings = Population(
-                nb_inds_tasks= [0] * len(self.tasks),
-                dim = self.dim_uss, 
-                bound = bound,
-                list_tasks= self.tasks,
-            )
+            self.IndClass,
+            nb_inds_tasks = [nb_inds_each_task] * len(self.tasks), 
+            dim = self.dim_uss,
+            list_tasks= self.tasks,
+            evaluate_initial_skillFactor = evaluate_initial_skillFactor
+        )
             elite = self.get_elite(population.ls_subPop,20)
             measurement = np.zeros((len_task,len_task))
             if np.sum(eval_k) >= epoch * nb_inds_each_task * len(self.tasks):
@@ -233,20 +239,22 @@ class model(AbstractModel.model):
                 self.IM.append(np.copy(IM))
             # create new offspring population 
             for i in range(len_task):
-                    while(len(population.ls_subPop[i])+len(offsprings.ls_subPop[i]) < 2* nb_inds_tasks[i]):
+                    while len(offsprings.ls_subPop[i]) < nb_inds_tasks[i] :
                         if np.random.rand() < 0.2:
                             pa = population.__getIndsTask__(idx_task=i,type='tournament',tournament_size=1 )
-                            oa = self.mutation(pa,return_newInd=True)
+                            oa = self.mutation(pa,return_newInd= False)
                             oa.skill_factor = pa.skill_factor
+                            oa.hybrid = False
                             offsprings.__addIndividual__(oa)
                             eval_k[oa.skill_factor]+=1
+                            
                         else:
                             k =self.RoutletWheel(rmp[i],np.random.rand())
-                            pa = population.__getIndsTask__(idx_task=i,type='tournament',tournament_size= 2 )
+                            pa = population.__getIndsTask__(idx_task=i,type='tournament',tournament_size= 1)
                             pb = population.__getIndsTask__(idx_task=k ,type='tournament',tournament_size=1)
-                            oa,ob = self.crossover(pa,pb)
-                            oa.skill_factor = pa.skill_factor
-                            ob.skill_factor = pa.skill_factor
+                            oa,ob = self.crossover(pa,pb,pa.skill_factor, pa.skill_factor)
+                            oa.hybrid = True
+                            ob.hybrid = True
                             if i!=k:
                                 oa.transfer =True
                                 ob.transfer =True
@@ -263,10 +271,11 @@ class model(AbstractModel.model):
                 x = 0 #inter
                 y= 0 #intra
                 for inv in elite_off[i] :
-                    if inv.transfer == True :
-                        x += 1
-                    else : 
-                        y += 1
+                    if inv.hybrid == True :
+                        if inv.transfer == True :
+                            x += 1
+                        else : 
+                            y += 1
                 y_tmp = y/(x+y)
                 y_tmp = max(0.2,min(0.8,y_tmp))
                 x_tmp = 1-y_tmp
