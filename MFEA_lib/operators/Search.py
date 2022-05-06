@@ -199,7 +199,7 @@ class L_SHADE(AbstractSearch):
         new_genes = np.where(new_genes > 1, (ind.genes + 1)/2, new_genes) 
         new_genes = np.where(new_genes < 0, (ind.genes + 0)/2, new_genes) 
 
-        new_ind = Individual(new_genes)
+        new_ind = self.IndClass(new_genes)
         new_ind.skill_factor = ind.skill_factor
         new_ind.fcost = new_ind.eval(self.tasks[new_ind.skill_factor])
 
