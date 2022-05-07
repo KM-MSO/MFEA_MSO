@@ -220,10 +220,10 @@ class Directional_Mutation_v2(AbstractMutation):
 
         new_genes = np.copy(ind.genes)
         try:
+            r = np.random.rand() 
+            beta1 = np.exp(r ** 2) * np.exp(r - 2/r)
+            beta2 = np.exp(r - r ** 2) *np.exp(r - 2/r)
             for idx in idx_mutation: 
-                r = np.random.rand() 
-                beta1 = np.exp(r ** 2) * np.exp(r - 2/r)
-                beta2 = np.exp(r - r ** 2) *np.exp(r - 2/r)
                 if self.direction[ind.skill_factor][idx] is True: 
                     if np.random.rand() < 0.7: 
                         new_genes[idx] = ind.genes[idx] + beta1 * (1 - ind.genes[idx]) 
@@ -256,6 +256,7 @@ class Directional_Mutation_v2(AbstractMutation):
                     curr_mean[idx_tasks][dim] = np.mean([ind.genes[dim] for ind in subpop]) 
             
             self.direction = curr_mean > self.prev_mean 
+            self.prev_mean = curr_mean
             pass 
         else: 
             self.prev_mean = np.zeros(shape=(self.nb_tasks, self.dim_uss)) 
