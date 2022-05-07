@@ -277,8 +277,11 @@ class model(AbstractModel.model):
                             pa = population[i].__getRandomItems__()
                             pb = population[k].__getRandomItems__()
                             oa,ob = self.crossover(pa,pb,pa.skill_factor, pa.skill_factor)
-                            oa = self.mutation(oa,return_newInd= False)
-                            ob = self.mutation(ob,return_newInd= False)
+                            if i!=k :
+                                oa = self.mutation(oa,return_newInd= False)
+                                ob = self.mutation(ob,return_newInd= False)
+                            oa = self.task[i](oa.genes)
+                            ob = self.task[i](ob.genes)
                             oa.hybrid = True
                             ob.hybrid = True
                             if i!=k:
@@ -287,11 +290,12 @@ class model(AbstractModel.model):
                             else :
                                 oa.transfer = False
                                 ob.transfer = False
-                            
-                            offsprings.__addIndividual__(oa)
-                            offsprings.__addIndividual__(ob)
-                            eval_k[oa.skill_factor]+=1
-                            eval_k[ob.skill_factor]+=1
+                            if oa.fcost < ob.fcost :
+                                offsprings.__addIndividual__(oa)
+                                eval_k[oa.skill_factor]+=1
+                            else :
+                                offsprings.__addIndividual__(ob)                          
+                                eval_k[ob.skill_factor]+=1
     
                 # eval and append # addIndividual already has eval  
                 # offsprings.__addIndividual__(oa) 
@@ -311,12 +315,12 @@ class model(AbstractModel.model):
                         else : 
                             y += 1
                 y_tmp = y/(x+y)
-                y_tmp = max(0.2,min(0.8,y_tmp))
+                y_tmp = max(0.3,min(0.7,y_tmp))
                 x_tmp = 1-y_tmp
 
                    
-                inter[i] =0.5*inter[i]+x_tmp*0.5
-                intra[i] =0.5*intra[i]+y_tmp*0.5
+                inter[i] = 0.5*inter[i]+x_tmp*0.5
+                intra[i] = 0.5*intra[i]+y_tmp*0.5
             tmp_inter = copy.deepcopy(inter)
             self.inter_task.append(tmp_inter)
             # merge and update rank
