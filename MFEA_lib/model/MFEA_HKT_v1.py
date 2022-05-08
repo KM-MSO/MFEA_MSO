@@ -23,14 +23,7 @@ class model(AbstractModel.model):
         *args, **kwargs):
         super().compile(IndClass, tasks, crossover, mutation, selection, *args, **kwargs)
         self.search = search
-        self.search.getInforTasks(IndClass, tasks, seed = self.seed)
-    
-    def findParentSameSkill(self, subpop: SubPopulation, ind):
-        ind2 = ind 
-        while ind2 is ind: 
-            ind2 = subpop.__getRandomItems__(size= 1)[0]
-        
-        return ind2 
+        self.search.getInforTasks(tasks, seed = self.seed)
     
     def Linear_population_size_reduction(self, evaluations, current_size_pop, max_eval_each_tasks, max_size, min_size):
         for task in range(len(self.tasks)):
