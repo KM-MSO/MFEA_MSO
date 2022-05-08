@@ -1,12 +1,12 @@
 from asyncio import tasks
 from operator import itemgetter
-from re import sub
+from re import S, sub
 import numpy as np
 import operator
 
 from sqlalchemy import false
 from . import AbstractModel
-from ..operators import Crossover, Mutation, Selection
+from ..operators import Crossover, Mutation, Selection ,Search
 from ..tasks.function import AbstractFunc
 from ..EA import *
 import matplotlib.pyplot as plt
@@ -16,9 +16,14 @@ class model(AbstractModel.model):
     def compile(self, 
         IndClass: Type[Individual],
         tasks: list[AbstractTask], 
-        crossover: Crossover.SBX_Crossover, mutation: Mutation.GaussMutation, selection: Selection.ElitismSelection, 
+        crossover: Crossover.SBX_Crossover, 
+        mutation: Mutation.Polynomial_Mutation, 
+        search: Search.SHADE,
+        selection: Selection.ElitismSelection, 
         *args, **kwargs):
-        return super().compile(IndClass, tasks, crossover, mutation, selection, *args, **kwargs)
+        super().compile(IndClass, tasks, crossover, mutation, selection, *args, **kwargs)
+        self.search = search
+        self.search.getInforTasks(IndClass, tasks, seed = self.seed)
     
     def findParentSameSkill(self, subpop: SubPopulation, ind):
         ind2 = ind 
@@ -152,27 +157,21 @@ class model(AbstractModel.model):
         #history
         self.IM = []
         self.rmp_hist = []
-        self.inter_task = []
         len_task  = len(self.tasks)
-        inter =  [1-1/len_task]*len_task
-        intra =  [1/len_task]*len_task
-        rmp = np.zeros([len_task,len_task])
         #SA param
         nb_inds_tasks = [nb_inds_each_task]*len(self.tasks)
         MAXEVALS = nb_generations * nb_inds_each_task * len(self.tasks)
         epoch =0 
         eval_k = np.zeros(len(self.tasks))
-        
+        UF = 2  
+        LF = 0.1 
+        UCR  = 0.9 
+        LCR = 0.1
+        alpha =0.1
+
         while np.sum(eval_k) <= MAXEVALS:
-            offsprings = Population(
-                self.IndClass,
-                nb_inds_tasks= [0] * len(self.tasks),
-                dim =  self.dim_uss, 
-                list_tasks= self.tasks,
-            )
-            elite = self.get_elite(population.ls_subPop,20)
-            # IM =self.get_pop_intersection_v2(elite)
-            measurement = np.zeros((len_task,len_task))
+            elite = self.get_elite(population.ls_subPop,size = 20)
+            rmp = self.get_pop_intersection_v2(elite)
             if np.sum(eval_k) >= epoch * nb_inds_each_task * len(self.tasks):
                     # save history 
                 self.history_cost.append([ind.fcost for ind in population.get_solves()])
@@ -182,86 +181,32 @@ class model(AbstractModel.model):
                 # self.IM.append(np.copy(IM))
                 self.rmp_hist.append(np.copy(rmp))
                 epoch+=1   
-            if (epoch % 5 == 0) : 
-                # for i in range(len_task):
-                #     for j in range(len_task):
-                #         if i != j :
-                #             for inv1 in range(20):
-                #                 measurement[i,j] += self.distance_to_pop(elite[j][inv1], elite[i], inv1 + 1)
-                # for i in range(len_task):
-                #     sum_tmp = np.sum(measurement[i])
-                #     for j in range(len_task):
-                #         if i != j:
-                #             rmp[i,j] = measurement[i,j] / sum_tmp * inter[i]
-                #     rmp[i,i]= intra[i]
-
-                center = np.zeros([len(self.tasks), 50])
-                for i in range(len_task): 
-                    tmp_center = np.zeros(50)
-                    for inv in elite[i] :
-                        tmp_center += inv.genes
-                    center[i] += tmp_center / 20
-                best = self.get_elite(population.ls_subPop,1)
-                for i in range(len_task):
-                    for j in range(len_task):
-                        if i != j :
-                            tmp_distance = 0
-                            for inv1 in range(20):
-                                tmp_distance += (1 + 1/(inv1 + 1)) * (self.distance(best[i][0].genes, elite[j][inv1].genes) + self.distance(center[i], elite[j][inv1].genes))
-                            measurement[i,j] = 1 / tmp_distance
-                for i in range(len_task):
-                    sum_tmp = np.sum(measurement[i])
-                    for j in range(len_task):
-                        if i != j:
-                            rmp[i,j] = measurement[i,j] / sum_tmp * inter[i]
-                    rmp[i,i]= intra[i]
-            for i in range(len_task):
-                    while len(offsprings.ls_subPop[i]) < nb_inds_tasks[i] :
-                        k =self.RoutletWheel(rmp[i],np.random.rand())
-                        pa = population[i].__getRandomItems__()
-                        pb = population[k].__getRandomItems__()
-                        oa,ob = self.crossover(pa,pb,pa.skill_factor, pa.skill_factor)
-                        if i!=k:
-                            oa.transfer =True
-                            ob.transfer =True
-                            oa = self.mutation(oa,return_newInd= False)
-                            ob = self.mutation(ob,return_newInd= False)
-                        else :
-                            oa.transfer = False
-                            ob.transfer = False
-                        oa.fcost = self.tasks[i](oa.genes)
-                        ob.fcost = self.tasks[i](ob.genes)
-                        if oa.fcost <ob.fcost:
-                            oa.skill_factor = pa.skill_factor
-                            offsprings.__addIndividual__(oa)
-                            eval_k[oa.skill_factor]+=1
-                        else:
-                            ob.skill_factor = pa.skill_factor
-                            offsprings.__addIndividual__(ob)
-                            eval_k[ob.skill_factor]+=1
-                
-            offsprings.update_rank()                
-            elite_off = self.get_elite(offsprings.ls_subPop,40)
-
-            for i in range(len(self.tasks)):
-                x = 0 #inter
-                y= 0 #intra
-                for inv in elite_off[i] :
-                        if inv.transfer == True :
-                            x += 1
-                        else : 
-                            y += 1
-                y_tmp = y/(x+y)
-                y_tmp = max(0.2,min(0.8,y_tmp))
-                x_tmp = 1-y_tmp
-
-                   
-                inter[i] =0.5*inter[i]+x_tmp*0.5
-                intra[i] =0.5*intra[i]+y_tmp*0.5
-            tmp_inter = copy.deepcopy(inter)
-            self.inter_task.append(tmp_inter)
+            offsprings = Population(
+                self.IndClass,
+                nb_inds_tasks= [0] * len(self.tasks),
+                dim =  self.dim_uss, 
+                list_tasks= self.tasks,
+            )
+            for k in range(len_task):
+                if np.random.rand() > alpha: 
+                    for idx in range(nb_inds_tasks[k]):
+                        oa = self.search(ind = population[k][idx],population=population)
+                        offsprings.__addIndividual__(oa)
+                        eval_k[k]+=1
+                else:
+                #    l = self.RoutletWheel(rmp[k],np.random.rand()) 
+                    l = 1-k
+                    while len(offsprings[k]) < nb_inds_tasks[k]:
+                        pa = population[k].__getRandomItems__()
+                        pb = population[l].__getRandomItems__()
+                        oa, ob = self.crossover(pa,pb,k,k)
+                        oa = self.mutation(oa, return_newInd= False)
+                        ob = self.mutation(ob, return_newInd= False)   
+                        offsprings.__addIndividual__(oa)
+                        offsprings.__addIndividual__(ob)
+                        eval_k[k] +=2
+    
             # merge and update rank
-
             population = population + offsprings
             population.update_rank()
 
