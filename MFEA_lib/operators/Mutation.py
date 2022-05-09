@@ -267,9 +267,4 @@ class Directional_Mutation_v2(AbstractMutation):
             curr_mean = np.array([subpop.getSolveInd().genes for subpop in population]) 
             assert curr_mean.shape == self.prev_mean.shape 
             self.direction = curr_mean > self.prev_mean 
-<<<<<<< HEAD
-            pass    
-         
-=======
             pass  
->>>>>>> 2cfb4a0de32b7fd75375dc0e241b5964aa62d183

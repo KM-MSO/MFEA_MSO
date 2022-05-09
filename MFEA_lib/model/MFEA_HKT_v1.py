@@ -156,15 +156,12 @@ class model(AbstractModel.model):
         MAXEVALS = nb_generations * nb_inds_each_task * len(self.tasks)
         epoch =0 
         eval_k = np.zeros(len(self.tasks))
-        UF = 2  
-        LF = 0.1 
-        UCR  = 0.9 
-        LCR = 0.1
         alpha =0.1
 
         while np.sum(eval_k) <= MAXEVALS:
             elite = self.get_elite(population.ls_subPop,size = 20)
-            rmp = self.get_pop_intersection_v2(elite)
+            # rmp = self.get_pop_intersection_v2(elite)
+            rmp = np.zeros((len_task,len_task))
             if np.sum(eval_k) >= epoch * nb_inds_each_task * len(self.tasks):
                     # save history 
                 self.history_cost.append([ind.fcost for ind in population.get_solves()])
@@ -180,25 +177,50 @@ class model(AbstractModel.model):
                 dim =  self.dim_uss, 
                 list_tasks= self.tasks,
             )
+            # for k in range(len_task):
+            #     if np.random.rand() > alpha: 
+            #         for idx in range(nb_inds_tasks[k]):
+            #             oa = self.search(ind = population[k][idx],population=population)
+            #             offsprings.__addIndividual__(oa)
+            #             eval_k[k]+=1
+            #     else:
+            #         # l = self.RoutletWheel(rmp[k],np.random.rand()) 
+            #         l = 1-k
+            #         while len(offsprings[k]) < nb_inds_tasks[k]:
+            #             pa = population[k].__getRandomItems__()
+            #             pb = population[l].__getRandomItems__()
+            #             oa, ob = self.crossover(pa,pb,k,k)
+            #             oa = self.mutation(oa, return_newInd= False)
+            #             ob = self.mutation(ob, return_newInd= False)   
+            #             offsprings.__addIndividual__(oa)
+            #             offsprings.__addIndividual__(ob)
+            #             eval_k[k] +=2
+            # L_SHADE core 
             for k in range(len_task):
-                if np.random.rand() > alpha: 
-                    for idx in range(nb_inds_tasks[k]):
-                        oa = self.search(ind = population[k][idx],population=population)
+                for inv in range (nb_inds_tasks[k]):
+                    t = np.random.randint(len_task)
+                    if t == k :
+                        oa = self.search(ind = population[k][inv],population=population)
                         offsprings.__addIndividual__(oa)
-                        eval_k[k]+=1
-                else:
-                #    l = self.RoutletWheel(rmp[k],np.random.rand()) 
-                    l = 1-k
-                    while len(offsprings[k]) < nb_inds_tasks[k]:
-                        pa = population[k].__getRandomItems__()
-                        pb = population[l].__getRandomItems__()
-                        oa, ob = self.crossover(pa,pb,k,k)
-                        oa = self.mutation(oa, return_newInd= False)
-                        ob = self.mutation(ob, return_newInd= False)   
-                        offsprings.__addIndividual__(oa)
-                        offsprings.__addIndividual__(ob)
-                        eval_k[k] +=2
-    
+                        eval_k[k]+=1 
+                    else:
+                        if np.random.rand() < rmp[k][t]:
+                            pa = population[k][inv]
+                            pb = population[t].__getRandomItems__()
+                            oa, ob = self.crossover(pa,pb,k,k)
+                            oa = self.mutation(oa, return_newInd= True)
+                            ob = self.mutation(ob, return_newInd= True)   
+                            oa.fcost  = self.tasks[k](oa.genes)
+                            ob.fcost  = self.tasks[k](ob.genes)
+                            if oa.fcost < ob.fcost:
+                                offsprings.__addIndividual__(oa)
+                            else:
+                                offsprings.__addIndividual__(ob)
+                            eval_k[k] +=1
+                        else:
+                            oa = self.search(ind = population[k][inv],population=population)
+                            offsprings.__addIndividual__(oa)
+                            eval_k[k]+=1 
             # merge and update rank
             population = population + offsprings
             population.update_rank()
@@ -212,6 +234,7 @@ class model(AbstractModel.model):
             self.selection(population, nb_inds_tasks)
             if epoch > 0 :
                 self.mutation.update(population)
+            self.search.update()
             # save history
             self.history_cost.append([ind.fcost for ind in population.get_solves()])
                 
