@@ -158,17 +158,15 @@ class model(AbstractModel.model):
         eval_k = np.zeros(len(self.tasks))
         alpha =0.1
 
+        rmp = np.zeros((len_task,len_task))
         while np.sum(eval_k) <= MAXEVALS:
             elite = self.get_elite(population.ls_subPop,size = 20)
-            # rmp = self.get_pop_intersection_v2(elite)
-            rmp = np.zeros((len_task,len_task))
+            if epoch % 5 == 1 : 
+                rmp = self.get_pop_intersection_v2(elite)
             if np.sum(eval_k) >= epoch * nb_inds_each_task * len(self.tasks):
                     # save history 
                 self.history_cost.append([ind.fcost for ind in population.get_solves()])
-                
-                self.render_process(epoch/nb_generations, ['Pop_size', 'Cost'], [[len(u) for u in population.ls_subPop], self.history_cost[-1]], use_sys= True)
-
-                # self.IM.append(np.copy(IM))
+                self.render_process(epoch/nb_generations, ['Pop_size', 'Cost'], [[len(population)], self.history_cost[-1]], use_sys= True)
                 self.rmp_hist.append(np.copy(rmp))
                 epoch+=1   
             offsprings = Population(
@@ -208,8 +206,8 @@ class model(AbstractModel.model):
                             pa = population[k][inv]
                             pb = population[t].__getRandomItems__()
                             oa, ob = self.crossover(pa,pb,k,k)
-                            oa = self.mutation(oa, return_newInd= True)
-                            ob = self.mutation(ob, return_newInd= True)   
+                            # oa = self.mutation(oa, return_newInd= True)
+                            # ob = self.mutation(ob, return_newInd= True)   
                             oa.fcost  = self.tasks[k](oa.genes)
                             ob.fcost  = self.tasks[k](ob.genes)
                             if oa.fcost < ob.fcost:
@@ -234,11 +232,11 @@ class model(AbstractModel.model):
             self.selection(population, nb_inds_tasks)
             if epoch > 0 :
                 self.mutation.update(population)
-            self.search.update()
+            # self.search.update()
             # save history
             self.history_cost.append([ind.fcost for ind in population.get_solves()])
                 
-            self.render_process(epoch/nb_generations, ['Pop_size', 'Cost'], [[len(u) for u in population.ls_subPop], self.history_cost[-1]], use_sys= True)
+            self.render_process(epoch/nb_generations, ['Pop_size', 'Cost'], [[len(population)], self.history_cost[-1]], use_sys= True)
 
             # self.IM.append(np.copy(IM))
             self.rmp_hist.append(np.copy(rmp))
