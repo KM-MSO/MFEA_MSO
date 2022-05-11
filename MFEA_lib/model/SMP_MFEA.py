@@ -16,11 +16,11 @@ class model(AbstractModel.model):
 
             #value const for intra
             self.p_const_intra = p_const_intra
-            self.lower_p = 0.1/(self.nb_tasks + 2)
+            self.lower_p = 0.1/(self.nb_tasks + 1)
 
             # smp without const_val of host
             self.sum_not_host = 1 - 0.1 - p_const_intra
-            self.SMP_not_host: np.ndarray = ((np.zeros((nb_tasks + 2, )) + self.sum_not_host)/(nb_tasks + 2))
+            self.SMP_not_host: np.ndarray = ((np.zeros((nb_tasks + 1, )) + self.sum_not_host)/(nb_tasks + 1))
             self.SMP_not_host[self.idx_host] += self.sum_not_host - np.sum(self.SMP_not_host)
 
             self.SMP_include_host = self.get_smp()
@@ -100,8 +100,8 @@ class model(AbstractModel.model):
                 np.append(np.arange(0, len(his_smp), step), np.array([len(his_smp) - 1])),
                 [his_smp[
                     np.append(np.arange(0, len(his_smp), step), np.array([len(his_smp) - 1])), 
-                    idx_task, t] for t in range(len(self.tasks) + 2)],
-                labels = ['Task' + str(i + 1) for i in range(len(self.tasks))] + ["mutation", "DE"]
+                    idx_task, t] for t in range(len(self.tasks) + 1)],
+                labels = ['Task' + str(i + 1) for i in range(len(self.tasks))] + ["mutation"]
             )
             # plt.legend()
             fig.axes[idx_task].set_title('Task ' + str(idx_task + 1) +": " + task.name)
