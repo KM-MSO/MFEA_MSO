@@ -16,11 +16,11 @@ class model(AbstractModel.model):
 
             #value const for intra
             self.p_const_intra = p_const_intra
-            self.lower_p = 0.1/(self.nb_tasks + 1)
+            self.lower_p = 0.1/(self.nb_tasks + 2)
 
             # smp without const_val of host
             self.sum_not_host = 1 - 0.1 - p_const_intra
-            self.SMP_not_host: np.ndarray = ((np.zeros((nb_tasks + 1, )) + self.sum_not_host)/(nb_tasks + 1))
+            self.SMP_not_host: np.ndarray = ((np.zeros((nb_tasks + 2, )) + self.sum_not_host)/(nb_tasks + 2))
             self.SMP_not_host[self.idx_host] += self.sum_not_host - np.sum(self.SMP_not_host)
 
             self.SMP_include_host = self.get_smp()
@@ -100,8 +100,8 @@ class model(AbstractModel.model):
                 np.append(np.arange(0, len(his_smp), step), np.array([len(his_smp) - 1])),
                 [his_smp[
                     np.append(np.arange(0, len(his_smp), step), np.array([len(his_smp) - 1])), 
-                    idx_task, t] for t in range(len(self.tasks) + 1)],
-                labels = ['Task' + str(i + 1) for i in range(len(self.tasks))] + ["mutation"]
+                    idx_task, t] for t in range(len(self.tasks) + 2)],
+                labels = ['Task' + str(i + 1) for i in range(len(self.tasks))] + ["mutation", "DE"]
             )
             # plt.legend()
             fig.axes[idx_task].set_title('Task ' + str(idx_task + 1) +": " + task.name)
@@ -200,81 +200,100 @@ class model(AbstractModel.model):
 
                     epoch += 1
 
-                # choose subpop of father pa
-                skf_pa = np.random.choice(np.arange(len(p_choose_father)), p= p_choose_father)
 
-                # get smp 
-                smp = M_smp[skf_pa].get_smp()
-
-                # choose subpop of mother pb
-                skf_pb = np.random.choice(np.arange(len(smp)), p= smp)
-
-                if skf_pb != len(self.tasks):
-                    pa = population[skf_pa].__getRandomItems__()
-                    pb = population[skf_pb].__getRandomItems__()
-                    while pb is pa:
-                        pb = population[skf_pb].__getRandomItems__()
-
-                    if np.all(pa.genes == pb.genes):
-                        pb = population[skf_pb].__getWorstIndividual__
-                        
-                    if pa < pb:
-                        pa, pb = pb, pa
-                
-                    oa, ob = self.crossover(pa, pb, skf_pa, skf_pa)
-                else:
-                    pa, pb = population.__getIndsTask__(skf_pa, type= 'random', size= 2)
-                    if pa < pb:
-                        pa, pb = pb, pa
-
-                    oa = self.mutation(pa, return_newInd= True)
-                    oa.skill_factor = skf_pa
-
-                    ob = self.mutation(pb, return_newInd= True)
-                    ob.skill_factor = skf_pa
-
-                count_Delta[skf_pa][skf_pb] += 2
-
-                # add oa, ob to offsprings population and eval fcost
-                offsprings.__addIndividual__(oa)
-                offsprings.__addIndividual__(ob)
-                
-                eval_k[skf_pa] += 2
-                turn_eval[skf_pa] += 2
-
-                # Calculate the maximum improvement percetage
-                Delta1 = (pa.fcost - oa.fcost)/(pa.fcost + 1e-50)**2
-                Delta2 = (pa.fcost - ob.fcost)/(pa.fcost + 1e-50)**2
-
-                # update smp
-                if Delta1 > 0 or Delta2 > 0:
-                    Delta[skf_pa][skf_pb] += max([Delta1, 0]) ** 2
-                    Delta[skf_pa][skf_pb] += max([Delta2, 0]) ** 2
-
-                    # swap
-                    if swap_po:
-                        if Delta1 > Delta2:
-                            # swap oa (-2) with pa 
-                            offsprings[skf_pa].ls_inds[-2], population[skf_pa].ls_inds[population[skf_pa].ls_inds.index(pa)] = pa, oa
-                            if Delta2 > 0 and skf_pa == skf_pb:
-                                #swap ob (-1) with pb 
-                                offsprings[skf_pa].ls_inds[-1], population[skf_pa].ls_inds[population[skf_pa].ls_inds.index(pb)] = pb, ob
-                        else:
-                            #swap ob (-1) with pa 
-                            offsprings[skf_pa].ls_inds[-1], population[skf_pa].ls_inds[population[skf_pa].ls_inds.index(pa)] = pa, ob
-                            if Delta1 > 0 and skf_pa == skf_pb:
-                                offsprings[skf_pa].ls_inds[-2], population[skf_pa].ls_inds[population[skf_pa].ls_inds.index(pb)] = pb, oa
-                    # reset count_eval_stop
-                    count_eval_stop[skf_pa] = 0
-                else:
-                    # count eval not decrease cost
-                    count_eval_stop[skf_pa] += 1
-
-                if count_eval_stop[skf_pa] > maxcount_es:
-                    Delta[skf_pa][len(self.tasks)] += 1e-5
-                elif count_eval_stop[skf_pa] == 0:
-                    pass
+                if np.random.rand() < prob_search:
+                    for i in range(2):
+                        # choose subpop of father pa
+                        skf_pa = np.random.choice(np.arange(len(p_choose_father)), p= p_choose_father)
                     
+                        idx = np.random.randint(0, len(population[skf_pa]))
+                        pa = population[skf_pa][idx]
+                        new_ind = self.search(ind = pa, population = population)
+                        if new_ind.fcost < pa.fcost:
+                            # population[skf_pa].ls_inds[idx] = new_ind
+                            pa.genes = new_ind.genes
+                            pa.fcost = new_ind.fcost
+                            population[skf_pa].update_rank()
+                        eval_k[skf_pa] += 1
+                        turn_eval[skf_pa] += 1
+                else:
+                    # choose subpop of father pa
+                    skf_pa = np.random.choice(np.arange(len(p_choose_father)), p= p_choose_father)
+                
+                    # get smp 
+                    smp = M_smp[skf_pa].get_smp()
+
+                    # choose subpop of mother pb
+                    skf_pb = np.random.choice(np.arange(len(smp)), p= smp)
+
+                    if skf_pb != len(self.tasks):
+                        pa = population[skf_pa].__getRandomItems__()
+                        pb = population[skf_pb].__getRandomItems__()
+                        while pb is pa:
+                            pb = population[skf_pb].__getRandomItems__()
+
+                        if np.all(pa.genes == pb.genes):
+                            pb = population[skf_pb].__getWorstIndividual__
+                            
+                        if pa < pb:
+                            pa, pb = pb, pa
+                    
+                        oa, ob = self.crossover(pa, pb, skf_pa, skf_pa)
+                    else:
+                        pa, pb = population.__getIndsTask__(skf_pa, type= 'random', size= 2)
+                        if pa < pb:
+                            pa, pb = pb, pa
+
+                        oa = self.mutation(pa, return_newInd= True)
+                        oa.skill_factor = skf_pa
+
+                        ob = self.mutation(pb, return_newInd= True)
+                        ob.skill_factor = skf_pa
+
+                    count_Delta[skf_pa][skf_pb] += 2
+
+                    # add oa, ob to offsprings population and eval fcost
+                    offsprings.__addIndividual__(oa)
+                    offsprings.__addIndividual__(ob)
+                    
+                    eval_k[skf_pa] += 2
+                    turn_eval[skf_pa] += 2
+
+                    # Calculate the maximum improvement percetage
+                    Delta1 = (pa.fcost - oa.fcost)/(pa.fcost + 1e-50)**2
+                    Delta2 = (pa.fcost - ob.fcost)/(pa.fcost + 1e-50)**2
+
+                    # update smp
+                    if Delta1 > 0 or Delta2 > 0:
+                        Delta[skf_pa][skf_pb] += max([Delta1, 0]) ** 2
+                        Delta[skf_pa][skf_pb] += max([Delta2, 0]) ** 2
+
+                        # swap
+                        if swap_po:
+                            if Delta1 > Delta2:
+                                # swap oa (-2) with pa 
+                                offsprings[skf_pa].ls_inds[-2], population[skf_pa].ls_inds[population[skf_pa].ls_inds.index(pa)] = pa, oa
+                                if Delta2 > 0 and skf_pa == skf_pb:
+                                    #swap ob (-1) with pb 
+                                    offsprings[skf_pa].ls_inds[-1], population[skf_pa].ls_inds[population[skf_pa].ls_inds.index(pb)] = pb, ob
+                            else:
+                                #swap ob (-1) with pa 
+                                offsprings[skf_pa].ls_inds[-1], population[skf_pa].ls_inds[population[skf_pa].ls_inds.index(pa)] = pa, ob
+                                if Delta1 > 0 and skf_pa == skf_pb:
+                                    offsprings[skf_pa].ls_inds[-2], population[skf_pa].ls_inds[population[skf_pa].ls_inds.index(pb)] = pb, oa
+                        # reset count_eval_stop
+                        count_eval_stop[skf_pa] = 0
+                    else:
+                        # count eval not decrease cost
+                        count_eval_stop[skf_pa] += 1
+
+                    if count_eval_stop[skf_pa] > maxcount_es:
+                        Delta[skf_pa][len(self.tasks)] += 1e-5
+                    elif count_eval_stop[skf_pa] == 0:
+                        pass
+
+            # NOTE    
+            self.search.update()
 
             # merge
             population = population + offsprings
@@ -295,23 +314,23 @@ class model(AbstractModel.model):
             for skf in range(len(self.tasks)):
                 M_smp[skf].update_SMP(Delta[skf], count_Delta[skf])
 
-            '''
-            search
-            '''
-            for subPop in population:
-                for idx in range(len(subPop)):
-                    if np.random.rand() < prob_search:
-                        '''
-                        DE
-                        '''
-                        new_ind = self.search(ind = subPop[idx], population = population)
-                        if new_ind.fcost < subPop[idx].fcost:
-                            # subPop.__addIndividual__(new_ind)
-                            subPop.ls_inds[idx] = new_ind
-                            subPop.update_rank()
-                        eval_k[subPop.skill_factor] += 1
-                        turn_eval[subPop.skill_factor] += 1
-            self.search.update()
+            # '''
+            # search
+            # '''
+            # for subPop in population:
+            #     for idx in range(len(subPop)):
+            #         if np.random.rand() < prob_search:
+            #             '''
+            #             DE
+            #             '''
+            #             new_ind = self.search(ind = subPop[idx], population = population)
+            #             if new_ind.fcost < subPop[idx].fcost:
+            #                 # subPop.__addIndividual__(new_ind)
+            #                 subPop.ls_inds[idx] = new_ind
+            #                 subPop.update_rank()
+            #             eval_k[subPop.skill_factor] += 1
+            #             turn_eval[subPop.skill_factor] += 1
+            # self.search.update()
             
         #solve
         self.last_pop = population
