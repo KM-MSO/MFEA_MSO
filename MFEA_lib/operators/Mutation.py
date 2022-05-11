@@ -254,3 +254,9 @@ class Directional_Mutation_v2(AbstractMutation):
         self.direction = curr_mean > self.prev_mean 
         self.prev_mean = curr_mean
 
+class GD_Mutation(AbstractMutation):
+    def __init__(self, *arg, **kwargs):
+        super().__init__(*arg, **kwargs)
+    
+    def __call__(self, ind: Individual, return_newInd: bool, *arg, **kwargs) -> Individual:
+        pass

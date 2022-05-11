@@ -210,7 +210,6 @@ class model(AbstractModel.model):
                         pa = population[skf_pa][idx]
                         new_ind = self.search(ind = pa, population = population)
                         if new_ind.fcost < pa.fcost:
-                            # population[skf_pa].ls_inds[idx] = new_ind
                             pa.genes = new_ind.genes
                             pa.fcost = new_ind.fcost
                             population[skf_pa].update_rank()
