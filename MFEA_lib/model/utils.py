@@ -963,10 +963,12 @@ class CompareResultBenchmark:
         for idx, name in enumerate(self.ls_name_algo): 
             print(f"({idx} : {name})")
         
-    def show_compare_detail(self, min_value= 0, round= 100, idx_main_algo= 0):
+    def show_compare_detail(self, min_value= 0, round= 100, idx_main_algo= 0, idx_gener_compare = 10, total_generation = 1000):
         # Step1: read folder 
-        algo_ls_model = np.empty(shape=(len(self.ls_name_algo), len(self.ls_benchmark))).tolist() 
+        algo_ls_model = np.zeros(shape=(len(self.ls_name_algo), len(self.ls_benchmark))).tolist() 
         ls_algorithms = os.listdir(self.path_folder)
+        # ls_benchmark_each_algo = [[]]
+        count_benchmark = np.zeros(shape=(len(self.ls_benchmark)), dtype= int)
 
         if len(self.ls_name_algo) == 0: 
             self.ls_name_algo = ls_algorithms.copy()  
@@ -978,7 +980,9 @@ class CompareResultBenchmark:
             for model_name in ls_models: 
                 idx_benchmark = (model_name.split(".")[0]).split("_")[-1] 
                 idx_benchmark = int(idx_benchmark)-1
+                # ls_benchmark_each_algo[idx_algo].append(idx_benchmark)
                 # try:
+                count_benchmark[idx_benchmark] += 1
                 model = loadModel(os.path.join(path_model, model_name), self.ls_benchmark[int(idx_benchmark)]) 
                 algo_ls_model[idx_algo][idx_benchmark] = model 
                 # except: 
@@ -993,6 +997,8 @@ class CompareResultBenchmark:
         # Step3: use compare model for each model in benchmark  
         for benchmark in range(len(self.ls_benchmark)): 
             print("Benchmark: ", benchmark + 1)
+            if count_benchmark[benchmark] == 0: 
+                continue 
             try: 
                 # compare = CompareModel([algo_ls_model[i][benchmark] for i in range(len(self.ls_name_algo))])
                 # print(compare.detail_compare_result(min_value= min_value, round = round))
@@ -1002,9 +1008,24 @@ class CompareResultBenchmark:
                 name_col[0], name_col[idx_main_algo] = name_col[idx_main_algo], name_col[0]
 
                 ls_models = [algo_ls_model[i][benchmark] for i in range(len(self.ls_name_algo))]
-                data = [] 
+                shape_his = None 
                 for model in ls_models: 
-                    data.append(model.history_cost[-1]) 
+                    if model  != 0 : 
+                        shape_his = model.history_cost[-1].shape
+                if shape_his == None: 
+                    continue 
+
+                data = []
+                for model in ls_models:
+                    if model == 0 : 
+                        data.append(np.zeros(shape= shape_his) + 1e20)
+                        continue
+                    idx_compare = -1
+                    if idx_gener_compare == -1 or idx_gener_compare == total_generation: 
+                        idx_compare = -1 
+                    else: 
+                        idx_compare = int(idx_gener_compare/total_generation* len(model.history_cost) )
+                    data.append(model.history_cost[idx_compare]) 
                 
                 data = np.array(data).T 
                 data = np.round(data, round) 
