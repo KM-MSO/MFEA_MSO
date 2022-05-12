@@ -963,7 +963,7 @@ class CompareResultBenchmark:
         for idx, name in enumerate(self.ls_name_algo): 
             print(f"({idx} : {name})")
         
-    def show_compare_detail(self, min_value= 0, round= 100, idx_main_algo= 0, idx_gener_compare = 10, total_generation = 1000):
+    def show_compare_detail(self, min_value= 0, round= 100, idx_main_algo= 0, idx_gener_compare = -1, total_generation = 1000):
         # Step1: read folder 
         algo_ls_model = np.zeros(shape=(len(self.ls_name_algo), len(self.ls_benchmark))).tolist() 
         ls_algorithms = os.listdir(self.path_folder)
@@ -975,7 +975,7 @@ class CompareResultBenchmark:
         assert len(self.ls_name_algo) == len(ls_algorithms)
         # Step2: Create ls model of each benchmark
         for idx_algo, algorithm in enumerate(ls_algorithms): 
-            path_model = os.path.join(self.path_folder, algorithm) 
+            path_model = os.path.join(self.path_folder, algorithm)
             ls_models = os.listdir(path_model) 
             for model_name in ls_models: 
                 idx_benchmark = (model_name.split(".")[0]).split("_")[-1] 
@@ -1111,7 +1111,7 @@ class CompareResultBenchmark:
                 np.sum(result_table, axis=0), columns=name_col, index=name_row)
         return result_table
     
-    def summarizing_compare_result(self, idx_main_algo= 0, min_value= 0, combine = True, idx_gener_compare = 10, total_generation = 1000): 
+    def summarizing_compare_result(self, idx_main_algo= 0, min_value= 0, combine = True, idx_gener_compare = -1, total_generation = 1000): 
         # Step1: read folder 
         algo_ls_model = np.zeros(shape=(len(self.ls_name_algo), len(self.ls_benchmark))).tolist() 
         ls_algorithms = os.listdir(self.path_folder)
