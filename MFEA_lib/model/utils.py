@@ -1028,6 +1028,7 @@ class CompareResultBenchmark:
                 result_compare = pd.DataFrame([result_compare], index=["Compare"], columns= name_col) 
                 end_data.columns = name_col 
                 end_data.index = name_row 
+
                 pd.set_option('display.expand_frame_repr', False)
                 end_data = pd.concat([end_data, result_compare]) 
                 print(end_data)
@@ -1037,7 +1038,7 @@ class CompareResultBenchmark:
                 pass 
         pass
 
-    def summarizing_compare_result(self, idx_main_algo=0, min_value=0, combine=True):
+    def summarizing_compare_result_v2(self, idx_main_algo=0, min_value=0, combine=True):
         nb_task = len(self.ls_benchmark[0])
         list_algo = os.listdir(self.path_folder)
         print(list_algo)
@@ -1046,6 +1047,8 @@ class CompareResultBenchmark:
         ls_model_cost = [np.zeros(
             shape=(len(benchmarks), nb_task)).tolist() for i in range(len(list_algo))]
         # print(ls_model_cost)
+
+        ls_benhchmark = [] 
         for idx_algo in range(len(list_algo)):
             path_algo = os.path.join(self.path_folder, list_algo[idx_algo])
             # count_benchmark = 0
@@ -1086,4 +1089,65 @@ class CompareResultBenchmark:
             result_table = pd.DataFrame(
                 np.sum(result_table, axis=0), columns=name_col, index=name_row)
         return result_table
+    
+    def summarizing_compare_result(self, idx_main_algo= 0, min_value= 0, combine = True, idx_gener_compare = 10, total_generation = 1000): 
+        # Step1: read folder 
+        algo_ls_model = np.zeros(shape=(len(self.ls_name_algo), len(self.ls_benchmark))).tolist() 
+        ls_algorithms = os.listdir(self.path_folder)
+
+        if len(self.ls_name_algo) == 0: 
+            self.ls_name_algo = ls_algorithms.copy()  
+        assert len(self.ls_name_algo) == len(ls_algorithms)
+        # Step2: Create ls model of each benchmark
+        self.ls_idx_benchmark = np.zeros(shape=(len(self.ls_benchmark))).tolist()  
+        for idx_algo, algorithm in enumerate(ls_algorithms): 
+            path_model = os.path.join(self.path_folder, algorithm) 
+            ls_models = os.listdir(path_model) 
+            for model_name in ls_models: 
+                idx_benchmark = (model_name.split(".")[0]).split("_")[-1] 
+                idx_benchmark = int(idx_benchmark)-1
+                self.ls_idx_benchmark[idx_benchmark] += 1 
+                # try:
+                model = loadModel(os.path.join(path_model, model_name), self.ls_benchmark[int(idx_benchmark)]) 
+                algo_ls_model[idx_algo][idx_benchmark] = model 
+                # except: 
+                #     print(f"Cannot load Model: {os.path.join(path_model, model_name)}")    
+                #     return
+        
+        # tìm xem thuật toán nào ko có bộ benchmark thì bỏ ko so sánh 
+        name_row = [] 
+        name_col =['Better', 'Equal', 'Worse']
+        count_row = 0 
+        result_table = np.zeros(shape=(len(self.ls_benchmark), len(ls_algorithms) -1, 3), dtype= int)
+        for idx, name_algo in enumerate(ls_algorithms): 
+            if idx != idx_main_algo: 
+                name_row.append(ls_algorithms[idx_main_algo] + " vs " + name_algo)
+                for idx_benchmark in range(len(self.ls_benchmark)):
+                    if algo_ls_model[idx][idx_benchmark] == 0 or algo_ls_model[idx_main_algo][idx_benchmark] == 0 : 
+                        continue 
+
+                    idx_gener_compare_first = -1  
+                    idx_gener_compare_second = -1  
+                    if idx_gener_compare == total_generation or idx_gener_compare == -1: 
+                        idx_gener_compare_first = -1
+                        idx_gener_compare_second = -1
+                    else: 
+                      
+                        idx_gener_compare_first = int(idx_gener_compare/total_generation * len(algo_ls_model[idx][idx_benchmark].history_cost))
+                        idx_gener_compare_second = int(idx_gener_compare/total_generation * len(algo_ls_model[idx_main_algo][idx_benchmark].history_cost))
+                    result = np.where(algo_ls_model[idx][idx_benchmark].history_cost[idx_gener_compare_first] > min_value, algo_ls_model[idx][idx_benchmark].history_cost[idx_gener_compare_first], min_value) - np.where(algo_ls_model[idx_main_algo][idx_benchmark].history_cost[idx_gener_compare_second] > min_value, algo_ls_model[idx_main_algo][idx_benchmark].history_cost[idx_gener_compare_second], min_value)
+                    result_table[idx_benchmark][count_row][2] += len(np.where(result < 0)[0]) 
+                    result_table[idx_benchmark][count_row][1] += len(np.where(result == 0)[0])
+                    result_table[idx_benchmark][count_row][0] += len(np.where(result > 0)[0]) 
+                
+                count_row += 1 
+
+        if combine is True :
+            result_table= pd.DataFrame(np.sum(result_table, axis= 0), columns= name_col, index= name_row) 
+        
+        return result_table
+                
+
+            
+            
     

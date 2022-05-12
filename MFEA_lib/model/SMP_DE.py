@@ -295,7 +295,24 @@ class model(AbstractModel.model):
             # update smp
             for skf in range(len(self.tasks)):
                 M_smp[skf].update_SMP(Delta[skf], count_Delta[skf])
-
+                
+            '''
+            search
+            '''
+            for subPop in population:
+                for idx in range(len(subPop)):
+                    if np.random.rand() < prob_search:
+                        '''
+                        DE
+                        '''
+                        new_ind = self.search(ind = subPop[idx], population = population)
+                        if new_ind.fcost < subPop[idx].fcost:
+                            # subPop.__addIndividual__(new_ind)
+                            subPop.ls_inds[idx] = new_ind
+                            subPop.update_rank()
+                        eval_k[subPop.skill_factor] += 1
+                        turn_eval[subPop.skill_factor] += 1
+            self.search.update()
 
             '''
             multistart and sample 
@@ -328,23 +345,7 @@ class model(AbstractModel.model):
                     
                     population[skf].update_rank() 
                 
-            '''
-            search
-            '''
-            for subPop in population:
-                for idx in range(len(subPop)):
-                    if np.random.rand() < prob_search:
-                        '''
-                        DE
-                        '''
-                        new_ind = self.search(ind = subPop[idx], population = population)
-                        if new_ind.fcost < subPop[idx].fcost:
-                            # subPop.__addIndividual__(new_ind)
-                            subPop.ls_inds[idx] = new_ind
-                            subPop.update_rank()
-                        eval_k[subPop.skill_factor] += 1
-                        turn_eval[subPop.skill_factor] += 1
-            self.search.update()
+
             
         #solve
         self.last_pop = population
