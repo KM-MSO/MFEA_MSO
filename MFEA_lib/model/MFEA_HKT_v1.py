@@ -25,26 +25,13 @@ class model(AbstractModel.model):
         self.search = search
         self.search.getInforTasks(IndClass, tasks, seed = self.seed)
     
-    def Linear_population_size_reduction(self, evaluations, current_size_pop, max_eval_each_tasks, max_size, min_size):
-        for task in range(len(self.tasks)):
-            new_size = (min_size[task] - max_size[task]) * evaluations[task] / max_eval_each_tasks[task] + max_size[task] 
-
-            new_size= int(new_size) 
-            if new_size < current_size_pop[task]: 
-                current_size_pop[task] = new_size 
-        
-        return current_size_pop 
     def get_elite(self,pop,size):
         elite_subpops = []
         for i in range(len(pop)):
             idx = np.argsort(pop[i].factorial_rank)[:size].tolist()
             elite_subpops.append(pop[i][idx])
         return elite_subpops
-    def get_elite_transfer (self, pop, size) :
-        elite_transfer = []
-        idx = np.argsort(pop.factorial_rank)[:size].tolist()
-        elite_transfer += pop[idx]
-        return elite_transfer
+
     def distance(self,a,b):
         return np.linalg.norm(a-b)        
     def rank_distance(self,subpops,x:Individual):
@@ -120,22 +107,6 @@ class model(AbstractModel.model):
             b[i] = IM_i[i]
         temp = sorted(b.items(), key = operator.itemgetter(1), reverse=True)
         return temp
-    def CurrentToPBest(self,ind: Individual, pbest:Individual,r1:Individual,r2:Individual):
-        rand_pos = np.random.randint(len(self.Cr))
-        mu_cr = np.random.normal(loc = self.Cr[rand_pos],scale=0.1)
-        mu_f = self.F[rand_pos] + 0.1 * np.tan(np.pi * (np.random.rand() - 0.5))
-        j_rand = np.random.randint(len(ind.genes))
-        child = np.zeros(len(ind.genes))
-        for i in range(len(child)):
-            if np.random.rand() <= mu_cr or i == j_rand:
-                child[i] = ind.genes[i] + mu_f * ((pbest.genes[i]-ind.genes[i]) + r1.genes[i] -r2.genes[i])
-            else:
-                child[i] =ind.genes[i]
-        child = np.clip(child,0,1)
-
-        return self.IndClass(child)  
-
-
 
     def fit(self, nb_inds_each_task: int, nb_inds_min:int,nb_generations :int ,  bound = [0, 1], evaluate_initial_skillFactor = False,LSA = False,
             *args, **kwargs): 
@@ -151,6 +122,7 @@ class model(AbstractModel.model):
         self.IM = []
         self.rmp_hist = []
         len_task  = len(self.tasks)
+        
         #SA param
         nb_inds_tasks = [nb_inds_each_task]*len(self.tasks)
         MAXEVALS = nb_generations * nb_inds_each_task * len(self.tasks)
