@@ -23,11 +23,18 @@ class model(AbstractModel.model):
             self.SMP_not_host: np.ndarray = ((np.zeros((nb_tasks + 1, )) + self.sum_not_host)/(nb_tasks + 1))
             self.SMP_not_host[self.idx_host] += self.sum_not_host - np.sum(self.SMP_not_host)
 
-            self.SMP_include_host = self.get_smp()
+            smp_return : np.ndarray = np.copy(self.SMP_not_host)
+            smp_return[self.idx_host] += self.p_const_intra
+            smp_return += self.lower_p
+
+            self.SMP_include_host = smp_return
             self.lr = lr
 
         def get_smp(self) -> np.ndarray:
             smp_return : np.ndarray = np.copy(self.SMP_not_host)
+            smp_return = np.where(smp_return < smp_return[np.argsort(-smp_return)[int((len(smp_return)  - 1) * 0.15 + 1 )]], 0, smp_return)
+            smp_return = smp_return / (np.sum(smp_return) / self.sum_not_host + 1e-50)
+
             smp_return[self.idx_host] += self.p_const_intra
             smp_return += self.lower_p
             return smp_return
@@ -47,8 +54,12 @@ class model(AbstractModel.model):
                 self.SMP_not_host = self.SMP_not_host * (1 - self.lr) + newSMP * self.lr
                 
                 self.SMP_not_host[self.idx_host] += self.sum_not_host - np.sum(self.SMP_not_host)
+                
+                smp_return : np.ndarray = np.copy(self.SMP_not_host)
+                smp_return[self.idx_host] += self.p_const_intra
+                smp_return += self.lower_p
+                self.SMP_include_host = smp_return
 
-                self.SMP_include_host = self.get_smp()
             return self.SMP_include_host
     
     def __init__(self, seed=None, percent_print=2) -> None:
@@ -249,12 +260,12 @@ class model(AbstractModel.model):
                         ob = self.mutation(pb, return_newInd= True)
                         ob.skill_factor = skf_pa
 
-                    count_Delta[skf_pa][skf_pb] += 2
 
                     # add oa, ob to offsprings population and eval fcost
                     offsprings.__addIndividual__(oa)
                     offsprings.__addIndividual__(ob)
                     
+                    count_Delta[skf_pa][skf_pb] += 2
                     eval_k[skf_pa] += 2
                     turn_eval[skf_pa] += 2
 
