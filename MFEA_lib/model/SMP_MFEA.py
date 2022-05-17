@@ -32,8 +32,8 @@ class model(AbstractModel.model):
 
         def get_smp(self) -> np.ndarray:
             smp_return : np.ndarray = np.copy(self.SMP_not_host)
-            smp_return = np.where(smp_return < smp_return[np.argsort(-smp_return)[int((len(smp_return)  - 1) * 0.15 + 1 )]], 0, smp_return)
-            smp_return = smp_return / (np.sum(smp_return) / self.sum_not_host + 1e-50)
+            # smp_return = np.where(smp_return < smp_return[np.argsort(-smp_return)[int((len(smp_return)  - 2) * 0.15 + 2 )]], 0, smp_return)
+            # smp_return = smp_return / (np.sum(smp_return) / self.sum_not_host + 1e-50)
 
             smp_return[self.idx_host] += self.p_const_intra
             smp_return += self.lower_p
