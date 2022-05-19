@@ -31,13 +31,12 @@ class model(AbstractModel.model):
             self.lr = lr
 
         def get_smp(self) -> np.ndarray:
-            smp_return : np.ndarray = np.copy(self.SMP_not_host)
-            # smp_return = np.where(smp_return < smp_return[np.argsort(-smp_return)[int((len(smp_return)  - 2) * 0.15 + 2 )]], 0, smp_return)
-            # smp_return = smp_return / (np.sum(smp_return) / self.sum_not_host + 1e-50)
+            # smp_return : np.ndarray = np.copy(self.SMP_not_host)
 
-            smp_return[self.idx_host] += self.p_const_intra
-            smp_return += self.lower_p
-            return smp_return
+            # smp_return[self.idx_host] += self.p_const_intra
+            # smp_return += self.lower_p
+            # return smp_return
+            return np.copy(self.SMP_include_host)
         
         def update_SMP(self, Delta_task, count_Delta_tasks):
             '''
@@ -206,9 +205,6 @@ class model(AbstractModel.model):
 
                     self.render_process(epoch/nb_generations, ['Pop_size', 'Cost'], [[len(population)], self.history_cost[-1]], use_sys= True)
 
-                    # update mutation
-                    self.mutation.update(population = population)
-
                     epoch += 1
 
 
@@ -277,6 +273,7 @@ class model(AbstractModel.model):
                     if Delta1 > 0 or Delta2 > 0:
                         Delta[skf_pa][skf_pb] += max([Delta1, 0]) ** 2
                         Delta[skf_pa][skf_pb] += max([Delta2, 0]) ** 2
+                        # Delta[skf_pa][skf_pb] += max([Delta2, Delta1, 0]) ** 2
 
                         # swap
                         if swap_po:
@@ -302,9 +299,6 @@ class model(AbstractModel.model):
                     elif count_eval_stop[skf_pa] == 0:
                         pass
 
-            # NOTE    
-            self.search.update()
-
             # merge
             population = population + offsprings
             population.update_rank()
@@ -319,28 +313,11 @@ class model(AbstractModel.model):
             # update operators
             self.crossover.update(population = population)
             self.mutation.update(population = population)
+            self.search.update()
 
             # update smp
             for skf in range(len(self.tasks)):
                 M_smp[skf].update_SMP(Delta[skf], count_Delta[skf])
-
-            # '''
-            # search
-            # '''
-            # for subPop in population:
-            #     for idx in range(len(subPop)):
-            #         if np.random.rand() < prob_search:
-            #             '''
-            #             DE
-            #             '''
-            #             new_ind = self.search(ind = subPop[idx], population = population)
-            #             if new_ind.fcost < subPop[idx].fcost:
-            #                 # subPop.__addIndividual__(new_ind)
-            #                 subPop.ls_inds[idx] = new_ind
-            #                 subPop.update_rank()
-            #             eval_k[subPop.skill_factor] += 1
-            #             turn_eval[subPop.skill_factor] += 1
-            # self.search.update()
             
         #solve
         self.last_pop = population

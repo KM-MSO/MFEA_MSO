@@ -277,6 +277,12 @@ class Population:
                        
         elif type == 'ontop':
             idx_inds = np.where(self.ls_subPop[idx_task].factorial_rank <= p_ontop * len(self[idx_task]))[0]
+            # if len(idx_inds) == 0:
+            #     if size == None:
+            #         return self.ls_subPop[idx_task].__getBestIndividual__
+            #     else:
+            #         print(Warning("replace = True because all ind is best ind of pop"))
+            #         return [self.ls_subPop[idx_task].__getBestIndividual__] * size
             if size == None:
                 return self.ls_subPop[idx_task].ls_inds[
                     np.random.choice(idx_inds, size = None, replace= replace)

@@ -196,8 +196,11 @@ class L_SHADE(AbstractSearch):
             ind.genes + F * (ind_best.genes - ind.genes + ind_ran1.genes - ind_ran2.genes),
             ind.genes
         )
-        new_genes = np.where(new_genes > 1, (ind.genes + 1)/2, new_genes) 
-        new_genes = np.where(new_genes < 0, (ind.genes + 0)/2, new_genes) 
+
+        u = np.random.rand(self.dim_uss)
+        tmp = ind.genes * u
+        new_genes = np.where(new_genes > 1,tmp + 1 - u, new_genes) 
+        new_genes = np.where(new_genes < 0, tmp, new_genes) 
 
         new_ind = self.IndClass(new_genes)
         new_ind.skill_factor = ind.skill_factor
