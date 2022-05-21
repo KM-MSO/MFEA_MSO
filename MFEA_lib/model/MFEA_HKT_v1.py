@@ -34,20 +34,7 @@ class model(AbstractModel.model):
 
     def distance(self,a,b):
         return np.linalg.norm(a-b)        
-    def rank_distance(self,subpops,x:Individual):
-        dist = []
-        for i in subpops:
-            dist.append(self.distance(i.genes,x.genes))
-        return np.argsort(np.argsort(dist)) + 1
-    def get_pop_similarity(self,subpops):
-        k = len(self.tasks)
-        rmp = np.ones((k,k))
-        for i in range(k):
-            for j in range(k):
-                x =  self.rank_distance(subpops[i],subpops[i][0])
-                y = self.rank_distance(subpops[i],subpops[j][0])
-                rmp[i][j] = np.sum([np.abs(i+1-x[i]) for i in range(len(x))]) / np.sum([np.abs(i+1-y[i]) for i in range(len(y))])
-        return rmp
+
     def get_pop_intersection(self,subpops):
         k = len(self.tasks)
         rmp = np.zeros([k,k])
@@ -101,12 +88,7 @@ class model(AbstractModel.model):
             sum += self.distance(inv.genes, individual.genes)
         tmp = 1/sum * (1+1/fRank)
         return tmp
-    def get_max_IM (self,IM_i) :
-        b = {}
-        for i in range(len(self.tasks)) :
-            b[i] = IM_i[i]
-        temp = sorted(b.items(), key = operator.itemgetter(1), reverse=True)
-        return temp
+
 
     def fit(self, nb_inds_each_task: int, nb_inds_min:int,nb_generations :int ,  bound = [0, 1], evaluate_initial_skillFactor = False,LSA = False,
             *args, **kwargs): 
@@ -147,24 +129,6 @@ class model(AbstractModel.model):
                 dim =  self.dim_uss, 
                 list_tasks= self.tasks,
             )
-            # for k in range(len_task):
-            #     if np.random.rand() > alpha: 
-            #         for idx in range(nb_inds_tasks[k]):
-            #             oa = self.search(ind = population[k][idx],population=population)
-            #             offsprings.__addIndividual__(oa)
-            #             eval_k[k]+=1
-            #     else:
-            #         # l = self.RoutletWheel(rmp[k],np.random.rand()) 
-            #         l = 1-k
-            #         while len(offsprings[k]) < nb_inds_tasks[k]:
-            #             pa = population[k].__getRandomItems__()
-            #             pb = population[l].__getRandomItems__()
-            #             oa, ob = self.crossover(pa,pb,k,k)
-            #             oa = self.mutation(oa, return_newInd= False)
-            #             ob = self.mutation(ob, return_newInd= False)   
-            #             offsprings.__addIndividual__(oa)
-            #             offsprings.__addIndividual__(ob)
-            #             eval_k[k] +=2
             # L_SHADE core 
             for k in range(len_task):
                 for inv in range (nb_inds_tasks[k]):
@@ -178,8 +142,8 @@ class model(AbstractModel.model):
                             pa = population[k][inv]
                             pb = population[t].__getRandomItems__()
                             oa, ob = self.crossover(pa,pb,k,k)
-                            # oa = self.mutation(oa, return_newInd= True)
-                            # ob = self.mutation(ob, return_newInd= True)   
+                            oa = self.mutation(oa, return_newInd= True)
+                            ob = self.mutation(ob, return_newInd= True)   
                             oa.fcost  = self.tasks[k](oa.genes)
                             ob.fcost  = self.tasks[k](ob.genes)
                             if oa.fcost < ob.fcost:
