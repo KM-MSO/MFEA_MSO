@@ -244,10 +244,7 @@ class model(AbstractModel.model):
                         if pa < pb:
                             pa, pb = pb, pa
 
-                        try:
-                            oa, ob = self.crossover(pa, pb, skf_pa, skf_pa)
-                        except:
-                            print()
+                        oa, ob = self.crossover(pa, pb, skf_pa, skf_pa, population)
                     else:
                         pa, pb = population.__getIndsTask__(skf_pa, type= 'random', size= 2)
                         if pa < pb:
