@@ -269,12 +269,10 @@ class model(AbstractModel.model):
                     Delta1 = (pa.fcost - oa.fcost)/(pa.fcost + 1e-50)**2
                     Delta2 = (pa.fcost - ob.fcost)/(pa.fcost + 1e-50)**2
 
+                    Delta[skf_pa][skf_pb] += max([Delta1, 0]) ** 2
+                    Delta[skf_pa][skf_pb] += max([Delta2, 0]) ** 2
                     # update smp
                     if Delta1 > 0 or Delta2 > 0:
-                        Delta[skf_pa][skf_pb] += max([Delta1, 0]) ** 2
-                        Delta[skf_pa][skf_pb] += max([Delta2, 0]) ** 2
-                        # Delta[skf_pa][skf_pb] += max([Delta2, Delta1, 0]) ** 2
-
                         # swap
                         if swap_po:
                             if Delta1 > Delta2:
