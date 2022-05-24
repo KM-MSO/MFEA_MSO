@@ -1003,7 +1003,7 @@ class CompareResultBenchmark:
                 # compare = CompareModel([algo_ls_model[i][benchmark] for i in range(len(self.ls_name_algo))])
                 # print(compare.detail_compare_result(min_value= min_value, round = round))
                 name_row = [str("Tasks") + str(i+1) for i in range(len(self.ls_benchmark[0]))]
-                name_col = self.ls_name_algo
+                name_col = np.copy(self.ls_name_algo)
 
                 name_col[0], name_col[idx_main_algo] = name_col[idx_main_algo], name_col[0]
 
