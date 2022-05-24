@@ -259,7 +259,7 @@ class KL_SBX(AbstractCrossover):
 
         #swap
         if skf_ob == skf_oa:
-            idx_swap = np.where(np.random.rand(len(pa)) < 0.5)[0]
+            idx_swap = np.where(np.random.rand(self.dim_uss) < 0.5)[0]
             oa.genes[idx_swap], ob.genes[idx_swap] = ob.genes[idx_swap], oa.genes[idx_swap]
         
         oa.skill_factor = skf_oa
