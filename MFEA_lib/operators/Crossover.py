@@ -47,9 +47,9 @@ class SBX_Crossover(AbstractCrossover):
         beta = np.where(u < 0.5, (2*u)**(1/(self.nc +1)), (2 * (1 - u))**(-1 / (1 + self.nc)))
 
         #like pa
-        oa = self.IndClass(np.clip(0.5*((1 + beta) * pa.genes + (1 - beta) * pb.genes), 0, 1))
+        oa = self.IndClass(np.clip(0.5*((1 + beta) * pa.genes + (1 - beta) * pb.genes), 0, 1), parent = pa)
         #like pb
-        ob = self.IndClass(np.clip(0.5*((1 - beta) * pa.genes + (1 + beta) * pb.genes), 0, 1))
+        ob = self.IndClass(np.clip(0.5*((1 - beta) * pa.genes + (1 + beta) * pb.genes), 0, 1), parent = pb)
 
         if pa.skill_factor == pb.skill_factor:
             idx_swap = np.where(np.random.rand(self.dim_uss) < 0.5)[0]
@@ -140,10 +140,10 @@ class newSBX(AbstractCrossover):
             p_of_oa = pb
         else:
             raise ValueError()
-        if skf_ob == pa.skill_factor:
-            p_of_ob = pa
-        elif skf_ob == pb.skill_factor:
+        if skf_ob == pb.skill_factor:
             p_of_ob = pb
+        elif skf_ob == pa.skill_factor:
+            p_of_ob = pa
         else:
             raise ValueError()
 
@@ -156,9 +156,9 @@ class newSBX(AbstractCrossover):
             idx_crossover = np.ones((self.dim_uss, ))
 
             #like pa
-            oa = self.IndClass(np.clip(0.5*((1 + beta) * pa.genes + (1 - beta) * pb.genes), 0, 1))
+            oa = self.IndClass(np.clip(0.5*((1 + beta) * pa.genes + (1 - beta) * pb.genes), 0, 1), parent= p_of_oa)
             #like pb
-            ob = self.IndClass(np.clip(0.5*((1 - beta) * pa.genes + (1 + beta) * pb.genes), 0, 1))
+            ob = self.IndClass(np.clip(0.5*((1 - beta) * pa.genes + (1 + beta) * pb.genes), 0, 1), parent= p_of_ob)
 
             #swap
             idx_swap = np.where(np.random.rand(len(pa)) < 0.5)[0]
@@ -175,9 +175,9 @@ class newSBX(AbstractCrossover):
                     idx_crossover[np.random.choice(idx_notsame)] = 1
 
             #like pa
-            oa = self.IndClass(np.where(idx_crossover, np.clip(0.5*((1 + beta) * pa.genes + (1 - beta) * pb.genes), 0, 1), p_of_oa))
+            oa = self.IndClass(np.where(idx_crossover, np.clip(0.5*((1 + beta) * pa.genes + (1 - beta) * pb.genes), 0, 1), p_of_oa), parent= p_of_oa)
             #like pb
-            ob = self.IndClass(np.where(idx_crossover, np.clip(0.5*((1 - beta) * pa.genes + (1 + beta) * pb.genes), 0, 1), p_of_ob))
+            ob = self.IndClass(np.where(idx_crossover, np.clip(0.5*((1 - beta) * pa.genes + (1 + beta) * pb.genes), 0, 1), p_of_ob), parent= p_of_ob)
 
             #swap
             if skf_ob == skf_oa:
