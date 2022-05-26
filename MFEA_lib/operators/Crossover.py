@@ -202,9 +202,10 @@ class KL_SBX(AbstractCrossover):
     '''
     pa, pb in [0, 1]^n
     '''
-    def __init__(self, nc = 2,  *args, **kwargs):
+    def __init__(self, nc = 2, k = 1, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.nc = nc
+        self.k = k
     
     def getInforTasks(self, IndClass: Type[Individual], tasks: list[AbstractTask], seed=None):
         super().getInforTasks(IndClass, tasks, seed)
@@ -222,9 +223,9 @@ class KL_SBX(AbstractCrossover):
         for i in range(self.nb_tasks):
             for j in range(self.nb_tasks):
                 kl = np.log((std[j] + 1e-50)/(std[i] + 1e-50)) + (std[i] ** 2 + (mean[i] - mean[j]) ** 2)/(2 * std[j] ** 2 + 1e-50) - 1/2
-                self.prob[i][j] = 1/(1 + kl)
+                self.prob[i][j] = 1/(1 + kl/self.k)
 
-    def __call__(self, pa: Individual, pb: Individual, skf_oa=None, skf_ob=None, population: Population=None,*args, **kwargs) -> Tuple[Individual, Individual]:
+    def __call__(self, pa: Individual, pb: Individual, skf_oa=None, skf_ob=None, *args, **kwargs) -> Tuple[Individual, Individual]:
         if skf_oa == pa.skill_factor:
             p_of_oa = pa
         elif skf_oa == pb.skill_factor:

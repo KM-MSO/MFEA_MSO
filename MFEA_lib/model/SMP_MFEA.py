@@ -206,6 +206,14 @@ class model(AbstractModel.model):
 
                     epoch += 1
 
+                    # update smp
+                    for skf in range(len(self.tasks)):
+                        M_smp[skf].update_SMP(Delta[skf], count_Delta[skf])
+
+                    # Delta epoch
+                    Delta:list[list[float]] = np.zeros((len(self.tasks), len(self.tasks) + 1)).tolist()
+                    count_Delta: list[list[float]] = np.zeros((len(self.tasks), len(self.tasks) + 1)).tolist()
+
                 if np.random.rand() < prob_search:
                     for i in range(2):
                         # choose subpop of father pa
@@ -264,14 +272,12 @@ class model(AbstractModel.model):
                     turn_eval[skf_pa] += 2
 
                     # Calculate the maximum improvement percetage
-                    try:
-                        Delta1 = (pa.fcost - oa.fcost)/(self.max_diff[skf_pa] + 1e-50)
-                        Delta2 = (pa.fcost - ob.fcost)/(self.max_diff[skf_pa] + 1e-50)
-                    except:
-                        print()
+                    Delta1 = (pa.fcost - oa.fcost)/(self.max_diff[skf_pa] + 1e-50)
+                    Delta2 = (pa.fcost - ob.fcost)/(self.max_diff[skf_pa] + 1e-50)
 
                     Delta[skf_pa][skf_pb] += max([Delta1, 0])**2
                     Delta[skf_pa][skf_pb] += max([Delta2, 0])**2
+
                     # update smp
                     if Delta1 > 0 or Delta2 > 0:
                         # swap
@@ -318,13 +324,6 @@ class model(AbstractModel.model):
                 [ind.fcost for ind in population[i].ls_inds]
             for i in range(len(self.tasks))], axis = 1)
 
-            # update smp
-            for skf in range(len(self.tasks)):
-                M_smp[skf].update_SMP(Delta[skf], count_Delta[skf])
-
-            # Delta epoch
-            Delta:list[list[float]] = np.zeros((len(self.tasks), len(self.tasks) + 1)).tolist()
-            count_Delta: list[list[float]] = np.zeros((len(self.tasks), len(self.tasks) + 1)).tolist()
 
         #solve
         self.last_pop = population
