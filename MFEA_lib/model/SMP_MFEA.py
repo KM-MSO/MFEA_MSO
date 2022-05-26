@@ -74,7 +74,7 @@ class model(AbstractModel.model):
         super().compile(IndClass, tasks, crossover, mutation, selection, *args, **kwargs)
         self.search = search
         self.search.getInforTasks(IndClass, tasks, seed = self.seed)
-        self.max_diff = [1] * len(tasks)
+        # self.max_diff = [1] * len(tasks)
     
     def render_smp(self,  shape = None, title = None, figsize = None, dpi = 100, step = 1, re_fig = False, label_shape= None, label_loc= None):
         
@@ -206,14 +206,6 @@ class model(AbstractModel.model):
 
                     epoch += 1
 
-                    # update smp
-                    for skf in range(len(self.tasks)):
-                        M_smp[skf].update_SMP(Delta[skf], count_Delta[skf])
-
-                    # Delta epoch
-                    Delta:list[list[float]] = np.zeros((len(self.tasks), len(self.tasks) + 1)).tolist()
-                    count_Delta: list[list[float]] = np.zeros((len(self.tasks), len(self.tasks) + 1)).tolist()
-
                 if np.random.rand() < prob_search:
                     for i in range(2):
                         # choose subpop of father pa
@@ -272,8 +264,8 @@ class model(AbstractModel.model):
                     turn_eval[skf_pa] += 2
 
                     # Calculate the maximum improvement percetage
-                    Delta1 = (pa.fcost - oa.fcost)/(self.max_diff[skf_pa] + 1e-50)
-                    Delta2 = (pa.fcost - ob.fcost)/(self.max_diff[skf_pa] + 1e-50)
+                    Delta1 = pa.fcost - oa.fcost
+                    Delta2 = pa.fcost - ob.fcost
 
                     Delta[skf_pa][skf_pb] += max([Delta1, 0])**2
                     Delta[skf_pa][skf_pb] += max([Delta2, 0])**2
@@ -320,10 +312,13 @@ class model(AbstractModel.model):
             self.mutation.update(population = population)
             self.search.update()
 
-            self.max_diff = np.std([
-                [ind.fcost for ind in population[i].ls_inds]
-            for i in range(len(self.tasks))], axis = 1)
+            # update smp
+            for skf in range(len(self.tasks)):
+                M_smp[skf].update_SMP(Delta[skf], count_Delta[skf])
 
+            # Delta epoch
+            Delta:list[list[float]] = np.zeros((len(self.tasks), len(self.tasks) + 1)).tolist()
+            count_Delta: list[list[float]] = np.zeros((len(self.tasks), len(self.tasks) + 1)).tolist()
 
         #solve
         self.last_pop = population
