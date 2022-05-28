@@ -127,7 +127,7 @@ class model(AbstractModel.model):
             return fig
 
     def fit(self, nb_generations: int, nb_inds_each_task: int, nb_inds_min = None,
-        lr = 1, p_const_intra = 0.5, swap_po = True, prob_search = 0.5,
+        lr = 1, p_const_intra = 0.5, swap_po = True, prob_search = 0.5, lc_nums = 100,
         nb_epochs_stop = 50, 
         evaluate_initial_skillFactor = False,
         *args, **kwargs):
@@ -322,7 +322,7 @@ class model(AbstractModel.model):
 
 
             '''local search'''
-            if epoch % 100 == 0: 
+            if epoch % lc_nums == 0: 
                 for skf in range(len(self.tasks)): 
                     ls = Search.LocalSearch_DSCG()
                     ls.getInforTasks(self.IndClass, self.tasks, seed= self.seed)
