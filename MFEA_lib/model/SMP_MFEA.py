@@ -243,8 +243,8 @@ class model(AbstractModel.model):
                 turn_eval[skf_pa] += 2
 
                 # Calculate the maximum improvement percetage
-                Delta1 = (pa.fcost - oa.fcost)/(pa.fcost + 1e-50)
-                Delta2 = (pa.fcost - ob.fcost)/(pa.fcost + 1e-50)
+                Delta1 = (pa.fcost - oa.fcost)/(pa.fcost + 1e-50)**2
+                Delta2 = (pa.fcost - ob.fcost)/(pa.fcost + 1e-50)**2
 
                 # update smp
                 if Delta1 > 0 or Delta2 > 0:

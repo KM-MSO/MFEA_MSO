@@ -270,7 +270,7 @@ class Population:
                 return [ls_inds[i] for i in idx_inds[:size]] 
                        
         elif type == 'ontop':
-            idx_inds = np.where(self.ls_subPop[idx_task].factorial_rank <= p_ontop * len(self[idx_task]))[0]
+            idx_inds = np.where(self.ls_subPop[idx_task].factorial_rank <=  max(p_ontop * len(self[idx_task]),3) )[0]
             if size == None:
                 return self.ls_subPop[idx_task].ls_inds[
                     np.random.choice(idx_inds, size = None, replace= replace)

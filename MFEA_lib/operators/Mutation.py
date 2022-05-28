@@ -205,17 +205,13 @@ class Directional_Mutation_v2(AbstractMutation):
     
     def  getInforTasks(self, IndClass: Type[Individual], tasks: list[AbstractTask], seed = None):
         super().getInforTasks(IndClass,tasks, seed)
-        self.direction = np.zeros(shape=(self.nb_tasks, self.dim_uss))
-        self.prev_mean = None 
-        # self.prev_mean = np.zeros(shape= (len(tasks), max))
+        self.direction = np.ones(shape=(self.nb_tasks, self.dim_uss))
+        # self.prev_mean = None 
+        self.prev_mean = np.zeros(shape= (self.nb_tasks, self.dim_uss))
     
     def __call__(self, ind: Individual, return_newInd: bool, *arg, **kwargs) -> Individual:
         # return super().__call__(ind, return_newInd, *arg, **kwargs)
-        if self.prev_mean is None : 
-            return ind 
         
-
-
         idx_mutation = np.where(np.random.rand(self.dim_uss) <= self.pm)[0] 
 
         new_genes = np.copy(ind.genes)
@@ -248,23 +244,13 @@ class Directional_Mutation_v2(AbstractMutation):
             ind.genes= new_genes 
             ind.fcost = None 
             return ind 
+
     def update(self, population: Population): 
-        if self.prev_mean is not None:
-            curr_mean= np.zeros(shape=(self.nb_tasks, self.dim_uss)) 
-            for idx_tasks, subpop in enumerate(population): 
-                for dim in range(self.dim_uss): 
-                    curr_mean[idx_tasks][dim] = np.mean([ind.genes[dim] for ind in subpop]) 
-            
-            self.direction = curr_mean > self.prev_mean 
-            self.prev_mean = curr_mean
-            pass 
-        else: 
-            self.prev_mean = np.zeros(shape=(self.nb_tasks, self.dim_uss)) 
-            for idx_tasks, subpop in enumerate(population): 
-                for dim in range(self.dim_uss): 
-                    self.prev_mean[idx_tasks][dim] = np.mean([ind.genes[dim] for ind in subpop]) 
-            
-            curr_mean = np.array([subpop.getSolveInd().genes for subpop in population]) 
-            assert curr_mean.shape == self.prev_mean.shape 
-            self.direction = curr_mean > self.prev_mean 
-            pass  
+        curr_mean= np.zeros(shape=(self.nb_tasks, self.dim_uss)) 
+        for idx_tasks, subpop in enumerate(population): 
+            for dim in range(self.dim_uss): 
+                curr_mean[idx_tasks][dim] = np.mean([ind.genes[dim] for ind in subpop]) 
+        
+        self.direction = curr_mean > self.prev_mean 
+        self.prev_mean = curr_mean
+
