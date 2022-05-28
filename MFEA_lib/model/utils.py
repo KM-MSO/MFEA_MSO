@@ -562,6 +562,8 @@ class TuningModel:
         self.list_parameter: list[tuple(str, list)] = list_parameter
         self.nb_run = nb_run
 
+        self.default_lsmodel= None 
+
     def compile(self, ls_benchmark=None, benchmark_weights=[], name_benchmark = [], ls_IndClass = [],  **kwargs):
         # if ls_benchmark is None:
         #     ls_benchmark.append(kwargs['tasks'])
@@ -602,15 +604,18 @@ class TuningModel:
 
             model.run(
                 nb_run=self.nb_run,
-                save_path=save_path + self.name_benchmark[idx] + "_" + name_model
+                save_path=save_path + self.name_benchmark[idx]
             )
-            model = loadModel(save_path + self.name_benchmark[idx] + "_" + name_model, ls_tasks=benchmark, set_attribute= True)
+            model = loadModel(save_path + self.name_benchmark[idx] , ls_tasks=benchmark, set_attribute= True)
 
             import json
             file = open(save_path + self.name_benchmark[idx] + "_" + name_model.split('.')[0] + "_result.txt", 'w')
             file.write(json.dumps(dict(enumerate(model.history_cost[-1]))))
             file.close()   
             ls_model.append(model)
+        
+        if self.default_lsmodel is None: 
+            self.default_lsmodel = ls_model 
 
         return ls_model 
 
@@ -642,7 +647,7 @@ class TuningModel:
 
         return model
     
-    def compare_between_2_ls_model(self, ls_model1: list[AbstractModel.model], ls_model2 : list[AbstractModel.model], min_value= 0 ):
+    def compare_between_2_ls_model(self, ls_model1: list[AbstractModel.model], ls_model2 : list[AbstractModel.model], min_value= 0, take_point = False):
         '''
         compare the result between models and return best model 
         [[model1_cec, model1_gecco], [model2_cec, model2_gecco]]
@@ -657,16 +662,30 @@ class TuningModel:
 
             point_model[0] += point1 * self.benchmark_weights[benchmark]
             point_model[1] += point2 * self.benchmark_weights[benchmark]
+            point_model += (1 - np.sum(point_model))/2 
+        if take_point is True: 
+            return point_model
+        else: 
+            return np.argmax(point_model) 
 
-        return np.argmax(point_model)  
 
-
-    def take_idx_best_lsmodel(self, set_ls_model: list[list[AbstractModel.model]], min_value = 0 ):
-        best_idx = 0  
-        for idx, ls_model in enumerate(set_ls_model[1:],start= 1 ):
-            better_idx = self.compare_between_2_ls_model(set_ls_model[best_idx], ls_model, min_value)
-            if better_idx == 1: 
-                best_idx = idx 
+    def take_idx_best_lsmodel(self, set_ls_model: list[list[AbstractModel.model]], min_value = 0, compare_default = True, take_point = False):
+        if compare_default is True: 
+            ls_point = [] 
+            for idx, ls_model in enumerate(set_ls_model):
+                ls_point += [(self.compare_between_2_ls_model(ls_model, self.default_lsmodel, min_value,take_point= True)[0])]
+            if take_point is True:
+                return ls_point 
+            else: 
+                best_idx = np.argmax(np.array(ls_point))
+                return best_idx
+            pass 
+        else: 
+            best_idx = 0  
+            for idx, ls_model in enumerate(set_ls_model[1:],start= 1 ):
+                better_idx = self.compare_between_2_ls_model(set_ls_model[best_idx], ls_model, min_value)
+                if better_idx == 1: 
+                    best_idx = idx 
         
         return best_idx 
 
@@ -757,6 +776,8 @@ class TuningModel:
                         pass
                         curr_fit_parameter[name_arg] = arg_pass[0]
 
+        
+        # run many 
         curr_order_params = 0
         for name_arg, arg_value in self.list_parameter:
             curr_order_params += 1
@@ -790,7 +811,20 @@ class TuningModel:
                             # set_ls_model.append(self.fit_multibenchmark(self.best_fit_parameter, curr_compile_parameter))
 
                         # TODO: take the best model and update best parameter
-                        value = para_value[self.take_idx_best_lsmodel(set_ls_model, min_value= min_value)]
+                        ls_point = self.take_idx_best_lsmodel(set_ls_model, min_value= min_value, take_point=True)
+                        value = para_value[np.argmax(ls_point)]
+
+
+                        import json 
+                        # file= open(value_folder_path + "/result.txt" , 'w')
+                        file = open(sub_folder + "/" + "result.txt", 'w')
+                        file.write(name_arg+" ") 
+                        file.write(name_para)
+                        file.write(json.dumps(list(zip(arg_value[name_para], ls_point))))
+                        file.close() 
+                        
+                        
+                        
                         setattr(
                             self.best_compile_parameter[name_arg], name_para, value)
 
@@ -815,8 +849,17 @@ class TuningModel:
                         set_ls_model.append(self.fit_multibenchmark(
                             self.best_fit_parameter, curr_compile_parameter, save_path=value_folder_path))
                     # TODO: take the best model and update best parameter
-                    value = arg_value[self.take_idx_best_lsmodel(set_ls_model, min_value= min_value)]
+                    ls_point = self.take_idx_best_lsmodel(set_ls_model, min_value= min_value, take_point=True)
+                    value = arg_value[np.argmax(ls_point)]
+
                     self.best_compile_parameter[name_arg] = value
+
+                    import json 
+                    # file = open(value_folder_path + "/result.txt", 'w')
+                    file = open(sub_folder + "/" + "result.txt", 'w')
+                    file.write(name_arg)
+                    file.write(json.dumps(list(zip(arg_value, ls_point))))
+                    file.close() 
 
                     # save result
                     result[idx][1] = value
@@ -842,9 +885,19 @@ class TuningModel:
                             set_ls_model.append(self.fit_multibenchmark(
                                 curr_fit_parameter, self.best_compile_parameter, save_path=value_folder_path))
                         # TODO: take the best modle in update best parameter
-                        value = para_value[self.take_idx_best_lsmodel(set_ls_model, min_value= min_value)]
+                        ls_point = self.take_idx_best_lsmodel(set_ls_model, min_value= min_value, take_point=True)
+                    
+                        value = para_value[np.argmax(ls_point)]
                         setattr(
                             self.best_fit_parameter[name_arg], name_arg, value)
+
+                        import json 
+                        # file= open(value_folder_path + "/result.txt" , 'w')
+                        file = open(sub_folder + "/" + "result.txt", 'w')
+                        file.write(name_arg) 
+                        file.write(name_para)
+                        file.write(json.dumps(list(zip(arg_value[name_para], ls_point))))
+                        file.close() 
 
                         # save result
                         result[idx][1][name_para] = value
@@ -862,8 +915,17 @@ class TuningModel:
                         set_ls_model.append(self.fit_multibenchmark(
                             curr_fit_parameter, self.best_compile_parameter, save_path=value_folder_path))
                     # TODO: take the best model and update best fit parameter
-                    value = arg_value[self.take_idx_best_lsmodel(set_ls_model, min_value= min_value)]
+                    ls_point = self.take_idx_best_lsmodel(set_ls_model, min_value= min_value, take_point=True)
+                    value = arg_value[np.argmax(ls_point)]
+
                     self.best_fit_parameter[name_arg] = value
+
+                    import json 
+                    file = open(sub_folder + "/" + "result.txt", 'w')
+                    file.write(name_arg)
+                    file.write(json.dumps(list(zip(arg_value, ls_point))))
+                    file.close() 
+
 
                     # save result
                     result[idx][1] = value
