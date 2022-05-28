@@ -320,6 +320,24 @@ class model(AbstractModel.model):
             Delta:list[list[float]] = np.zeros((len(self.tasks), len(self.tasks) + 1)).tolist()
             count_Delta: list[list[float]] = np.zeros((len(self.tasks), len(self.tasks) + 1)).tolist()
 
+
+            '''local search'''
+            if epoch % 100 == 0: 
+                for skf in range(len(self.tasks)): 
+                    ls = Search.LocalSearch_DSCG()
+                    ls.getInforTasks(self.IndClass, self.tasks, seed= self.seed)
+                    ind = population[skf].getSolveInd()
+                    evals, new_ind = ls.search(ind, fes = 2000)
+                    eval_k[skf] += evals
+                    if new_ind.fcost < ind.fcost : 
+                        population[skf].ls_inds[0].genes= new_ind.genes 
+                        population[skf].ls_inds[0].fcost = new_ind.fcost
+                        population.update_rank()  
+
+
+
+
+
         #solve
         self.last_pop = population
         self.render_process(epoch/nb_generations, ['Pop_size', 'Cost'], [[len(population)], self.history_cost[-1]], use_sys= True)
