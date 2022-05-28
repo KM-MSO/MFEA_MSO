@@ -562,6 +562,8 @@ class TuningModel:
         self.list_parameter: list[tuple(str, list)] = list_parameter
         self.nb_run = nb_run
 
+        self.default_lsmodel= None 
+
     def compile(self, ls_benchmark=None, benchmark_weights=[], name_benchmark = [], ls_IndClass = [],  **kwargs):
         # if ls_benchmark is None:
         #     ls_benchmark.append(kwargs['tasks'])
@@ -602,15 +604,18 @@ class TuningModel:
 
             model.run(
                 nb_run=self.nb_run,
-                save_path=save_path + self.name_benchmark[idx] + "_" + name_model
+                save_path=save_path + self.name_benchmark[idx]
             )
-            model = loadModel(save_path + self.name_benchmark[idx] + "_" + name_model, ls_tasks=benchmark, set_attribute= True)
+            model = loadModel(save_path + self.name_benchmark[idx] , ls_tasks=benchmark, set_attribute= True)
 
             import json
             file = open(save_path + self.name_benchmark[idx] + "_" + name_model.split('.')[0] + "_result.txt", 'w')
             file.write(json.dumps(dict(enumerate(model.history_cost[-1]))))
             file.close()   
             ls_model.append(model)
+        
+        if self.default_lsmodel is None: 
+            self.default_lsmodel = ls_model 
 
         return ls_model 
 
@@ -642,7 +647,7 @@ class TuningModel:
 
         return model
     
-    def compare_between_2_ls_model(self, ls_model1: list[AbstractModel.model], ls_model2 : list[AbstractModel.model], min_value= 0 ):
+    def compare_between_2_ls_model(self, ls_model1: list[AbstractModel.model], ls_model2 : list[AbstractModel.model], min_value= 0, take_point = False):
         '''
         compare the result between models and return best model 
         [[model1_cec, model1_gecco], [model2_cec, model2_gecco]]
@@ -657,16 +662,30 @@ class TuningModel:
 
             point_model[0] += point1 * self.benchmark_weights[benchmark]
             point_model[1] += point2 * self.benchmark_weights[benchmark]
+            point_model += (1 - np.sum(point_model))/2 
+        if take_point is True: 
+            return point_model
+        else: 
+            return np.argmax(point_model) 
 
-        return np.argmax(point_model)  
 
-
-    def take_idx_best_lsmodel(self, set_ls_model: list[list[AbstractModel.model]], min_value = 0 ):
-        best_idx = 0  
-        for idx, ls_model in enumerate(set_ls_model[1:],start= 1 ):
-            better_idx = self.compare_between_2_ls_model(set_ls_model[best_idx], ls_model, min_value)
-            if better_idx == 1: 
-                best_idx = idx 
+    def take_idx_best_lsmodel(self, set_ls_model: list[list[AbstractModel.model]], min_value = 0, compare_default = True, take_point = False):
+        if compare_default is True: 
+            ls_point = [] 
+            for idx, ls_model in enumerate(set_ls_model):
+                ls_point += [(self.compare_between_2_ls_model(ls_model, self.default_lsmodel, min_value,take_point= True)[0])]
+            if take_point is True:
+                return ls_point 
+            else: 
+                best_idx = np.argmax(np.array(ls_point))
+                return best_idx
+            pass 
+        else: 
+            best_idx = 0  
+            for idx, ls_model in enumerate(set_ls_model[1:],start= 1 ):
+                better_idx = self.compare_between_2_ls_model(set_ls_model[best_idx], ls_model, min_value)
+                if better_idx == 1: 
+                    best_idx = idx 
         
         return best_idx 
 
@@ -757,6 +776,8 @@ class TuningModel:
                         pass
                         curr_fit_parameter[name_arg] = arg_pass[0]
 
+        
+        # run many 
         curr_order_params = 0
         for name_arg, arg_value in self.list_parameter:
             curr_order_params += 1
@@ -790,7 +811,20 @@ class TuningModel:
                             # set_ls_model.append(self.fit_multibenchmark(self.best_fit_parameter, curr_compile_parameter))
 
                         # TODO: take the best model and update best parameter
-                        value = para_value[self.take_idx_best_lsmodel(set_ls_model, min_value= min_value)]
+                        ls_point = self.take_idx_best_lsmodel(set_ls_model, min_value= min_value, take_point=True)
+                        value = para_value[np.argmax(ls_point)]
+
+
+                        import json 
+                        # file= open(value_folder_path + "/result.txt" , 'w')
+                        file = open(sub_folder + "/" + "result.txt", 'w')
+                        file.write(name_arg+" ") 
+                        file.write(name_para)
+                        file.write(json.dumps(list(zip(arg_value[name_para], ls_point))))
+                        file.close() 
+                        
+                        
+                        
                         setattr(
                             self.best_compile_parameter[name_arg], name_para, value)
 
@@ -815,8 +849,17 @@ class TuningModel:
                         set_ls_model.append(self.fit_multibenchmark(
                             self.best_fit_parameter, curr_compile_parameter, save_path=value_folder_path))
                     # TODO: take the best model and update best parameter
-                    value = arg_value[self.take_idx_best_lsmodel(set_ls_model, min_value= min_value)]
+                    ls_point = self.take_idx_best_lsmodel(set_ls_model, min_value= min_value, take_point=True)
+                    value = arg_value[np.argmax(ls_point)]
+
                     self.best_compile_parameter[name_arg] = value
+
+                    import json 
+                    # file = open(value_folder_path + "/result.txt", 'w')
+                    file = open(sub_folder + "/" + "result.txt", 'w')
+                    file.write(name_arg)
+                    file.write(json.dumps(list(zip(arg_value, ls_point))))
+                    file.close() 
 
                     # save result
                     result[idx][1] = value
@@ -842,9 +885,19 @@ class TuningModel:
                             set_ls_model.append(self.fit_multibenchmark(
                                 curr_fit_parameter, self.best_compile_parameter, save_path=value_folder_path))
                         # TODO: take the best modle in update best parameter
-                        value = para_value[self.take_idx_best_lsmodel(set_ls_model, min_value= min_value)]
+                        ls_point = self.take_idx_best_lsmodel(set_ls_model, min_value= min_value, take_point=True)
+                    
+                        value = para_value[np.argmax(ls_point)]
                         setattr(
                             self.best_fit_parameter[name_arg], name_arg, value)
+
+                        import json 
+                        # file= open(value_folder_path + "/result.txt" , 'w')
+                        file = open(sub_folder + "/" + "result.txt", 'w')
+                        file.write(name_arg) 
+                        file.write(name_para)
+                        file.write(json.dumps(list(zip(arg_value[name_para], ls_point))))
+                        file.close() 
 
                         # save result
                         result[idx][1][name_para] = value
@@ -862,8 +915,17 @@ class TuningModel:
                         set_ls_model.append(self.fit_multibenchmark(
                             curr_fit_parameter, self.best_compile_parameter, save_path=value_folder_path))
                     # TODO: take the best model and update best fit parameter
-                    value = arg_value[self.take_idx_best_lsmodel(set_ls_model, min_value= min_value)]
+                    ls_point = self.take_idx_best_lsmodel(set_ls_model, min_value= min_value, take_point=True)
+                    value = arg_value[np.argmax(ls_point)]
+
                     self.best_fit_parameter[name_arg] = value
+
+                    import json 
+                    file = open(sub_folder + "/" + "result.txt", 'w')
+                    file.write(name_arg)
+                    file.write(json.dumps(list(zip(arg_value, ls_point))))
+                    file.close() 
+
 
                     # save result
                     result[idx][1] = value
@@ -963,22 +1025,26 @@ class CompareResultBenchmark:
         for idx, name in enumerate(self.ls_name_algo): 
             print(f"({idx} : {name})")
         
-    def show_compare_detail(self, min_value= 0, round= 100, idx_main_algo= 0):
+    def show_compare_detail(self, min_value= 0, round= 100, idx_main_algo= 0, idx_gener_compare = -1, total_generation = 1000):
         # Step1: read folder 
-        algo_ls_model = np.empty(shape=(len(self.ls_name_algo), len(self.ls_benchmark))).tolist() 
+        algo_ls_model = np.zeros(shape=(len(self.ls_name_algo), len(self.ls_benchmark))).tolist() 
         ls_algorithms = os.listdir(self.path_folder)
+        # ls_benchmark_each_algo = [[]]
+        count_benchmark = np.zeros(shape=(len(self.ls_benchmark)), dtype= int)
 
         if len(self.ls_name_algo) == 0: 
             self.ls_name_algo = ls_algorithms.copy()  
         assert len(self.ls_name_algo) == len(ls_algorithms)
         # Step2: Create ls model of each benchmark
         for idx_algo, algorithm in enumerate(ls_algorithms): 
-            path_model = os.path.join(self.path_folder, algorithm) 
+            path_model = os.path.join(self.path_folder, algorithm)
             ls_models = os.listdir(path_model) 
             for model_name in ls_models: 
                 idx_benchmark = (model_name.split(".")[0]).split("_")[-1] 
                 idx_benchmark = int(idx_benchmark)-1
+                # ls_benchmark_each_algo[idx_algo].append(idx_benchmark)
                 # try:
+                count_benchmark[idx_benchmark] += 1
                 model = loadModel(os.path.join(path_model, model_name), self.ls_benchmark[int(idx_benchmark)]) 
                 algo_ls_model[idx_algo][idx_benchmark] = model 
                 # except: 
@@ -993,18 +1059,35 @@ class CompareResultBenchmark:
         # Step3: use compare model for each model in benchmark  
         for benchmark in range(len(self.ls_benchmark)): 
             print("Benchmark: ", benchmark + 1)
+            if count_benchmark[benchmark] == 0: 
+                continue 
             try: 
                 # compare = CompareModel([algo_ls_model[i][benchmark] for i in range(len(self.ls_name_algo))])
                 # print(compare.detail_compare_result(min_value= min_value, round = round))
                 name_row = [str("Tasks") + str(i+1) for i in range(len(self.ls_benchmark[0]))]
-                name_col = self.ls_name_algo
+                name_col = np.copy(self.ls_name_algo)
 
                 name_col[0], name_col[idx_main_algo] = name_col[idx_main_algo], name_col[0]
 
                 ls_models = [algo_ls_model[i][benchmark] for i in range(len(self.ls_name_algo))]
-                data = [] 
+                shape_his = None 
                 for model in ls_models: 
-                    data.append(model.history_cost[-1]) 
+                    if model  != 0 : 
+                        shape_his = model.history_cost[-1].shape
+                if shape_his == None: 
+                    continue 
+
+                data = []
+                for model in ls_models:
+                    if model == 0 : 
+                        data.append(np.zeros(shape= shape_his) + 1e20)
+                        continue
+                    idx_compare = -1
+                    if idx_gener_compare == -1 or idx_gener_compare == total_generation: 
+                        idx_compare = -1 
+                    else: 
+                        idx_compare = int(idx_gener_compare/total_generation* len(model.history_cost) )
+                    data.append(model.history_cost[idx_compare]) 
                 
                 data = np.array(data).T 
                 data = np.round(data, round) 
@@ -1028,6 +1111,7 @@ class CompareResultBenchmark:
                 result_compare = pd.DataFrame([result_compare], index=["Compare"], columns= name_col) 
                 end_data.columns = name_col 
                 end_data.index = name_row 
+
                 pd.set_option('display.expand_frame_repr', False)
                 end_data = pd.concat([end_data, result_compare]) 
                 print(end_data)
@@ -1037,7 +1121,7 @@ class CompareResultBenchmark:
                 pass 
         pass
 
-    def summarizing_compare_result(self, idx_main_algo=0, min_value=0, combine=True):
+    def summarizing_compare_result_v2(self, idx_main_algo=0, min_value=0, combine=True):
         nb_task = len(self.ls_benchmark[0])
         list_algo = os.listdir(self.path_folder)
         print(list_algo)
@@ -1046,6 +1130,8 @@ class CompareResultBenchmark:
         ls_model_cost = [np.zeros(
             shape=(len(benchmarks), nb_task)).tolist() for i in range(len(list_algo))]
         # print(ls_model_cost)
+
+        ls_benhchmark = [] 
         for idx_algo in range(len(list_algo)):
             path_algo = os.path.join(self.path_folder, list_algo[idx_algo])
             # count_benchmark = 0
@@ -1086,4 +1172,65 @@ class CompareResultBenchmark:
             result_table = pd.DataFrame(
                 np.sum(result_table, axis=0), columns=name_col, index=name_row)
         return result_table
+    
+    def summarizing_compare_result(self, idx_main_algo= 0, min_value= 0, combine = True, idx_gener_compare = -1, total_generation = 1000): 
+        # Step1: read folder 
+        algo_ls_model = np.zeros(shape=(len(self.ls_name_algo), len(self.ls_benchmark))).tolist() 
+        ls_algorithms = os.listdir(self.path_folder)
+
+        if len(self.ls_name_algo) == 0: 
+            self.ls_name_algo = ls_algorithms.copy()  
+        assert len(self.ls_name_algo) == len(ls_algorithms)
+        # Step2: Create ls model of each benchmark
+        self.ls_idx_benchmark = np.zeros(shape=(len(self.ls_benchmark))).tolist()  
+        for idx_algo, algorithm in enumerate(ls_algorithms): 
+            path_model = os.path.join(self.path_folder, algorithm) 
+            ls_models = os.listdir(path_model) 
+            for model_name in ls_models: 
+                idx_benchmark = (model_name.split(".")[0]).split("_")[-1] 
+                idx_benchmark = int(idx_benchmark)-1
+                self.ls_idx_benchmark[idx_benchmark] += 1 
+                # try:
+                model = loadModel(os.path.join(path_model, model_name), self.ls_benchmark[int(idx_benchmark)]) 
+                algo_ls_model[idx_algo][idx_benchmark] = model 
+                # except: 
+                #     print(f"Cannot load Model: {os.path.join(path_model, model_name)}")    
+                #     return
+        
+        # tìm xem thuật toán nào ko có bộ benchmark thì bỏ ko so sánh 
+        name_row = [] 
+        name_col =['Better', 'Equal', 'Worse']
+        count_row = 0 
+        result_table = np.zeros(shape=(len(self.ls_benchmark), len(ls_algorithms) -1, 3), dtype= int)
+        for idx, name_algo in enumerate(ls_algorithms): 
+            if idx != idx_main_algo: 
+                name_row.append(ls_algorithms[idx_main_algo] + " vs " + name_algo)
+                for idx_benchmark in range(len(self.ls_benchmark)):
+                    if algo_ls_model[idx][idx_benchmark] == 0 or algo_ls_model[idx_main_algo][idx_benchmark] == 0 : 
+                        continue 
+
+                    idx_gener_compare_first = -1  
+                    idx_gener_compare_second = -1  
+                    if idx_gener_compare == total_generation or idx_gener_compare == -1: 
+                        idx_gener_compare_first = -1
+                        idx_gener_compare_second = -1
+                    else: 
+                      
+                        idx_gener_compare_first = int(idx_gener_compare/total_generation * len(algo_ls_model[idx][idx_benchmark].history_cost))
+                        idx_gener_compare_second = int(idx_gener_compare/total_generation * len(algo_ls_model[idx_main_algo][idx_benchmark].history_cost))
+                    result = np.where(algo_ls_model[idx][idx_benchmark].history_cost[idx_gener_compare_first] > min_value, algo_ls_model[idx][idx_benchmark].history_cost[idx_gener_compare_first], min_value) - np.where(algo_ls_model[idx_main_algo][idx_benchmark].history_cost[idx_gener_compare_second] > min_value, algo_ls_model[idx_main_algo][idx_benchmark].history_cost[idx_gener_compare_second], min_value)
+                    result_table[idx_benchmark][count_row][2] += len(np.where(result < 0)[0]) 
+                    result_table[idx_benchmark][count_row][1] += len(np.where(result == 0)[0])
+                    result_table[idx_benchmark][count_row][0] += len(np.where(result > 0)[0]) 
+                
+                count_row += 1 
+
+        if combine is True :
+            result_table= pd.DataFrame(np.sum(result_table, axis= 0), columns= name_col, index= name_row) 
+        
+        return result_table
+                
+
+            
+            
     
