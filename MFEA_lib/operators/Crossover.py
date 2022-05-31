@@ -1,4 +1,4 @@
-from typing import Tuple, Type
+from typing import Deque, Tuple, Type
 import numpy as np
 from ..tasks.task import AbstractTask
 from ..EA import Individual, Population
@@ -202,16 +202,17 @@ class KL_SBX(AbstractCrossover):
     '''
     pa, pb in [0, 1]^n
     '''
-    def __init__(self, nc = 2, k = 1, *args, **kwargs):
+    def __init__(self, nc = 2, k = 1, len_mem = 6, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.nc = nc
         self.k = k
+        # self.len_mem = len_mem
     
     def getInforTasks(self, IndClass: Type[Individual], tasks: list[AbstractTask], seed=None):
         super().getInforTasks(IndClass, tasks, seed)
         # self.prob = 1 - KL_divergence
-        # self.prob = np.ones((self.nb_tasks, self.nb_tasks, self.dim_uss))
         self.prob = [[np.ones((self.dim_uss, )) for i in range(self.nb_tasks)] for j in range(self.nb_tasks)]
+        # self.M = [Deque(np.random.rand(self.len_mem), maxlen= self.len_mem) for i in range(self.nb_tasks)]
 
     def update(self, population: Population, **kwargs) -> None:
         mean: list = np.empty((self.nb_tasks, )).tolist()
