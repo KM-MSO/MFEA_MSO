@@ -319,5 +319,8 @@ class Population:
             for idx in range(self.nb_tasks)
         ]
         return newPop
-    
-    
+
+
+class LSHADE_Population(Population): 
+    def __init__(self, IndClass: Type[Individual], dim, nb_inds_tasks: list[int], list_tasks:list[AbstractTask] = [], evaluate_initial_skillFactor = False) -> None:
+        super().__init__(IndClass, dim, nb_inds_tasks, list_tasks, evaluate_initial_skillFactor = False)
