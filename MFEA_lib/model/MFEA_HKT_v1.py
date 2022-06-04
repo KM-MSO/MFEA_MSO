@@ -5,7 +5,6 @@ from . import AbstractModel
 from ..operators import Crossover, Mutation, Selection ,Search
 from ..tasks.function import AbstractFunc
 from ..EA import *
-import matplotlib.pyplot as plt
 import copy
 
   
@@ -15,7 +14,6 @@ class model(AbstractModel.model):
         tasks: list[AbstractTask], 
         crossover: Crossover.SBX_Crossover, 
         mutation: Mutation.Polynomial_Mutation, 
-        search: Search.SHADE,
         selection: Selection.ElitismSelection, 
         *args, **kwargs):
         super().compile(IndClass, tasks, crossover, mutation, selection, *args, **kwargs)
@@ -51,19 +49,19 @@ class model(AbstractModel.model):
         pbest_size = int(self.BEST_RATE * len(sub_pop))
         idx_elites = np.argsort(sub_pop.factorial_rank)[:pbest_size]
         
-        pbest = curr_indiv
-        while pbest == curr_indiv:
-            pbest = sub_pop[np.random.choice(idx_elites)]
+        # pbest = curr_indiv
+        # while pbest == curr_indiv:
+        pbest = sub_pop[np.random.choice(idx_elites)]
 
         r1 = curr_indiv
-        while r1 == curr_indiv or r1 == pbest:
-            r1 = sub_pop.__getRandomItems__()
+        # while r1 == curr_indiv or r1 == pbest:
+        r1 = sub_pop.__getRandomItems__()
         if self.update_time[id_task] > 0 and np.random.rand() <= len(self.archive[id_task]) / (len(self.archive[id_task]) + len(sub_pop)):
             r2 = self.archive[id_task][np.random.randint(len(self.archive[id_task]))]
         else:
             r2 = curr_indiv
-            while r2 == curr_indiv or r2 == r1 or r2 == pbest:
-                r2 = sub_pop.__getRandomItems__()
+            # while r2 == curr_indiv or r2 == r1 or r2 == pbest:
+            r2 = sub_pop.__getRandomItems__()
         
         j_rand = np.random.randint(len(curr_indiv))
         temp_genes = np.random.rand(len(curr_indiv))
@@ -173,7 +171,7 @@ class model(AbstractModel.model):
                     self.diff_f_inter_x[(id_task, other_task)].clear()
         
 
-    def fit(self, nb_inds_each_task: int, nb_generations :int ,  nb_inds_min:int,Z:int, evaluate_initial_skillFactor = False,LSA = False,
+    def fit(self, nb_inds_each_task: int, nb_generations :int ,  nb_inds_min:int, evaluate_initial_skillFactor = False,LSA = False,
             *args, **kwargs): 
         super().fit(*args, **kwargs)
         
@@ -214,12 +212,6 @@ class model(AbstractModel.model):
                 self.success_rmp[(task, other_task)] = []
                 self.diff_f_inter_x[(task, other_task)] = []
 
-
-        self.max_evals = num_tasks * MAX_EVALS_PER_TASK
-        records_num = 1
-        record_counter = 0
-        evals_per_record = self.max_evals / records_num
-
         # Initialize the population
         population = Population(
             self.IndClass,
@@ -238,7 +230,6 @@ class model(AbstractModel.model):
             for t in range(num_tasks):
                 if population[t].__getBestIndividual__.fcost < EPSILON:
                     continue
-                # stop = False
                 offsprings = SubPopulation(
                     IndClass=self.IndClass,
                     skill_factor=t,
@@ -246,7 +237,6 @@ class model(AbstractModel.model):
                     num_inds=0,
                     task=self.tasks[t]
                 )
-
                 for indiv in population[t]:
                     other_t = np.random.randint(num_tasks)
                     if other_t == t:
@@ -260,7 +250,6 @@ class model(AbstractModel.model):
                                 rmp = np.random.normal(loc=mu_rmp, scale=0.1)
                                 if not(rmp <= 0 or rmp > 1):
                                     break
-                        
                         if np.random.rand() <= rmp:
                             # Inter-task crossover
                             other_indiv = population[other_task].__getRandomItems__()
@@ -288,32 +277,22 @@ class model(AbstractModel.model):
                             offsprings.__addIndividual__(self.current_to_pbest(population[t], t, indiv))
                     eval_k[t]+=1
 
-
                 population.ls_subPop[t] = offsprings  
 
                 # Update RMP, F, CR, population size
                 self.update_state(population[t], t)
-                population.update_rank()
-                if LSA is True: 
-                    nb_inds_tasks = [int(
+            if LSA is True: 
+                nb_inds_tasks = [int(
                     # (nb_inds_min - nb_inds_each_task) / nb_generations * (epoch - 1) + nb_inds_each_task
-                    int(min((nb_inds_min - nb_inds_each_task)/(nb_generations - 1)* (epoch - 1) + nb_inds_each_task, nb_inds_each_task)))] * len(self.tasks)
-                self.selection(population, nb_inds_tasks)
-                
+                    int(min((nb_inds_min - nb_inds_each_task)/(nb_generations - 1)* (epoch - 1) + nb_inds_each_task, nb_inds_each_task))
+                )] * len(self.tasks)
+            population.update_rank()
+            self.selection(population, nb_inds_tasks)
             self.history_cost.append([indiv.fcost for indiv in population.get_solves()])
-                # while self.count_evals >= (record_counter + 1) * evals_per_record:
-                #     self.history_cost.append([indiv.fcost for indiv in population[t].get_solves()])
-                #     record_counter += 1
             if np.sum(eval_k) >= epoch * nb_inds_each_task * len(self.tasks):
                 # save history
                 self.history_cost.append([ind.fcost for ind in population.get_solves()])
                 self.render_process(epoch/nb_generations, ['Pop_size', 'Cost'], [[len(population)], self.history_cost[-1]], use_sys= True)
                 epoch +=1
-
-      
-        # while record_counter < records_num:
-        #     self.history_cost.append([indiv.fcost for indiv in population.get_solves()])
-        #     record_counter += 1
-        # self.render_process(epoch/nb_generations, ['Pop_size', 'Cost'], [[len(population)], self.history_cost[-1]], use_sys= True)
         self.last_pop = population
         return self.last_pop.get_solves()
