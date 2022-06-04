@@ -1,8 +1,11 @@
 from asyncio import tasks
 from operator import itemgetter
-from re import sub
+# from xxlimited import new
+# from re import U, sub
 import numpy as np
 import operator
+import scipy.stats
+
 from . import AbstractModel
 from ..operators import Crossover, Mutation, Selection
 from ..tasks.function import AbstractFunc
@@ -96,30 +99,7 @@ class model(AbstractModel.model):
                 if j != i:
                     rmp[i][j] = np.float64( DT / DA)
         return rmp
-    def renderRMP(self,tmp, title = None, figsize = None, dpi = 200):
-        if figsize is None:
-            figsize = (30, 30)
-        if title is None:
-            title = self.__class__.__name__
-        fig = plt.figure(figsize= figsize, dpi = dpi)
-        fig.suptitle(title, size = 15)
-        fig.set_facecolor("white")
-        for i in range(len(self.tasks)):
-            for j in range(len(self.tasks)):
-                x=[]
-                # for k in range(1000):
-                for k in range(len(tmp)):
-                    if i!=j:
-                        x.append(tmp[k][i][j])
-                        plt.subplot(int(np.ceil(len(self.tasks) / 3)), 3, i + 1)
-                        plt.plot(x,label= 'task: ' +str(j + 1))
-                        plt.legend()
-              
-            plt.title('task ' + str( i + 1))
-            plt.xlabel("Epoch")
-            plt.ylabel("M_rmp")
-            plt.ylim(bottom = -0.1, top = 1.1)
-    def RoutletWheel(self,rmp,rand):
+    def RoutletWheel(self,rmp,rand, max):
         tmp = [0]*len(self.tasks)
         tmp[0]= rmp[0]
         for i in range(1,len(tmp)):
@@ -127,7 +107,7 @@ class model(AbstractModel.model):
         index =0 
         while tmp[index] < rand:
             index+=1
-            if index == len(self.tasks) - 1:
+            if index == max - 1:
                 return index
         return index 
 
@@ -143,8 +123,23 @@ class model(AbstractModel.model):
             b[i] = IM_i[i]
         temp = sorted(b.items(), key = operator.itemgetter(1), reverse=True)
         return temp
-        
+    def CurrentToPBest(self,ind: Individual, pbest:Individual,r1:Individual,r2:Individual):
+        rand_pos = np.random.randint(len(self.Cr))
+        mu_cr = np.random.normal(loc = self.Cr[rand_pos],scale=0.1)
+        mu_f = self.F[rand_pos] + 0.1 * np.tan(np.pi * (np.random.rand() - 0.5))
+        j_rand = np.random.randint(len(ind.genes))
+        child = np.zeros(len(ind.genes))
+        for i in range(len(child)):
+            if np.random.rand() <= mu_cr or i == j_rand:
+                child[i] = ind.genes[i] + mu_f * ((pbest.genes[i]-ind.genes[i]) + r1.genes[i] -r2.genes[i])
+            else:
+                child[i] =ind.genes[i]
+        child = np.clip(child,0,1)
 
+        return self.IndClass(child)  
+
+    def Add_Archie (archie, index, genes) :
+        archie[index] = np.copy(genes)
 
     def fit(self, nb_inds_each_task: int, nb_inds_min:int,nb_generations :int ,  bound = [0, 1], evaluate_initial_skillFactor = False,LSA = False,
             *args, **kwargs): 
@@ -156,122 +151,255 @@ class model(AbstractModel.model):
             list_tasks= self.tasks,
             evaluate_initial_skillFactor = evaluate_initial_skillFactor
         )
+        H = 6
+        population.update_rank()
         #history
-        self.IM = []
-        self.rmp_hist = []
-        self.inter_task = []
+        # self.rmp_hist = []
         len_task  = len(self.tasks)
-        inter =  [1-1/len_task]*len_task
-        intra =  [1/len_task]*len_task
-        rmp = np.zeros([len_task,len_task])
-
         #SA param
         nb_inds_tasks = [nb_inds_each_task]*len(self.tasks)
         MAXEVALS = nb_generations * nb_inds_each_task * len(self.tasks)
         epoch =0 
         eval_k = np.zeros(len(self.tasks))
+        archie = []
+        value_archie = []
+        for i in range(len_task) :
+            new_archie = []
+            archie.append(new_archie)
+            new_value_archie = []
+            value_archie.append(new_value_archie)
+        # index = np.zeros(len_task, dtype = int)
+        # mean = np.zeros([len_task, self.dim_uss])
+        # std = np.zeros([len_task, self.dim_uss])
+        for i in range(len_task) :
+            for j in range(nb_inds_each_task) :
+                archie[i].append(np.copy(population[i].ls_inds[j].genes))
+                value_archie[i].append(population[i].ls_inds[j].fcost)
+        for i in range(len_task) :
+            for inv in population[i].ls_inds :
+                inv.init_gen = 0
+        u_CR = 0.5 * np.ones([len_task])
+        u_F = 0.5 * np.ones([len_task])
 
-        while np.sum(eval_k) <= MAXEVALS:
+        u_rmp = 0.5*np.ones([len_task, len_task])
+        m_CR = 0.5 * np.ones([len_task,H])
+        m_F = 0.5 * np.ones([len_task,H])
+        m_rmp = 0.5 * np.ones([len_task,len_task,H])
+        len_archie = 500
+        self.u_CR = []
+        self.u_F = []
+        self.smp = []
+
+        while np.sum(eval_k) <= MAXEVALS: 
+            # if np.sum(eval_k) >= epoch * nb_inds_each_task * len(self.tasks):
+                    # save history 
+            self.history_cost.append([ind.fcost for ind in population.get_solves()])
+                
+                # self.render_process(epoch/nb_generations, ['Pop_size', 'Cost'], [[len(u) for u in population.ls_subPop], self.history_cost[-1]], use_sys= True)
+            self.render_process(np.sum(eval_k)/MAXEVALS, ['Pop_size', 'Cost'], [[len(u) for u in population.ls_subPop], self.history_cost[-1]], use_sys= True)
+
+                # self.IM.append(np.copy(IM))
+                # self.rmp_hist.append(np.copy(rmp))
+            epoch = (epoch + 1)%1000 
             offsprings = Population(
                 self.IndClass,
                 nb_inds_tasks= [0] * len(self.tasks),
                 dim =  self.dim_uss, 
                 list_tasks= self.tasks,
             )
-            elite = self.get_elite(population.ls_subPop,20)
-            # IM =self.get_pop_intersection_v2(elite)
-            measurement = np.zeros((len_task,len_task))
-            if np.sum(eval_k) >= epoch * nb_inds_each_task * len(self.tasks):
-                    # save history 
-                self.history_cost.append([ind.fcost for ind in population.get_solves()])
-                
-                self.render_process(epoch/nb_generations, ['Pop_size', 'Cost'], [[len(u) for u in population.ls_subPop], self.history_cost[-1]], use_sys= True)
 
-                # self.IM.append(np.copy(IM))
-                self.rmp_hist.append(np.copy(rmp))
-                epoch+=1
-      
-            if (epoch % 5 == 0) : 
-                for i in range(len_task):
-                    for j in range(len_task):
-                        if i != j :
-                            for inv1 in range(20):
-                                measurement[i,j] += self.distance_to_pop(elite[j][inv1], elite[i], inv1 + 1)
-                for i in range(len_task):
-                    sum_tmp = np.sum(measurement[i])
-                    for j in range(len_task):
-                        if i != j:
-                            rmp[i,j] = measurement[i,j] / sum_tmp * inter[i]
-                    rmp[i,i]= intra[i]
-
-
-            if (epoch % 20) == 19 :
-                IM =self.get_pop_intersection_v2(elite)
-                for i in range(len(self.tasks)) :
-                    arr = self.get_max_IM(IM[i])
-                    for t in arr :
-                        j = int(t[0])
-                        transfer = min (3, int(IM[i,j] * nb_inds_tasks[i]))
-                        transfer = max(1, transfer)
-                        pop_transfer = self.get_elite_transfer (population[j], transfer)
-                        for inv in pop_transfer :
-                            gen = np.copy(inv.genes)
-                            tmp_inv = self.IndClass (gen)
-                            tmp_inv.skill_factor = i
-                            tmp_inv.hybrid = False
-                            eval_k[i] += 1
-                            offsprings.__addIndividual__(tmp_inv)
-                        if len(offsprings[i]) >= nb_inds_tasks[i] / 2 :
-                            break
-                self.IM.append(np.copy(IM))
-            # create new offspring population 
+            best = self.get_elite(population.ls_subPop, 11)
+            best40 = self.get_elite(population.ls_subPop, 40)
+            u_CR = np.mean(m_CR, axis = 1)
+            u_F = np.mean(m_F, axis = 1)
+            u_rmp = np.mean(m_rmp, axis = 2)
+            mean = np.zeros([len_task, self.dim_uss])
+            for i in range(len_task) :
+                tmp = np.zeros(self.dim_uss)
+                for inv in population[i].ls_inds :
+                    tmp += inv.genes
+                mean[i] = tmp / len(population[i].ls_inds)
+            # print(len(population[i].ls_inds), eval_k[0], epoch)
             for i in range(len_task):
-                    while(len(population.ls_subPop[i])+len(offsprings.ls_subPop[i]) < 2* nb_inds_tasks[i]):
-                        if np.random.rand() < 0.2:
-                            pa = population.__getIndsTask__(idx_task=i,type='tournament',tournament_size=1 )
-                            oa = self.mutation(pa,return_newInd=True)
-                            oa.skill_factor = pa.skill_factor
-                            offsprings.__addIndividual__(oa)
-                            eval_k[oa.skill_factor]+=1
-                        else:
-                            k =self.RoutletWheel(rmp[i],np.random.rand())
-                            pa = population.__getIndsTask__(idx_task=i,type='tournament',tournament_size= 2 )
-                            pb = population.__getIndsTask__(idx_task=k ,type='tournament',tournament_size=1)
-                            oa,ob = self.crossover(pa,pb)
-                            oa.skill_factor = pa.skill_factor
-                            ob.skill_factor = pa.skill_factor
-                            if i!=k:
-                                oa.transfer =True
-                                ob.transfer =True
+                s_F = []
+                s_CR = []
+                s_rmp = []
+                delta_f_hybrid = [] 
+                for j in range(len_task) :
+                    tmp1 = []
+                    delta_f_hybrid.append(tmp1)
+
+                    tmp2 = []
+                    s_rmp.append(tmp2)  
+                delta_f_DE = []          
+                # for j in range(nb_inds_tasks[i]) :
+                #     eval_k[i] += 1
+                #     inv = population[i].ls_inds[j]
+                if (epoch+1)%50 == 49 :
+                    subpop = np.zeros([40,self.dim_uss])
+                    for j in range (40) :
+                        subpop[j] = best40[i][j].genes
+                    mean = np.mean(subpop, axis = 0)
+                    std = np.std(subpop,axis = 0)
+                    mean_fitness = 0
+                    for inv in population[i].ls_inds :
+                        mean_fitness += inv.fcost 
+                    mean_fitness = mean_fitness / len(population[i].ls_inds)
+                    for j in range(nb_inds_each_task) :
+                        genes = np.zeros(self.dim_uss)
+                        for l in range(self.dim_uss) :
+                            genes[l] = np.random.normal(loc = mean[l], scale = std[l])
+                        inv = Individual(genes)
+                        inv.skill_factor = i
+                        offsprings.__addIndividual__(inv)
+                        inv.fcost = self.tasks[i](genes)
+                        if inv.fcost < mean_fitness :
+                            rand = random.randint(0,len(archie[i])-1)
+                            archie[i][rand] = np.copy(child.genes)
+                            value_archie[i][rand] = child.fcost
+                    eval_k[i] += nb_inds_each_task
+                else :
+                    j = 0
+                    for inv in population[i].ls_inds :
+                        eval_k[i] += 1
+                        k = random.randint(0,len_task - 1)
+                        temp_rmp = np.random.normal(loc = u_rmp[i,k], scale = 0.1)
+                        if k!=i and random.random() < temp_rmp :
+                            eval_k[i] += 1
+                            # p1 = population[k].__getRandomItems__()
+                            p1 = random.randint(0, len(archie[k]) - 1)
+                            gene = archie[k][p1]
+                            p2 = Individual(gene)
+                            # p2.genes = p2.genes + mean[i] - mean[k]
+                            # p2.skill_factor = i
+                            child1, child2 = self.crossover(inv, p2, inv.skill_factor, inv.skill_factor)
+                            child1.fcost = self.tasks[i](child1.genes)
+                            child2.fcost = self.tasks[i](child2.genes)
+                            child1.skill_factor = i
+                            child2.skill_factor = i
+                            if child1.fcost < child2.fcost :
+                                child = child1
                             else :
-                                oa.transfer = False
-                                ob.transfer = False
-                            offsprings.__addIndividual__(oa)
-                            offsprings.__addIndividual__(ob)
-                            eval_k[oa.skill_factor]+=1
-                            eval_k[ob.skill_factor]+=1
-            offsprings.update_rank()                
-            elite_off = self.get_elite(offsprings.ls_subPop,40)
-            for i in range(len(self.tasks)):
-                x = 0 #inter
-                y= 0 #intra
-                for inv in elite_off[i] :
-                    if inv.transfer == True :
-                        x += 1
-                    else : 
-                        y += 1
-                y_tmp = y/(x+y)
-                y_tmp = max(0.2,min(0.8,y_tmp))
-                x_tmp = 1-y_tmp
+                                child = child2
+                            child.init_gen = epoch + 1
+                            offsprings.__addIndividual__(child1)
+                            offsprings.__addIndividual__(child2)
+                            if child.fcost < inv.fcost :
+                                delta_f_hybrid[k].append((inv.fcost - child.fcost) / inv.fcost)
+                                s_rmp[k].append(temp_rmp)
+                                if len(archie[i]) < len_archie :
+                                    archie[i].append(np.copy(child.genes))
+                                    value_archie[i].append(child.fcost)
+                                else :
+                                    rand = random.randint(0,len_archie-1)
+                                    archie[i][rand] = np.copy(child.genes)
+                                    value_archie[i][rand] = child.fcost
+                            else :
+                                offsprings.__addIndividual__(inv)
+                        else :
+                            f = np.random.normal(loc = u_F[i], scale = 0.1)
+                            f = min(1, max(0.01,f))
+                            cr = scipy.stats.cauchy.rvs(loc = u_CR[i], scale = 0.1)
+                            cr = min(1, max(cr, 0.01))
 
-                   
-                inter[i] =0.5*inter[i]+x_tmp*0.5
-                intra[i] =0.5*intra[i]+y_tmp*0.5
-            tmp_inter = copy.deepcopy(inter)
-            self.inter_task.append(tmp_inter)
-            # merge and update rank
+                            p0 = random.randint(0, 10)
+                            p1 = random.randint(0, len(archie[i]) - 1)
+                            p2 = random.randint(0, len(archie[i]) - 1)
+                            while p2 == p1 :
+                                p2 = random.randint(0, len(archie[i]) - 1)
+                            # if value_archie[i][p1] < value_archie[i][p2] :
+                            #     r1 = archie[i][p1]
+                            #     r2 = archie[i][p2]
+                            # else :
+                            #     r1 = archie[i][p2]
+                            #     r2 = archie[i][p1]
+                            r1 = archie[i][p1]
+                            r2 = archie[i][p2]
+                            # if np.sum((best[i][0].genes - inv.genes)*(r1 - r2)) > 0 :
+                            V_k = inv.genes + f*(best[i][p0].genes - inv.genes) + f*(r1 - r2)
+                            # else :
+                            #     V_k = inv.genes + f*(best[i][p0].genes - inv.genes) - f*(r1 - r2)
 
-            population = population + offsprings
+                            j_rand = random.randint(0, self.dim_uss-1)
+                            gen_child = np.zeros(self.dim_uss)
+                            for l in range(self.dim_uss) :
+                                if random.random() < cr or l == j_rand :
+                                    gen_child[l] = V_k[l]
+                                    if gen_child[l] < 0 :
+                                        gen_child[l] = (inv.genes[l]) / 2
+                                    if gen_child[l] > 1 :
+                                        gen_child[l] = (inv.genes[l] + 1) / 2
+                                else :
+                                    gen_child[l] = inv.genes[l]       
+                            child = self.IndClass(gen_child)
+                            child.skill_factor=i
+                            child.fcost = self.tasks[i](child.genes)
+                            child.init_gen = epoch + 1
+                            if child.fcost < inv.fcost :
+                                s_F.append(f)
+                                s_CR.append(cr)
+                                delta_f_DE.append((inv.fcost - child.fcost)/inv.fcost)
+                                child.init_gen = epoch + 1
+                                child.skill_factor = inv.skill_factor
+                                offsprings.__addIndividual__(child)
+                                if len(archie[i]) < len_archie :
+                                    archie[i].append(np.copy(child.genes))
+                                    value_archie[i].append(child.fcost)
+                                else :
+                                    rand = random.randint(0,len_archie-1)
+                                    archie[i][rand] = np.copy(child.genes)
+                                    value_archie[i][rand] = child.fcost
+                            else :
+                                offsprings.__addIndividual__(inv)
+                        j+=1
+                    while eval_k[i] < (epoch+1)*nb_inds_each_task :
+                        p1 = random.randint(0,nb_inds_tasks[i]-1)
+                        p2 = random.randint(0,nb_inds_tasks[i]-1)
+                        while p2 == p1 :
+                            p2 = random.randint(0,nb_inds_tasks[i]-1)
+                        pa = offsprings[i].ls_inds[p1]
+                        pb = offsprings[i].ls_inds[p2]
+                        oa,_ = self.crossover(pa,pb,pa.skill_factor, pa.skill_factor)
+                        oa.init_gen = epoch+1
+                        offsprings.__addIndividual__(oa)
+
+                        if len(archie[i]) < len_archie :
+                            archie[i].append(np.copy(oa.genes))
+                            value_archie[i].append(oa.fcost)
+                        else :
+                            rand = random.randint(0,len_archie-1)
+                            archie[i][rand] = np.copy(oa.genes)
+                            value_archie[i][rand] = oa.fcost
+                        eval_k[i] += 1
+                    num_inv_success = len(s_CR)
+                    if num_inv_success > 0 :
+                        sf = np.array(s_F)
+                        scr = np.array(s_CR)
+                        deltafDE = np.array(delta_f_DE)
+                        mean_F = np.sum(sf**2) / np.sum(sf)
+                        mean_F = max(0.1, min(mean_F, 1))
+                        mean_CR = np.sum(scr * deltafDE) / np.sum(deltafDE)
+                        mean_CR = max(0.1, min(mean_CR, 1))
+                        m_F[i,(epoch%H)] = mean_F
+                        m_CR[i,(epoch%H)] = mean_CR
+                    for j in range(len_task) :
+                        if i!=j :
+                            num_inv_success = len(delta_f_hybrid[j]) 
+                            if num_inv_success > 0 :
+                                srmp = np.array(s_rmp[j])
+                                deltafhybrid = np.array(delta_f_hybrid[j])
+                                m_rmp[i,j,(epoch%H)] = np.sum(srmp*srmp*deltafhybrid) / np.sum(srmp*deltafhybrid)
+                                m_rmp[i,j,(epoch%H)] = max (0.01, min(m_rmp[i,j,(epoch%H)],1))
+                            else :
+                                m_rmp[i,j,(epoch%H)] -= 0.02
+                                m_rmp[i,j,(epoch%H)] = max (0.01, min(m_rmp[i,j,(epoch%H)],1))
+            if (epoch+1)%50 == 49 :
+                for i in range(len_task) :
+                    population[i].ls_inds += offsprings[i].ls_inds
+            else :   
+                for i in range(len_task) :
+                    population[i].ls_inds.clear()
+                    population[i].ls_inds += offsprings[i].ls_inds
             population.update_rank()
 
             # selection 
@@ -280,15 +408,23 @@ class model(AbstractModel.model):
                     # (nb_inds_min - nb_inds_each_task) / nb_generations * (epoch - 1) + nb_inds_each_task
                     int(min((nb_inds_min - nb_inds_each_task)/(nb_generations - 1)* epoch  + nb_inds_each_task, nb_inds_each_task))
                 )] * len(self.tasks)
+                # for j in range(len_task) :
+                #     if epoch%20 == 19  :
+                #         nb_inds_tasks[j] -= 1
             self.selection(population, nb_inds_tasks)
-           
+            # if epoch > 0 :
+            #     self.mutation.update(population)
             # save history
             self.history_cost.append([ind.fcost for ind in population.get_solves()])
                 
-            self.render_process(epoch/nb_generations, ['Pop_size', 'Cost'], [[len(u) for u in population.ls_subPop], self.history_cost[-1]], use_sys= True)
-
+            # self.render_process(epoch/nb_generations, ['Pop_size', 'Cost'], [[len(u) for u in population.ls_subPop], self.history_cost[-1]], use_sys= True)
+            self.render_process(np.sum(eval_k)/MAXEVALS, ['Pop_size', 'Cost'], [[len(u) for u in population.ls_subPop], self.history_cost[-1]], use_sys= True)
             # self.IM.append(np.copy(IM))
-            self.rmp_hist.append(np.copy(rmp))
+            # self.rmp_hist.append(np.copy(rmp))
+            if np.sum(eval_k) >= MAXEVALS :
+                self.render_process(1, ['Pop_size', 'Cost'], [[len(u) for u in population.ls_subPop], self.history_cost[-1]], use_sys= True)
+                break
+            # print(epoch)
         print("End")
         # solve 
         self.last_pop = population 
