@@ -67,36 +67,3 @@ class TournamentSelection(AbstractSelection):
             ls_idx_selected.append(idx_selected_inds)
         return ls_idx_selected
 
-class SelectionAHalf(AbstractSelection):
-    def __init__(self, ontop = 1.0) -> None:
-        super().__init__()
-        self.ontop = ontop
-
-    def __call__(self, population: Population, nb_inds_tasks: list, ontop = None, *args, **kwds) -> list[int]:
-        ls_idx_selected = [] 
-        if ontop is None:
-            pass 
-        else: 
-            self.ontop = ontop  
-    
-        for idx_subpop, subpop in enumerate(population):
-            subpop.update_rank() 
-            # N_i = min(nb_inds_tasks[idx_subpop], len(subpop))
-            N_i = nb_inds_tasks[idx_subpop] 
-
-            idx_selected_inds = np.where(subpop.scalar_fitness >= 1/(N_i))[0].tolist()
-            ls_idx_selected.append(deepcopy(idx_selected_inds))
-            
-
-            if self.ontop < 1.0:
-                idx_selected_inds = np.where(subpop.scalar_fitness >= 1/(N_i*self.ontop))[0].tolist()
-                idx_noneed = np.where(subpop.scalar_fitness < 1/(N_i * self.ontop))[0]
-                idx_add = np.random.choice(idx_noneed, size = (int(N_i - len(idx_selected_inds)), ), replace= False)
-                idx_selected_inds = np.concatenate([idx_selected_inds, idx_add]).tolist() 
-                assert len(set(idx_selected_inds)) == len(ls_idx_selected[idx_subpop])
-            np.random.shuffle(idx_selected_inds)
-            subpop.select(idx_selected_inds) 
-            assert len(subpop) == N_i
-             
-            
-        return ls_idx_selected 
