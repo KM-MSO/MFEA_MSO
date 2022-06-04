@@ -54,6 +54,7 @@ class model(AbstractModel.model):
             epoch= 0 
 
             while np.sum(eval_k) <= MAXEVALS and stop is False: 
+                gen += 1 
                 offsprings = Population(
                     self.IndClass, 
                     nb_inds_tasks=[0] * len(self.tasks), 
@@ -62,18 +63,6 @@ class model(AbstractModel.model):
                 )
 
                 for skf in range(0, len(self.tasks)): 
-
-                    if np.sum(eval_k) >= epoch * nb_inds_each_task * len(self.tasks):
-                        # save history
-                        self.history_cost.append([ind.fcost for ind in population.get_solves()])
-                        # self.history_smp.append([M_smp[i].get_smp() for i in range(len(self.tasks))])
-
-                        self.render_process(epoch/nb_generations, ['Pop_size', 'Cost'], [[len(population)], self.history_cost[-1]], use_sys= True)
-
-                        # update mutation
-                        self.mutation.update(population = population)
-
-                        epoch += 1
 
 
                     for idx_ind, ind in enumerate(population[skf]): 
@@ -135,6 +124,33 @@ class model(AbstractModel.model):
                 self.crossover.update(population = population)
                 self.mutation.update(population = population)
                 self.search.update(population) 
+
+                '''local search'''
+                for skf in range(len(self.tasks)): 
+                    # if (epoch - before_epoch) > kwargs['step_over']: 
+                    if gen % 50 == 0: 
+                        
+                        ls = Search.LocalSearch_DSCG()
+                        ls.getInforTasks(self.IndClass, self.tasks, seed= self.seed)
+                        
+                        ind = population[skf].getSolveInd()
+                        evals, new_ind = ls.search(ind, fes = 2000)
+                        eval_k[skf] += evals
+                        if new_ind.fcost < ind.fcost : 
+                            population[skf].ls_inds[0].genes= new_ind.genes 
+                            population[skf].ls_inds[0].fcost = new_ind.fcost
+                            population.update_rank()  
+                if np.sum(eval_k) >= epoch * nb_inds_each_task * len(self.tasks):
+                    # save history
+                    self.history_cost.append([ind.fcost for ind in population.get_solves()])
+                    # self.history_smp.append([M_smp[i].get_smp() for i in range(len(self.tasks))])
+
+                    self.render_process(np.sum(eval_k)/MAXEVALS, ['Pop_size', 'Cost'], [[len(population)], self.history_cost[-1]], use_sys= True)
+
+                    # update mutation
+                    self.mutation.update(population = population)
+
+                    epoch = np.sum(eval_k)/MAXEVALS + 1 
             
             
             self.last_pop = population
