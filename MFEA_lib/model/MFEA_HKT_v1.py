@@ -170,7 +170,6 @@ class model(AbstractModel.model):
                     self.success_rmp[(id_task, other_task)].clear()
                     self.diff_f_inter_x[(id_task, other_task)].clear()
         
-
     def fit(self, nb_inds_each_task: int, nb_generations :int ,  nb_inds_min:int, evaluate_initial_skillFactor = False,LSA = False,
             *args, **kwargs): 
         super().fit(*args, **kwargs)
@@ -183,7 +182,7 @@ class model(AbstractModel.model):
         self.H = 30
         self.C = 0.02
         INIT_RMP = 0.5
-        
+        self.J = 0.3
 
         # Initialize the parameter
         num_tasks = len(self.tasks)
@@ -276,7 +275,24 @@ class model(AbstractModel.model):
                             # Intra - crossover
                             offsprings.__addIndividual__(self.current_to_pbest(population[t], t, indiv))
                     eval_k[t]+=1
-
+                if np.random.rand() < self.J:
+                    a = np.amax(offsprings.ls_inds,axis= 0)
+                    b = np.amin(offsprings.ls_inds,axis= 0)
+                    op_offsprings = SubPopulation(
+                        IndClass=self.IndClass,
+                        skill_factor=t,
+                        dim=self.dim_uss,
+                        num_inds=0,
+                        task=self.tasks[t]
+                    )
+                    for inv in offsprings:
+                        oa = self.IndClass(a+b-inv.genes)
+                        oa.fcost = self.tasks[t](oa.genes)
+                        op_offsprings.__addIndividual__(oa)
+                        eval_k[t]+=1
+                    offsprings  = offsprings+op_offsprings 
+                # offsprings.update_rank()
+                # self.selection(offsprings,nb_inds_tasks[t])
                 population.ls_subPop[t] = offsprings  
 
                 # Update RMP, F, CR, population size
