@@ -5,14 +5,8 @@ from . import AbstractModel
 from ..operators import Crossover, Mutation, Selection ,Search
 from ..tasks.function import AbstractFunc
 from ..EA import *
-import matplotlib.pyplot as plt
 import copy
-class IndividualDE(Individual):
-    def __init__(self, genes, dim= None) -> None:
-        super().__init__(genes, dim)
-        if genes is None:
-            self.genes: np.ndarray = np.random.rand(dim)
-        self.transfer =False
+
   
 class model(AbstractModel.model):
     def compile(self, 
@@ -20,7 +14,6 @@ class model(AbstractModel.model):
         tasks: list[AbstractTask], 
         crossover: Crossover.SBX_Crossover, 
         mutation: Mutation.Polynomial_Mutation, 
-        search: Search.SHADE,
         selection: Selection.ElitismSelection, 
         *args, **kwargs):
         super().compile(IndClass, tasks, crossover, mutation, selection, *args, **kwargs)
@@ -28,13 +21,14 @@ class model(AbstractModel.model):
     def cauchy_g(self, mu: float, gamma: float):
         return mu + gamma*np.tan(np.pi * np.random.rand()-0.5)
 
-    def get_elite(self,pop,size):
+    def get_elite(self,sub_pop,size):
         elite_subpops = []
-        for i in range(len(pop)):
-            idx = np.argsort(pop[i].factorial_rank)[:size].tolist()
-            elite_subpops.append(pop[i][idx])
-        return elite_subpops
-    def choose_Individual(self, sub_pop: SubPopulation, id_task: int , curr_indiv: Individual) :
+        idx_elites = np.argsort(sub_pop.factorial_rank)[:size]
+        for idx in idx_elites :
+            elite_subpops.append(sub_pop[idx])
+        return elite_subpops   
+
+    def current_to_pbest(self, sub_pop: SubPopulation, id_task: int , curr_indiv: Individual) -> Individual:
         rand_pos = np.random.randint(self.H)
         mu_cr = self.mem_cr[id_task,rand_pos]
         mu_f = self.mem_f[id_task, rand_pos]
@@ -42,37 +36,46 @@ class model(AbstractModel.model):
         if (mu_cr == -1):
             cr = 0
         else:
-            cr = np.clip(np.random.normal(loc=mu_cr, scale=0.1), 0.05, 0.95)
+            cr = np.clip(np.random.normal(loc=mu_cr, scale=0.1), 0, 1)
             
         while True:
             f = self.cauchy_g(mu_f, gamma=0.1)
-            if f > 0.05 :
+            if f > 0:
                 break
         if f > 1:
             f = 1
-  
+        
+        
         pbest_size = int(self.BEST_RATE * len(sub_pop))
         idx_elites = np.argsort(sub_pop.factorial_rank)[:pbest_size]
         
-        pbest = curr_indiv
-        while pbest == curr_indiv:
-            pbest = sub_pop[np.random.choice(idx_elites)]
+        # pbest = curr_indiv
+        # while pbest == curr_indiv:
+        pbest = sub_pop[np.random.choice(idx_elites)]
 
         r1 = curr_indiv
-        while r1 == curr_indiv or r1 == pbest:
-            r1 = sub_pop.__getRandomItems__()
+        # while r1 == curr_indiv or r1 == pbest:
+        r1 = sub_pop.__getRandomItems__()
         if self.update_time[id_task] > 0 and np.random.rand() <= len(self.archive[id_task]) / (len(self.archive[id_task]) + len(sub_pop)):
             r2 = self.archive[id_task][np.random.randint(len(self.archive[id_task]))]
-            r3 = self.archive[id_task][np.random.randint(len(self.archive[id_task]))]
         else:
             r2 = curr_indiv
-            while r2 == curr_indiv or r2 == r1 or r2 == pbest:
-                r2 = sub_pop.__getRandomItems__()
-            r3 = curr_indiv
-            while r3 == curr_indiv or r3 == r2 or r3 == pbest :
-                r3 = sub_pop.__getRandomItems__()
-        return f,cr,pbest,r1,r2,r3
-    def update_success_history (self, sub_pop: SubPopulation, id_task: int , curr_indiv: Individual, child : Individual, f,cr) -> Individual :
+            # while r2 == curr_indiv or r2 == r1 or r2 == pbest:
+            r2 = sub_pop.__getRandomItems__()
+        
+        j_rand = np.random.randint(len(curr_indiv))
+        temp_genes = np.random.rand(len(curr_indiv))
+        for j in range(len(curr_indiv)):
+            if np.random.rand() <= cr or j == j_rand:
+                temp_genes[j] = curr_indiv[j] + f * (pbest[j] - curr_indiv[j] + r1[j] - r2[j])
+                # bound handling
+                if temp_genes[j] > 1:
+                    temp_genes[j] = (curr_indiv[j] + 1)/2
+                elif temp_genes[j] < 0:
+                    temp_genes[j] = (curr_indiv[j] + 0)/2
+            else:
+                temp_genes[j] = curr_indiv[j]
+        child = self.IndClass(temp_genes)
         child.fcost = sub_pop.task(child.genes)
         child.skill_factor = id_task
         self.count_evals += 1
@@ -91,14 +94,40 @@ class model(AbstractModel.model):
             return child
         else:
             return curr_indiv
-    def current_to_pbest(self, sub_pop: SubPopulation, id_task: int , curr_indiv: Individual) :
-        f,cr,pbest,r1,r2,r3 = self.choose_Individual(sub_pop, id_task , curr_indiv)
+
+    def rand_1(self, sub_pop: SubPopulation, id_task: int , curr_indiv: Individual) -> Individual:
+        rand_pos = np.random.randint(self.H)
+        mu_cr = self.mem_cr[id_task,rand_pos]
+        mu_f = self.mem_f[id_task, rand_pos]
+
+        if (mu_cr == -1):
+            cr = 0
+        else:
+            cr = np.clip(np.random.normal(loc=mu_cr, scale=0.1), 0, 1)
+            
+        while True:
+            f = self.cauchy_g(mu_f, gamma=0.1)
+            if f > 0:
+                break
+        if f > 1:
+            f = 1
+
+        r1 = curr_indiv
+        # while r1 == curr_indiv or r1 == pbest:
+        r1 = sub_pop.__getRandomItems__()
+        r3 = sub_pop.__getRandomItems__()
+        if self.update_time[id_task] > 0 and np.random.rand() <= len(self.archive[id_task]) / (len(self.archive[id_task]) + len(sub_pop)):
+            r2 = self.archive[id_task][np.random.randint(len(self.archive[id_task]))]
+        else:
+            r2 = curr_indiv
+            # while r2 == curr_indiv or r2 == r1 or r2 == pbest:
+            r2 = sub_pop.__getRandomItems__()
         
         j_rand = np.random.randint(len(curr_indiv))
         temp_genes = np.random.rand(len(curr_indiv))
         for j in range(len(curr_indiv)):
             if np.random.rand() <= cr or j == j_rand:
-                temp_genes[j] = curr_indiv[j] + f * (pbest[j] - curr_indiv[j] + r1[j] - r2[j])
+                temp_genes[j] = r1[j] + f * (r3[j] - r2[j])
                 # bound handling
                 if temp_genes[j] > 1:
                     temp_genes[j] = (curr_indiv[j] + 1)/2
@@ -106,62 +135,35 @@ class model(AbstractModel.model):
                     temp_genes[j] = (curr_indiv[j] + 0)/2
             else:
                 temp_genes[j] = curr_indiv[j]
-        child = IndividualDE(temp_genes)
-        survival_ind = self.update_success_history(sub_pop, id_task , curr_indiv, child , f,cr)
-        return survival_ind
-
-    def current_to_rand(self, sub_pop: SubPopulation, id_task: int , curr_indiv: Individual) :
-        f,cr,pbest,r1,r2,r3 = self.choose_Individual(sub_pop, id_task , curr_indiv)      
-        j_rand = np.random.randint(len(curr_indiv))
-        temp_genes = np.random.rand(len(curr_indiv))
-        for j in range(len(curr_indiv)):
-            if np.random.rand() <= cr or j == j_rand:
-                temp_genes[j] = curr_indiv[j] + f * (r3[j] - curr_indiv[j] + r1[j] - r2[j])
-                if temp_genes[j] > 1:
-                    temp_genes[j] = (curr_indiv[j] + 1)/2
-                elif temp_genes[j] < 0:
-                    temp_genes[j] = (curr_indiv[j] + 0)/2
+        child = self.IndClass(temp_genes)
+        child.fcost = sub_pop.task(child.genes)
+        child.skill_factor = id_task
+        self.count_evals += 1
+        
+        if child.fcost == curr_indiv.fcost:
+            return child
+        elif child.fcost < curr_indiv.fcost:
+            self.success_cr[id_task].append(cr)
+            self.success_f[id_task].append(f)
+            self.diff_fitness[id_task].append(curr_indiv.fcost - child.fcost)
+            if len(self.archive[id_task]) < self.ARC_RATE * len(sub_pop):
+                self.archive[id_task].append(curr_indiv)
             else:
-                temp_genes[j] = curr_indiv[j]
-        child = IndividualDE(temp_genes)
-        survival_ind = self.update_success_history(sub_pop, id_task , curr_indiv, child , f,cr)
-        return survival_ind
-
-    def rand_1 (self, sub_pop: SubPopulation, id_task: int , curr_indiv: Individual) :
-        f,cr,pbest,r1,r2,r3 = self.choose_Individual(sub_pop, id_task , curr_indiv)      
-        j_rand = np.random.randint(len(curr_indiv))
-        temp_genes = np.random.rand(len(curr_indiv))
-        for j in range(len(curr_indiv)):
-            if np.random.rand() <= cr or j == j_rand:
-                temp_genes[j] = r1[j] + f * (r2[j] - r3[j])
-                if temp_genes[j] > 1:
-                    temp_genes[j] = (curr_indiv[j] + 1)/2
-                elif temp_genes[j] < 0:
-                    temp_genes[j] = (curr_indiv[j] + 0)/2
-            else:
-                temp_genes[j] = curr_indiv[j]
-        child = IndividualDE(temp_genes)
-        survival_ind = self.update_success_history(sub_pop, id_task , curr_indiv, child , f,cr)
-        return survival_ind
-
-    def pbest_1 (self, sub_pop: SubPopulation, id_task: int , curr_indiv: Individual) :
-        f,cr,pbest,r1,r2,r3 = self.choose_Individual(sub_pop, id_task , curr_indiv)      
-        j_rand = np.random.randint(len(curr_indiv))
-        temp_genes = np.random.rand(len(curr_indiv))
-        for j in range(len(curr_indiv)):
-            if np.random.rand() <= cr or j == j_rand:
-                temp_genes[j] = pbest[j] + f * (r1[j] - r2[j])
-                if temp_genes[j] > 1:
-                    temp_genes[j] = (curr_indiv[j] + 1)/2
-                elif temp_genes[j] < 0:
-                    temp_genes[j] = (curr_indiv[j] + 0)/2
-            else:
-                temp_genes[j] = curr_indiv[j]
-        child = IndividualDE(temp_genes)
-        survival_ind = self.update_success_history(sub_pop, id_task , curr_indiv, child , f,cr)
-        return survival_ind
-    
-
+                self.archive[id_task].pop(np.random.randint(len(self.archive[id_task])))
+                self.archive[id_task].append(curr_indiv)
+            return child
+        else:
+            return curr_indiv
+    def Uniform_Crossover(self, pa: Individual, pb: Individual, skf_oa= None) -> Individual:
+        genes = np.zeros(self.dim_uss)
+        for i in range(self.dim_uss) :
+            if np.random.random() < 0.5 :
+                genes[i] = pa.genes[i]
+            else : 
+                genes[i] = pb.genes[i]
+        oa = self.IndClass(genes)
+        oa.skill_factor = skf_oa
+        return oa
     def update_state(self, sub_pop: SubPopulation, id_task: int):
         self.update_time[id_task] += 1
 
@@ -237,8 +239,7 @@ class model(AbstractModel.model):
                     self.success_rmp[(id_task, other_task)].clear()
                     self.diff_f_inter_x[(id_task, other_task)].clear()
         
-
-    def fit(self, nb_inds_each_task: int, nb_generations :int ,  bound = [0, 1], evaluate_initial_skillFactor = False,LSA = False,
+    def fit(self, nb_inds_each_task: int, nb_generations :int ,  nb_inds_min:int, evaluate_initial_skillFactor = False,LSA = False,
             *args, **kwargs): 
         super().fit(*args, **kwargs)
         
@@ -250,7 +251,7 @@ class model(AbstractModel.model):
         self.H = 30
         self.C = 0.02
         INIT_RMP = 0.5
-        
+        self.J = 0.3
 
         # Initialize the parameter
         num_tasks = len(self.tasks)
@@ -279,12 +280,6 @@ class model(AbstractModel.model):
                 self.success_rmp[(task, other_task)] = []
                 self.diff_f_inter_x[(task, other_task)] = []
 
-
-        self.max_evals = num_tasks * MAX_EVALS_PER_TASK
-        records_num = 1
-        record_counter = 0
-        evals_per_record = self.max_evals / records_num
-
         # Initialize the population
         population = Population(
             self.IndClass,
@@ -293,66 +288,30 @@ class model(AbstractModel.model):
             list_tasks= self.tasks,
             evaluate_initial_skillFactor = evaluate_initial_skillFactor
         )
-        print(len(population))
-        for i in range(num_tasks) :
-            for j in range(len(population[i].ls_inds)) :
-                population[i].ls_inds[j].Tci = (j%4)+1
         epoch = 1
-        best_Tci = np.ones(num_tasks, dtype = int)
+        eval_k = np.zeros(len(self.tasks))
+        nb_inds_tasks = [nb_inds_each_task] * len(self.tasks)
         # stop = False
         # while (self.count_evals < self.max_evals and (not stop)):
-        for epoch in range(nb_generations):
+        while np.sum(eval_k) <= MAX_EVALS_PER_TASK*len(self.tasks):
             # stop = True
-            offsprings = Population(
-                self.IndClass,
-                nb_inds_tasks= [0] * len(self.tasks),
-                dim =  self.dim_uss, 
-                list_tasks= self.tasks,
-            )
             for t in range(num_tasks):
-
                 if population[t].__getBestIndividual__.fcost < EPSILON:
                     continue
-                # stop = False
-                # offsprings = SubPopulation(
-                #     IndClass=IndividualDE,
-                #     skill_factor=t,
-                #     dim=self.dim_uss,
-                #     num_inds=0,
-                #     task=self.tasks[t]
-                # )
-
-                increment = np.zeros(4)
-
-                for indiv in population[t].ls_inds :
+                offsprings = SubPopulation(
+                    IndClass=self.IndClass,
+                    skill_factor=t,
+                    dim=self.dim_uss,
+                    num_inds=0,
+                    task=self.tasks[t]
+                )
+                for indiv in population[t]:
                     other_t = np.random.randint(num_tasks)
-                    if other_t == t:     
-                        # offsprings.__addIndividual__(self.current_to_pbest(population[t], t, indiv))
-                        # if indiv.Tci == 1 :
-                        #     survival = self.current_to_pbest(population[t], t, indiv)
-                        # if indiv.Tci == 2 : 
-                        #     survival = self.current_to_rand(population[t], t, indiv)
-                        # if indiv.Tci == 3 : 
-                        #     survival = self.rand_1(population[t], t, indiv)
-                        # else :
-                        #     survival = self.pbest_1(population[t], t, indiv)
-                        # if survival.fcost < indiv.fcost :
-                        #     survival.Tci = indiv.Tci
-                        #     increment[survival.Tci-1] = max (increment[survival.Tci-1], (indiv.fcost - survival.fcost)/indiv.fcost)
-                        #     survival.init_gen = epoch + 1
-                        # else :
-                        #     if random.random() < (epoch - survival.init_gen) / 10 :
-                        #         if random.random() < 0.5 :
-                        #             survival.Tci = best_Tci[i]
-                        #         else :
-                        #             survival.Tci = random.randint(1,4)
-                        # if epoch - indiv.init_gen >= 10 :
-                        #     survival = self.rand_1(population[t], t, indiv)
-                        # else :
-                        survival = self.current_to_pbest(population[t], t, indiv)
-                        if survival.fcost < indiv.fcost :
-                            survival.init_gen = epoch + 1
-                        offsprings.__addIndividual__(survival)
+                    if other_t == t:
+                        if random.random() < 0.9 :
+                            offsprings.__addIndividual__(self.current_to_pbest(population[t], t, indiv))
+                        else :
+                            offsprings.__addIndividual__(self.rand_1(population[t], t, indiv))
                     else:
                         if self.best_partner[t] == other_t:
                             rmp = 1
@@ -362,11 +321,10 @@ class model(AbstractModel.model):
                                 rmp = np.random.normal(loc=mu_rmp, scale=0.1)
                                 if not(rmp <= 0 or rmp > 1):
                                     break
-                        
                         if np.random.rand() <= rmp:
                             # Inter-task crossover
+                            eval_k[t]+=1
                             other_indiv = population[other_task].__getRandomItems__()
-
                             oa, ob = self.crossover(indiv, other_indiv, t, t)
                             oa.fcost  = self.tasks[t](oa.genes)
                             ob.fcost  = self.tasks[t](ob.genes)
@@ -375,8 +333,7 @@ class model(AbstractModel.model):
                             survival = oa
                             if survival.fcost > ob.fcost:
                                 survival = ob
-                            survival.init_gen = epoch + 1
-                            # survival.Tci = indiv.Tci
+                            
                             delta_fitness = indiv.fcost - survival.fcost
                             if (delta_fitness == 0):
                                 offsprings.__addIndividual__(survival)
@@ -388,51 +345,61 @@ class model(AbstractModel.model):
                                 offsprings.__addIndividual__(indiv) 
                         else:
                             # Intra - crossover
-                            # if indiv.Tci == 1 :
-                            #     survival = self.current_to_pbest(population[t], t, indiv)
-                            # if indiv.Tci == 2 : 
-                            #     survival = self.current_to_rand(population[t], t, indiv)
-                            # if indiv.Tci == 3 : 
-                            #     survival = self.rand_1(population[t], t, indiv)
-                            # else :
-                            #     survival = self.pbest_1(population[t], t, indiv)
-                            # if survival.fcost < indiv.fcost :
-                            #     survival.Tci = indiv.Tci
-                            #     increment[survival.Tci-1] = max (increment[survival.Tci-1], (indiv.fcost - survival.fcost)/indiv.fcost)
-                            #     survival.init_gen = epoch + 1
-                            # else :
-                            #     if random.random() < (epoch - survival.init_gen) / 10 :
-                            #         if random.random() < 0.5 :
-                            #             survival.Tci = best_Tci[i]
-                            #         else :
-                            #             survival.Tci = random.randint(1,4)
-                            # offsprings.__addIndividual__(survival)
-                            # if epoch - indiv.init_gen >= 10 :
-                            #     survival = self.rand_1(population[t], t, indiv)
-                            # else :
-                            survival = self.current_to_pbest(population[t], t, indiv)
-                            if survival.fcost < indiv.fcost :
-                                survival.init_gen = epoch + 1
-                            offsprings.__addIndividual__(survival)
+                            if random.random() < 0.9 :
+                                offsprings.__addIndividual__(self.current_to_pbest(population[t], t, indiv))
+                            else :
+                                offsprings.__addIndividual__(self.rand_1(population[t], t, indiv))
+                    eval_k[t]+=1
+                if epoch > 500 :
+                    top10 = self.get_elite(population[t],10)
+                    random.shuffle(top10)
+                    for j in range(5) :
+                        oa,ob = self.crossover(top10[j], top10[j+5], t, t)
+                        oa.fcost  = self.tasks[t](oa.genes)
+                        ob.fcost  = self.tasks[t](ob.genes)
+                        offsprings.__addIndividual__(oa)
+                        offsprings.__addIndividual__(ob)
+                        eval_k[t]+=2
+                if np.random.rand() < self.J:
+                    a = np.amax(offsprings.ls_inds,axis= 0)
+                    b = np.amin(offsprings.ls_inds,axis= 0)
+                    op_offsprings = SubPopulation(
+                        IndClass=self.IndClass,
+                        skill_factor=t,
+                        dim=self.dim_uss,
+                        num_inds=0,
+                        task=self.tasks[t]
+                    )
+                    for inv in offsprings:
+                        oa = self.IndClass(a+b-inv.genes)
+                        oa.fcost = self.tasks[t](oa.genes)
+                        op_offsprings.__addIndividual__(oa)
+                        eval_k[t]+=1
+                    offsprings  = offsprings+op_offsprings 
+                # offsprings.update_rank()
+                # self.selection(offsprings,nb_inds_tasks[t])
+                population.ls_subPop[t] = offsprings  
 
-            # for t in range(num_tasks) :
-                population[t].ls_inds.clear() 
-                population[t].ls_inds  += offsprings[t].ls_inds
-
-                if sum(increment) > 0 :
-                    best_Tci[i] = np.argmax(increment) + 1
                 # Update RMP, F, CR, population size
                 self.update_state(population[t], t)
+            if LSA is True: 
+                nb_inds_tasks = [int(
+                    # (nb_inds_min - nb_inds_each_task) / nb_generations * (epoch - 1) + nb_inds_each_task
+                    int(min((nb_inds_min - nb_inds_each_task)/(nb_generations - 1)* (epoch - 1) + nb_inds_each_task, nb_inds_each_task))
+                )] * len(self.tasks)
+            population.update_rank()
+            self.selection(population, nb_inds_tasks)
             self.history_cost.append([indiv.fcost for indiv in population.get_solves()])
-                # while self.count_evals >= (record_counter + 1) * evals_per_record:
-                #     self.history_cost.append([indiv.fcost for indiv in population[t].get_solves()])
-                #     record_counter += 1
-            self.render_process(epoch/nb_generations, ['Pop_size', 'Cost'], [[len(population)], self.history_cost[-1]], use_sys= True)
-            epoch += 1
-
-        # while record_counter < records_num:
-        #     self.history_cost.append([indiv.fcost for indiv in population.get_solves()])
-        #     record_counter += 1
-        # self.render_process(epoch/nb_generations, ['Pop_size', 'Cost'], [[len(population)], self.history_cost[-1]], use_sys= True)
+            if np.sum(eval_k) >= epoch * nb_inds_each_task * len(self.tasks):
+                # save history
+                self.history_cost.append([ind.fcost for ind in population.get_solves()])
+                self.render_process(epoch/nb_generations, ['Pop_size', 'Cost'], [[len(population)], self.history_cost[-1]], use_sys= True)
+                epoch +=1
+            if np.sum(eval_k) >= nb_generations * nb_inds_each_task * len(self.tasks):
+                epoch = nb_generations
+                # save history
+                self.history_cost.append([ind.fcost for ind in population.get_solves()])
+                self.render_process(epoch/nb_generations, ['Pop_size', 'Cost'], [[len(population)], self.history_cost[-1]], use_sys= True)
+                epoch +=1
         self.last_pop = population
         return self.last_pop.get_solves()
