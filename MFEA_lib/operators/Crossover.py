@@ -1,4 +1,3 @@
-from ossaudiodev import SOUND_MIXER_PCM
 from typing import Tuple, Type
 import numpy as np
 from ..tasks.task import AbstractTask
@@ -88,9 +87,9 @@ class SBX_LSA21(AbstractCrossover):
         #like pb
         ob = self.IndClass(np.clip(0.5*((1 - beta) * pa.genes + (1 + beta) * pb.genes), 0, 1))
 
-        if pa.skill_factor == pb.skill_factor:
-            idx_swap = np.where(np.random.rand(self.dim_uss) < 0.5)[0]
-            oa.genes[idx_swap], ob.genes[idx_swap] = ob.genes[idx_swap], oa.genes[idx_swap]
+        # if pa.skill_factor == pb.skill_factor:
+        #     idx_swap = np.where(np.random.rand(self.dim_uss) < 0.5)[0]
+        #     oa.genes[idx_swap], ob.genes[idx_swap] = ob.genes[idx_swap], oa.genes[idx_swap]
 
         oa.skill_factor = skf_oa
         ob.skill_factor = skf_ob
@@ -99,14 +98,14 @@ class SBX_LSA21(AbstractCrossover):
     def update(self, *args, **kwargs) -> None:
         for task in range(self.nb_tasks):
             maxRmp = 0 
-            best_partner = -1 
+            self.best_partner[task] = -1 
             for task2 in range(self.nb_tasks): 
                 if task2 == task: 
                     continue 
                 
                 good_mean = 0 
                 if len(self.s_rmp[task][task2]) > 0: 
-                    sum = np.sum(np.array(self.s_rmp[task][task2])) 
+                    sum = np.sum(np.array(self.diff_f_inter_x[task][task2])) 
 
                     w = np.array(self.diff_f_inter_x[task][task2]) / sum 
 
@@ -117,7 +116,8 @@ class SBX_LSA21(AbstractCrossover):
 
                     if (good_mean > self.rmp[task][task2] and good_mean > maxRmp): 
                         maxRmp = good_mean 
-                        best_partner = task2 
+                        self.best_partner[task] = task2 
+                    
                 
                 if good_mean > 0: 
                     c1 = 1.0 
@@ -126,8 +126,8 @@ class SBX_LSA21(AbstractCrossover):
                 self.rmp[task][task2] = c1 * self.rmp[task][task2] + self.C * good_mean 
                 self.rmp[task][task2] = np.max([0.01, np.min([1, self.rmp[task][task2]])])
 
-                self.s_rmp = np.empty(shape= (self.nb_tasks, self.nb_tasks,0)).tolist()
-                self.diff_f_inter_x = np.empty(shape=(self.nb_tasks, self.nb_tasks,0)).tolist() 
+        self.s_rmp = np.empty(shape= (self.nb_tasks, self.nb_tasks,0)).tolist()
+        self.diff_f_inter_x = np.empty(shape=(self.nb_tasks, self.nb_tasks,0)).tolist() 
 
 class newSBX(AbstractCrossover):
     '''

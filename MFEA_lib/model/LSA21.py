@@ -83,32 +83,32 @@ class model(AbstractModel.model):
                                 while rmp <= 0 or rmp > 1: 
                                     rmp = np.random.normal(loc= mu_rmp, scale= 0.1 )
 
-                                if np.random.rand() < rmp: 
-                                    ind2 = population[partner_task].__getRandomItems__(size=1)[0]
-                                    oa, ob = self.crossover(ind, ind2, skf, skf)
+                            if np.random.rand() <= rmp: 
+                                ind2 = population[partner_task].__getRandomItems__(size=1)[0]
+                                oa, ob = self.crossover(ind, ind2, skf, skf)
 
-                                    oa.fcost = oa.eval(self.tasks[oa.skill_factor])
-                                    ob.fcost = ob.eval(self.tasks[ob.skill_factor])
-                                    
-                                    survival = oa 
-                                    if oa.fcost > ob.fcost : 
-                                        survival = ob 
-                                    
-                                    eval_k[skf] += 2 
+                                oa.fcost = oa.eval(self.tasks[oa.skill_factor])
+                                ob.fcost = ob.eval(self.tasks[ob.skill_factor])
+                                
+                                survival = oa 
+                                if oa.fcost > ob.fcost : 
+                                    survival = ob 
+                                
+                                eval_k[skf] += 2 
 
-                                    delta = ind.fcost - survival.fcost 
-                                    if delta == 0: 
-                                        offsprings[skf].__addIndividual__(survival) 
-                                    elif delta > 0: 
-                                        self.crossover.s_rmp[skf][partner_task].append(rmp) 
-                                        self.crossover.diff_f_inter_x[skf][partner_task].append(delta)
-                                        offsprings[skf].__addIndividual__(survival) 
-                                    else: 
-                                        offsprings[skf].__addIndividual__(ind)
+                                delta = ind.fcost - survival.fcost 
+                                if delta == 0: 
+                                    offsprings[skf].__addIndividual__(survival) 
+                                elif delta > 0: 
+                                    self.crossover.s_rmp[skf][partner_task].append(rmp) 
+                                    self.crossover.diff_f_inter_x[skf][partner_task].append(delta)
+                                    offsprings[skf].__addIndividual__(survival) 
                                 else: 
-                                    off = self.search(ind = ind, population = population)
-                                    offsprings[skf].__addIndividual__(off)
-                                    eval_k += 1 
+                                    offsprings[skf].__addIndividual__(ind)
+                            else: 
+                                off = self.search(ind = ind, population = population)
+                                offsprings[skf].__addIndividual__(off)
+                                eval_k[skf] += 1 
                             
                 population = offsprings   
                 population.update_rank() 
@@ -116,7 +116,7 @@ class model(AbstractModel.model):
                 # selection
                 nb_inds_tasks = [int(
                     # (nb_inds_min - nb_inds_each_task) / nb_generations * (epoch - 1) + nb_inds_each_task
-                    int(min((nb_inds_min - nb_inds_each_task)/(nb_generations - 1)* (epoch - 1) + nb_inds_each_task, nb_inds_each_task))
+                    int(max((nb_inds_min - nb_inds_each_task)*(np.sum(eval_k)/MAXEVALS) + nb_inds_each_task, nb_inds_min))
                 )] * len(self.tasks)
 
                 self.selection(population, nb_inds_tasks)
@@ -125,36 +125,38 @@ class model(AbstractModel.model):
                 self.mutation.update(population = population)
                 self.search.update(population) 
 
-                '''local search'''
-                for skf in range(len(self.tasks)): 
-                    # if (epoch - before_epoch) > kwargs['step_over']: 
-                    if gen % 50 == 0: 
+                # '''local search'''
+                # for skf in range(len(self.tasks)): 
+                #     # if (epoch - before_epoch) > kwargs['step_over']: 
+                #     if gen % 50 == 0: 
                         
-                        ls = Search.LocalSearch_DSCG()
-                        ls.getInforTasks(self.IndClass, self.tasks, seed= self.seed)
+                #         ls = Search.LocalSearch_DSCG()
+                #         ls.getInforTasks(self.IndClass, self.tasks, seed= self.seed)
                         
-                        ind = population[skf].getSolveInd()
-                        evals, new_ind = ls.search(ind, fes = 2000)
-                        eval_k[skf] += evals
-                        if new_ind.fcost < ind.fcost : 
-                            population[skf].ls_inds[0].genes= new_ind.genes 
-                            population[skf].ls_inds[0].fcost = new_ind.fcost
-                            population.update_rank()  
+                #         ind = population[skf].getSolveInd()
+                #         evals, new_ind = ls.search(ind, fes = 2000)
+                #         eval_k[skf] += evals
+                #         if new_ind.fcost < ind.fcost : 
+                #             population[skf].ls_inds[0].genes= new_ind.genes 
+                #             population[skf].ls_inds[0].fcost = new_ind.fcost
+                #             population.update_rank()  
+
                 if np.sum(eval_k) >= epoch * nb_inds_each_task * len(self.tasks):
                     # save history
                     self.history_cost.append([ind.fcost for ind in population.get_solves()])
                     # self.history_smp.append([M_smp[i].get_smp() for i in range(len(self.tasks))])
 
-                    self.render_process(np.sum(eval_k)/MAXEVALS, ['Pop_size', 'Cost'], [[len(population)], self.history_cost[-1]], use_sys= True)
+                    self.render_process(np.sum(eval_k)/MAXEVALS, ['Pop_size', 'Cost'], [[len(population)], self.history_cost[-1]], use_sys= True, print_format_e= False)
 
                     # update mutation
                     self.mutation.update(population = population)
 
-                    epoch = np.sum(eval_k)/MAXEVALS + 1 
+                    epoch = np.sum(eval_k)/MAXEVALS*nb_generations
+                    epoch= int(epoch)
             
             
             self.last_pop = population
-            self.render_process(epoch/nb_generations, ['Pop_size', 'Cost'], [[len(population)], self.history_cost[-1]], use_sys= True)
+            self.render_process(epoch/nb_generations, ['Pop_size', 'Cost'], [[len(population)], self.history_cost[-1]], use_sys= True, print_format_e= False)
             print()
             # print(p_choose_father)
             print(eval_k)

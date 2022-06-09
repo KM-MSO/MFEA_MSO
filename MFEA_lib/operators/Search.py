@@ -489,8 +489,11 @@ class LSHADE_LSA21(AbstractSearch):
         cr = np.clip(np.random.normal(loc = self.M_cr[ind.skill_factor][k], scale = 0.1), 0, 1)
 
         F = 0
-        while F <= 0 or F > 1:
+        while F <= 0:
             F = scipy.stats.cauchy.rvs(loc= self.M_F[ind.skill_factor][k], scale= 0.1) 
+        
+        if F >1: 
+            F = 1 
     
         u = (np.random.uniform(size = self.dim_uss) < cr)
         if np.sum(u) == 0:
@@ -558,7 +561,7 @@ class LSHADE_LSA21(AbstractSearch):
 
                 self.M_F[skf][self.index_update[skf]] = np.sum(w * np.array(self.epoch_M_F[skf]) ** 2) / tmp_sum_f
 
-                if (tmp_sum_cr == 0 or self.M_cr[skf][self.index_update[skf]] == -1): 
+                if (tmp_sum_cr == 0): 
                     self.M_cr[skf][self.index_update[skf]] = -1 
                 else: 
                     self.M_cr[skf][self.index_update[skf]] = np.sum(w * np.array(self.epoch_M_cr[skf]) ** 2) / tmp_sum_cr 
