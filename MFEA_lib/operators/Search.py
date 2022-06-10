@@ -474,6 +474,8 @@ class LSHADE_LSA21(AbstractSearch):
         self.archive: list[list[Individual]] = None 
         self.arc_rate = 5 
 
+        self.first_run = True 
+
 
 
     def getInforTasks(self, IndClass: Type[Individual], tasks: list[AbstractTask], seed=None):
@@ -521,7 +523,7 @@ class LSHADE_LSA21(AbstractSearch):
             ind1 = population.__getIndsTask__(ind.skill_factor, type='random') 
         
 
-        if np.random.rand() < len(self.archive[ind.skill_factor]) / (len(self.archive[ind.skill_factor]) + len(population[ind.skill_factor])): 
+        if self.first_run is False and np.random.rand() < len(self.archive[ind.skill_factor]) / (len(self.archive[ind.skill_factor]) + len(population[ind.skill_factor])): 
             ind2 = self.archive[ind.skill_factor][np.random.choice(len(self.archive[ind.skill_factor]))]
         else: 
             ind2 = ind1 
@@ -561,6 +563,7 @@ class LSHADE_LSA21(AbstractSearch):
 
 
     def update(self, population, *args, **kwargs) -> None:
+        self.first_run = False 
         for skf in range(self.nb_tasks): 
             if(len(self.epoch_M_cr[skf])) > 0: 
                 sum_diff = np.sum(np.array(self.epoch_M_w[skf])) 

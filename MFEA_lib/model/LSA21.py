@@ -64,7 +64,6 @@ class model(AbstractModel.model):
 
                 for skf in range(0, len(self.tasks)): 
 
-
                     for idx_ind, ind in enumerate(population[skf]): 
                         partner_task = np.random.choice(len(self.tasks))
                         if partner_task == skf: 
@@ -110,7 +109,7 @@ class model(AbstractModel.model):
                                 offsprings[skf].__addIndividual__(off)
                                 eval_k[skf] += 1 
                             
-                population = offsprings   
+                population = offsprings
                 population.update_rank() 
 
                 # selection
