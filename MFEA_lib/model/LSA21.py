@@ -125,21 +125,24 @@ class model(AbstractModel.model):
                 self.mutation.update(population = population)
                 self.search.update(population) 
 
-                # '''local search'''
-                # for skf in range(len(self.tasks)): 
-                #     # if (epoch - before_epoch) > kwargs['step_over']: 
-                #     if gen % 50 == 0: 
+                '''local search'''
+                if gen % 50 == 0: 
+                    # if (epoch - before_epoch) > kwargs['step_over']: 
+                    for skf in range(len(self.tasks)): 
                         
-                #         ls = Search.LocalSearch_DSCG()
-                #         ls.getInforTasks(self.IndClass, self.tasks, seed= self.seed)
+                        ls = Search.LocalSearch_DSCG()
+                        ls.getInforTasks(self.IndClass, self.tasks, seed= self.seed)
                         
-                #         ind = population[skf].getSolveInd()
-                #         evals, new_ind = ls.search(ind, fes = 2000)
-                #         eval_k[skf] += evals
-                #         if new_ind.fcost < ind.fcost : 
-                #             population[skf].ls_inds[0].genes= new_ind.genes 
-                #             population[skf].ls_inds[0].fcost = new_ind.fcost
-                #             population.update_rank()  
+                        ind = population[skf].getSolveInd()
+                        evals, new_ind = ls.search(ind, fes = 2000)
+                        eval_k[skf] += evals
+                        if new_ind.fcost < ind.fcost : 
+                            idx = int(np.where(population[skf].factorial_rank == 1)[0])
+                            population[skf].ls_inds[idx].genes = new_ind.genes 
+                            population[skf].ls_inds[idx].fcost = new_ind.fcost 
+                            # population[skf].ls_inds[0].genes= new_ind.genes 
+                            # population[skf].ls_inds[0].fcost = new_ind.fcost
+                            population.update_rank()  
 
                 if np.sum(eval_k) >= epoch * nb_inds_each_task * len(self.tasks):
                     # save history

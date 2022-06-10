@@ -265,7 +265,6 @@ class LocalSearch_DSCG(AbstractSearch):
             
             if evals >= fes or direct < self.dim_uss : 
                 break 
-            pass 
             
             z = np.zeros(shape= (self.dim_uss,)) 
             norm_z = 0 
@@ -365,7 +364,7 @@ class LocalSearch_DSCG(AbstractSearch):
         F[1] = x.fcost 
 
         if x.fcost > x0.fcost: 
-            x.genes = x0.genes - 2 * s * v 
+            x.genes = x.genes - 2 * s * v 
             s = -s 
 
             x.fcost = x.eval(task) 
@@ -436,7 +435,7 @@ class LocalSearch_DSCG(AbstractSearch):
                 change = False 
 
 
-        if (interpolation_flag and (F[0] - 2 * F[1] + F[2] != 0)) : 
+        if (interpolation_flag and ((F[0] - 2 * F[1] + F[2]) != 0)) : 
         
             x.genes = interpolation_points[1] + s * (F[0] - F[2]) / ( 2.0 * (F[0] - 2 * F[1] + F[2])) 
             x.fcost = x.eval(task) 
