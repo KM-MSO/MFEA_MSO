@@ -3,7 +3,7 @@ RESULTS/**
 !/RESULTS/__static__/
 !/RESULTS/__static__/**
 
-
+test*.py
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -13,6 +13,7 @@ __pycache__/
 *.so
 
 # Distribution / packaging
+tempCodeRunnerFile*.py
 .Python
 build/
 develop-eggs/

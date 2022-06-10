@@ -10,11 +10,12 @@ class Individual:
     + `skill_factor`: skill factor of the individual\n
     + `fcost`: factorial cost of the individual for skill_factor
     '''
-    def __init__(self, genes, dim= None) -> None: 
+    def __init__(self, genes,  parent= None, dim= None, *args, **kwargs) -> None: 
         self.skill_factor: int = None
         self.fcost: float = None
         self.genes: np.ndarray = genes
-        
+        self.parent: Individual = parent
+
     def eval(self, task: AbstractTask) -> None:
         '''
         Evaluate Individual
@@ -100,7 +101,7 @@ class SubPopulation:
         self.task = task
         self.dim = dim
         self.ls_inds = [
-            IndClass(None, self.dim)
+            IndClass(genes= None, dim= self.dim)
             for i in range(num_inds)
         ]
         self.IndClass = IndClass
@@ -178,6 +179,12 @@ class SubPopulation:
     def getSolveInd(self):
         return self.ls_inds[int(np.where(self.factorial_rank == 1)[0])]
 
+    def index(self, ind: Individual):
+        for idx, e in self.ls_inds:
+            if e is ind:
+                return idx
+        raise ValueError(str(ind) + "is not in subPop")
+
 class Population:
     def __init__(self, IndClass: Type[Individual], dim, nb_inds_tasks: list[int], list_tasks:list[AbstractTask] = [], 
         evaluate_initial_skillFactor = False) -> None:
@@ -206,7 +213,7 @@ class Population:
 
             # list individual (don't have skill factor)
             ls_inds = [
-                IndClass(None, self.dim_uss)
+                IndClass(genes= None, dim= self.dim_uss)
                 for i in range(np.sum(nb_inds_tasks))
             ]
             # matrix factorial cost and matrix rank
