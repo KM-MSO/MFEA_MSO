@@ -353,13 +353,29 @@ class model(AbstractModel.model):
                 if epoch > 500 :
                     top10 = self.get_elite(population[t],10)
                     random.shuffle(top10)
-                    for j in range(5) :
-                        oa,ob = self.crossover(top10[j], top10[j+5], t, t)
-                        oa.fcost  = self.tasks[t](oa.genes)
-                        ob.fcost  = self.tasks[t](ob.genes)
-                        offsprings.__addIndividual__(oa)
-                        offsprings.__addIndividual__(ob)
-                        eval_k[t]+=2
+                    if epoch %2 == 0 :
+                        for j in range(5) :
+                            oa,ob = self.crossover(top10[j], top10[j+5], t, t)
+                            oa.fcost  = self.tasks[t](oa.genes)
+                            ob.fcost  = self.tasks[t](ob.genes)
+                            offsprings.__addIndividual__(oa)
+                            offsprings.__addIndividual__(ob)
+                            eval_k[t]+=2
+                    else :
+                        subpop_elite = np.zeros([10, self.dim_uss])
+                        for j in range(10) :
+                            subpop_elite[j] = top10[j].genes
+                        mean = np.mean(subpop_elite, axis = 0)
+                        std = np.std(subpop_elite, axis = 0)
+                        for j in range(10) :
+                            genes = np.zeros(self.dim_uss)
+                            for l in range(self.dim_uss) :
+                                genes[l] = np.random.normal(loc = mean[l], scale = std[l])
+                            indiv = self.IndClass(genes = genes)
+                            indiv.skill_factor = t
+                            indiv.fcost = self.tasks[t](genes)
+                            offsprings.__addIndividual__(indiv)
+                            eval_k[t] += 1
                 if np.random.rand() < self.J:
                     a = np.amax(offsprings.ls_inds,axis= 0)
                     b = np.amin(offsprings.ls_inds,axis= 0)
@@ -387,6 +403,7 @@ class model(AbstractModel.model):
                     # (nb_inds_min - nb_inds_each_task) / nb_generations * (epoch - 1) + nb_inds_each_task
                     int(min((nb_inds_min - nb_inds_each_task)/(nb_generations - 1)* (epoch - 1) + nb_inds_each_task, nb_inds_each_task))
                 )] * len(self.tasks)
+
             population.update_rank()
             self.selection(population, nb_inds_tasks)
             self.history_cost.append([indiv.fcost for indiv in population.get_solves()])
