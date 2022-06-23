@@ -3,7 +3,24 @@ from ..operators import Crossover, Mutation, Search, Selection
 from ..tasks.task import AbstractTask 
 from . import AbstractModel 
 
-class model(AbstractModel.model): 
+class model(AbstractModel.model):
+
+    class rmp_lsa21: 
+        def __init__(self, default_rmp= 0.5) -> None:
+            self.default_rmp = default_rmp
+            self.C = 0.02 
+            self.best_partner = None 
+
+
+            self.rmp = np.zeros(shape=(self.nb_tasks, self.nb_tasks)) + self.default_rmp
+            self.best_partner = np.zeros(shape= (self.nb_tasks), dtype= int) - 1 
+
+            self.s_rmp = np.empty(shape= (self.nb_tasks, self.nb_tasks,0)).tolist()
+            self.diff_f_inter_x = np.empty(shape=(self.nb_tasks, self.nb_tasks,0)).tolist() 
+        
+
+
+            
     def __init__(self, seed= None, percent_print= 2): 
         super().__init__(seed, percent_print) 
     

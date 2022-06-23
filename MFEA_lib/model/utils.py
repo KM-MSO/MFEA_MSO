@@ -67,7 +67,24 @@ class MultiTimeModel:
                 print("cannot get attribute {}".format(self.list_attri_avg[i]))
                 continue
             try:
-                result = np.array(result)
+                
+                min_dim1 = 1e10 
+                for idx1, array_seed in enumerate(result): 
+                    min_dim1 = min([len(array_seed), min_dim1])
+                    for idx2,k in enumerate(array_seed): 
+                         
+                        for idx3, x in enumerate(k) : 
+                            if type(x) != float:
+                                result[idx1][idx2][idx3] = float(x)
+                        
+                        result[idx1][idx2]= np.array(result[idx1][idx2])
+                    result[idx1] = np.array(result[idx1])
+                
+                for idx, array in enumerate(result):
+                    result[idx] = result[idx][:min_dim1]
+                
+
+                result = np.array(result[:][:min([len(his) for his in result])][:])
                 result = np.average(result, axis=0)
                 self.__setattr__(self.list_attri_avg[i], result)
             except:
@@ -1046,6 +1063,11 @@ class CompareResultBenchmark:
                 # try:
                 count_benchmark[idx_benchmark] += 1
                 model = loadModel(os.path.join(path_model, model_name), self.ls_benchmark[int(idx_benchmark)]) 
+                try:
+                    model.set_attribute()
+                except:
+                    # print('koco')
+                    pass
                 algo_ls_model[idx_algo][idx_benchmark] = model 
                 # except: 
                 #     print(f"Cannot load Model: {os.path.join(path_model, model_name)}")    
@@ -1192,6 +1214,11 @@ class CompareResultBenchmark:
                 self.ls_idx_benchmark[idx_benchmark] += 1 
                 # try:
                 model = loadModel(os.path.join(path_model, model_name), self.ls_benchmark[int(idx_benchmark)]) 
+                try:
+                    model.set_attribute()
+                except:
+                    # print('koco')
+                    pass
                 algo_ls_model[idx_algo][idx_benchmark] = model 
                 # except: 
                 #     print(f"Cannot load Model: {os.path.join(path_model, model_name)}")    
