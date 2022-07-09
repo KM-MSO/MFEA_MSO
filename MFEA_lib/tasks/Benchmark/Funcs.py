@@ -290,7 +290,7 @@ class WCCI22_benchmark():
                     y[i] = x_decode[self.SS[i]-1]
                 return y
             return x_decode 
-        @jit(nopython = True)
+        #@jit(nopython = True)
         def func(x,ID,dim):
             if ID == 1: 
                 return Ellips_func(x,dim) + 100

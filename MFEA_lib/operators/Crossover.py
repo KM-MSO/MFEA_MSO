@@ -198,7 +198,7 @@ class newSBX(AbstractCrossover):
 
         return oa, ob
 
-@nb.njit
+#@nb.njit
 def pmx_func(p1, p2, t1, t2,  dim_uss):
     oa = np.empty_like(p1)
     ob = np.empty_like(p1)
@@ -274,8 +274,8 @@ class PMX_Crossover(AbstractCrossover):
         
 
     def __call__(self, pa: Individual, pb: Individual, skf_oa=None, skf_ob=None, *args, **kwargs) -> Tuple[Individual, Individual]:
-        t1 = np.random.randint(0, self.dim_uss + 1)
-        t2 = np.random.randint(t1, self.dim_uss + 1)
+        t1 = np.random.randint(0, self.dim_uss)
+        t2 = np.random.randint(t1 + 1, self.dim_uss + 1)
         genes_oa, genes_ob = pmx_func(pa.genes, pb.genes, t1, t2, self.dim_uss)
         oa = self.IndClass(genes_oa)
         ob = self.IndClass(genes_ob)

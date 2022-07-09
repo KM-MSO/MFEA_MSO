@@ -62,7 +62,7 @@ class AbstractFunc(AbstractTask):
         return self.__class__.func(x)
 
     @staticmethod
-    @jit(nopython = True)
+    #@jit(nopython = True)
     def func(x):
         pass
 
@@ -75,7 +75,7 @@ class Sphere(AbstractFunc):
         super().__init__(dim, shift, rotation_matrix, bound)
 
     @staticmethod
-    @jit(nopython = True)
+    #@jit(nopython = True)
     def func(x):
         '''
         Request: input x is encoded
@@ -95,7 +95,7 @@ class Weierstrass(AbstractFunc):
         self.params['k_max'] = 21
 
     @staticmethod
-    @jit(nopython = True)
+    #@jit(nopython = True)
     def func(x, dim, params: dict):
         '''
         Request: input x is encoded
@@ -131,7 +131,7 @@ class Ackley(AbstractFunc):
     
 
     @staticmethod
-    @jit(nopython = True)
+    #@jit(nopython = True)
     def func(x, fixed, params):
         if fixed:
             return -params['a'] * np.exp(-params['b']*np.sqrt(np.mean(x**2)))\
@@ -158,7 +158,7 @@ class Rosenbrock(AbstractFunc):
         super().__init__(dim, shift, rotation_matrix, bound)
 
     @staticmethod
-    @jit(nopython = True)
+    #@jit(nopython = True)
     def func(x):
         l = 100*np.sum((x[1:] - x[:-1]**2) ** 2)
         r = np.sum((x[:-1] - 1) ** 2)
@@ -180,7 +180,7 @@ class Schwefel(AbstractFunc):
         self.fixed = fixed
 
     @staticmethod
-    @jit(nopython = True)
+    #@jit(nopython = True)
     def func(x, dim, fixed):
         if fixed:
             return (418.9828872724336455576189785193) * dim - np.sum(x * np.sin(np.sqrt(np.abs(x)))) 
@@ -200,7 +200,7 @@ class Griewank(AbstractFunc):
         super().__init__(dim, shift, rotation_matrix, bound)
     
     @staticmethod
-    @jit(nopython = True)
+    #@jit(nopython = True)
     def func(x, dim):
         return np.sum(x**2) / 4000 \
             - np.prod(np.cos(x / np.sqrt((np.arange(dim) + 1))))\
@@ -219,7 +219,7 @@ class Rastrigin(AbstractFunc):
         super().__init__(dim, shift, rotation_matrix, bound)
     
     @staticmethod
-    @jit(nopython = True)
+    #@jit(nopython = True)
     def func(x, dim):
         return 10 * dim + np.sum(x ** 2 - 10 * np.cos(2 * np.pi * x))
     

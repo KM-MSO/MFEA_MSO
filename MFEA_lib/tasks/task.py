@@ -1,7 +1,47 @@
+from black import out
 import numpy as np
 import numba as nb
+import torch
+import torch.nn as nn
 import sys
+import os
 MAX_INT = sys.maxsize
+
+class SurrogateModel(nn.Module):
+    def __init__(self, input_dim, hidden_dim, output_dim):
+        super().__init__()
+        self.linear1 = nn.Linear(input_dim, hidden_dim)
+        self.linear2 = nn.Linear(hidden_dim, output_dim)
+        
+    def forward(self, x):
+        x = self.linear1(x)
+        x = self.linear2(x)
+        return x
+    
+class SurrogatePipeline():
+    def __init__(self, input_dim, hidden_dim, output_dim, learning_rate, device):
+        self.device = "cpu"
+        self.model = SurrogateModel(input_dim, hidden_dim, output_dim).to(self.device)
+        self.optimizer = torch.optim.SGD(self.model.parameters(), lr=learning_rate)
+        self.criteria = nn.MSELoss()
+        self.learning_rate = learning_rate
+    def train(self, input, output):
+        input = torch.Tensor(input.flatten()).to(self.device)
+        output = torch.Tensor([output]).to(self.device)
+        pred = self.model(input)
+        loss = self.criteria(pred, output)
+        self.optimizer.zero_grad()
+        loss.backward()
+        self.optimizer.step()
+
+    def predict(self, input):
+        with torch.no_grad():
+            input = torch.Tensor(input.flatten()).to(self.device)
+            return self.model(input)
+
+    def save_pipeline(self, path):
+        pass
+
 class AbstractTask():
     def __init__(self, *args, **kwargs) -> None:
         pass
@@ -16,14 +56,14 @@ class AbstractTask():
         pass
 
     @staticmethod
-    @nb.jit(nopython = True)
+    #@nb.jit(nopython = True)
     def func(x):
         pass
 
 #----------------------------------------------------------------------------------------------------------------------------
 #a solution is an permutation start from 0 to n - 1, k is also counted from 0 but domain is counted from 1
 class IDPC_EDU_FUNC(AbstractTask):    
-    def __init__(self, dataset_path, file_name):
+    def __init__(self, dataset_path, file_name, use_surrogate = True):
         self.file = str(dataset_path) + '/'  + file_name
         self.datas = {}
         self.source: int
@@ -34,8 +74,15 @@ class IDPC_EDU_FUNC(AbstractTask):
         self.edges: np.ndarray
         self.dim: int = int(file_name[5:].split('x')[0])
         self.name = file_name.split('.')[0]
+        self.use_surrogate = use_surrogate
         self.read_data()
-            
+        if self.use_surrogate:
+            self.surrogate_pipeline = SurrogatePipeline(input_dim=self.num_nodes*2, 
+                                                        hidden_dim=self.num_nodes, 
+                                                        output_dim=1, 
+                                                        learning_rate=1e-5,
+                                                        device='cuda' if torch.cuda.is_available() else 'cpu')
+ 
     def read_data(self):
         with open(self.file, "r") as f:
             lines = f.readlines()
@@ -63,20 +110,20 @@ class IDPC_EDU_FUNC(AbstractTask):
             self.count_paths = count_paths
 
     @staticmethod
-    @nb.njit(
-        nb.int64(
-            nb.typeof(np.array([[1]]).astype(np.int64)),
-            nb.int64,
-            nb.int64,
-            nb.int64,
-            nb.int64,
-            nb.typeof(nb.typed.Dict().empty(
-                key_type= nb.types.unicode_type,
-                value_type= nb.typeof((0, 0)),
-            )),
-            nb.typeof(np.array([[1]]).astype(np.int64)),
-        )
-    )
+    # @nb.njit(
+    #     nb.int64(
+    #         nb.typeof(np.array([[1]]).astype(np.int64)),
+    #         nb.int64,
+    #         nb.int64,
+    #         nb.int64,
+    #         nb.int64,
+    #         nb.typeof(nb.typed.Dict().empty(
+    #             key_type= nb.types.unicode_type,
+    #             value_type= nb.typeof((0, 0)),
+    #         )),
+    #         nb.typeof(np.array([[1]]).astype(np.int64)),
+    #     )
+    # )
     def func(gene,
              source,
              target,
@@ -124,5 +171,14 @@ class IDPC_EDU_FUNC(AbstractTask):
         idx = np.arange(self.dim)
         gene = np.ascontiguousarray(gene[:, idx])
         # eval
-        return __class__.func(gene, self.source, self.target,
-                         self.num_nodes, self.num_domains, self.edges, self.count_paths)
+        if self.use_surrogate:
+            if os.environ.get("surrogate_status") == "train":
+                cost = __class__.func(gene, self.source, self.target,
+                                self.num_nodes, self.num_domains, self.edges, self.count_paths)
+                self.surrogate_pipeline.train(gene, cost)
+            else:
+                cost = self.surrogate_pipeline.predict(gene)
+        else:
+            cost = __class__.func(gene, self.source, self.target,
+                                self.num_nodes, self.num_domains, self.edges, self.count_paths)
+        return cost
