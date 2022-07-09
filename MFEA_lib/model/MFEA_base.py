@@ -3,6 +3,7 @@ from . import AbstractModel
 from ..operators import Crossover, Mutation, Selection
 from ..tasks.task import AbstractTask
 from ..EA import *
+import os
 
 class model(AbstractModel.model):
     def compile(self, 
