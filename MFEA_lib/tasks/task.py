@@ -177,7 +177,7 @@ class IDPC_EDU_FUNC(AbstractTask):
                                 self.num_nodes, self.num_domains, self.edges, self.count_paths)
                 self.surrogate_pipeline.train(gene, cost)
             else:
-                cost = self.surrogate_pipeline.predict(gene)
+                cost = self.surrogate_pipeline.predict(gene).item()
         else:
             cost = __class__.func(gene, self.source, self.target,
                                 self.num_nodes, self.num_domains, self.edges, self.count_paths)
