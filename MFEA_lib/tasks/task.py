@@ -63,20 +63,20 @@ class IDPC_EDU_FUNC(AbstractTask):
             self.count_paths = count_paths
 
     @staticmethod
-    @nb.njit(
-        nb.int64(
-            nb.typeof(np.array([[1]]).astype(np.int64)),
-            nb.int64,
-            nb.int64,
-            nb.int64,
-            nb.int64,
-            nb.typeof(nb.typed.Dict().empty(
-                key_type= nb.types.unicode_type,
-                value_type= nb.typeof((0, 0)),
-            )),
-            nb.typeof(np.array([[1]]).astype(np.int64)),
-        )
-    )
+    # @nb.njit(
+    #     nb.int64(
+    #         nb.typeof(np.array([[1]]).astype(np.int64)),
+    #         nb.int64,
+    #         nb.int64,
+    #         nb.int64,
+    #         nb.int64,
+    #         nb.typeof(nb.typed.Dict().empty(
+    #             key_type= nb.types.unicode_type,
+    #             value_type= nb.typeof((0, 0)),
+    #         )),
+    #         nb.typeof(np.array([[1]]).astype(np.int64)),
+    #     )
+    # )
     def func(gene,
              source,
              target,
@@ -126,3 +126,4 @@ class IDPC_EDU_FUNC(AbstractTask):
         # eval
         return __class__.func(gene, self.source, self.target,
                          self.num_nodes, self.num_domains, self.edges, self.count_paths)
+

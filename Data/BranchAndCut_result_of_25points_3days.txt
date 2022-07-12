@@ -1,0 +1,4084 @@
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 14 1 2 7 15 16 9 5 21 12 13 19 11]
+Tong quang duong cua loi giai: 1252
+Best total cost hien tai: 1252
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 14 1 2 7 15 16 9 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 1074
+Best total cost hien tai: 1074
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 14 1 2 7 15 16 9 5 21 13 11 19 12]
+Tong quang duong cua loi giai: 1218
+Best total cost hien tai: 1074
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 14 1 2 7 15 16 5 9 21 12 13 11 19]
+Tong quang duong cua loi giai: 1107
+Best total cost hien tai: 1074
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 14 1 2 7 15 16 5 21 9 12 13 19 11]
+Tong quang duong cua loi giai: 1236
+Best total cost hien tai: 1074
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 14 1 2 7 15 16 5 21 9 12 13 11 19]
+Tong quang duong cua loi giai: 1058
+Best total cost hien tai: 1058
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 14 1 2 7 15 16 5 21 9 13 11 19 12]
+Tong quang duong cua loi giai: 1189
+Best total cost hien tai: 1058
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 14 1 2 7 15 16 5 21 12 9 13 19 11]
+Tong quang duong cua loi giai: 1159
+Best total cost hien tai: 1058
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 14 1 2 7 15 16 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 981
+Best total cost hien tai: 981
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 14 1 2 7 15 16 5 21 12 13 11 19 9]
+Tong quang duong cua loi giai: 996
+Best total cost hien tai: 981
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 14 1 2 7 15 16 5 21 13 11 19 9 12]
+Tong quang duong cua loi giai: 1102
+Best total cost hien tai: 981
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 14 1 2 7 15 5 21 16 12 13 11 19 9]
+Tong quang duong cua loi giai: 1012
+Best total cost hien tai: 981
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 14 1 2 7 15 5 21 12 9 13 11 19 16]
+Tong quang duong cua loi giai: 1103
+Best total cost hien tai: 981
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 14 1 2 7 16 5 15 21 12 13 11 19 9]
+Tong quang duong cua loi giai: 1012
+Best total cost hien tai: 981
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 14 1 2 7 16 5 9 15 21 12 13 11 19]
+Tong quang duong cua loi giai: 999
+Best total cost hien tai: 981
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 14 1 2 7 16 5 9 15 21 13 11 19 12]
+Tong quang duong cua loi giai: 1143
+Best total cost hien tai: 981
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 14 1 2 7 16 5 21 15 9 12 13 11 19]
+Tong quang duong cua loi giai: 1015
+Best total cost hien tai: 981
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 14 1 2 7 16 5 21 15 9 13 11 19 12]
+Tong quang duong cua loi giai: 1146
+Best total cost hien tai: 981
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 14 1 2 7 16 5 21 15 12 9 13 19 11]
+Tong quang duong cua loi giai: 1108
+Best total cost hien tai: 981
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 14 1 2 7 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 930
+Best total cost hien tai: 930
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 14 1 2 7 16 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 945
+Best total cost hien tai: 930
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 14 1 2 7 9 15 16 5 21 12 13 19 11]
+Tong quang duong cua loi giai: 1081
+Best total cost hien tai: 930
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 14 1 2 7 9 15 16 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 903
+Best total cost hien tai: 903
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 14 1 2 7 9 15 16 5 21 13 11 19 12]
+Tong quang duong cua loi giai: 1047
+Best total cost hien tai: 903
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 14 1 2 7 9 15 5 21 16 12 13 11 19]
+Tong quang duong cua loi giai: 919
+Best total cost hien tai: 903
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 14 1 2 7 9 15 5 21 12 13 11 19 16]
+Tong quang duong cua loi giai: 1025
+Best total cost hien tai: 903
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 14 1 2 7 9 15 21 5 16 12 13 11 19]
+Tong quang duong cua loi giai: 929
+Best total cost hien tai: 903
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 14 1 2 7 9 5 21 15 16 12 13 11 19]
+Tong quang duong cua loi giai: 910
+Best total cost hien tai: 903
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 14 1 2 7 9 5 21 15 12 13 11 19 16]
+Tong quang duong cua loi giai: 1024
+Best total cost hien tai: 903
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 14 1 2 16 7 9 15 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 936
+Best total cost hien tai: 903
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 14 1 2 16 7 9 5 21 15 12 13 11 19]
+Tong quang duong cua loi giai: 935
+Best total cost hien tai: 903
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 14 1 2 5 7 21 15 16 12 13 11 19 9]
+Tong quang duong cua loi giai: 936
+Best total cost hien tai: 903
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 14 1 7 2 15 16 5 21 9 12 13 11 19]
+Tong quang duong cua loi giai: 943
+Best total cost hien tai: 903
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 14 1 7 2 15 16 5 21 12 9 13 19 11]
+Tong quang duong cua loi giai: 1044
+Best total cost hien tai: 903
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 14 1 7 2 15 16 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 866
+Best total cost hien tai: 866
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 14 1 7 2 15 16 5 21 12 13 11 19 9]
+Tong quang duong cua loi giai: 881
+Best total cost hien tai: 866
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 14 1 7 2 15 16 5 21 13 11 19 9 12]
+Tong quang duong cua loi giai: 987
+Best total cost hien tai: 866
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 14 1 7 2 15 5 21 16 12 13 11 19 9]
+Tong quang duong cua loi giai: 897
+Best total cost hien tai: 866
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 14 1 7 2 15 5 21 12 9 13 11 19 16]
+Tong quang duong cua loi giai: 988
+Best total cost hien tai: 866
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 14 1 7 2 16 5 21 15 12 9 13 19 11]
+Tong quang duong cua loi giai: 1025
+Best total cost hien tai: 866
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 14 1 7 2 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 847
+Best total cost hien tai: 847
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 14 1 7 2 16 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 862
+Best total cost hien tai: 847
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 14 1 7 2 5 16 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 856
+Best total cost hien tai: 847
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 14 1 7 2 5 16 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 871
+Best total cost hien tai: 847
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 14 1 7 2 5 21 15 16 12 13 11 9 19]
+Tong quang duong cua loi giai: 937
+Best total cost hien tai: 847
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 14 1 7 2 5 21 15 16 12 13 11 19 9]
+Tong quang duong cua loi giai: 837
+Best total cost hien tai: 837
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 14 1 7 2 5 21 15 12 9 13 11 19 16]
+Tong quang duong cua loi giai: 936
+Best total cost hien tai: 837
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 14 1 7 2 5 21 15 12 13 11 19 9 16]
+Tong quang duong cua loi giai: 970
+Best total cost hien tai: 837
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 14 1 7 2 5 21 12 13 9 15 16 19 11]
+Tong quang duong cua loi giai: 991
+Best total cost hien tai: 837
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 14 1 7 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 849
+Best total cost hien tai: 837
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 14 1 7 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 864
+Best total cost hien tai: 837
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 14 1 7 9 15 2 5 21 16 12 13 11 19]
+Tong quang duong cua loi giai: 853
+Best total cost hien tai: 837
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 14 1 7 9 15 2 5 21 12 13 11 19 16]
+Tong quang duong cua loi giai: 959
+Best total cost hien tai: 837
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 14 1 7 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 822
+Best total cost hien tai: 822
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 14 1 7 9 15 16 2 5 21 13 11 19 12]
+Tong quang duong cua loi giai: 966
+Best total cost hien tai: 822
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 14 1 7 9 15 16 5 21 2 12 13 11 19]
+Tong quang duong cua loi giai: 856
+Best total cost hien tai: 822
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 14 1 7 9 15 16 5 21 2 19 13 11 12]
+Tong quang duong cua loi giai: 990
+Best total cost hien tai: 822
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 14 1 7 9 15 16 5 21 12 2 13 11 19]
+Tong quang duong cua loi giai: 844
+Best total cost hien tai: 822
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 14 1 7 9 15 5 21 2 16 12 13 11 19]
+Tong quang duong cua loi giai: 858
+Best total cost hien tai: 822
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 14 1 7 9 15 5 21 12 2 19 13 11 16]
+Tong quang duong cua loi giai: 959
+Best total cost hien tai: 822
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 1 7 14 2 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 846
+Best total cost hien tai: 822
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 1 7 14 2 16 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 861
+Best total cost hien tai: 822
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 1 7 14 2 5 16 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 855
+Best total cost hien tai: 822
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 1 7 14 2 5 21 15 16 12 13 11 19 9]
+Tong quang duong cua loi giai: 836
+Best total cost hien tai: 822
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 1 7 14 2 5 21 15 12 9 13 11 19 16]
+Tong quang duong cua loi giai: 935
+Best total cost hien tai: 822
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 1 7 14 2 5 21 15 12 13 11 19 9 16]
+Tong quang duong cua loi giai: 969
+Best total cost hien tai: 822
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 1 7 14 15 16 2 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 831
+Best total cost hien tai: 822
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 1 7 14 15 16 2 5 21 12 13 11 19 9]
+Tong quang duong cua loi giai: 846
+Best total cost hien tai: 822
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 1 7 14 15 16 5 21 12 2 19 13 11 9]
+Tong quang duong cua loi giai: 890
+Best total cost hien tai: 822
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 1 7 14 16 2 15 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 841
+Best total cost hien tai: 822
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 1 7 14 16 2 15 5 21 12 13 11 19 9]
+Tong quang duong cua loi giai: 856
+Best total cost hien tai: 822
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 1 7 14 16 2 5 9 15 21 12 13 11 19]
+Tong quang duong cua loi giai: 858
+Best total cost hien tai: 822
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 1 7 14 16 2 5 21 15 12 9 13 19 11]
+Tong quang duong cua loi giai: 967
+Best total cost hien tai: 822
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 789
+Best total cost hien tai: 789
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 804
+Best total cost hien tai: 789
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 25 20 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 812
+Best total cost hien tai: 789
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 20 25 14 1 7 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 817
+Best total cost hien tai: 789
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 20 25 1 7 14 2 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 827
+Best total cost hien tai: 789
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 20 25 1 7 14 2 5 21 15 16 12 13 11 19 9]
+Tong quang duong cua loi giai: 817
+Best total cost hien tai: 789
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 20 25 1 7 14 2 5 21 15 12 9 13 11 19 16]
+Tong quang duong cua loi giai: 916
+Best total cost hien tai: 789
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 20 25 1 7 14 15 16 2 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 812
+Best total cost hien tai: 789
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 20 25 1 7 14 15 16 2 5 21 12 13 11 19 9]
+Tong quang duong cua loi giai: 827
+Best total cost hien tai: 789
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 20 25 1 7 14 15 16 5 21 12 2 19 13 11 9]
+Tong quang duong cua loi giai: 871
+Best total cost hien tai: 789
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 20 25 1 7 14 16 2 15 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 822
+Best total cost hien tai: 789
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 20 25 1 7 14 16 2 5 21 15 12 9 13 19 11]
+Tong quang duong cua loi giai: 948
+Best total cost hien tai: 789
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 20 25 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 770
+Best total cost hien tai: 770
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 20 25 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 785
+Best total cost hien tai: 770
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 24 20 25 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 793
+Best total cost hien tai: 770
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 25 24 20 14 1 7 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 801
+Best total cost hien tai: 770
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 25 24 20 1 7 14 15 16 2 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 810
+Best total cost hien tai: 770
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 25 24 20 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 768
+Best total cost hien tai: 768
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 25 24 20 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 783
+Best total cost hien tai: 768
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 22 25 24 20 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 791
+Best total cost hien tai: 768
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 24 22 25 20 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 776
+Best total cost hien tai: 768
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 24 22 25 20 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 791
+Best total cost hien tai: 768
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 24 22 25 20 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 799
+Best total cost hien tai: 768
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 24 22 20 25 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 774
+Best total cost hien tai: 768
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 24 22 20 25 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 789
+Best total cost hien tai: 768
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 8 24 22 20 25 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 797
+Best total cost hien tai: 768
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 22 8 24 25 20 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 800
+Best total cost hien tai: 768
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 22 8 24 20 25 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 781
+Best total cost hien tai: 768
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 22 8 24 20 25 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 796
+Best total cost hien tai: 768
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 22 8 24 20 25 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 804
+Best total cost hien tai: 768
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 22 8 25 24 20 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 791
+Best total cost hien tai: 768
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 22 8 25 24 20 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 806
+Best total cost hien tai: 768
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 22 8 20 24 25 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 808
+Best total cost hien tai: 768
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 22 24 8 25 20 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 782
+Best total cost hien tai: 768
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 22 24 8 25 20 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 797
+Best total cost hien tai: 768
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 22 24 8 25 20 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 805
+Best total cost hien tai: 768
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 22 24 8 20 25 14 1 7 2 5 21 15 16 12 13 11 19 9]
+Tong quang duong cua loi giai: 806
+Best total cost hien tai: 768
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 22 24 8 20 25 14 1 7 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 791
+Best total cost hien tai: 768
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 22 24 8 20 25 1 7 14 2 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 801
+Best total cost hien tai: 768
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 22 24 8 20 25 1 7 14 2 5 21 15 16 12 13 11 19 9]
+Tong quang duong cua loi giai: 791
+Best total cost hien tai: 768
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 22 24 8 20 25 1 7 14 2 5 21 15 12 9 13 11 19 16]
+Tong quang duong cua loi giai: 890
+Best total cost hien tai: 768
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 22 24 8 20 25 1 7 14 15 16 2 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 786
+Best total cost hien tai: 768
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 22 24 8 20 25 1 7 14 15 16 2 5 21 12 13 11 19 9]
+Tong quang duong cua loi giai: 801
+Best total cost hien tai: 768
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 22 24 8 20 25 1 7 14 15 16 5 21 12 2 19 13 11 9]
+Tong quang duong cua loi giai: 845
+Best total cost hien tai: 768
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 22 24 8 20 25 1 7 14 16 2 15 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 796
+Best total cost hien tai: 768
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 22 24 8 20 25 1 7 14 16 2 5 21 15 12 9 13 19 11]
+Tong quang duong cua loi giai: 922
+Best total cost hien tai: 768
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 22 24 8 20 25 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 744
+Best total cost hien tai: 744
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 22 24 8 20 25 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 759
+Best total cost hien tai: 744
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 22 24 8 20 25 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 767
+Best total cost hien tai: 744
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 24 8 22 25 20 14 1 7 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 770
+Best total cost hien tai: 744
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 24 8 22 25 20 1 7 14 15 16 2 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 779
+Best total cost hien tai: 744
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 24 8 22 25 20 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 737
+Best total cost hien tai: 737
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 24 8 22 25 20 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 752
+Best total cost hien tai: 737
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 24 8 22 25 20 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 760
+Best total cost hien tai: 737
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 24 8 22 20 25 1 7 14 15 16 2 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 777
+Best total cost hien tai: 737
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 24 8 22 20 25 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 735
+Best total cost hien tai: 735
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 24 8 22 20 25 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 750
+Best total cost hien tai: 735
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 24 8 22 20 25 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 758
+Best total cost hien tai: 735
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 24 22 8 25 20 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 766
+Best total cost hien tai: 735
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 24 22 8 20 25 14 1 7 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 775
+Best total cost hien tai: 735
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 24 22 8 20 25 1 7 14 15 16 2 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 770
+Best total cost hien tai: 735
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 24 22 8 20 25 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 728
+Best total cost hien tai: 728
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 24 22 8 20 25 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 743
+Best total cost hien tai: 728
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 6 24 22 8 20 25 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 751
+Best total cost hien tai: 728
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 6 22 24 25 20 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 756
+Best total cost hien tai: 728
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 6 22 24 20 25 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 737
+Best total cost hien tai: 728
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 6 22 24 20 25 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 752
+Best total cost hien tai: 728
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 6 22 24 20 25 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 760
+Best total cost hien tai: 728
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 6 22 25 24 20 14 1 7 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 768
+Best total cost hien tai: 728
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 6 22 25 24 20 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 735
+Best total cost hien tai: 728
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 6 22 25 24 20 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 750
+Best total cost hien tai: 728
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 6 22 25 24 20 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 758
+Best total cost hien tai: 728
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 6 24 22 25 20 14 1 7 2 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 768
+Best total cost hien tai: 728
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 6 24 22 25 20 14 1 7 2 5 21 15 16 12 13 11 19 9]
+Tong quang duong cua loi giai: 758
+Best total cost hien tai: 728
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 6 24 22 25 20 14 1 7 2 5 21 15 12 9 13 11 19 16]
+Tong quang duong cua loi giai: 857
+Best total cost hien tai: 728
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 6 24 22 25 20 14 1 7 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 743
+Best total cost hien tai: 728
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 6 24 22 25 20 14 1 7 9 15 16 2 5 21 13 11 19 12]
+Tong quang duong cua loi giai: 887
+Best total cost hien tai: 728
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 6 24 22 25 20 14 1 7 9 15 16 5 21 2 19 13 11 12]
+Tong quang duong cua loi giai: 911
+Best total cost hien tai: 728
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 6 24 22 25 20 14 1 7 9 15 16 5 21 12 2 13 11 19]
+Tong quang duong cua loi giai: 765
+Best total cost hien tai: 728
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 6 24 22 25 20 1 7 14 2 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 767
+Best total cost hien tai: 728
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 6 24 22 25 20 1 7 14 2 5 21 15 16 12 13 11 19 9]
+Tong quang duong cua loi giai: 757
+Best total cost hien tai: 728
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 6 24 22 25 20 1 7 14 2 5 21 15 12 9 13 11 19 16]
+Tong quang duong cua loi giai: 856
+Best total cost hien tai: 728
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 6 24 22 25 20 1 7 14 15 16 2 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 752
+Best total cost hien tai: 728
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 6 24 22 25 20 1 7 14 15 16 2 5 21 12 13 11 19 9]
+Tong quang duong cua loi giai: 767
+Best total cost hien tai: 728
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 6 24 22 25 20 1 7 14 16 2 15 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 762
+Best total cost hien tai: 728
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 6 24 22 25 20 1 7 14 16 2 5 21 15 12 9 13 19 11]
+Tong quang duong cua loi giai: 888
+Best total cost hien tai: 728
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 6 24 22 25 20 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 710
+Best total cost hien tai: 710
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 6 24 22 25 20 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 725
+Best total cost hien tai: 710
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 6 24 22 25 20 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 733
+Best total cost hien tai: 710
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 6 24 22 20 25 1 7 14 15 16 2 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 750
+Best total cost hien tai: 710
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 6 24 22 20 25 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 708
+Best total cost hien tai: 708
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 6 24 22 20 25 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 723
+Best total cost hien tai: 708
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 6 24 22 20 25 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 731
+Best total cost hien tai: 708
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 22 6 24 25 20 14 1 7 2 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 746
+Best total cost hien tai: 708
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 22 6 24 25 20 14 1 7 2 5 21 15 16 12 13 11 19 9]
+Tong quang duong cua loi giai: 736
+Best total cost hien tai: 708
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 22 6 24 25 20 14 1 7 2 5 21 15 12 9 13 11 19 16]
+Tong quang duong cua loi giai: 835
+Best total cost hien tai: 708
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 22 6 24 25 20 14 1 7 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 748
+Best total cost hien tai: 708
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 22 6 24 25 20 14 1 7 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 721
+Best total cost hien tai: 708
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 22 6 24 25 20 14 1 7 9 15 16 2 5 21 13 11 19 12]
+Tong quang duong cua loi giai: 865
+Best total cost hien tai: 708
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 22 6 24 25 20 14 1 7 9 15 16 5 21 2 19 13 11 12]
+Tong quang duong cua loi giai: 889
+Best total cost hien tai: 708
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 22 6 24 25 20 14 1 7 9 15 16 5 21 12 2 13 11 19]
+Tong quang duong cua loi giai: 743
+Best total cost hien tai: 708
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 22 6 24 25 20 1 7 14 2 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 745
+Best total cost hien tai: 708
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 22 6 24 25 20 1 7 14 2 5 21 15 16 12 13 11 19 9]
+Tong quang duong cua loi giai: 735
+Best total cost hien tai: 708
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 22 6 24 25 20 1 7 14 2 5 21 15 12 9 13 11 19 16]
+Tong quang duong cua loi giai: 834
+Best total cost hien tai: 708
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 22 6 24 25 20 1 7 14 15 16 2 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 730
+Best total cost hien tai: 708
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 22 6 24 25 20 1 7 14 15 16 2 5 21 12 13 11 19 9]
+Tong quang duong cua loi giai: 745
+Best total cost hien tai: 708
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 22 6 24 25 20 1 7 14 15 16 5 21 12 2 19 13 11 9]
+Tong quang duong cua loi giai: 789
+Best total cost hien tai: 708
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 22 6 24 25 20 1 7 14 16 2 15 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 740
+Best total cost hien tai: 708
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 22 6 24 25 20 1 7 14 16 2 5 21 15 12 9 13 19 11]
+Tong quang duong cua loi giai: 866
+Best total cost hien tai: 708
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 22 6 24 25 20 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 688
+Best total cost hien tai: 688
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 22 6 24 25 20 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 703
+Best total cost hien tai: 688
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 22 6 24 25 20 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 711
+Best total cost hien tai: 688
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 22 6 24 20 25 14 1 7 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 716
+Best total cost hien tai: 688
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 22 6 24 20 25 1 7 14 2 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 726
+Best total cost hien tai: 688
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 22 6 24 20 25 1 7 14 2 5 21 15 16 12 13 11 19 9]
+Tong quang duong cua loi giai: 716
+Best total cost hien tai: 688
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 22 6 24 20 25 1 7 14 2 5 21 15 12 9 13 11 19 16]
+Tong quang duong cua loi giai: 815
+Best total cost hien tai: 688
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 22 6 24 20 25 1 7 14 15 16 2 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 711
+Best total cost hien tai: 688
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 22 6 24 20 25 1 7 14 15 16 2 5 21 12 13 11 19 9]
+Tong quang duong cua loi giai: 726
+Best total cost hien tai: 688
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 22 6 24 20 25 1 7 14 15 16 5 21 12 2 19 13 11 9]
+Tong quang duong cua loi giai: 770
+Best total cost hien tai: 688
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 22 6 24 20 25 1 7 14 16 2 15 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 721
+Best total cost hien tai: 688
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 22 6 24 20 25 1 7 14 16 2 5 21 15 12 9 13 19 11]
+Tong quang duong cua loi giai: 847
+Best total cost hien tai: 688
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 22 6 24 20 25 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 669
+Best total cost hien tai: 669
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 22 6 24 20 25 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 684
+Best total cost hien tai: 669
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 22 6 24 20 25 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 692
+Best total cost hien tai: 669
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 22 24 25 20 6 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 702
+Best total cost hien tai: 669
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 22 24 20 25 6 1 7 14 15 16 2 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 708
+Best total cost hien tai: 669
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 22 24 20 25 6 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 666
+Best total cost hien tai: 666
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 22 24 20 25 6 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 681
+Best total cost hien tai: 666
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 22 24 20 25 6 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 689
+Best total cost hien tai: 666
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 22 25 24 20 6 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 681
+Best total cost hien tai: 666
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 22 25 24 20 6 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 696
+Best total cost hien tai: 666
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 22 25 24 20 6 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 704
+Best total cost hien tai: 666
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 24 22 25 20 6 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 689
+Best total cost hien tai: 666
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 24 22 25 20 6 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 704
+Best total cost hien tai: 666
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 24 22 20 25 6 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 670
+Best total cost hien tai: 666
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 24 22 20 25 6 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 685
+Best total cost hien tai: 666
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 8 24 22 20 25 6 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 693
+Best total cost hien tai: 666
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 22 6 24 8 20 25 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 681
+Best total cost hien tai: 666
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 22 6 24 8 20 25 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 696
+Best total cost hien tai: 666
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 22 6 24 8 20 25 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 704
+Best total cost hien tai: 666
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 22 24 8 20 25 6 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 678
+Best total cost hien tai: 666
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 22 24 8 20 25 6 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 693
+Best total cost hien tai: 666
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 22 24 8 20 25 6 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 701
+Best total cost hien tai: 666
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 24 8 22 25 20 6 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 670
+Best total cost hien tai: 666
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 24 8 22 25 20 6 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 685
+Best total cost hien tai: 666
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 24 8 22 25 20 6 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 693
+Best total cost hien tai: 666
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 24 8 22 25 20 14 1 7 6 2 5 21 15 16 12 13 11 19 9]
+Tong quang duong cua loi giai: 705
+Best total cost hien tai: 666
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 24 8 22 20 25 6 1 7 14 2 5 21 15 16 12 13 11 19 9]
+Tong quang duong cua loi giai: 698
+Best total cost hien tai: 666
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 24 8 22 20 25 6 1 7 14 15 16 2 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 693
+Best total cost hien tai: 666
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 24 8 22 20 25 6 1 7 14 16 2 15 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 703
+Best total cost hien tai: 666
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 24 8 22 20 25 6 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 651
+Best total cost hien tai: 651
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 24 8 22 20 25 6 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 666
+Best total cost hien tai: 651
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 24 8 22 20 25 6 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 674
+Best total cost hien tai: 651
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 24 22 8 20 25 6 1 7 14 15 16 2 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 686
+Best total cost hien tai: 651
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 24 22 8 20 25 6 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 644
+Best total cost hien tai: 644
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 24 22 8 20 25 6 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 659
+Best total cost hien tai: 644
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 17 24 22 8 20 25 6 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 667
+Best total cost hien tai: 644
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 8 22 24 25 20 14 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 673
+Best total cost hien tai: 644
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 8 22 24 25 20 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 676
+Best total cost hien tai: 644
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 8 22 24 20 25 17 14 1 7 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 671
+Best total cost hien tai: 644
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 8 22 24 20 25 17 1 7 14 2 5 21 15 16 12 13 11 19 9]
+Tong quang duong cua loi giai: 678
+Best total cost hien tai: 644
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 8 22 24 20 25 17 1 7 14 15 16 2 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 673
+Best total cost hien tai: 644
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 8 22 24 20 25 17 1 7 14 16 2 15 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 683
+Best total cost hien tai: 644
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 8 22 24 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 631
+Best total cost hien tai: 631
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 8 22 24 20 25 17 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 646
+Best total cost hien tai: 631
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 8 22 24 20 25 17 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 654
+Best total cost hien tai: 631
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 8 22 24 20 25 14 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 668
+Best total cost hien tai: 631
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 8 22 24 20 25 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 657
+Best total cost hien tai: 631
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 8 22 24 20 25 1 7 14 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 671
+Best total cost hien tai: 631
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 8 22 25 17 24 20 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 669
+Best total cost hien tai: 631
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 8 22 25 24 20 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 667
+Best total cost hien tai: 631
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 8 22 25 24 20 14 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 652
+Best total cost hien tai: 631
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 8 22 25 24 20 14 1 7 17 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 667
+Best total cost hien tai: 631
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 8 22 25 24 20 14 1 7 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 670
+Best total cost hien tai: 631
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 8 22 25 24 20 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 655
+Best total cost hien tai: 631
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 8 22 25 24 20 1 7 14 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 669
+Best total cost hien tai: 631
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 8 24 22 25 20 14 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 660
+Best total cost hien tai: 631
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 8 24 22 25 20 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 663
+Best total cost hien tai: 631
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 8 24 22 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 635
+Best total cost hien tai: 631
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 8 24 22 20 25 17 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 650
+Best total cost hien tai: 631
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 8 24 22 20 25 17 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 658
+Best total cost hien tai: 631
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 8 24 22 20 25 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 661
+Best total cost hien tai: 631
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 22 8 24 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 642
+Best total cost hien tai: 631
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 22 8 24 20 25 17 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 657
+Best total cost hien tai: 631
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 22 8 24 20 25 17 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 665
+Best total cost hien tai: 631
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 22 8 24 20 25 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 668
+Best total cost hien tai: 631
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 22 8 20 24 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 669
+Best total cost hien tai: 631
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 22 8 20 24 1 2 25 15 14 7 17 16 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 669
+Best total cost hien tai: 631
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 22 24 17 8 20 25 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 666
+Best total cost hien tai: 631
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 22 24 8 25 20 14 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 666
+Best total cost hien tai: 631
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 22 24 8 25 20 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 669
+Best total cost hien tai: 631
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 22 24 8 20 25 17 14 1 7 2 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 670
+Best total cost hien tai: 631
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 22 24 8 20 25 17 14 1 7 2 5 21 15 16 12 13 11 19 9]
+Tong quang duong cua loi giai: 660
+Best total cost hien tai: 631
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 22 24 8 20 25 17 14 1 7 2 5 21 15 12 9 13 11 19 16]
+Tong quang duong cua loi giai: 759
+Best total cost hien tai: 631
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 22 24 8 20 25 17 14 1 7 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 645
+Best total cost hien tai: 631
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 22 24 8 20 25 17 14 1 7 9 15 16 2 5 21 13 11 19 12]
+Tong quang duong cua loi giai: 789
+Best total cost hien tai: 631
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 22 24 8 20 25 17 14 1 7 9 15 16 5 21 2 19 13 11 12]
+Tong quang duong cua loi giai: 813
+Best total cost hien tai: 631
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 22 24 8 20 25 17 14 1 7 9 15 16 5 21 12 2 13 11 19]
+Tong quang duong cua loi giai: 667
+Best total cost hien tai: 631
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 22 24 8 20 25 17 1 7 14 2 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 662
+Best total cost hien tai: 631
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 22 24 8 20 25 17 1 7 14 2 5 16 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 671
+Best total cost hien tai: 631
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 22 24 8 20 25 17 1 7 14 2 5 21 15 16 12 13 11 19 9]
+Tong quang duong cua loi giai: 652
+Best total cost hien tai: 631
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 22 24 8 20 25 17 1 7 14 2 5 21 15 12 9 13 11 19 16]
+Tong quang duong cua loi giai: 751
+Best total cost hien tai: 631
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 22 24 8 20 25 17 1 7 14 15 16 2 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 647
+Best total cost hien tai: 631
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 22 24 8 20 25 17 1 7 14 15 16 2 5 21 12 13 11 19 9]
+Tong quang duong cua loi giai: 662
+Best total cost hien tai: 631
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 22 24 8 20 25 17 1 7 14 15 16 5 21 12 2 19 13 11 9]
+Tong quang duong cua loi giai: 706
+Best total cost hien tai: 631
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 22 24 8 20 25 17 1 7 14 16 2 15 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 657
+Best total cost hien tai: 631
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 22 24 8 20 25 17 1 7 14 16 2 5 21 15 12 9 13 19 11]
+Tong quang duong cua loi giai: 783
+Best total cost hien tai: 631
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 22 24 8 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 605
+Best total cost hien tai: 605
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 22 24 8 20 25 17 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 620
+Best total cost hien tai: 605
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 22 24 8 20 25 17 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 628
+Best total cost hien tai: 605
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 22 24 8 20 25 14 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 642
+Best total cost hien tai: 605
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 22 24 8 20 25 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 631
+Best total cost hien tai: 605
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 22 24 8 20 25 1 7 14 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 645
+Best total cost hien tai: 605
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 24 8 22 25 20 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 636
+Best total cost hien tai: 605
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 24 8 22 25 20 14 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 621
+Best total cost hien tai: 605
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 24 8 22 25 20 14 1 7 17 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 636
+Best total cost hien tai: 605
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 24 8 22 25 20 14 1 7 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 639
+Best total cost hien tai: 605
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 24 8 22 25 20 1 7 17 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 643
+Best total cost hien tai: 605
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 24 8 22 25 20 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 624
+Best total cost hien tai: 605
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 24 8 22 25 20 1 7 14 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 638
+Best total cost hien tai: 605
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 24 8 22 25 20 1 7 14 15 17 16 2 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 643
+Best total cost hien tai: 605
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 24 8 22 25 20 1 7 2 17 16 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 642
+Best total cost hien tai: 605
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 24 8 22 20 25 17 14 1 7 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 636
+Best total cost hien tai: 605
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 24 8 22 20 25 17 1 7 14 2 5 21 15 16 12 13 11 19 9]
+Tong quang duong cua loi giai: 643
+Best total cost hien tai: 605
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 24 8 22 20 25 17 1 7 14 15 16 2 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 638
+Best total cost hien tai: 605
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 24 8 22 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 596
+Best total cost hien tai: 596
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 24 8 22 20 25 17 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 611
+Best total cost hien tai: 596
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 24 8 22 20 25 17 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 619
+Best total cost hien tai: 596
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 24 8 22 20 25 14 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 633
+Best total cost hien tai: 596
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 24 8 22 20 25 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 622
+Best total cost hien tai: 596
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 24 8 22 20 25 1 7 14 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 636
+Best total cost hien tai: 596
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 24 22 8 20 25 17 14 1 7 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 629
+Best total cost hien tai: 596
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 24 22 8 20 25 17 1 7 14 15 16 2 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 631
+Best total cost hien tai: 596
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 24 22 8 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 589
+Best total cost hien tai: 589
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 24 22 8 20 25 17 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 604
+Best total cost hien tai: 589
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 24 22 8 20 25 17 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 612
+Best total cost hien tai: 589
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 24 22 8 20 25 14 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 626
+Best total cost hien tai: 589
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 24 22 8 20 25 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 615
+Best total cost hien tai: 589
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 6 24 22 8 20 25 1 7 14 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 629
+Best total cost hien tai: 589
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 8 22 6 24 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 624
+Best total cost hien tai: 589
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 22 6 24 8 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 605
+Best total cost hien tai: 589
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 22 6 24 8 20 25 17 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 620
+Best total cost hien tai: 589
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 22 6 24 8 20 25 17 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 628
+Best total cost hien tai: 589
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 22 24 8 20 25 6 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 628
+Best total cost hien tai: 589
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 24 8 22 20 25 6 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 623
+Best total cost hien tai: 589
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 18 3 24 22 8 20 25 6 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 616
+Best total cost hien tai: 589
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 3 18 24 8 22 20 25 6 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 614
+Best total cost hien tai: 589
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 3 18 24 8 22 20 25 6 1 7 14 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 628
+Best total cost hien tai: 589
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 3 18 24 22 8 20 25 6 1 7 17 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 626
+Best total cost hien tai: 589
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 3 18 24 22 8 20 25 6 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 607
+Best total cost hien tai: 589
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 3 18 24 22 8 20 25 6 1 7 14 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 621
+Best total cost hien tai: 589
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 3 18 24 22 8 20 25 6 1 7 14 15 17 16 2 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 626
+Best total cost hien tai: 589
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 3 18 24 22 8 20 25 6 1 7 2 17 16 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 625
+Best total cost hien tai: 589
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 3 18 24 22 8 20 25 1 7 6 2 17 16 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 629
+Best total cost hien tai: 589
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 3 6 22 18 24 8 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 618
+Best total cost hien tai: 589
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 3 6 22 24 8 18 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 621
+Best total cost hien tai: 589
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 3 6 24 8 22 18 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 598
+Best total cost hien tai: 589
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 3 6 24 8 22 18 20 25 17 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 613
+Best total cost hien tai: 589
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 3 6 24 8 22 18 20 25 17 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 621
+Best total cost hien tai: 589
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 3 6 24 8 22 18 20 25 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 624
+Best total cost hien tai: 589
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 3 6 24 8 22 25 18 20 14 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 624
+Best total cost hien tai: 589
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 3 6 24 8 22 25 18 20 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 627
+Best total cost hien tai: 589
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 3 6 24 8 22 14 18 20 25 17 1 7 2 5 21 15 16 12 13 11 19 9]
+Tong quang duong cua loi giai: 621
+Best total cost hien tai: 589
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 3 6 24 8 22 14 18 20 25 17 1 7 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 606
+Best total cost hien tai: 589
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 3 6 24 8 22 14 18 20 25 17 1 7 9 15 16 2 5 21 13 11 19 12]
+Tong quang duong cua loi giai: 750
+Best total cost hien tai: 589
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 3 6 24 8 22 14 18 20 25 17 1 7 9 15 16 5 21 12 2 13 11 19]
+Tong quang duong cua loi giai: 628
+Best total cost hien tai: 589
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 3 6 24 8 22 14 18 20 25 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 596
+Best total cost hien tai: 589
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 3 6 24 8 22 14 18 20 25 1 7 17 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 611
+Best total cost hien tai: 589
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 3 6 24 8 22 14 18 20 25 1 7 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 614
+Best total cost hien tai: 589
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 3 6 24 22 8 18 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 605
+Best total cost hien tai: 589
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 3 6 24 22 8 18 20 25 17 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 620
+Best total cost hien tai: 589
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 3 6 24 22 8 18 20 25 17 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 628
+Best total cost hien tai: 589
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 3 8 24 22 14 18 20 25 6 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 625
+Best total cost hien tai: 589
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 3 22 6 24 8 18 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 621
+Best total cost hien tai: 589
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 3 24 8 22 18 20 25 6 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 625
+Best total cost hien tai: 589
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 3 24 8 22 14 18 20 25 17 1 7 6 2 5 21 15 16 12 13 11 19 9]
+Tong quang duong cua loi giai: 626
+Best total cost hien tai: 589
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 3 24 8 22 14 18 20 25 6 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 597
+Best total cost hien tai: 589
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 3 24 8 22 14 18 20 25 6 1 7 17 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 612
+Best total cost hien tai: 589
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 3 24 8 22 14 18 20 25 6 1 7 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 615
+Best total cost hien tai: 589
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 23 3 24 8 22 14 18 20 25 1 7 6 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 619
+Best total cost hien tai: 589
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 23 22 6 24 8 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 621
+Best total cost hien tai: 589
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 23 24 8 22 20 25 6 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 622
+Best total cost hien tai: 589
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 23 24 22 8 20 25 6 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 615
+Best total cost hien tai: 589
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 23 24 22 8 20 25 6 1 7 14 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 629
+Best total cost hien tai: 589
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 17 8 23 22 6 24 20 25 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 625
+Best total cost hien tai: 589
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 17 8 23 22 24 20 25 6 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 622
+Best total cost hien tai: 589
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 17 8 23 24 22 25 20 6 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 599
+Best total cost hien tai: 589
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 17 8 23 24 22 25 20 6 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 614
+Best total cost hien tai: 589
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 17 8 23 24 22 25 20 6 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 622
+Best total cost hien tai: 589
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 17 8 23 24 22 20 25 6 1 7 14 2 5 21 15 16 12 13 11 19 9]
+Tong quang duong cua loi giai: 627
+Best total cost hien tai: 589
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 17 8 23 24 22 20 25 6 1 7 14 15 16 2 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 622
+Best total cost hien tai: 589
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 17 8 23 24 22 20 25 6 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 580
+Best total cost hien tai: 580
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 17 8 23 24 22 20 25 6 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 595
+Best total cost hien tai: 580
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 17 8 23 24 22 20 25 6 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 603
+Best total cost hien tai: 580
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 17 8 22 23 24 20 25 6 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 591
+Best total cost hien tai: 580
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 17 8 22 23 24 20 25 6 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 606
+Best total cost hien tai: 580
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 17 8 22 23 24 20 25 6 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 614
+Best total cost hien tai: 580
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 17 22 23 24 8 20 25 6 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 603
+Best total cost hien tai: 580
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 17 22 23 24 8 20 25 6 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 618
+Best total cost hien tai: 580
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 17 24 8 22 23 25 20 6 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 611
+Best total cost hien tai: 580
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 17 24 8 22 20 25 23 6 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 618
+Best total cost hien tai: 580
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 17 24 22 8 23 25 20 6 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 613
+Best total cost hien tai: 580
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 17 24 22 8 20 25 23 6 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 611
+Best total cost hien tai: 580
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 23 24 8 22 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 615
+Best total cost hien tai: 580
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 23 24 22 8 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 608
+Best total cost hien tai: 580
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 8 23 22 24 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 587
+Best total cost hien tai: 580
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 8 23 22 24 20 25 17 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 602
+Best total cost hien tai: 580
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 8 23 22 24 20 25 17 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 610
+Best total cost hien tai: 580
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 8 23 22 24 20 25 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 613
+Best total cost hien tai: 580
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 8 23 22 25 24 20 14 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 608
+Best total cost hien tai: 580
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 8 23 22 25 24 20 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 611
+Best total cost hien tai: 580
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 8 23 24 22 25 20 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 585
+Best total cost hien tai: 580
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 8 23 24 22 25 20 17 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 600
+Best total cost hien tai: 580
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 8 23 24 22 25 20 17 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 608
+Best total cost hien tai: 580
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 8 23 24 22 25 20 14 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 570
+Best total cost hien tai: 570
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 8 23 24 22 25 20 14 1 7 17 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 585
+Best total cost hien tai: 570
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 8 23 24 22 25 20 14 1 7 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 588
+Best total cost hien tai: 570
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 8 23 24 22 25 20 14 1 7 2 17 16 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 603
+Best total cost hien tai: 570
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 8 23 24 22 25 20 1 7 17 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 592
+Best total cost hien tai: 570
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 8 23 24 22 25 20 1 7 17 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 607
+Best total cost hien tai: 570
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 8 23 24 22 25 20 1 7 17 16 2 5 21 14 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 607
+Best total cost hien tai: 570
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 8 23 24 22 25 20 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 573
+Best total cost hien tai: 570
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 8 23 24 22 25 20 1 7 17 16 2 5 21 15 12 14 9 13 11 19]
+Tong quang duong cua loi giai: 596
+Best total cost hien tai: 570
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 8 23 24 22 25 20 1 7 14 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 587
+Best total cost hien tai: 570
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 8 23 24 22 25 20 1 7 14 2 17 16 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 602
+Best total cost hien tai: 570
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 8 23 24 22 25 20 1 7 14 15 17 16 2 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 592
+Best total cost hien tai: 570
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 8 23 24 22 25 20 1 7 14 15 17 16 2 5 21 12 13 11 19 9]
+Tong quang duong cua loi giai: 607
+Best total cost hien tai: 570
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 8 23 24 22 25 20 1 7 14 15 17 16 5 21 12 2 19 13 11 9]
+Tong quang duong cua loi giai: 651
+Best total cost hien tai: 570
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 8 23 24 22 25 20 1 7 2 17 14 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 610
+Best total cost hien tai: 570
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 8 23 24 22 25 20 1 7 2 17 16 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 591
+Best total cost hien tai: 570
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 8 23 24 22 20 25 17 14 1 7 2 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 610
+Best total cost hien tai: 570
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 8 23 24 22 20 25 17 14 1 7 2 5 21 15 16 12 13 11 19 9]
+Tong quang duong cua loi giai: 600
+Best total cost hien tai: 570
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 8 23 24 22 20 25 17 14 1 7 2 5 21 15 12 9 13 11 19 16]
+Tong quang duong cua loi giai: 699
+Best total cost hien tai: 570
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 8 23 24 22 20 25 17 14 1 7 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 585
+Best total cost hien tai: 570
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 8 23 24 22 20 25 17 14 1 7 9 15 16 2 5 21 13 11 19 12]
+Tong quang duong cua loi giai: 729
+Best total cost hien tai: 570
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 8 23 24 22 20 25 17 14 1 7 9 15 16 5 21 2 19 13 11 12]
+Tong quang duong cua loi giai: 753
+Best total cost hien tai: 570
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 8 23 24 22 20 25 17 14 1 7 9 15 16 5 21 12 2 13 11 19]
+Tong quang duong cua loi giai: 607
+Best total cost hien tai: 570
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 8 23 24 22 20 25 17 1 7 14 2 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 602
+Best total cost hien tai: 570
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 8 23 24 22 20 25 17 1 7 14 2 5 21 15 16 12 13 11 19 9]
+Tong quang duong cua loi giai: 592
+Best total cost hien tai: 570
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 8 23 24 22 20 25 17 1 7 14 2 5 21 15 12 9 13 11 19 16]
+Tong quang duong cua loi giai: 691
+Best total cost hien tai: 570
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 8 23 24 22 20 25 17 1 7 14 15 16 2 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 587
+Best total cost hien tai: 570
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 8 23 24 22 20 25 17 1 7 14 15 16 2 5 21 12 13 11 19 9]
+Tong quang duong cua loi giai: 602
+Best total cost hien tai: 570
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 8 23 24 22 20 25 17 1 7 14 15 16 5 21 12 2 19 13 11 9]
+Tong quang duong cua loi giai: 646
+Best total cost hien tai: 570
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 8 23 24 22 20 25 17 1 7 14 16 2 15 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 597
+Best total cost hien tai: 570
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 8 23 24 22 20 25 17 1 7 14 16 2 5 21 15 12 9 13 19 11]
+Tong quang duong cua loi giai: 723
+Best total cost hien tai: 570
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 8 23 24 22 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 545
+Best total cost hien tai: 545
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 8 23 24 22 20 25 17 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 560
+Best total cost hien tai: 545
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 8 23 24 22 20 25 17 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 568
+Best total cost hien tai: 545
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 8 23 24 22 20 25 14 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 582
+Best total cost hien tai: 545
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 8 23 24 22 20 25 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 571
+Best total cost hien tai: 545
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 8 23 24 22 20 25 1 7 14 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 585
+Best total cost hien tai: 545
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 8 22 23 24 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 556
+Best total cost hien tai: 545
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 8 22 23 24 20 25 17 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 571
+Best total cost hien tai: 545
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 8 22 23 24 20 25 17 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 579
+Best total cost hien tai: 545
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 8 22 23 24 20 25 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 582
+Best total cost hien tai: 545
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 22 23 24 8 20 25 17 14 1 7 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 570
+Best total cost hien tai: 545
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 22 23 24 8 20 25 17 1 7 14 2 5 21 15 16 12 13 11 19 9]
+Tong quang duong cua loi giai: 577
+Best total cost hien tai: 545
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 22 23 24 8 20 25 17 1 7 14 15 16 2 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 572
+Best total cost hien tai: 545
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 22 23 24 8 20 25 17 1 7 14 16 2 15 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 582
+Best total cost hien tai: 545
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 22 23 24 8 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 530
+Best total cost hien tai: 530
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 22 23 24 8 20 25 17 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 545
+Best total cost hien tai: 530
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 22 23 24 8 20 25 17 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 553
+Best total cost hien tai: 530
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 22 23 24 8 20 25 14 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 567
+Best total cost hien tai: 530
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 22 23 24 8 20 25 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 556
+Best total cost hien tai: 530
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 22 23 24 8 20 25 1 7 14 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 570
+Best total cost hien tai: 530
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 22 8 23 24 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 552
+Best total cost hien tai: 530
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 22 8 23 24 20 25 17 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 567
+Best total cost hien tai: 530
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 24 8 22 23 25 20 14 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 562
+Best total cost hien tai: 530
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 24 8 22 23 25 20 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 565
+Best total cost hien tai: 530
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 24 22 8 23 25 20 14 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 564
+Best total cost hien tai: 530
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 6 24 22 8 23 25 20 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 567
+Best total cost hien tai: 530
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 8 23 24 22 20 25 6 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 561
+Best total cost hien tai: 530
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 22 23 24 8 20 25 6 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 553
+Best total cost hien tai: 530
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 18 3 22 23 24 8 20 25 6 1 7 14 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 567
+Best total cost hien tai: 530
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 3 6 8 23 24 22 18 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 548
+Best total cost hien tai: 530
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 3 6 8 23 24 22 18 20 25 17 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 563
+Best total cost hien tai: 530
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 3 6 8 23 24 22 14 18 20 25 17 1 7 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 556
+Best total cost hien tai: 530
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 3 6 8 23 24 22 14 18 20 25 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 546
+Best total cost hien tai: 530
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 3 6 8 23 24 22 14 18 20 25 1 7 17 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 561
+Best total cost hien tai: 530
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 3 6 8 23 24 22 14 18 20 25 1 7 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 564
+Best total cost hien tai: 530
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 3 6 22 23 24 8 18 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 547
+Best total cost hien tai: 530
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 3 6 22 23 24 8 18 20 25 17 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 562
+Best total cost hien tai: 530
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 3 6 22 23 24 8 18 20 25 17 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 570
+Best total cost hien tai: 530
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 3 6 24 8 22 23 18 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 567
+Best total cost hien tai: 530
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 3 6 24 22 8 23 18 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 569
+Best total cost hien tai: 530
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 3 8 23 24 22 18 20 25 6 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 564
+Best total cost hien tai: 530
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 3 8 23 24 22 14 18 20 25 17 1 7 6 2 5 21 15 16 12 13 11 19 9]
+Tong quang duong cua loi giai: 565
+Best total cost hien tai: 530
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 3 8 23 24 22 14 18 20 25 6 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 536
+Best total cost hien tai: 530
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 3 8 23 24 22 14 18 20 25 6 1 7 17 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 551
+Best total cost hien tai: 530
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 3 8 23 24 22 14 18 20 25 6 1 7 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 554
+Best total cost hien tai: 530
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 3 8 23 24 22 14 18 20 25 6 1 7 2 17 16 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 569
+Best total cost hien tai: 530
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 3 8 23 24 22 14 18 20 25 1 7 6 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 558
+Best total cost hien tai: 530
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 3 22 23 24 8 18 20 25 6 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 570
+Best total cost hien tai: 530
++++++++++++++++++++++++++++
+Loi giai: [0 10 4 3 24 8 22 14 18 20 25 23 6 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 565
+Best total cost hien tai: 530
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 18 3 17 24 22 8 20 25 6 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 567
+Best total cost hien tai: 530
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 18 3 6 8 22 24 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 554
+Best total cost hien tai: 530
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 18 3 6 8 22 24 20 25 17 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 569
+Best total cost hien tai: 530
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 18 3 6 8 24 22 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 558
+Best total cost hien tai: 530
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 18 3 6 22 8 24 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 565
+Best total cost hien tai: 530
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 18 3 6 22 24 8 20 25 17 14 1 7 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 568
+Best total cost hien tai: 530
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 18 3 6 22 24 8 20 25 17 1 7 14 15 16 2 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 570
+Best total cost hien tai: 530
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 18 3 6 22 24 8 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 528
+Best total cost hien tai: 528
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 18 3 6 22 24 8 20 25 17 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 543
+Best total cost hien tai: 528
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 18 3 6 22 24 8 20 25 17 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 551
+Best total cost hien tai: 528
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 18 3 6 22 24 8 20 25 14 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 565
+Best total cost hien tai: 528
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 18 3 6 22 24 8 20 25 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 554
+Best total cost hien tai: 528
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 18 3 6 22 24 8 20 25 1 7 14 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 568
+Best total cost hien tai: 528
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 18 3 6 24 8 22 25 20 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 559
+Best total cost hien tai: 528
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 18 3 6 24 8 22 25 20 14 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 544
+Best total cost hien tai: 528
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 18 3 6 24 8 22 25 20 14 1 7 17 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 559
+Best total cost hien tai: 528
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 18 3 6 24 8 22 25 20 14 1 7 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 562
+Best total cost hien tai: 528
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 18 3 6 24 8 22 25 20 1 7 17 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 566
+Best total cost hien tai: 528
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 18 3 6 24 8 22 25 20 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 547
+Best total cost hien tai: 528
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 18 3 6 24 8 22 25 20 1 7 14 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 561
+Best total cost hien tai: 528
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 18 3 6 24 8 22 25 20 1 7 14 15 17 16 2 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 566
+Best total cost hien tai: 528
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 18 3 6 24 8 22 25 20 1 7 2 17 16 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 565
+Best total cost hien tai: 528
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 18 3 6 24 8 22 20 25 17 14 1 7 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 559
+Best total cost hien tai: 528
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 18 3 6 24 8 22 20 25 17 1 7 14 2 5 21 15 16 12 13 11 19 9]
+Tong quang duong cua loi giai: 566
+Best total cost hien tai: 528
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 18 3 6 24 8 22 20 25 17 1 7 14 15 16 2 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 561
+Best total cost hien tai: 528
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 18 3 6 24 8 22 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 519
+Best total cost hien tai: 519
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 18 3 6 24 8 22 20 25 17 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 534
+Best total cost hien tai: 519
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 18 3 6 24 8 22 20 25 17 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 542
+Best total cost hien tai: 519
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 18 3 6 24 8 22 20 25 14 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 556
+Best total cost hien tai: 519
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 18 3 6 24 8 22 20 25 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 545
+Best total cost hien tai: 519
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 18 3 6 24 8 22 20 25 1 7 14 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 559
+Best total cost hien tai: 519
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 18 3 6 24 22 8 20 25 17 14 1 7 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 552
+Best total cost hien tai: 519
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 18 3 6 24 22 8 20 25 17 1 7 14 15 16 2 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 554
+Best total cost hien tai: 519
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 18 3 6 24 22 8 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 512
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 18 3 6 24 22 8 20 25 17 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 527
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 18 3 6 24 22 8 20 25 17 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 535
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 18 3 6 24 22 8 20 25 14 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 549
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 18 3 6 24 22 8 20 25 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 538
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 18 3 6 24 22 8 20 25 1 7 14 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 552
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 18 3 8 22 6 24 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 547
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 18 3 22 6 24 8 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 528
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 18 3 22 6 24 8 20 25 17 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 543
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 18 3 22 6 24 8 20 25 17 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 551
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 18 3 22 24 8 20 25 6 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 551
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 18 3 24 8 22 20 25 6 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 546
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 18 3 24 22 8 20 25 6 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 539
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 3 18 24 8 22 20 25 6 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 538
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 3 18 24 8 22 20 25 6 1 7 14 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 552
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 3 18 24 22 8 20 25 6 1 7 17 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 550
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 3 18 24 22 8 20 25 6 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 531
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 3 18 24 22 8 20 25 6 1 7 14 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 545
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 3 18 24 22 8 20 25 6 1 7 14 15 17 16 2 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 550
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 3 18 24 22 8 20 25 6 1 7 2 17 16 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 549
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 3 6 22 18 24 8 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 542
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 3 6 22 24 8 18 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 545
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 3 6 24 8 22 18 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 522
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 3 6 24 8 22 18 20 25 17 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 537
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 3 6 24 8 22 18 20 25 17 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 545
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 3 6 24 8 22 18 20 25 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 548
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 3 6 24 8 22 25 18 20 14 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 548
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 3 6 24 8 22 25 18 20 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 551
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 3 6 24 8 22 14 18 20 25 17 1 7 2 5 21 15 16 12 13 11 19 9]
+Tong quang duong cua loi giai: 545
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 3 6 24 8 22 14 18 20 25 17 1 7 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 530
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 3 6 24 8 22 14 18 20 25 17 1 7 9 15 16 2 5 21 13 11 19 12]
+Tong quang duong cua loi giai: 674
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 3 6 24 8 22 14 18 20 25 17 1 7 9 15 16 5 21 12 2 13 11 19]
+Tong quang duong cua loi giai: 552
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 3 6 24 8 22 14 18 20 25 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 520
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 3 6 24 8 22 14 18 20 25 1 7 17 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 535
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 3 6 24 8 22 14 18 20 25 1 7 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 538
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 3 6 24 22 8 18 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 529
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 3 6 24 22 8 18 20 25 17 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 544
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 3 6 24 22 8 18 20 25 17 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 552
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 3 8 24 22 14 18 20 25 6 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 549
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 3 22 6 24 8 18 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 545
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 3 24 8 22 18 20 25 6 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 549
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 3 24 8 22 14 18 20 25 17 1 7 6 2 5 21 15 16 12 13 11 19 9]
+Tong quang duong cua loi giai: 550
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 3 24 8 22 14 18 20 25 6 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 521
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 3 24 8 22 14 18 20 25 6 1 7 17 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 536
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 3 24 8 22 14 18 20 25 6 1 7 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 539
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 4 3 24 8 22 14 18 20 25 1 7 6 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 543
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 23 3 18 4 8 22 6 24 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 548
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 4 8 23 24 22 14 18 20 25 6 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 549
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 23 24 22 8 20 25 6 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 550
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 23 6 24 22 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 534
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 23 6 24 22 20 25 17 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 549
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 23 22 6 24 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 522
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 23 22 6 24 20 25 17 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 537
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 23 22 6 24 20 25 17 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 545
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 23 22 6 24 20 25 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 548
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 23 22 24 20 25 6 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 545
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 23 24 22 25 20 6 1 7 17 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 541
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 23 24 22 25 20 6 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 522
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 23 24 22 25 20 6 1 7 17 16 2 5 21 15 12 14 9 13 11 19]
+Tong quang duong cua loi giai: 545
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 23 24 22 25 20 6 1 7 14 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 536
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 23 24 22 25 20 6 1 7 14 2 17 16 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 551
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 23 24 22 25 20 6 1 7 14 15 17 16 2 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 541
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 23 24 22 25 20 6 1 7 2 17 16 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 540
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 23 24 22 25 20 14 1 7 6 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 524
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 23 24 22 25 20 14 1 7 6 2 17 16 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 539
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 23 24 22 25 20 1 7 6 2 17 14 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 546
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 23 24 22 25 20 1 7 6 2 17 16 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 527
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 23 24 22 25 20 1 7 6 2 17 16 5 21 15 12 14 9 13 11 19]
+Tong quang duong cua loi giai: 550
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 23 24 22 25 20 1 7 14 6 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 533
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 23 24 22 25 20 1 7 14 6 2 17 16 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 548
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 23 24 22 20 25 17 14 1 7 6 2 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 546
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 23 24 22 20 25 17 14 1 7 6 2 5 21 15 16 12 13 11 19 9]
+Tong quang duong cua loi giai: 536
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 23 24 22 20 25 17 14 1 7 6 2 5 21 15 12 9 13 11 19 16]
+Tong quang duong cua loi giai: 635
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 23 24 22 20 25 17 14 1 7 9 6 2 5 21 15 16 12 13 11 19]
+Tong quang duong cua loi giai: 548
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 23 24 22 20 25 17 1 7 6 2 16 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 542
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 23 24 22 20 25 17 1 7 6 2 5 16 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 551
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 23 24 22 20 25 17 1 7 6 2 5 21 14 9 15 12 13 11 19 16]
+Tong quang duong cua loi giai: 631
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 23 24 22 20 25 17 1 7 6 2 5 21 15 14 16 12 13 11 19 9]
+Tong quang duong cua loi giai: 540
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 23 24 22 20 25 17 1 7 14 6 2 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 548
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 23 24 22 20 25 17 1 7 14 6 2 5 21 15 16 12 13 11 19 9]
+Tong quang duong cua loi giai: 538
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 23 24 22 20 25 17 1 7 14 6 2 5 21 15 12 9 13 11 19 16]
+Tong quang duong cua loi giai: 637
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 23 24 22 20 25 17 1 7 14 15 6 2 16 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 548
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 23 24 22 20 25 17 1 7 14 15 6 2 5 21 16 12 13 11 19 9]
+Tong quang duong cua loi giai: 546
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 23 24 22 20 25 17 1 7 14 15 6 2 5 21 12 9 13 11 19 16]
+Tong quang duong cua loi giai: 637
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 23 24 22 20 25 17 1 7 14 16 6 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 531
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 23 24 22 20 25 17 1 7 14 16 6 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 546
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 23 24 22 20 25 17 1 7 14 9 6 2 5 21 15 16 12 13 11 19]
+Tong quang duong cua loi giai: 531
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 23 24 22 20 25 6 14 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 538
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 23 24 22 20 25 6 1 7 17 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 522
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 23 24 22 20 25 6 1 7 17 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 537
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 23 24 22 20 25 6 1 7 17 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 545
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 23 24 22 20 25 6 1 7 17 16 2 5 21 14 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 537
+Best total cost hien tai: 512
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 23 24 22 20 25 6 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 503
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 23 24 22 20 25 6 1 7 17 16 2 5 21 14 9 15 13 11 19 12]
+Tong quang duong cua loi giai: 669
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 23 24 22 20 25 6 1 7 17 16 2 5 21 15 14 9 12 13 11 19]
+Tong quang duong cua loi giai: 543
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 23 24 22 20 25 6 1 7 17 16 2 5 21 15 12 14 9 13 11 19]
+Tong quang duong cua loi giai: 526
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 23 24 22 20 25 6 1 7 14 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 517
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 23 24 22 20 25 6 1 7 14 2 17 16 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 532
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 23 24 22 20 25 6 1 7 14 15 17 16 2 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 522
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 23 24 22 20 25 6 1 7 14 15 17 16 2 5 21 12 13 11 19 9]
+Tong quang duong cua loi giai: 537
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 23 24 22 20 25 6 1 7 14 15 17 16 5 21 12 2 19 13 11 9]
+Tong quang duong cua loi giai: 581
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 23 24 22 20 25 6 1 7 2 17 14 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 540
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 23 24 22 20 25 6 1 7 2 17 16 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 521
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 23 24 22 20 25 14 1 7 6 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 536
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 23 24 22 20 25 1 7 6 2 17 16 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 525
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 23 24 22 20 25 1 7 14 6 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 531
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 23 24 22 14 20 25 6 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 541
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 22 23 24 20 25 17 1 7 14 16 6 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 542
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 22 23 24 20 25 17 1 7 14 9 6 2 5 21 15 16 12 13 11 19]
+Tong quang duong cua loi giai: 542
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 22 23 24 20 25 6 1 7 17 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 533
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 22 23 24 20 25 6 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 514
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 22 23 24 20 25 6 1 7 17 16 2 5 21 15 12 14 9 13 11 19]
+Tong quang duong cua loi giai: 537
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 22 23 24 20 25 6 1 7 14 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 528
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 22 23 24 20 25 6 1 7 14 15 17 16 2 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 533
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 22 23 24 20 25 6 1 7 2 17 16 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 532
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 22 23 24 20 25 1 7 6 2 17 16 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 536
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 8 22 23 24 20 25 1 7 14 6 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 542
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 22 23 24 8 20 25 6 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 525
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 22 23 24 8 20 25 6 1 7 14 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 539
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 10 3 18 4 22 23 24 8 20 25 6 1 7 2 17 16 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 543
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 23 18 3 6 22 24 8 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 527
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 23 18 3 6 22 24 8 20 25 17 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 542
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 23 18 3 6 24 8 22 25 20 14 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 543
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 23 18 3 6 24 8 22 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 518
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 23 18 3 6 24 8 22 20 25 17 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 533
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 23 18 3 6 24 8 22 20 25 17 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 541
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 23 18 3 6 24 22 8 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 511
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 23 18 3 6 24 22 8 20 25 17 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 526
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 23 18 3 6 24 22 8 20 25 17 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 534
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 23 18 3 6 24 22 8 20 25 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 537
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 23 18 3 22 6 24 8 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 527
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 23 18 3 22 6 24 8 20 25 17 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 542
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 23 18 3 24 22 8 20 25 6 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 538
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 23 3 18 24 8 22 20 25 6 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 536
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 23 3 18 24 22 8 20 25 6 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 529
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 23 3 18 24 22 8 20 25 6 1 7 14 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 543
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 23 3 6 22 18 24 8 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 540
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 23 3 6 22 24 8 18 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 543
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 23 3 6 24 8 22 18 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 520
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 23 3 6 24 8 22 18 20 25 17 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 535
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 23 3 6 24 8 22 18 20 25 17 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 543
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 23 3 6 24 8 22 14 18 20 25 17 1 7 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 528
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 23 3 6 24 8 22 14 18 20 25 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 518
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 23 3 6 24 8 22 14 18 20 25 1 7 17 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 533
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 23 3 6 24 8 22 14 18 20 25 1 7 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 536
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 23 3 6 24 22 8 18 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 527
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 23 3 6 24 22 8 18 20 25 17 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 542
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 23 3 22 6 24 8 18 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 543
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 23 3 24 8 22 14 18 20 25 6 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 519
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 23 3 24 8 22 14 18 20 25 6 1 7 17 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 534
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 23 3 24 8 22 14 18 20 25 6 1 7 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 537
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 23 3 24 8 22 14 18 20 25 1 7 6 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 541
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 18 3 6 8 23 24 22 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 539
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 18 3 6 22 23 24 8 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 524
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 18 3 6 22 23 24 8 20 25 17 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 539
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 23 24 8 22 14 18 20 25 6 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 536
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 18 6 8 23 24 22 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 529
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 18 6 8 22 23 24 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 540
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 18 6 22 23 24 8 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 514
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 18 6 22 23 24 8 20 25 17 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 529
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 18 6 22 23 24 8 20 25 17 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 537
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 18 6 22 23 24 8 20 25 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 540
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 18 6 22 8 23 24 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 536
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 18 8 23 22 6 24 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 543
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 18 8 23 24 22 25 20 6 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 543
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 18 8 23 24 22 20 25 6 1 7 17 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 543
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 18 8 23 24 22 20 25 6 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 524
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 18 8 23 24 22 20 25 6 1 7 14 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 538
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 18 8 23 24 22 20 25 6 1 7 14 15 17 16 2 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 543
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 18 8 23 24 22 20 25 6 1 7 2 17 16 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 542
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 18 8 22 23 24 20 25 6 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 535
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 18 22 23 24 8 20 25 6 1 7 17 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 543
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 18 22 23 24 8 20 25 6 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 524
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 18 22 23 24 8 20 25 6 1 7 14 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 538
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 18 22 23 24 8 20 25 6 1 7 14 15 17 16 2 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 543
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 18 22 23 24 8 20 25 6 1 7 2 17 16 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 542
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 18 24 23 22 8 20 25 6 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 532
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 18 24 8 22 23 25 20 6 1 7 17 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 533
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 18 24 8 22 23 25 20 6 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 514
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 18 24 8 22 23 25 20 6 1 7 17 16 2 5 21 15 12 14 9 13 11 19]
+Tong quang duong cua loi giai: 537
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 18 24 8 22 23 25 20 6 1 7 14 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 528
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 18 24 8 22 23 25 20 6 1 7 14 15 17 16 2 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 533
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 18 24 8 22 23 25 20 6 1 7 2 17 16 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 532
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 18 24 8 22 23 25 20 14 1 7 6 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 516
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 18 24 8 22 23 25 20 14 1 7 6 2 17 16 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 531
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 18 24 8 22 23 25 20 1 7 6 2 17 14 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 538
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 18 24 8 22 23 25 20 1 7 6 2 17 16 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 519
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 18 24 8 22 23 25 20 1 7 6 2 17 16 5 21 15 12 14 9 13 11 19]
+Tong quang duong cua loi giai: 542
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 18 24 8 22 23 25 20 1 7 14 6 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 525
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 18 24 8 22 23 25 20 1 7 14 6 2 17 16 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 540
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 18 24 8 22 20 25 23 6 1 7 17 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 540
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 18 24 8 22 20 25 23 6 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 521
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 18 24 8 22 20 25 23 6 1 7 14 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 535
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 18 24 8 22 20 25 23 6 1 7 14 15 17 16 2 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 540
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 18 24 8 22 20 25 23 6 1 7 2 17 16 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 539
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 18 24 22 8 23 25 20 6 1 7 17 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 535
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 18 24 22 8 23 25 20 6 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 516
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 18 24 22 8 23 25 20 6 1 7 17 16 2 5 21 15 12 14 9 13 11 19]
+Tong quang duong cua loi giai: 539
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 18 24 22 8 23 25 20 6 1 7 14 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 530
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 18 24 22 8 23 25 20 6 1 7 14 15 17 16 2 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 535
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 18 24 22 8 23 25 20 6 1 7 2 17 16 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 534
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 18 24 22 8 23 25 20 14 1 7 6 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 518
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 18 24 22 8 23 25 20 14 1 7 6 2 17 16 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 533
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 18 24 22 8 23 25 20 1 7 6 2 17 14 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 540
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 18 24 22 8 23 25 20 1 7 6 2 17 16 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 521
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 18 24 22 8 23 25 20 1 7 14 6 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 527
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 18 24 22 8 23 25 20 1 7 14 6 2 17 16 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 542
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 18 24 22 8 20 25 23 6 1 7 17 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 533
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 18 24 22 8 20 25 23 6 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 514
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 18 24 22 8 20 25 23 6 1 7 17 16 2 5 21 15 12 14 9 13 11 19]
+Tong quang duong cua loi giai: 537
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 18 24 22 8 20 25 23 6 1 7 14 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 528
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 18 24 22 8 20 25 23 6 1 7 14 15 17 16 2 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 533
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 18 24 22 8 20 25 23 6 1 7 2 17 16 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 532
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 18 24 22 8 20 25 23 14 1 7 6 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 540
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 18 24 22 8 20 14 23 25 6 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 543
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 17 8 23 24 22 18 20 25 6 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 522
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 17 8 23 24 22 18 20 25 6 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 537
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 17 8 23 24 22 25 18 20 6 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 542
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 17 8 23 24 22 14 18 20 25 6 1 7 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 530
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 6 8 23 18 24 22 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 541
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 6 8 23 22 18 24 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 540
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 6 8 23 24 22 18 20 25 17 14 1 7 2 5 21 15 16 12 13 11 19 9]
+Tong quang duong cua loi giai: 542
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 6 8 23 24 22 18 20 25 17 14 1 7 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 527
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 6 8 23 24 22 18 20 25 17 1 7 14 2 5 21 15 16 12 13 11 19 9]
+Tong quang duong cua loi giai: 534
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 6 8 23 24 22 18 20 25 17 1 7 14 2 5 21 15 12 9 13 11 19 16]
+Tong quang duong cua loi giai: 633
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 6 8 23 24 22 18 20 25 17 1 7 14 15 16 2 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 529
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 6 8 23 24 22 18 20 25 17 1 7 14 16 2 15 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 539
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 6 8 23 24 22 18 20 25 17 1 7 14 16 2 5 21 15 12 9 13 19 11]
+Tong quang duong cua loi giai: 665
+Best total cost hien tai: 503
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 6 8 23 24 22 18 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 487
+Best total cost hien tai: 487
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 6 8 23 24 22 18 20 25 17 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 502
+Best total cost hien tai: 487
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 6 8 23 24 22 18 20 25 17 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 510
+Best total cost hien tai: 487
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 6 8 23 24 22 18 20 25 14 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 524
+Best total cost hien tai: 487
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 6 8 23 24 22 18 20 25 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 513
+Best total cost hien tai: 487
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 6 8 23 24 22 18 20 25 1 7 14 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 527
+Best total cost hien tai: 487
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 6 8 23 24 22 25 18 20 14 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 513
+Best total cost hien tai: 487
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 6 8 23 24 22 25 18 20 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 516
+Best total cost hien tai: 487
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 6 8 23 24 22 14 18 20 25 17 1 7 2 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 520
+Best total cost hien tai: 487
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 6 8 23 24 22 14 18 20 25 17 1 7 2 5 21 15 16 12 13 11 19 9]
+Tong quang duong cua loi giai: 510
+Best total cost hien tai: 487
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 6 8 23 24 22 14 18 20 25 17 1 7 2 5 21 15 12 9 13 11 19 16]
+Tong quang duong cua loi giai: 609
+Best total cost hien tai: 487
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 6 8 23 24 22 14 18 20 25 17 1 7 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 522
+Best total cost hien tai: 487
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 6 8 23 24 22 14 18 20 25 17 1 7 9 15 2 5 21 16 12 13 11 19]
+Tong quang duong cua loi giai: 526
+Best total cost hien tai: 487
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 6 8 23 24 22 14 18 20 25 17 1 7 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 495
+Best total cost hien tai: 487
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 6 8 23 24 22 14 18 20 25 17 1 7 9 15 16 2 5 21 13 11 19 12]
+Tong quang duong cua loi giai: 639
+Best total cost hien tai: 487
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 6 8 23 24 22 14 18 20 25 17 1 7 9 15 16 5 21 2 19 13 11 12]
+Tong quang duong cua loi giai: 663
+Best total cost hien tai: 487
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 6 8 23 24 22 14 18 20 25 17 1 7 9 15 16 5 21 12 2 13 11 19]
+Tong quang duong cua loi giai: 517
+Best total cost hien tai: 487
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 6 8 23 24 22 14 18 20 25 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 485
+Best total cost hien tai: 485
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 6 8 23 24 22 14 18 20 25 1 7 17 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 500
+Best total cost hien tai: 485
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 6 8 23 24 22 14 18 20 25 1 7 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 503
+Best total cost hien tai: 485
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 6 8 23 24 22 14 18 20 25 1 7 2 17 16 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 518
+Best total cost hien tai: 485
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 6 8 22 23 24 18 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 520
+Best total cost hien tai: 485
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 6 22 23 24 8 18 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 486
+Best total cost hien tai: 485
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 6 22 23 24 8 18 20 25 17 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 501
+Best total cost hien tai: 485
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 6 22 23 24 8 18 20 25 17 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 509
+Best total cost hien tai: 485
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 6 22 23 24 8 18 20 25 14 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 523
+Best total cost hien tai: 485
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 6 22 23 24 8 18 20 25 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 512
+Best total cost hien tai: 485
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 6 22 8 23 24 18 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 516
+Best total cost hien tai: 485
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 6 22 24 8 23 18 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 524
+Best total cost hien tai: 485
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 6 24 8 22 23 18 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 506
+Best total cost hien tai: 485
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 6 24 8 22 23 18 20 25 17 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 521
+Best total cost hien tai: 485
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 6 24 22 8 23 18 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 508
+Best total cost hien tai: 485
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 6 24 22 8 23 18 20 25 17 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 523
+Best total cost hien tai: 485
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 8 23 24 22 18 20 25 6 1 7 17 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 522
+Best total cost hien tai: 485
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 8 23 24 22 18 20 25 6 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 503
+Best total cost hien tai: 485
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 8 23 24 22 18 20 25 6 1 7 14 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 517
+Best total cost hien tai: 485
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 8 23 24 22 18 20 25 6 1 7 14 15 17 16 2 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 522
+Best total cost hien tai: 485
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 8 23 24 22 18 20 25 6 1 7 2 17 16 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 521
+Best total cost hien tai: 485
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 8 23 24 22 18 20 25 1 7 6 2 17 16 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 525
+Best total cost hien tai: 485
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 8 23 24 22 25 18 20 6 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 523
+Best total cost hien tai: 485
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 8 23 24 22 25 18 20 14 1 7 6 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 525
+Best total cost hien tai: 485
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 8 23 24 22 14 18 20 25 17 1 7 6 2 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 514
+Best total cost hien tai: 485
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 8 23 24 22 14 18 20 25 17 1 7 6 2 5 16 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 523
+Best total cost hien tai: 485
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 8 23 24 22 14 18 20 25 17 1 7 6 2 5 21 15 16 12 13 11 19 9]
+Tong quang duong cua loi giai: 504
+Best total cost hien tai: 485
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 8 23 24 22 14 18 20 25 17 1 7 6 2 5 21 15 12 9 13 11 19 16]
+Tong quang duong cua loi giai: 603
+Best total cost hien tai: 485
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 8 23 24 22 14 18 20 25 17 1 7 9 6 2 5 21 15 16 12 13 11 19]
+Tong quang duong cua loi giai: 516
+Best total cost hien tai: 485
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 8 23 24 22 14 18 20 25 6 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 475
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 8 23 24 22 14 18 20 25 6 1 7 17 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 490
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 8 23 24 22 14 18 20 25 6 1 7 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 493
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 8 23 24 22 14 18 20 25 6 1 7 2 17 16 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 508
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 8 23 24 22 14 18 20 25 1 7 6 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 497
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 8 23 24 22 14 18 20 25 1 7 6 2 17 16 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 512
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 22 23 24 8 18 20 25 6 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 509
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 4 10 3 24 8 22 14 18 20 25 23 6 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 504
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 4 18 3 6 10 23 24 8 22 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 511
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 4 18 3 6 10 23 24 22 8 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 504
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 4 18 3 6 10 8 23 24 22 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 493
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 4 18 3 6 10 8 23 24 22 20 25 17 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 508
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 4 18 3 6 10 8 22 23 24 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 504
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 4 18 3 6 10 22 23 24 8 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 488
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 4 18 3 6 10 22 23 24 8 20 25 17 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 503
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 4 18 3 6 10 22 23 24 8 20 25 17 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 511
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 4 18 3 6 10 22 23 24 8 20 25 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 514
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 4 18 3 6 10 22 8 23 24 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 510
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 4 18 3 6 8 23 24 10 22 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 502
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 4 18 3 6 24 10 8 22 23 25 20 14 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 515
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 4 3 6 10 23 24 8 22 18 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 514
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 4 3 6 10 23 24 8 22 14 18 20 25 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 512
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 4 3 6 10 8 23 24 22 18 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 496
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 4 3 6 10 8 23 24 22 18 20 25 17 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 511
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 4 3 6 10 8 23 24 22 14 18 20 25 17 1 7 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 504
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 4 3 6 10 8 23 24 22 14 18 20 25 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 494
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 4 3 6 10 8 23 24 22 14 18 20 25 1 7 17 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 509
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 4 3 6 10 8 23 24 22 14 18 20 25 1 7 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 512
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 4 3 6 10 22 23 24 8 18 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 505
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 4 3 6 8 23 24 10 22 18 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 505
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 4 3 6 8 23 24 10 22 14 18 20 25 17 1 7 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 513
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 4 3 6 8 23 24 10 22 14 18 20 25 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 503
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 4 3 8 23 24 10 22 14 18 20 25 6 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 493
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 4 3 8 23 24 10 22 14 18 20 25 6 1 7 17 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 508
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 4 3 8 23 24 10 22 14 18 20 25 6 1 7 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 511
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 4 3 8 23 24 10 22 14 18 20 25 1 7 6 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 515
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 18 6 24 22 8 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 509
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 18 22 6 24 8 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 512
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 18 24 8 22 25 20 6 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 509
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 18 24 8 22 25 20 14 1 7 6 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 511
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 18 24 8 22 25 20 1 7 6 2 17 16 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 514
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 18 24 8 22 20 25 6 1 7 17 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 509
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 18 24 8 22 20 25 6 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 490
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 18 24 8 22 20 25 6 1 7 17 16 2 5 21 15 12 14 9 13 11 19]
+Tong quang duong cua loi giai: 513
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 18 24 8 22 20 25 6 1 7 14 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 504
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 18 24 8 22 20 25 6 1 7 14 15 17 16 2 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 509
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 18 24 8 22 20 25 6 1 7 2 17 16 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 508
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 18 24 8 22 20 25 1 7 6 2 17 16 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 512
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 18 24 22 8 20 25 17 1 7 14 16 6 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 511
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 18 24 22 8 20 25 17 1 7 14 9 6 2 5 21 15 16 12 13 11 19]
+Tong quang duong cua loi giai: 511
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 18 24 22 8 20 25 6 1 7 17 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 502
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 18 24 22 8 20 25 6 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 483
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 18 24 22 8 20 25 6 1 7 17 16 2 5 21 15 12 14 9 13 11 19]
+Tong quang duong cua loi giai: 506
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 18 24 22 8 20 25 6 1 7 14 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 497
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 18 24 22 8 20 25 6 1 7 14 2 17 16 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 512
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 18 24 22 8 20 25 6 1 7 14 15 17 16 2 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 502
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 18 24 22 8 20 25 6 1 7 2 17 16 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 501
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 18 24 22 8 20 25 1 7 6 2 17 16 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 505
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 18 24 22 8 20 25 1 7 14 6 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 511
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 6 8 18 24 22 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 514
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 6 8 24 22 18 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 513
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 6 8 24 22 14 18 20 25 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 511
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 6 22 18 24 8 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 494
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 6 22 18 24 8 20 25 17 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 509
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 6 22 24 8 18 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 497
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 6 22 24 8 18 20 25 17 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 512
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 6 24 8 22 18 20 25 17 14 1 7 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 514
+Best total cost hien tai: 475
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 6 24 8 22 18 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 474
+Best total cost hien tai: 474
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 6 24 8 22 18 20 25 17 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 489
+Best total cost hien tai: 474
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 6 24 8 22 18 20 25 17 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 497
+Best total cost hien tai: 474
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 6 24 8 22 18 20 25 14 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 511
+Best total cost hien tai: 474
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 6 24 8 22 18 20 25 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 500
+Best total cost hien tai: 474
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 6 24 8 22 18 20 25 1 7 14 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 514
+Best total cost hien tai: 474
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 6 24 8 22 25 18 20 14 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 500
+Best total cost hien tai: 474
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 6 24 8 22 25 18 20 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 503
+Best total cost hien tai: 474
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 6 24 8 22 14 18 20 25 17 1 7 2 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 507
+Best total cost hien tai: 474
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 6 24 8 22 14 18 20 25 17 1 7 2 5 21 15 16 12 13 11 19 9]
+Tong quang duong cua loi giai: 497
+Best total cost hien tai: 474
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 6 24 8 22 14 18 20 25 17 1 7 2 5 21 15 12 9 13 11 19 16]
+Tong quang duong cua loi giai: 596
+Best total cost hien tai: 474
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 6 24 8 22 14 18 20 25 17 1 7 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 509
+Best total cost hien tai: 474
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 6 24 8 22 14 18 20 25 17 1 7 9 15 2 5 21 16 12 13 11 19]
+Tong quang duong cua loi giai: 513
+Best total cost hien tai: 474
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 6 24 8 22 14 18 20 25 17 1 7 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 482
+Best total cost hien tai: 474
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 6 24 8 22 14 18 20 25 17 1 7 9 15 16 2 5 21 13 11 19 12]
+Tong quang duong cua loi giai: 626
+Best total cost hien tai: 474
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 6 24 8 22 14 18 20 25 17 1 7 9 15 16 5 21 2 19 13 11 12]
+Tong quang duong cua loi giai: 650
+Best total cost hien tai: 474
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 6 24 8 22 14 18 20 25 17 1 7 9 15 16 5 21 12 2 13 11 19]
+Tong quang duong cua loi giai: 504
+Best total cost hien tai: 474
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 6 24 8 22 14 18 20 25 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 472
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 6 24 8 22 14 18 20 25 1 7 17 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 487
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 6 24 8 22 14 18 20 25 1 7 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 490
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 6 24 8 22 14 18 20 25 1 7 2 17 16 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 505
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 6 24 22 8 18 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 481
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 6 24 22 8 18 20 25 17 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 496
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 6 24 22 8 18 20 25 17 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 504
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 6 24 22 8 18 20 25 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 507
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 8 24 22 14 18 20 25 6 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 501
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 22 6 24 8 18 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 497
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 24 8 22 18 20 25 6 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 501
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 24 8 22 14 18 20 25 17 1 7 6 2 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 512
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 24 8 22 14 18 20 25 17 1 7 6 2 5 21 15 16 12 13 11 19 9]
+Tong quang duong cua loi giai: 502
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 24 8 22 14 18 20 25 17 1 7 6 2 5 21 15 12 9 13 11 19 16]
+Tong quang duong cua loi giai: 601
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 24 8 22 14 18 20 25 6 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 473
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 24 8 22 14 18 20 25 6 1 7 17 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 488
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 24 8 22 14 18 20 25 6 1 7 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 491
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 24 8 22 14 18 20 25 6 1 7 2 17 16 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 506
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 24 8 22 14 18 20 25 1 7 6 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 495
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 24 8 22 14 18 20 25 1 7 6 2 17 16 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 510
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 10 3 24 22 8 18 20 25 6 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 508
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 18 3 6 10 22 24 8 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 499
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 18 3 6 10 24 8 22 25 20 14 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 511
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 18 3 6 10 24 8 22 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 486
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 18 3 6 10 24 8 22 20 25 17 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 501
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 18 3 6 10 24 8 22 20 25 17 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 509
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 18 3 6 10 24 8 22 20 25 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 512
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 18 3 6 10 24 22 8 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 479
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 18 3 6 10 24 22 8 20 25 17 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 494
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 18 3 6 10 24 22 8 20 25 17 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 502
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 18 3 6 10 24 22 8 20 25 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 505
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 18 3 6 22 24 10 8 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 494
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 18 3 6 22 24 10 8 20 25 17 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 509
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 18 3 6 24 10 8 22 25 20 14 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 510
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 18 3 6 24 10 8 22 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 485
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 18 3 6 24 10 8 22 20 25 17 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 500
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 18 3 6 24 10 8 22 20 25 17 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 508
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 18 3 6 24 10 8 22 20 25 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 511
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 18 3 6 24 10 22 8 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 482
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 18 3 6 24 10 22 8 20 25 17 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 497
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 18 3 6 24 10 22 8 20 25 17 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 505
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 18 3 6 24 10 22 8 20 25 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 508
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 18 3 24 10 8 22 20 25 6 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 512
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 18 3 24 10 22 8 20 25 6 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 509
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 3 18 24 10 8 22 20 25 6 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 504
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 3 18 24 10 22 8 20 25 6 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 501
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 3 6 10 24 8 22 18 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 489
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 3 6 10 24 8 22 18 20 25 17 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 504
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 3 6 10 24 8 22 18 20 25 17 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 512
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 3 6 10 24 8 22 14 18 20 25 17 1 7 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 497
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 3 6 10 24 8 22 14 18 20 25 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 487
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 3 6 10 24 8 22 14 18 20 25 1 7 17 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 502
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 3 6 10 24 8 22 14 18 20 25 1 7 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 505
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 3 6 10 24 22 8 18 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 496
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 3 6 10 24 22 8 18 20 25 17 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 511
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 3 6 22 18 24 10 8 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 508
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 3 6 22 24 10 8 18 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 511
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 3 6 24 10 8 22 18 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 488
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 3 6 24 10 8 22 18 20 25 17 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 503
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 3 6 24 10 8 22 18 20 25 17 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 511
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 3 6 24 10 8 22 14 18 20 25 17 1 7 2 5 21 15 16 12 13 11 19 9]
+Tong quang duong cua loi giai: 511
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 3 6 24 10 8 22 14 18 20 25 17 1 7 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 496
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 3 6 24 10 8 22 14 18 20 25 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 486
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 3 6 24 10 8 22 14 18 20 25 1 7 17 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 501
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 3 6 24 10 8 22 14 18 20 25 1 7 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 504
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 3 6 24 10 22 8 18 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 499
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 3 24 10 8 22 14 18 20 25 6 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 487
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 3 24 10 8 22 14 18 20 25 6 1 7 17 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 502
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 3 24 10 8 22 14 18 20 25 6 1 7 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 505
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 4 3 24 10 8 22 14 18 20 25 1 7 6 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 509
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 3 18 4 10 22 6 24 8 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 503
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 23 3 18 4 10 24 22 8 20 25 6 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 506
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 23 24 22 8 20 25 6 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 510
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 17 8 23 24 22 25 20 6 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 494
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 17 8 23 24 22 25 20 6 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 509
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 17 8 23 24 22 20 25 6 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 475
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 17 8 23 24 22 20 25 6 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 490
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 17 8 23 24 22 20 25 6 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 498
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 17 8 22 23 24 20 25 6 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 486
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 17 8 22 23 24 20 25 6 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 501
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 17 8 22 23 24 20 25 6 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 509
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 17 22 23 24 8 20 25 6 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 498
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 17 24 8 22 23 25 20 6 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 506
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 17 24 22 8 23 25 20 6 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 508
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 17 24 22 8 20 25 23 6 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 506
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 23 24 8 22 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 510
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 23 24 22 8 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 503
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 8 23 22 24 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 482
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 8 23 22 24 20 25 17 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 497
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 8 23 22 24 20 25 17 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 505
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 8 23 22 24 20 25 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 508
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 8 23 22 25 24 20 14 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 503
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 8 23 22 25 24 20 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 506
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 8 23 24 22 25 20 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 480
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 8 23 24 22 25 20 17 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 495
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 8 23 24 22 25 20 17 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 503
+Best total cost hien tai: 472
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 8 23 24 22 25 20 14 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 465
+Best total cost hien tai: 465
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 8 23 24 22 25 20 14 1 7 17 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 480
+Best total cost hien tai: 465
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 8 23 24 22 25 20 14 1 7 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 483
+Best total cost hien tai: 465
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 8 23 24 22 25 20 14 1 7 2 17 16 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 498
+Best total cost hien tai: 465
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 8 23 24 22 25 20 1 7 17 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 487
+Best total cost hien tai: 465
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 8 23 24 22 25 20 1 7 17 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 502
+Best total cost hien tai: 465
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 8 23 24 22 25 20 1 7 17 16 2 5 21 14 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 502
+Best total cost hien tai: 465
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 8 23 24 22 25 20 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 468
+Best total cost hien tai: 465
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 8 23 24 22 25 20 1 7 17 16 2 5 21 15 12 14 9 13 11 19]
+Tong quang duong cua loi giai: 491
+Best total cost hien tai: 465
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 8 23 24 22 25 20 1 7 14 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 482
+Best total cost hien tai: 465
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 8 23 24 22 25 20 1 7 14 2 17 16 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 497
+Best total cost hien tai: 465
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 8 23 24 22 25 20 1 7 14 15 17 16 2 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 487
+Best total cost hien tai: 465
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 8 23 24 22 25 20 1 7 14 15 17 16 2 5 21 12 13 11 19 9]
+Tong quang duong cua loi giai: 502
+Best total cost hien tai: 465
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 8 23 24 22 25 20 1 7 14 15 17 16 5 21 12 2 19 13 11 9]
+Tong quang duong cua loi giai: 546
+Best total cost hien tai: 465
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 8 23 24 22 25 20 1 7 2 17 14 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 505
+Best total cost hien tai: 465
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 8 23 24 22 25 20 1 7 2 17 16 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 486
+Best total cost hien tai: 465
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 8 23 24 22 20 25 17 14 1 7 2 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 505
+Best total cost hien tai: 465
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 8 23 24 22 20 25 17 14 1 7 2 5 21 15 16 12 13 11 19 9]
+Tong quang duong cua loi giai: 495
+Best total cost hien tai: 465
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 8 23 24 22 20 25 17 14 1 7 2 5 21 15 12 9 13 11 19 16]
+Tong quang duong cua loi giai: 594
+Best total cost hien tai: 465
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 8 23 24 22 20 25 17 14 1 7 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 480
+Best total cost hien tai: 465
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 8 23 24 22 20 25 17 14 1 7 9 15 16 2 5 21 13 11 19 12]
+Tong quang duong cua loi giai: 624
+Best total cost hien tai: 465
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 8 23 24 22 20 25 17 14 1 7 9 15 16 5 21 2 19 13 11 12]
+Tong quang duong cua loi giai: 648
+Best total cost hien tai: 465
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 8 23 24 22 20 25 17 14 1 7 9 15 16 5 21 12 2 13 11 19]
+Tong quang duong cua loi giai: 502
+Best total cost hien tai: 465
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 8 23 24 22 20 25 17 1 7 14 2 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 497
+Best total cost hien tai: 465
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 8 23 24 22 20 25 17 1 7 14 2 5 21 15 16 12 13 11 19 9]
+Tong quang duong cua loi giai: 487
+Best total cost hien tai: 465
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 8 23 24 22 20 25 17 1 7 14 2 5 21 15 12 9 13 11 19 16]
+Tong quang duong cua loi giai: 586
+Best total cost hien tai: 465
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 8 23 24 22 20 25 17 1 7 14 15 16 2 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 482
+Best total cost hien tai: 465
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 8 23 24 22 20 25 17 1 7 14 15 16 2 5 21 12 13 11 19 9]
+Tong quang duong cua loi giai: 497
+Best total cost hien tai: 465
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 8 23 24 22 20 25 17 1 7 14 15 16 5 21 12 2 19 13 11 9]
+Tong quang duong cua loi giai: 541
+Best total cost hien tai: 465
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 8 23 24 22 20 25 17 1 7 14 16 2 15 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 492
+Best total cost hien tai: 465
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 8 23 24 22 20 25 17 1 7 14 16 2 5 21 15 12 9 13 19 11]
+Tong quang duong cua loi giai: 618
+Best total cost hien tai: 465
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 8 23 24 22 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 440
+Best total cost hien tai: 440
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 8 23 24 22 20 25 17 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 455
+Best total cost hien tai: 440
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 8 23 24 22 20 25 17 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 463
+Best total cost hien tai: 440
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 8 23 24 22 20 25 14 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 477
+Best total cost hien tai: 440
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 8 23 24 22 20 25 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 466
+Best total cost hien tai: 440
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 8 23 24 22 20 25 1 7 14 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 480
+Best total cost hien tai: 440
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 8 22 23 24 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 451
+Best total cost hien tai: 440
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 8 22 23 24 20 25 17 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 466
+Best total cost hien tai: 440
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 8 22 23 24 20 25 17 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 474
+Best total cost hien tai: 440
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 8 22 23 24 20 25 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 477
+Best total cost hien tai: 440
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 22 23 24 8 20 25 17 14 1 7 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 465
+Best total cost hien tai: 440
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 22 23 24 8 20 25 17 1 7 14 2 5 21 15 16 12 13 11 19 9]
+Tong quang duong cua loi giai: 472
+Best total cost hien tai: 440
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 22 23 24 8 20 25 17 1 7 14 15 16 2 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 467
+Best total cost hien tai: 440
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 22 23 24 8 20 25 17 1 7 14 16 2 15 5 21 12 9 13 11 19]
+Tong quang duong cua loi giai: 477
+Best total cost hien tai: 440
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 22 23 24 8 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 425
+Best total cost hien tai: 425
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 22 23 24 8 20 25 17 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 440
+Best total cost hien tai: 425
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 22 23 24 8 20 25 17 1 7 14 9 15 16 2 5 21 12 13 11 19]
+Tong quang duong cua loi giai: 448
+Best total cost hien tai: 425
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 22 23 24 8 20 25 14 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 462
+Best total cost hien tai: 425
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 22 23 24 8 20 25 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 451
+Best total cost hien tai: 425
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 22 23 24 8 20 25 1 7 14 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 465
+Best total cost hien tai: 425
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 22 8 23 24 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 447
+Best total cost hien tai: 425
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 22 8 23 24 20 25 17 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 462
+Best total cost hien tai: 425
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 24 8 22 23 25 20 14 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 457
+Best total cost hien tai: 425
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 24 8 22 23 25 20 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 460
+Best total cost hien tai: 425
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 24 22 8 23 25 20 14 1 7 17 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 459
+Best total cost hien tai: 425
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 6 24 22 8 23 25 20 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 462
+Best total cost hien tai: 425
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 8 23 24 22 20 25 6 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 456
+Best total cost hien tai: 425
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 22 23 24 8 20 25 6 1 7 17 16 2 5 21 14 9 15 12 13 11 19]
+Tong quang duong cua loi giai: 448
+Best total cost hien tai: 425
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 10 3 22 23 24 8 20 25 6 1 7 14 2 17 16 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 462
+Best total cost hien tai: 425
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 3 6 10 23 24 22 8 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 460
+Best total cost hien tai: 425
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 3 6 10 8 23 24 22 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 449
+Best total cost hien tai: 425
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 3 6 10 8 23 24 22 20 25 17 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 464
+Best total cost hien tai: 425
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 3 6 10 8 22 23 24 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 460
+Best total cost hien tai: 425
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 3 6 10 22 23 24 8 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 444
+Best total cost hien tai: 425
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 3 6 10 22 23 24 8 20 25 17 1 7 14 16 2 5 21 15 12 13 11 19 9]
+Tong quang duong cua loi giai: 459
+Best total cost hien tai: 425
++++++++++++++++++++++++++++
+Loi giai: [0 18 4 3 6 8 23 24 10 22 20 25 17 1 7 14 16 2 5 21 15 12 9 13 11 19]
+Tong quang duong cua loi giai: 458
+Best total cost hien tai: 425

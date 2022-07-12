@@ -260,8 +260,11 @@ def pmx_func(p1, p2, t1, t2,  dim_uss):
     redundant_idx = np.array(redundant_idx)
     redundant_idx_b = np.array(redundant_idx_b)
     
-    oa[redundant_idx] = redundant
-    ob[redundant_idx_b] = redundant_b
+    if len(redundant_idx):
+        oa[redundant_idx] = redundant
+    if len(redundant_idx_b):
+        ob[redundant_idx_b] = redundant_b
+    
     
     oa[t1:t2] = mid
     ob[t1:t2] = mid_b
