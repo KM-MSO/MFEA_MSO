@@ -8,8 +8,8 @@ from ..cec14_func import *
 path = os.path.dirname(os.path.realpath(__file__))
 
 class Individual_func(Individual):
-    def __init__(self, genes, dim= None) -> None:
-        super().__init__(genes, dim)
+    def __init__(self, genes, parent= None, dim= None, *args, **kwargs) -> None:
+        super().__init__(genes, parent, dim)
         if genes is None:
             self.genes: np.ndarray = np.random.rand(dim)
 

@@ -88,7 +88,7 @@ class model():
         self.selection.getInforTasks(tasks, seed = self.seed)
 
 
-    def render_process(self,curr_progress, list_desc, list_value, use_sys = False, *args, **kwargs): 
+    def render_process(self,curr_progress, list_desc, list_value, use_sys = False,print_format_e = True,  *args, **kwargs): 
         percent = int(curr_progress * 100)
         if percent >= 100: 
             self.time_end = time.time() 
@@ -123,7 +123,10 @@ class model():
         for i in range(len(list_desc)):
             desc = str("")
             for value in range(len(list_value[i])):
-                desc = desc + str("%.2E " % (list_value[i][value])) + " "
+                if print_format_e: 
+                    desc = desc + str("%.2E " % (list_value[i][value])) + " "
+                else: 
+                    desc = desc + str(list_value[i][value]) + " "
             line = '{}: {},  '.format(list_desc[i], desc)
             if use_sys is True: 
                 print_line = print_line + line 

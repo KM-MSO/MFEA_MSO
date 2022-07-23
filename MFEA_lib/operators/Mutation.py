@@ -1,4 +1,5 @@
 from copy import deepcopy
+from re import I
 from typing import Deque, Tuple, Type
 from matplotlib import pyplot as plt
 import numpy as np
@@ -29,7 +30,7 @@ class AbstractMutation():
 class NoMutation(AbstractMutation):
     def __call__(self, ind: Individual, return_newInd:bool, *arg, **kwargs) -> Individual:
         if return_newInd:
-            newInd =  self.IndClass(genes= np.copy(ind.genes))
+            newInd =  self.IndClass(genes= np.copy(ind.genes), parent=ind)
             newInd.skill_factor = ind.skill_factor
             newInd.fcost = ind.fcost
             return newInd
@@ -70,7 +71,8 @@ class Polynomial_Mutation(AbstractMutation):
                     ind.genes + delta * ind.genes,
                     # delta_r: ind -> 1
                     ind.genes + delta * (1 - ind.genes)
-                )
+                ),
+                parent= ind
             )
             newInd.skill_factor = ind.skill_factor
             return newInd
@@ -107,25 +109,13 @@ class GaussMutation(AbstractMutation):
         if return_newInd:
             new_genes = np.copy(ind.genes)
             new_genes[idx_mutation] = mutate_genes
-            newInd = self.IndClass(genes= new_genes)
+            newInd = self.IndClass(genes= new_genes, parent= ind)
             newInd.skill_factor = ind.skill_factor
             return newInd
         else:
             ind.genes[idx_mutation] = mutate_genes
             ind.fcost = None
             return ind
-
-class PMD_Scale(AbstractMutation):
-    def __init__(self, nm = 5, lenMem = 30, default_scale = 0.5, *arg, **kwargs):
-        super().__init__(*arg, **kwargs)
-        self.lenMem = lenMem
-        self.default_scale = default_scale
-
-    def getInforTasks(self, tasks: list[AbstractTask], seed=None):
-        super().getInforTasks(tasks, seed)
-
-    def __call__(self, ind: Individual, return_newInd: bool, *arg, **kwargs) -> Individual:
-        return super().__call__(ind, return_newInd, *arg, **kwargs)
 
 class IDPCEDU_Mutation(AbstractMutation):
     def getInforTasks(self, IndClass: Type[Individual], tasks: list[AbstractTask], seed=None):
@@ -254,3 +244,9 @@ class Directional_Mutation_v2(AbstractMutation):
         self.direction = curr_mean > self.prev_mean 
         self.prev_mean = curr_mean
 
+class GD_Mutation(AbstractMutation):
+    def __init__(self, *arg, **kwargs):
+        super().__init__(*arg, **kwargs)
+    
+    def __call__(self, ind: Individual, return_newInd: bool, *arg, **kwargs) -> Individual:
+        pass
