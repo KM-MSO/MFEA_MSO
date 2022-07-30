@@ -121,8 +121,8 @@ class IDPC_EDU_FUNC(AbstractTask):
     def __call__(self, gene: np.ndarray):
         # decode
         # idx = np.argsort(gene[0])[:self.dim]
-        idx = np.arange(self.dim)
-        gene = np.ascontiguousarray(gene[:, idx])
+        # print([np.sort(np.argsort(gene[0])[:self.dim])])
+        gene = np.ascontiguousarray(gene[:,np.sort(np.argsort(gene[0])[:self.dim])])
         # eval
         return __class__.func(gene, self.source, self.target,
                          self.num_nodes, self.num_domains, self.edges, self.count_paths)

@@ -21,3 +21,16 @@ class IDPC_EDU_benchmark:
             tasks.append(IDPC_EDU_FUNC(path + '/__references__/IDPC_DU/IDPC_EDU/data/set' + str(ID_set), file_name))
         return tasks, Ind_EDU
 
+    def get_batches(ID_set:int, batch_size: int):
+        print('\rReading data...')
+        tasks = []
+        file_list = sorted(os.listdir(path + '/__references__/IDPC_DU/IDPC_EDU/data/set' + str(ID_set)))
+        count = 0
+        for file_name in tqdm(file_list):
+            tasks.append(IDPC_EDU_FUNC(path + '/__references__/IDPC_DU/IDPC_EDU/data/set' + str(ID_set), file_name))
+            if count == batch_size - 1:
+                yield tasks, Ind_EDU
+                tasks = []
+                count = 0
+            else:
+                count += 1

@@ -12,32 +12,20 @@ from MFEA_lib.operators.Mutation import *
 from MFEA_lib.operators.Selection import *
 
 
-# In[2]:
-
-
-tasks, IndClass = IDPC_EDU_benchmark.get_tasks(1)
-
-
-# In[3]:
-
-
-tasks[0].num_nodes
-
-
 # In[4]:
 
-
-baseModel = MFEA_base.model()
-baseModel.compile(
-    IndClass= IndClass,
-    tasks= tasks,
-    # crossover= newSBX(nc = 2, gamma= 0.4, alpha= 6),
-    crossover= IDPCEDU_Crossover(),
-    mutation= IDPCEDU_Mutation(),
-    selection= ElitismSelection()
-)
-solve = baseModel.fit(
-    nb_generations = 1000, rmp = 0.3, nb_inds_each_task= 100, 
-    bound_pop= [0, 1], evaluate_initial_skillFactor= True
-)
+for tasks, IndClass in IDPC_EDU_benchmark.get_batches(2, batch_size = 18):
+    baseModel = MFEA_base.model()
+    baseModel.compile(
+        IndClass= IndClass,
+        tasks= tasks,
+        # crossover= newSBX(nc = 2, gamma= 0.4, alpha= 6),
+        crossover= IDPCEDU_Crossover(),
+        mutation= IDPCEDU_Mutation(),
+        selection= ElitismSelection()
+    )
+    solve = baseModel.fit(
+        nb_generations = 1000, rmp = 0.3, nb_inds_each_task= 100, 
+        bound_pop= [0, 1], evaluate_initial_skillFactor= True
+    )
 
