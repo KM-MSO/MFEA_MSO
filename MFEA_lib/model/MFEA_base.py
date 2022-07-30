@@ -29,6 +29,8 @@ class model(AbstractModel.model):
         
         self.render_process(0, ['Cost'], [self.history_cost[-1]], use_sys= True)
         
+        _rmp = 0
+        not_start_transfer = True
         for epoch in range(nb_generations):
             
             # initial offspring_population of generation
@@ -44,7 +46,7 @@ class model(AbstractModel.model):
                 # choose parent 
                 pa, pb = population.__getRandomInds__(2)
 
-                if pa.skill_factor == pb.skill_factor or np.random.rand() < rmp:
+                if pa.skill_factor == pb.skill_factor or np.random.rand() < _rmp:
                     # intra / inter crossover
                     skf_oa, skf_ob = np.random.choice([pa.skill_factor, pb.skill_factor], size= 2, replace= True)
                     oa, ob = self.crossover(pa, pb, skf_oa, skf_ob)
@@ -71,6 +73,11 @@ class model(AbstractModel.model):
 
             #print
             self.render_process((epoch+1)/nb_generations, ['Cost'], [self.history_cost[-1]], use_sys= True)
+            
+            if np.mean(self.history_cost[-1]) < -40 and not_start_transfer:
+                print('START TRANSFER!!!!')
+                _rmp = rmp
+                not_start_transfer = False
         print('\nEND!')
 
         #solve

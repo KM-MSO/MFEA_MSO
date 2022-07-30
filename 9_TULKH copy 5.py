@@ -71,7 +71,7 @@ class TULKH_FUNC(AbstractTask):
         curr = 0
         curr_time = 0
 
-        for curr_idx in range(data['n']):
+        for curr_idx in range(data['objective']):
             stop = True
             for i, t in enumerate(idx):
             
@@ -128,10 +128,12 @@ class TULKH_benchmark:
     def get_tasks():
         print('\rReading data...', )
         tasks = []
-        file_list = ['DATA/' + file_name for file_name in ['50points_5days_DoubleDiscrepancy.txt', '25points_3days.txt', '10points_1day.txt']]
+        file_list = ['DATA/' + file_name for file_name in ['50points_5days_DoubleDiscrepancy.txt']]
         for file_name in tqdm(file_list):
             # tasks.append(TULKH_FUNC(file_name, objective = 'cost'))
-            tasks.append(TULKH_FUNC(file_name, objective = 'time'))
+            tasks.append(TULKH_FUNC(file_name, objective = 50))
+            tasks.append(TULKH_FUNC(file_name, objective = 30))
+            tasks.append(TULKH_FUNC(file_name, objective = 10))
                          
         return tasks, Ind_TULKH
 

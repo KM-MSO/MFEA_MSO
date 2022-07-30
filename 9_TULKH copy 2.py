@@ -109,9 +109,9 @@ class TULKH_FUNC(AbstractTask):
         
     def __call__(self, gene: np.ndarray):
         # decode
-        idx = np.argsort(gene)[:self.dim]
+        gene = gene[:self.dim]
         # eval
-        return __class__.func(gene[np.sort(idx)], self.data)
+        return __class__.func(gene, self.data)
 
 
 # In[23]:
@@ -128,11 +128,13 @@ class TULKH_benchmark:
     def get_tasks():
         print('\rReading data...', )
         tasks = []
-        file_list = ['DATA/' + file_name for file_name in ['50points_5days_DoubleDiscrepancy.txt', '25points_3days.txt', '10points_1day.txt']]
+        file_list = ['DATA/' + file_name for file_name in ['50points_5days_DoubleDiscrepancy.txt']]
         for file_name in tqdm(file_list):
-            # tasks.append(TULKH_FUNC(file_name, objective = 'cost'))
-            tasks.append(TULKH_FUNC(file_name, objective = 'time'))
-                         
+            tasks.append(TULKH_FUNC(file_name, objective = 'cost'))
+        tasks.append(TULKH_FUNC(file_name, objective = 'time'))
+        tasks.append(TULKH_FUNC(file_name, objective = 'time'))
+        tasks.append(TULKH_FUNC(file_name, objective = 'time'))
+                        
         return tasks, Ind_TULKH
 
 

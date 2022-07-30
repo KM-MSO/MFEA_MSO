@@ -109,9 +109,9 @@ class TULKH_FUNC(AbstractTask):
         
     def __call__(self, gene: np.ndarray):
         # decode
-        idx = np.argsort(gene)[:self.dim]
+        gene = gene[:self.dim]
         # eval
-        return __class__.func(gene[np.sort(idx)], self.data)
+        return __class__.func(gene, self.data)
 
 
 # In[23]:
@@ -128,10 +128,11 @@ class TULKH_benchmark:
     def get_tasks():
         print('\rReading data...', )
         tasks = []
-        file_list = ['DATA/' + file_name for file_name in ['50points_5days_DoubleDiscrepancy.txt', '25points_3days.txt', '10points_1day.txt']]
-        for file_name in tqdm(file_list):
-            # tasks.append(TULKH_FUNC(file_name, objective = 'cost'))
-            tasks.append(TULKH_FUNC(file_name, objective = 'time'))
+        file_list = ['DATA/' + file_name for file_name in ['50points_5days_DoubleDiscrepancy.txt']]
+        for i in range(2):
+            for file_name in tqdm(file_list):
+                tasks.append(TULKH_FUNC(file_name, objective = 'cost'))
+                tasks.append(TULKH_FUNC(file_name, objective = 'time'))
                          
         return tasks, Ind_TULKH
 
@@ -191,7 +192,7 @@ for i in range(1):
         # crossover= newSBX(nc = 2, gamma= 0.4, alpha= 6),
         crossover= TULKH_Crossover(),
         mutation= TULKH_Mutation(),
-        selection= ElitismSelection(p = 0.2)
+        selection= ElitismSelection()
     )
     solve = baseModel.fit(
         nb_generations = 1000, rmp = 0.3, nb_inds_each_task= 1000, 

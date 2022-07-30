@@ -57,6 +57,9 @@ class TULKH_FUNC(AbstractTask):
         data['cost'] = np.array(cost)
         data['time'] = np.array(time)
         data['objective'] = self.objective
+        if self.objective == 'mutate':
+            idx = np.where(np.random.rand(data['cost'].shape[0], data['cost'].shape[1]) > 0.5, True, False)
+            data['cost'][idx] = data['cost'][idx] * 2 
         # data['prior'] = rankdata(data['late'])
         self.dim = n
         self.data = data
@@ -98,7 +101,7 @@ class TULKH_FUNC(AbstractTask):
                 # print(curr_idx / data['n'])
                 # print(curr_idx, data['n'])
                     return MAX_INT
-                return - curr_idx
+                return -curr_idx 
             
         assert data['cost'][curr][0] > 0
         assert len(idx) == 0
@@ -109,9 +112,9 @@ class TULKH_FUNC(AbstractTask):
         
     def __call__(self, gene: np.ndarray):
         # decode
-        idx = np.argsort(gene)[:self.dim]
+        gene = gene[:self.dim]
         # eval
-        return __class__.func(gene[np.sort(idx)], self.data)
+        return __class__.func(gene, self.data)
 
 
 # In[23]:
@@ -128,10 +131,29 @@ class TULKH_benchmark:
     def get_tasks():
         print('\rReading data...', )
         tasks = []
-        file_list = ['DATA/' + file_name for file_name in ['50points_5days_DoubleDiscrepancy.txt', '25points_3days.txt', '10points_1day.txt']]
-        for file_name in tqdm(file_list):
-            # tasks.append(TULKH_FUNC(file_name, objective = 'cost'))
-            tasks.append(TULKH_FUNC(file_name, objective = 'time'))
+        file_list = ['DATA/' + file_name for file_name in ['50points_5days_DoubleDiscrepancy.txt']]
+        for i in range(1):
+            for file_name in tqdm(file_list):
+                # tasks.append(TULKH_FUNC(file_name, objective = 'cost'))
+                tasks.append(TULKH_FUNC(file_name, objective = 'time'))
+                tasks.append(TULKH_FUNC(file_name, objective = 'time'))
+                tasks.append(TULKH_FUNC(file_name, objective = 'time'))
+                tasks.append(TULKH_FUNC(file_name, objective = 'mutate'))
+                tasks.append(TULKH_FUNC(file_name, objective = 'mutate'))
+                tasks.append(TULKH_FUNC(file_name, objective = 'mutate'))
+                tasks.append(TULKH_FUNC(file_name, objective = 'mutate'))
+                tasks.append(TULKH_FUNC(file_name, objective = 'mutate'))
+                tasks.append(TULKH_FUNC(file_name, objective = 'mutate'))
+                tasks.append(TULKH_FUNC(file_name, objective = 'mutate'))
+                tasks.append(TULKH_FUNC(file_name, objective = 'mutate'))
+                tasks.append(TULKH_FUNC(file_name, objective = 'mutate'))
+                tasks.append(TULKH_FUNC(file_name, objective = 'mutate'))
+                tasks.append(TULKH_FUNC(file_name, objective = 'mutate'))
+                tasks.append(TULKH_FUNC(file_name, objective = 'mutate'))
+                tasks.append(TULKH_FUNC(file_name, objective = 'mutate'))
+                tasks.append(TULKH_FUNC(file_name, objective = 'mutate'))
+                tasks.append(TULKH_FUNC(file_name, objective = 'mutate'))
+                tasks.append(TULKH_FUNC(file_name, objective = 'mutate'))                
                          
         return tasks, Ind_TULKH
 
@@ -191,10 +213,10 @@ for i in range(1):
         # crossover= newSBX(nc = 2, gamma= 0.4, alpha= 6),
         crossover= TULKH_Crossover(),
         mutation= TULKH_Mutation(),
-        selection= ElitismSelection(p = 0.2)
+        selection= ElitismSelection(p =0.3)
     )
     solve = baseModel.fit(
-        nb_generations = 1000, rmp = 0.3, nb_inds_each_task= 1000, 
+        nb_generations = 2000, rmp = 0.1, nb_inds_each_task= 100, 
         bound_pop= [0, 1], evaluate_initial_skillFactor= True
     )
     print(solve)
