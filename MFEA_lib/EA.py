@@ -1,5 +1,5 @@
 import random
-from typing import Type
+from typing import Type, List
 import numpy as np
 from .tasks.task import AbstractTask
 
@@ -186,7 +186,7 @@ class SubPopulation:
         raise ValueError(str(ind) + "is not in subPop")
 
 class Population:
-    def __init__(self, IndClass: Type[Individual], dim, nb_inds_tasks: list[int], list_tasks:list[AbstractTask] = [], 
+    def __init__(self, IndClass: Type[Individual], dim, nb_inds_tasks: List[int], list_tasks:List[AbstractTask] = [], 
         evaluate_initial_skillFactor = False) -> None:
         '''
         A Population include:\n
@@ -328,6 +328,6 @@ class Population:
         return newPop
 
 
-class LSHADE_Population(Population): 
-    def __init__(self, IndClass: Type[Individual], dim, nb_inds_tasks: list[int], list_tasks:list[AbstractTask] = [], evaluate_initial_skillFactor = False) -> None:
-        super().__init__(IndClass, dim, nb_inds_tasks, list_tasks, evaluate_initial_skillFactor = False)
+# class LSHADE_Population(Population): 
+#     def __init__(self, IndClass: Type[Individual], dim, nb_inds_tasks: list[int], list_tasks:list[AbstractTask] = [], evaluate_initial_skillFactor = False) -> None:
+#         super().__init__(IndClass, dim, nb_inds_tasks, list_tasks, evaluate_initial_skillFactor = False)
