@@ -6,7 +6,7 @@
 
 from MFEA_lib.tasks.Benchmark.IDPC_EDU import IDPC_EDU_benchmark
 from MFEA_lib.model import MFEA_base
-from MFEA_lib.model.utils import *
+from MFEA_lib.model.utils.utils import *
 from MFEA_lib.operators.Crossover import *
 from MFEA_lib.operators.Mutation import *
 from MFEA_lib.operators.Selection import *
