@@ -1,5 +1,5 @@
 import numpy as np
-from .task import AbstractTask
+from ...task import AbstractTask
 from numba import jit
 from numba.typed import Dict
 

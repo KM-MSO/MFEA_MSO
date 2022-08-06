@@ -2,7 +2,7 @@ from operator import index
 import pickle
 import matplotlib.pyplot as plt
 import numpy as np
-from ..tasks.function import AbstractTask
+from ..tasks.task import AbstractTask
 from . import AbstractModel
 from ..operators import Crossover, Mutation, Selection
 from pathlib import Path

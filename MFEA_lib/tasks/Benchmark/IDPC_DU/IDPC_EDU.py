@@ -2,7 +2,7 @@ import os
 import numpy as np
 from tqdm import tqdm
 from MFEA_lib.tasks.task import IDPC_EDU_FUNC
-from ...EA import Individual
+from ....EA import Individual
 path = os.path.dirname(os.path.realpath(__file__))
 
 class Ind_EDU(Individual):

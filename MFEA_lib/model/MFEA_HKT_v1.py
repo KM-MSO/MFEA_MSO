@@ -7,7 +7,7 @@ import operator
 from sqlalchemy import false
 from . import AbstractModel
 from ..operators import Crossover, Mutation, Selection
-from ..tasks.function import AbstractFunc
+from ..tasks.task import AbstractTask
 from ..EA import *
 import matplotlib.pyplot as plt
 import copy
