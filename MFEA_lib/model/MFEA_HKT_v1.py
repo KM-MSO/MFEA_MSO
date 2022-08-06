@@ -15,7 +15,7 @@ import copy
 class model(AbstractModel.model):
     def compile(self, 
         IndClass: Type[Individual],
-        tasks: list[AbstractTask], 
+        tasks: List[AbstractTask], 
         crossover: Crossover.SBX_Crossover, mutation: Mutation.GaussMutation, selection: Selection.ElitismSelection, 
         *args, **kwargs):
         return super().compile(IndClass, tasks, crossover, mutation, selection, *args, **kwargs)

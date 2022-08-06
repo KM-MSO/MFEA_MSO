@@ -12,8 +12,8 @@ from IPython.display import display, clear_output
 class model():
     def __init__(self, seed = None, percent_print = 0.5) -> None:
         # initial history of factorial cost
-        self.history_cost: list[float] = []
-        self.solve: list[Individual]  
+        self.history_cost: List[float] = []
+        self.solve: List[Individual]  
         self.seed = None 
         self.seed = seed
         if seed is None:
@@ -36,7 +36,7 @@ class model():
         self.percent_print = percent_print 
         
 
-    def render_history(self, shape: Tuple[int, int] = None, min_cost = 1e-6,title = "", yscale = None, ylim: list[float, float] = None, re_fig = False):
+    def render_history(self, shape: Tuple[int, int] = None, min_cost = 1e-6,title = "", yscale = None, ylim: Tuple[float, float] = None, re_fig = False):
         if shape is None:
             shape = (int(np.ceil(len(self.tasks) / 3)), 3)
         else:
@@ -66,7 +66,7 @@ class model():
     
     def compile(self, 
         IndClass: Type[Individual],
-        tasks: list[AbstractTask], 
+        tasks: List[AbstractTask], 
         crossover: Crossover.AbstractCrossover, 
         mutation: Mutation.AbstractMutation, 
         selection: Selection.AbstractSelection,
@@ -167,7 +167,7 @@ class model():
         self.count_pre_line = 2 + len(list_desc)
             
 
-    def fit(self, *args, **kwargs) -> list[Individual] :
+    def fit(self, *args, **kwargs) -> List[Individual] :
         self.time_begin = time.time()
         print('Checking...', end='\r')
         pass

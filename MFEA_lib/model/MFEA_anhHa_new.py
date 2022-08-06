@@ -12,7 +12,7 @@ import copy
 
 
 class model(AbstractModel.model): 
-    def compile(self, tasks: list[AbstractFunc], crossover: Crossover.AbstractCrossover, mutation: Mutation.AbstractMutation, selection: Selection.AbstractSelection, *args, **kwargs):
+    def compile(self, tasks: List[AbstractFunc], crossover: Crossover.AbstractCrossover, mutation: Mutation.AbstractMutation, selection: Selection.AbstractSelection, *args, **kwargs):
         return super().compile(tasks, crossover, mutation, selection, *args, **kwargs)
     
     def findParentSameSkill(self, subpop: SubPopulation, ind):

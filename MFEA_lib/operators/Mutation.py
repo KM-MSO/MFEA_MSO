@@ -1,6 +1,6 @@
 from copy import deepcopy
 from re import I
-from typing import Deque, Tuple, Type
+from typing import Deque, Tuple, Type, List
 from matplotlib import pyplot as plt
 import numpy as np
 
@@ -13,7 +13,7 @@ class AbstractMutation():
         pass
     def __call__(self, ind: Individual, return_newInd:bool, *arg, **kwargs) -> Individual:
         pass
-    def getInforTasks(self, IndClass: Type[Individual], tasks: list[AbstractTask], seed = None):
+    def getInforTasks(self, IndClass: Type[Individual], tasks: List[AbstractTask], seed = None):
         self.dim_uss = max([t.dim for t in tasks])
         self.nb_tasks = len(tasks)
         if self.pm is None:
@@ -118,7 +118,7 @@ class GaussMutation(AbstractMutation):
             return ind
 
 class IDPCEDU_Mutation(AbstractMutation):
-    def getInforTasks(self, IndClass: Type[Individual], tasks: list[AbstractTask], seed=None):
+    def getInforTasks(self, IndClass: Type[Individual], tasks: List[AbstractTask], seed=None):
         super().getInforTasks(IndClass, tasks, seed)
         self.S_tasks = [np.amax(t.count_paths, axis= 1)  for t in tasks]
         
@@ -147,7 +147,7 @@ class Directional_Mutation(AbstractMutation):
     def __init__(self, *arg, **kwargs):
         super().__init__(*arg, **kwargs)
 
-    def  getInforTasks(self, IndClass: Type[Individual], tasks: list[AbstractTask], seed = None):
+    def  getInforTasks(self, IndClass: Type[Individual], tasks: List[AbstractTask], seed = None):
         super().getInforTasks(IndClass,tasks, seed)
         self.direction = [True]*self.nb_tasks
         self.prev_mean = [float('inf')]*self.nb_tasks
@@ -193,7 +193,7 @@ class Directional_Mutation_v2(AbstractMutation):
     def __init__(self, pm = None ,*arg, **kwargs):
         super().__init__(*arg, **kwargs)
     
-    def  getInforTasks(self, IndClass: Type[Individual], tasks: list[AbstractTask], seed = None):
+    def  getInforTasks(self, IndClass: Type[Individual], tasks: List[AbstractTask], seed = None):
         super().getInforTasks(IndClass,tasks, seed)
         self.direction = np.ones(shape=(self.nb_tasks, self.dim_uss))
         # self.prev_mean = None 

@@ -1,5 +1,5 @@
 import numpy as np
-from typing import Tuple, Type
+from typing import Tuple, Type, List
 from ...EA import Individual
 from ..function import AbstractFunc, Sphere, Weierstrass, Ackley, Rosenbrock, Schwefel, Griewank, Rastrigin
 from scipy.io import loadmat
@@ -17,7 +17,7 @@ class GECCO20_benchmark_50tasks():
     task_size = 50
     dim = 50
 
-    def get_choice_function(ID) -> list[int]:
+    def get_choice_function(ID) -> List[int]:
         choice_functions = []
         if ID == 1:
             choice_functions = [1]
@@ -43,7 +43,7 @@ class GECCO20_benchmark_50tasks():
             raise ValueError("Invalid input: ID should be in [1,10]")
         return choice_functions
 
-    def get_items(ID, fix = False) -> Tuple[list[AbstractFunc], Type[Individual_func]]:
+    def get_items(ID, fix = False) -> Tuple[List[AbstractFunc], Type[Individual_func]]:
         choice_functions = __class__.get_choice_function(ID)
 
         tasks = []
@@ -90,7 +90,7 @@ class CEC17_benchmark():
     dim = 50
     task_size = 2
 
-    def get_10tasks_benchmark(fix = False)-> Tuple[list[AbstractFunc], Type[Individual_func]]:
+    def get_10tasks_benchmark(fix = False)-> Tuple[List[AbstractFunc], Type[Individual_func]]:
         tasks = [
         Sphere(     50,shift= 0,    bound= [-100, 100]),   # 0
         Sphere(     50,shift= 80,   bound= [-100, 100]),  # 80
@@ -106,7 +106,7 @@ class CEC17_benchmark():
         return tasks, Individual_func
 
 
-    def get_2tasks_benchmark(ID)-> Tuple[list[AbstractFunc], Type[Individual_func]]:
+    def get_2tasks_benchmark(ID)-> Tuple[List[AbstractFunc], Type[Individual_func]]:
         #TODO
         tasks = []
 
@@ -268,7 +268,7 @@ class CEC17_benchmark():
         return tasks, Individual_func
 
 class WCCI22_benchmark():
-    def get_50tasks_benchmark(ID) -> list[AbstractFunc]:
+    def get_50tasks_benchmark(ID) -> List[AbstractFunc]:
         return GECCO20_benchmark_50tasks.get_items(ID)
     
     class Task():
@@ -362,7 +362,7 @@ class WCCI22_benchmark():
             x= x*(self.Ub-self.Lb)+self.Lb
             return self.fnceval(x)
 
-    def get_complex_benchmark(ID) -> list[AbstractFunc]:
+    def get_complex_benchmark(ID) -> List[AbstractFunc]:
         dim =50  
         task =[]
         file_dir = path + "/__references__/WCCI2022/SO-Complex-Benchmarks/Tasks/benchmark_" + str(ID)

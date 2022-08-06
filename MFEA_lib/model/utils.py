@@ -9,6 +9,7 @@ from pathlib import Path
 import traceback
 import os
 import pandas as pd
+from typing import List, Tuple
 
 
 def get_model_name(model: AbstractModel.model):
@@ -38,8 +39,8 @@ class MultiTimeModel:
         else:
             self.list_attri_avg = list_attri_avg
 
-        self.ls_model: list[AbstractModel.model] = []
-        self.ls_seed: list[int] = []
+        self.ls_model: List[AbstractModel.model] = []
+        self.ls_seed: List[int] = []
         self.total_time = 0
 
         # add inherit
@@ -369,7 +370,7 @@ def loadModel(PATH: str, ls_tasks=None, set_attribute=False) -> AbstractModel:
 
 class CompareModel():
     # TODO so sánh
-    def __init__(self, models: list[AbstractModel.model], label: list[str] = None) -> None:
+    def __init__(self, models: List[AbstractModel.model], label: List[str] = None) -> None:
         self.models = models
         if label is None:
             label = [m.name for m in self.models]
@@ -381,7 +382,7 @@ class CompareModel():
 
         self.label = label
 
-    def render(self, shape: tuple = None, min_cost=0, nb_generations: int = None, step=1, figsize: tuple[int, int] = None, dpi=200, yscale: str = None, re=False, label_shape=None, label_loc=None):
+    def render(self, shape: tuple = None, min_cost=0, nb_generations: int = None, step=1, figsize: Tuple[int, int] = None, dpi=200, yscale: str = None, re=False, label_shape=None, label_loc=None):
         assert np.all([len(self.models[0].tasks) == len(m.tasks)
                       for m in self.models])
         nb_tasks = len(self.models[0].tasks)
@@ -572,11 +573,11 @@ class CompareModel():
 
 
 class TuningModel:
-    def __init__(self, model_name, nb_run: int = 1, list_parameter: list[tuple] = []) -> None:
+    def __init__(self, model_name, nb_run: int = 1, list_parameter: List[tuple] = []) -> None:
         self.best_compile_parameter = {}
         self.best_fit_parameter = {}
         self.model_name = model_name
-        self.list_parameter: list[tuple(str, list)] = list_parameter
+        self.list_parameter: List[tuple(str, list)] = list_parameter
         self.nb_run = nb_run
 
         self.default_lsmodel= None 
@@ -598,7 +599,7 @@ class TuningModel:
                       ) == 1, 'Benchmark weighs need sum up to 1'
 
         self.compile_kwargs = kwargs
-        self.ls_benchmark: list[list[AbstractTask]] = ls_benchmark
+        self.ls_benchmark: List[List[AbstractTask]] = ls_benchmark
         self.benchmark_weights = benchmark_weights
         self.name_benchmark = name_benchmark
         self.ls_IndClass = ls_IndClass
@@ -664,7 +665,7 @@ class TuningModel:
 
         return model
     
-    def compare_between_2_ls_model(self, ls_model1: list[AbstractModel.model], ls_model2 : list[AbstractModel.model], min_value= 0, take_point = False):
+    def compare_between_2_ls_model(self, ls_model1: List[AbstractModel.model], ls_model2 : List[AbstractModel.model], min_value= 0, take_point = False):
         '''
         compare the result between models and return best model 
         [[model1_cec, model1_gecco], [model2_cec, model2_gecco]]
@@ -686,7 +687,7 @@ class TuningModel:
             return np.argmax(point_model) 
 
 
-    def take_idx_best_lsmodel(self, set_ls_model: list[list[AbstractModel.model]], min_value = 0, compare_default = True, take_point = False):
+    def take_idx_best_lsmodel(self, set_ls_model: List[List[AbstractModel.model]], min_value = 0, compare_default = True, take_point = False):
         if compare_default is True: 
             ls_point = [] 
             for idx, ls_model in enumerate(set_ls_model):

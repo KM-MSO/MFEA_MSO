@@ -1,6 +1,7 @@
 import random
-from typing import Type, List
 import numpy as np
+from typing import Type, List
+
 from .tasks.task import AbstractTask
 
 class Individual:
@@ -125,7 +126,7 @@ class SubPopulation:
             elif type(index) == list:
                 return [self.ls_inds[i] for i in index]
             else:
-                raise TypeError('Int, Slice or list[int], not ' + str(type(index)))
+                raise TypeError('Int, Slice or List[int], not ' + str(type(index)))
 
     def __getRandomItems__(self, size:int = None, replace:bool = False):
         if size == 0:
@@ -207,7 +208,7 @@ class Population:
 
         if evaluate_initial_skillFactor:
             # empty population
-            self.ls_subPop: list[SubPopulation] = [
+            self.ls_subPop: List[SubPopulation] = [
                 SubPopulation(IndClass, skf, self.dim_uss, 0, list_tasks[skf]) for skf in range(len(nb_inds_tasks))
             ]
 
@@ -240,7 +241,7 @@ class Population:
             for i in range(len(list_tasks)):
                 self.ls_subPop[i].update_rank()
         else:
-            self.ls_subPop: list[SubPopulation] = [
+            self.ls_subPop: List[SubPopulation] = [
                 SubPopulation(IndClass, skf, self.dim_uss, nb_inds_tasks[skf], list_tasks[skf]) for skf in range(self.nb_tasks)
             ]
 
@@ -329,5 +330,5 @@ class Population:
 
 
 # class LSHADE_Population(Population): 
-#     def __init__(self, IndClass: Type[Individual], dim, nb_inds_tasks: list[int], list_tasks:list[AbstractTask] = [], evaluate_initial_skillFactor = False) -> None:
+#     def __init__(self, IndClass: Type[Individual], dim, nb_inds_tasks: List[int], list_tasks:List[AbstractTask] = [], evaluate_initial_skillFactor = False) -> None:
 #         super().__init__(IndClass, dim, nb_inds_tasks, list_tasks, evaluate_initial_skillFactor = False)

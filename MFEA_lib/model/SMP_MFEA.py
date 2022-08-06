@@ -65,7 +65,7 @@ class model(AbstractModel.model):
 
     def compile(self, 
         IndClass: Type[Individual],
-        tasks: list[AbstractTask], 
+        tasks: List[AbstractTask], 
         crossover: Crossover.SBX_Crossover, 
         mutation: Mutation.Polynomial_Mutation, 
         search: Search.SHADE,
@@ -182,8 +182,8 @@ class model(AbstractModel.model):
         epoch = 1
 
         # Delta epoch
-        Delta:list[list[float]] = np.zeros((len(self.tasks), len(self.tasks) + 1)).tolist()
-        count_Delta: list[list[float]] = np.zeros((len(self.tasks), len(self.tasks) + 1)).tolist()
+        Delta:List[List[float]] = np.zeros((len(self.tasks), len(self.tasks) + 1)).tolist()
+        count_Delta: List[List[float]] = np.zeros((len(self.tasks), len(self.tasks) + 1)).tolist()
 
         while np.sum(eval_k) <= MAXEVALS:
             turn_eval = [0] * len(self.tasks)
@@ -317,8 +317,8 @@ class model(AbstractModel.model):
                 M_smp[skf].update_SMP(Delta[skf], count_Delta[skf])
 
             # Delta epoch
-            Delta:list[list[float]] = np.zeros((len(self.tasks), len(self.tasks) + 1)).tolist()
-            count_Delta: list[list[float]] = np.zeros((len(self.tasks), len(self.tasks) + 1)).tolist()
+            Delta:List[List[float]] = np.zeros((len(self.tasks), len(self.tasks) + 1)).tolist()
+            count_Delta: List[List[float]] = np.zeros((len(self.tasks), len(self.tasks) + 1)).tolist()
 
 
             '''local search'''
