@@ -13,13 +13,10 @@ from ..EA import *
 import matplotlib.pyplot as plt
 import copy
 
-class model(AbstractModel.model):
-    def compile(self, 
-        IndClass: Type[Individual],
-        tasks: list[AbstractTask], 
-        crossover: Crossover.SBX_Crossover, mutation: Mutation.GaussMutation, selection: Selection.ElitismSelection, 
-        *args, **kwargs):
-        return super().compile(IndClass, tasks, crossover, mutation, selection, *args, **kwargs)
+
+class model(AbstractModel.model): 
+    def compile(self, tasks: list[AbstractFunc], crossover: Crossover.AbstractCrossover, mutation: Mutation.AbstractMutation, selection: Selection.AbstractSelection, *args, **kwargs):
+        return super().compile(tasks, crossover, mutation, selection, *args, **kwargs)
     
     def findParentSameSkill(self, subpop: SubPopulation, ind):
         ind2 = ind 
@@ -210,97 +207,38 @@ class model(AbstractModel.model):
                 dim =  self.dim_uss, 
                 list_tasks= self.tasks,
             )
+            elite = self.get_elite(population.ls_subPop,20)
+            measurement = np.zeros((len_task,len_task))
+            if np.sum(eval_k) >= epoch * nb_inds_each_task * len(self.tasks):
+                    # save history 
+                self.history_cost.append([ind.fcost for ind in population.get_solves()])
+                
+                self.render_process(epoch/nb_generations, ['Pop_size', 'Cost'], [[len(u) for u in population.ls_subPop], self.history_cost[-1]], use_sys= True)
 
-            best = self.get_elite(population.ls_subPop, 11)
-            u_CR = np.mean(m_CR, axis = 2)
-            u_F = np.mean(m_F, axis = 2)
-            u_mt = np.mean(m_mt, axis = 1)
-            u_rmp = np.mean(m_rmp, axis = 2)
-            # print(len(population[i].ls_inds), eval_k[0], epoch)
-            for i in range(len_task):
-                increment = np.zeros(len_archie)
-                num_hybrid = np.zeros(len_archie)
-                s_F = [[], []]
-                s_CR = [[], []]
-                s_mt = []
-                s_rmp = []
-                delta_f_hybrid = [] 
-                for j in range(len_task) :
-                    tmp1 = []
-                    delta_f_hybrid.append(tmp1)
-
-                    tmp2 = []
-                    s_rmp.append(tmp2)
-                delta_f_mt = []
-                delta_f_DE = [[], []]              
-                # for j in range(nb_inds_tasks[i]) :
-                #     eval_k[i] += 1
-                #     inv = population[i].ls_inds[j]
-                j = 0
-                for inv in population[i].ls_inds :
-                    eval_k[i] += 1
-                    # if epoch - inv.init_gen >= 20 and population[i].factorial_rank[j] > 1 :
-                    #     child = self.mutation(inv, return_newInd= True)
-                    #     child.skill_factor = i
-                    #     child.init_gen = epoch + 1
-                    #     offsprings.__addIndividual__(child)
-                    #     archie[i][index[i]] = np.copy(child.genes)
-                    #     index[i] = (index[i] + 1)%500
-                    #     continue
-
-                    # k = random.randint(0,len_task - 1)
-                    k = self.RoutletWheel(smp[i],random.random(),len_task)
-                    num_hybrid[k] += 1
-                    # temp_rmp = np.random.normal(loc = u_rmp[i,k], scale = 0.1)
-                    if k!=i :
-                        eval_k[i] += 1
-                        p1 = population[k].__getRandomItems__()
-                        child1, child2 = self.crossover(inv, p1, inv.skill_factor, inv.skill_factor)
-                        child1.fcost = self.tasks[i](child1.genes)
-                        child2.fcost = self.tasks[i](child2.genes)
-                        if child1.fcost < child2.fcost :
-                            child = child1
-                        else :
-                            child = child2
-                        child.init_gen = epoch + 1
-                        if child.fcost < inv.fcost :
-                            offsprings.__addIndividual__(child)
-                            delta_f_hybrid[k].append((inv.fcost - child.fcost) / inv.fcost)
-                            increment[k] += inv.fcost - child.fcost 
-                            if len(archie[i]) < len_archie :
-                                archie[i].append(np.copy(child.genes))
-                            else :
-                                rand = random.randint(0,len_archie-1)
-                                archie[i][rand] = np.copy(child.genes)
-                        else :
-                            offsprings.__addIndividual__(inv)
-                    else :
-                        temp_mt = np.random.normal(loc = u_mt[i], scale = 0.1)
-                        while temp_mt < 0 or temp_mt > 1 :
-                            temp_mt = np.random.normal(loc = u_mt[i], scale = 0.1)
-                        index_DE = 0
-                        # if random.random() < temp_mt :
-                        if random.random() < 10 :
-                            index_DE = 0
-                            f = np.random.normal(loc = u_F[i,0], scale = 0.1)
-                            f = min(1, max(0,f))
-                            cr = scipy.stats.cauchy.rvs(loc = u_CR[i,0], scale = 0.1)
-                            cr = min(1, max(cr, 0))
-
-                            p0 = random.randint(0, 9)
-                            p1 = random.randint(0, len(archie[i]) - 1)
-                            p2 = random.randint(0, len(archie[i]) - 1)
-    
-                            r1 = archie[i][p1]
-                            r2 = archie[i][p2]
-                            V_k = inv.genes + f*(best[i][p0].genes - inv.genes) + f*(r1 - r2)
-                            V_k = np.clip(V_k, 0, 1)
-                        else :
-                            index_DE = 1
-                            f = np.random.normal(loc = u_F[i,1], scale = 0.1)
-                            f = min(1, max(0,f))
-                            cr = scipy.stats.cauchy.rvs(loc = u_CR[i,1], scale = 0.1)
-                            cr = min(1, max(cr, 0))
+                self.rmp_hist.append(np.copy(rmp))
+                epoch+=1
+      
+            if (epoch % 5 == 0) : 
+                center = np.zeros([len(self.tasks), 50])
+                for i in range(len_task): 
+                    tmp_center = np.zeros(50)
+                    for inv in elite[i] :
+                        tmp_center += inv.genes
+                    center[i] += tmp_center / 20
+                best = self.get_elite(population.ls_subPop,1)
+                for i in range(len_task):
+                    for j in range(len_task):
+                        if i != j :
+                            tmp_distance = 0
+                            for inv1 in range(20):
+                                tmp_distance += (1 + 1/(inv1 + 1)) * (self.distance(best[i][0].genes, elite[j][inv1].genes) + self.distance(center[i], elite[j][inv1].genes))
+                            measurement[i,j] = 1 / tmp_distance
+                for i in range(len_task):
+                    sum_tmp = np.sum(measurement[i])
+                    for j in range(len_task):
+                        if i != j:
+                            rmp[i,j] = measurement[i,j] / sum_tmp * inter[i]
+                    rmp[i,i]= intra[i]
 
                             p1 = random.randint(0, len(archie[i]) - 1)
                             p2 = random.randint(0, len(archie[i]) - 1)

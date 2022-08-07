@@ -7,12 +7,12 @@ from ..EA import *
 class model(AbstractModel.model):
     def compile(self, 
         IndClass: Type[Individual],
-        tasks: list[AbstractTask], 
+        tasks: List[AbstractTask], 
         crossover: Crossover.SBX_Crossover, mutation: Mutation.Polynomial_Mutation, selection: Selection.ElitismSelection, 
         *args, **kwargs):
         return super().compile(IndClass, tasks, crossover, mutation, selection, *args, **kwargs)
     
-    def fit(self, nb_generations, rmp = 0.3, nb_inds_each_task = 100, evaluate_initial_skillFactor = True, *args, **kwargs) -> list[Individual]:
+    def fit(self, nb_generations, rmp = 0.3, nb_inds_each_task = 100, evaluate_initial_skillFactor = True, *args, **kwargs) -> List[Individual]:
         super().fit(*args, **kwargs)
 
         # initialize population

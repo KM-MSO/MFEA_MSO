@@ -26,7 +26,7 @@ class model(AbstractModel.model):
     
     def compile(self, 
         IndClass: Type[Individual], 
-        tasks: list[AbstractTask], 
+        tasks: List[AbstractTask], 
         crossover: Crossover.SBX_LSA21, 
         mutation: Mutation.AbstractMutation,
         search: Search.LocalSearch_DSCG, 

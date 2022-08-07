@@ -1,4 +1,4 @@
-from typing import Tuple, Type
+from typing import Tuple, Type, List
 import numpy as np
 import scipy.stats
 
@@ -10,7 +10,7 @@ class AbstractSearch():
         pass
     def __call__(self, *args, **kwargs) -> Individual:
         pass
-    def getInforTasks(self, IndClass: Type[Individual], tasks: list[AbstractTask], seed = None):
+    def getInforTasks(self, IndClass: Type[Individual], tasks: List[AbstractTask], seed = None):
         self.dim_uss = max([t.dim for t in tasks])
         self.nb_tasks = len(tasks)
         self.tasks = tasks
@@ -33,7 +33,7 @@ class SHADE(AbstractSearch):
         self.p_ontop = p_ontop
         self.tournament_size = tournament_size
 
-    def getInforTasks(self, IndClass: Type[Individual], tasks: list[AbstractTask], seed = None):
+    def getInforTasks(self, IndClass: Type[Individual], tasks: List[AbstractTask], seed = None):
         super().getInforTasks(IndClass, tasks, seed= seed)
         # memory of cr and F
         self.M_cr = np.zeros(shape = (self.nb_tasks, self.len_mem, ), dtype= float) + 0.5
@@ -41,11 +41,11 @@ class SHADE(AbstractSearch):
         self.index_update = [0] * self.nb_tasks
 
         # memory of cr and F in epoch
-        self.epoch_M_cr:list[list] = np.empty(shape = (self.nb_tasks, 0)).tolist()
-        self.epoch_M_F: list[list] = np.empty(shape = (self.nb_tasks, 0)).tolist()
+        self.epoch_M_cr:List[list] = np.empty(shape = (self.nb_tasks, 0)).tolist()
+        self.epoch_M_F: List[list] = np.empty(shape = (self.nb_tasks, 0)).tolist()
 
         # memory of delta fcost p and o in epoch
-        self.epoch_M_w: list[list] = np.empty(shape = (self.nb_tasks, 0)).tolist()
+        self.epoch_M_w: List[list] = np.empty(shape = (self.nb_tasks, 0)).tolist()
     
     def update(self, *args, **kwargs) -> None:
         super().update(*args, **kwargs)
@@ -66,9 +66,9 @@ class SHADE(AbstractSearch):
             self.index_update[skf] = new_index
 
         # reset epoch mem
-        self.epoch_M_cr:list[list] = np.empty(shape = (self.nb_tasks, 0)).tolist()
-        self.epoch_M_F: list[list] = np.empty(shape = (self.nb_tasks, 0)).tolist()
-        self.epoch_M_w: list[list] = np.empty(shape = (self.nb_tasks, 0)).tolist()
+        self.epoch_M_cr:List[list] = np.empty(shape = (self.nb_tasks, 0)).tolist()
+        self.epoch_M_F: List[list] = np.empty(shape = (self.nb_tasks, 0)).tolist()
+        self.epoch_M_w: List[list] = np.empty(shape = (self.nb_tasks, 0)).tolist()
         
     def __call__(self, ind: Individual, population: Population, *args, **kwargs) -> Individual:
         super().__call__(*args, **kwargs)
@@ -127,7 +127,7 @@ class L_SHADE(AbstractSearch):
         self.p_ontop = p_ontop
         self.tournament_size = tournament_size
 
-    def getInforTasks(self, IndClass: Type[Individual], tasks: list[AbstractTask], seed = None):
+    def getInforTasks(self, IndClass: Type[Individual], tasks: List[AbstractTask], seed = None):
         super().getInforTasks(IndClass, tasks, seed= seed)
         # memory of cr and F
         self.M_cr = np.zeros(shape = (self.nb_tasks, self.len_mem, ), dtype= float) + 0.5
@@ -135,11 +135,11 @@ class L_SHADE(AbstractSearch):
         self.index_update = [0] * self.nb_tasks
 
         # memory of cr and F in epoch
-        self.epoch_M_cr:list[list] = np.empty(shape = (self.nb_tasks, 0)).tolist()
-        self.epoch_M_F: list[list] = np.empty(shape = (self.nb_tasks, 0)).tolist()
+        self.epoch_M_cr:List[list] = np.empty(shape = (self.nb_tasks, 0)).tolist()
+        self.epoch_M_F: List[list] = np.empty(shape = (self.nb_tasks, 0)).tolist()
 
         # memory of delta fcost p and o in epoch
-        self.epoch_M_w: list[list] = np.empty(shape = (self.nb_tasks, 0)).tolist()
+        self.epoch_M_w: List[list] = np.empty(shape = (self.nb_tasks, 0)).tolist()
     
     def update(self, *args, **kwargs) -> None:
         super().update(*args, **kwargs)
@@ -160,9 +160,9 @@ class L_SHADE(AbstractSearch):
             self.index_update[skf] = new_index
 
         # reset epoch mem
-        self.epoch_M_cr:list[list] = np.empty(shape = (self.nb_tasks, 0)).tolist()
-        self.epoch_M_F: list[list] = np.empty(shape = (self.nb_tasks, 0)).tolist()
-        self.epoch_M_w: list[list] = np.empty(shape = (self.nb_tasks, 0)).tolist()
+        self.epoch_M_cr:List[list] = np.empty(shape = (self.nb_tasks, 0)).tolist()
+        self.epoch_M_F: List[list] = np.empty(shape = (self.nb_tasks, 0)).tolist()
+        self.epoch_M_w: List[list] = np.empty(shape = (self.nb_tasks, 0)).tolist()
         
     def __call__(self, ind: Individual, population: Population, *args, **kwargs) -> Individual:
         super().__call__(*args, **kwargs)
@@ -231,7 +231,7 @@ class LocalSearch_DSCG(AbstractSearch):
         self.EPSILON= 1e-8 
         self.EVALS_PER_LINE_SEARCH= 50 
     
-    def getInforTasks(self, IndClass: Type[Individual], tasks: list[AbstractTask], seed=None):
+    def getInforTasks(self, IndClass: Type[Individual], tasks: List[AbstractTask], seed=None):
         return super().getInforTasks(IndClass, tasks, seed)
     
     def update(self, *args, **kwargs) -> None:
@@ -244,7 +244,7 @@ class LocalSearch_DSCG(AbstractSearch):
         result = self.IndClass(start_point.genes, dim= self.dim_uss) 
         result.fcost = start_point.fcost 
 
-        x: list[Individual] = [self.IndClass(genes = None, dim= self.dim_uss) for i in range(self.dim_uss + 2)]
+        x: List[Individual] = [self.IndClass(genes = None, dim= self.dim_uss) for i in range(self.dim_uss + 2)]
 
         # x.append(self.IndClass(start_point.genes))
         x[0] = self.IndClass(start_point.genes)
@@ -471,14 +471,14 @@ class LSHADE_LSA21(AbstractSearch):
         super().__init__()
         self.len_mem = len_mem 
         self.p_ontop = p_ontop 
-        self.archive: list[list[Individual]] = None 
+        self.archive: List[List[Individual]] = None 
         self.arc_rate = 5 
 
         self.first_run = True 
 
 
 
-    def getInforTasks(self, IndClass: Type[Individual], tasks: list[AbstractTask], seed=None):
+    def getInforTasks(self, IndClass: Type[Individual], tasks: List[AbstractTask], seed=None):
         super().getInforTasks(IndClass, tasks, seed)
 
         # memory of cr and F
@@ -489,11 +489,11 @@ class LSHADE_LSA21(AbstractSearch):
         self.archive = np.empty(shape= (self.nb_tasks, 0)).tolist() 
 
         # memory of cr and F in epoch
-        self.epoch_M_cr:list[list] = np.empty(shape = (self.nb_tasks, 0)).tolist()
-        self.epoch_M_F: list[list] = np.empty(shape = (self.nb_tasks, 0)).tolist()
+        self.epoch_M_cr:List[list] = np.empty(shape = (self.nb_tasks, 0)).tolist()
+        self.epoch_M_F: List[list] = np.empty(shape = (self.nb_tasks, 0)).tolist()
 
         # memory of delta fcost p and o in epoch
-        self.epoch_M_w: list[list] = np.empty(shape = (self.nb_tasks, 0)).tolist()
+        self.epoch_M_w: List[list] = np.empty(shape = (self.nb_tasks, 0)).tolist()
     
     def __call__(self,ind: Individual, population: Population, *args, **kwargs) -> Individual: 
         super().__call__(*args, **kwargs)
@@ -584,9 +584,9 @@ class LSHADE_LSA21(AbstractSearch):
             
         
         # reset epoch mem
-        self.epoch_M_cr:list[list] = np.empty(shape = (self.nb_tasks, 0)).tolist()
-        self.epoch_M_F: list[list] = np.empty(shape = (self.nb_tasks, 0)).tolist()
-        self.epoch_M_w: list[list] = np.empty(shape = (self.nb_tasks, 0)).tolist()
+        self.epoch_M_cr:List[list] = np.empty(shape = (self.nb_tasks, 0)).tolist()
+        self.epoch_M_F: List[list] = np.empty(shape = (self.nb_tasks, 0)).tolist()
+        self.epoch_M_w: List[list] = np.empty(shape = (self.nb_tasks, 0)).tolist()
 
         # update archive size
         for skf in range(self.nb_tasks): 
