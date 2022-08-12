@@ -22,7 +22,8 @@ class Individual:
         Evaluate Individual
         return factorial_cost after evaluate
         '''
-        return task(self.genes)
+        self.fcost = task(self.genes)
+        return self.fcost
 
     @property
     def shape(self) -> int:
