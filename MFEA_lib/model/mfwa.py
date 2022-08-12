@@ -110,11 +110,13 @@ class model(AbstractModel.model):
                     # Calculate number of sparks and explosion amplitude
                     num_spark[t, i] = self.calculate_num_spark(S_param, rank_firework, alpha, nb_inds_each_task)
                     if epoch > 0:
-                        pre_firework = archive_pop[t][i]
+                        # Compare firework at previous generation that have same rank with current firework to adjust amplitude
+                        id = np.where(archive_pop[t].factorial_rank == rank_firework)[0][0]
+                        pre_firework = archive_pop[t][id]
                         if firework.fcost > pre_firework.fcost:
-                            amplitude *= Cr
+                            amplitude[t,i] *= Cr
                         else:
-                            amplitude *= Ca
+                            amplitude[t,i] *= Ca
 
                     # Eplosion spark
                     for s in range(num_spark[t, i]):
