@@ -67,7 +67,7 @@ class model(AbstractModel.model):
         IndClass: Type[Individual],
         tasks: List[AbstractTask], 
         crossover: Crossover.SBX_Crossover, 
-        mutation: Mutation.Polynomial_Mutation, 
+        mutation: Mutation.PolynomialMutation, 
         search: Search.SHADE,
         selection: Selection.ElitismSelection, 
         *args, **kwargs):

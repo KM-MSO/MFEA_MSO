@@ -8,7 +8,7 @@ class model(AbstractModel.model):
     def compile(self, 
         IndClass: Type[Individual],
         tasks: List[AbstractTask], 
-        crossover: Crossover.SBX_Crossover, mutation: Mutation.Polynomial_Mutation, selection: Selection.ElitismSelection, 
+        crossover: Crossover.SBX_Crossover, mutation: Mutation.PolynomialMutation, selection: Selection.ElitismSelection, 
         *args, **kwargs):
         return super().compile(IndClass, tasks, crossover, mutation, selection, *args, **kwargs)
     

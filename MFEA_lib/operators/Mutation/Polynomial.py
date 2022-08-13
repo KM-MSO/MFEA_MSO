@@ -9,8 +9,8 @@ class PolynomialMutation(AbstractMutation):
     '''
     def __init__(self, nm = 15, pm = None, *arg, **kwargs):
         '''
-        nm: parameters of Polynomial_mutation
-        pm: prob mutate of Polynomial_mutation
+        nm: parameters of PolynomialMutation
+        pm: prob mutate of PolynomialMutation
         '''
         super().__init__(*arg, **kwargs)
         self.nm = nm
