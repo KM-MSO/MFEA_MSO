@@ -22,6 +22,29 @@ class model(AbstractModel.model):
         for i in range(len(population)):
             r[i] = self.manhattan(population[i].genes*len(population),sum)
         return r/np.sum(r)
+    
+     
+    def transfer_spark(self, population: Population, target_task:int, other_task:int, firework: Individual, 
+        sigma: float, nb_inds_each_task: int, rank: int, alpha: float ):
+        
+        # Compute transfer vector TV that contain the information from other task to target task
+        TV_gene = np.zeros_like(firework.genes)
+        for i in range(nb_inds_each_task):
+            if population[other_task].factorial_rank[i] < sigma * nb_inds_each_task:
+                TV_gene += population[other_task][i].genes
+        for i in range(nb_inds_each_task):
+            if population[target_task].factorial_rank[i] < sigma * nb_inds_each_task:
+                TV_gene -= population[target_task][i].genes
+        denom_temp = 0
+        for r in range(1, nb_inds_each_task + 1):
+            denom_temp += (r**-alpha)
+        TV_gene = TV_gene * 2 / (sigma * (nb_inds_each_task + nb_inds_each_task)) * (rank ** -alpha) / denom_temp
+
+        # Generate transfer spark
+        TS_gene = firework.genes + TV_gene
+        TS = self.IndClass(TS_gene, parent = firework)
+        TS.skill_factor = other_task
+        return TS
     def fit(self, nb_generations, rmp = 0.3, nb_inds_each_task = 100, evaluate_initial_skillFactor = True, *args, **kwargs) -> List[Individual]:
         super().fit(*args, **kwargs)
         # params 
@@ -78,21 +101,21 @@ class model(AbstractModel.model):
                     offsprings.__addIndividual__(oa)
                     offsprings.__addIndividual__(ob)
                 #update transfer spark
-                for n in range(len(self.tasks)):
-                    if n == k:
-                        continue
-                    TV = np.zeros(self.dim_uss)
-                    for j in range(int(nb_inds_each_task*sigma)):
-                        TV += population.ls_subPop[n][j].genes
-                        TV -= population.ls_subPop[k][j].genes
-                    TV = TV /(nb_inds_each_task*sigma*nb_inds_each_task)
-                    for j in range(nb_inds_each_task):
-                        gene = population.ls_subPop[k][j].genes +TV
-                        gene = np.clip(gene,0,1)
-                        ob = self.IndClass(genes = gene,parent = population[k][j])
-                        ob.skill_factor = k
-                        ob.fcost = self.tasks[k](gene)
-                        offsprings.__addIndividual__(ob)
+                    for other_t in range(len(self.tasks)):
+                        if other_t != k:
+                            TP = self.transfer_spark(
+                                population=population,
+                                target_task=k,
+                                other_task=other_t,
+                                firework=population[k][j],
+                                sigma=sigma,
+                                nb_inds_each_task=nb_inds_each_task,
+                                rank=population[k].factorial_rank[j],
+                                alpha=0
+                                )
+                            TP.eval(self.tasks[other_t])
+                            offsprings.__addIndividual__(TP)
+                            
             # merge and update rank
             population = population + offsprings
             population.update_rank()
