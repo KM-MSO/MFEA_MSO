@@ -322,7 +322,7 @@ class IDPC_EDU_new(AbstractTask):
         self.target: int
         self.num_domains: int
         self.num_nodes: int
-        self.num_edges: int = int(file_name[:-5].split('x')[-1])
+        self.num_edges: int 
         self.edges: dict ={}
         self.dim: int 
         self.name = file_name.split('.')[0]
@@ -341,6 +341,7 @@ class IDPC_EDU_new(AbstractTask):
             self.target = int(line1[1])
             #get all edges
             lines = lines[2:]
+            self.num_edges =len(lines)
             for line in lines:
                 data = [int(x) for x in line.split()]
                 if data[0] not in self.edges.keys(): 
@@ -363,10 +364,9 @@ class IDPC_EDU_new(AbstractTask):
         for idx in range(len(gene)):
             if currNode == target:
                 return cost
-            l = int(gene[idx]*len(edges[currNode]))
-            if l == len(edges[currNode]):
-                l = l-1
+            l = int(gene[idx]*len(edges[currNode])) % len(edges[currNode])
             nextNode,w,d = edges[currNode][l]
+            # print(d)
             # print(nextNode)
             if nodes[nextNode] == 1:
                 return 99999
