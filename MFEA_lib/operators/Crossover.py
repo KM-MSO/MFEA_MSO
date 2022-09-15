@@ -198,7 +198,7 @@ class newSBX(AbstractCrossover):
 
         return oa, ob
 
-#@nb.njit
+@nb.njit
 def pmx_func(p1, p2, t1, t2,  dim_uss):
     oa = np.empty_like(p1)
     ob = np.empty_like(p1)

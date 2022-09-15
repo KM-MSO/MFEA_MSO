@@ -12,19 +12,7 @@ from MFEA_lib.operators.Mutation import *
 from MFEA_lib.operators.Selection import *
 
 
-# In[2]:
-
-
 tasks, IndClass = IDPC_EDU_benchmark.get_tasks(1)
-
-
-# In[3]:
-
-
-tasks[0].num_nodes
-
-
-# In[4]:
 
 
 baseModel = MFEA_base.model()
