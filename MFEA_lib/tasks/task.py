@@ -18,12 +18,13 @@ class SurrogateModel(nn.Module):
         return x
     
 class SurrogatePipeline():
-    def __init__(self, input_dim, hidden_dim, output_dim, learning_rate, device):
-        self.device = "cpu"
+    def __init__(self, input_dim, hidden_dim, output_dim, learning_rate, device= None):
+        self.device = device if device else 'cpu'
         self.model = SurrogateModel(input_dim, hidden_dim, output_dim).to(self.device)
         self.optimizer = torch.optim.SGD(self.model.parameters(), lr=learning_rate)
         self.criteria = nn.MSELoss()
         self.learning_rate = learning_rate
+        
     def train(self, input, output):
         input = torch.Tensor(input.flatten()).to(self.device)
         output = torch.Tensor([output]).to(self.device)
@@ -110,20 +111,20 @@ class IDPC_EDU_FUNC(AbstractTask):
             self.count_paths = count_paths
 
     @staticmethod
-    # @nb.njit(
-    #     nb.int64(
-    #         nb.typeof(np.array([[1]]).astype(np.int64)),
-    #         nb.int64,
-    #         nb.int64,
-    #         nb.int64,
-    #         nb.int64,
-    #         nb.typeof(nb.typed.Dict().empty(
-    #             key_type= nb.types.unicode_type,
-    #             value_type= nb.typeof((0, 0)),
-    #         )),
-    #         nb.typeof(np.array([[1]]).astype(np.int64)),
-    #     )
-    # )
+    @nb.njit(
+        nb.int64(
+            nb.typeof(np.array([[1]]).astype(np.int64)),
+            nb.int64,
+            nb.int64,
+            nb.int64,
+            nb.int64,
+            nb.typeof(nb.typed.Dict().empty(
+                key_type= nb.types.unicode_type,
+                value_type= nb.typeof((0, 0)),
+            )),
+            nb.typeof(np.array([[1]]).astype(np.int64)),
+        )
+    )
     def func(gene,
              source,
              target,
