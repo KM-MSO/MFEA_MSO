@@ -3,7 +3,7 @@ import numba as nb
 import torch
 import sys
 import os
-from Surrogate import SurrogateModel, SurrogatePipeline
+from .surrogate import SurrogateModel, SurrogatePipeline, GraphDataset
 MAX_INT = sys.maxsize
 
 
@@ -29,7 +29,7 @@ class AbstractTask():
 #----------------------------------------------------------------------------------------------------------------------------
 #a solution is an permutation start from 0 to n - 1, k is also counted from 0 but domain is counted from 1
 class IDPC_EDU_FUNC(AbstractTask):    
-    def __init__(self, dataset_path, file_name, use_surrogate = False):
+    def __init__(self, dataset_path, file_name, use_surrogate = True):
         self.file = str(dataset_path) + '/'  + file_name
         self.datas = {}
         self.source: int
@@ -43,6 +43,12 @@ class IDPC_EDU_FUNC(AbstractTask):
         self.use_surrogate = use_surrogate
         self.read_data()
         if self.use_surrogate:
+            self.graph_data = GraphDataset(edges= self.edges, count_paths= self.count_paths,
+                                           num_nodes= self.num_nodes, source = self.source, target = self.target)
+            import torch_geometric.nn as gnn
+            import torch.nn as nn
+            print(gnn.EdgeConv(nn.Linear(2, 64, device= 'cuda'))(self.graph_data.graph.x.cuda(), self.graph_data.graph.edge_index.cuda()).shape)
+            
             self.surrogate_pipeline = SurrogatePipeline(input_dim=self.num_nodes*2, 
                                                         hidden_dim=self.num_nodes, 
                                                         output_dim=1, 
