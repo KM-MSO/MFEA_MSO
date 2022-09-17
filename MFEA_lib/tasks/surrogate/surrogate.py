@@ -1,9 +1,12 @@
 import torch.nn as nn
 import torch 
-import torch_geometric.nn as gnn
+import torch.nn.functional as F
+import torch_geometric.nn as gnn_nn
 from torch_geometric.data import Data, InMemoryDataset
+from torch_geometric.loader import DataLoader
+
 import numpy as np
-import ray
+#import ray
 
 class GraphDataset(InMemoryDataset):
     def __init__(self, tasks, root = './data', transform= None, pre_transform= None, pre_filter= None):
@@ -63,47 +66,83 @@ class GraphDataset(InMemoryDataset):
     def __repr__(self):
         return '{}{}'.format(self.__class__.__name__)
   
+# type 2
+class GNN_GCN(nn.Module):
+    def __init__(self, in_channels, hid_channels, num_nodes):
+        super(GNN_GCN, self).__init__()
+        self.gc1 = gnn_nn.GCNConv(in_channels, hid_channels)
+        self.gc2 = gnn_nn.GCNConv(hid_channels, 1)
+        self.fc = nn.Linear(num_nodes, 1)
 
-class GNNModel(nn.Module):
-    def __init__(self):
-        pass
+    def forward(self, x, edge_index, edge_weight):
+        x = F.relu(self.gc1(x, edge_index, edge_weight))
+        x = self.gc2(x, edge_index, edge_weight)
+        x = x.squeeze(1)
+        x = self.fc(x)
+        return x
 
+# type 1
 class SurrogateModel(nn.Module):
-    def __init__(self, input_dim, hidden_dim, output_dim):
+    def __init__(self, in_channels, hid_channels, num_nodes):
         super().__init__()
-        self.edge_conv1 = gnn.EdgeConv(nn.Linear(2, 64))
-        self.linear1 = nn.Linear(input_dim, hidden_dim)
-        self.linear2 = nn.Linear(hidden_dim, output_dim)
+        self.gc1 = gnn_nn.GATConv(in_channels=in_channels, out_channels=hid_channels)
+        self.gc2 = gnn_nn.GATConv(in_channels=hid_channels, out_channels=1)
+        self.fc = nn.Linear(num_nodes, 1)
         
-    def forward(self, x, graph):
-        graph_features = self.edge_conv1(graph.x, graph.data)
-        print(x.shape, graph_features.shape)
-        x = self.linear1(x)
-        x = self.linear2(x)
+    def forward(self, inputs):
+        vertices_feature, edge_index, edge_attr = inputs.x, inputs.edge_index, inputs.edge_attr
+        x = F.relu(self.gc1(vertices_feature, edge_index, edge_attr))
+        x = self.gc2(vertices_feature, edge_index, edge_attr)
+        x = x.squeeze(1)
+        x = self.fc(x)
         return x
     
 class SurrogatePipeline():
-    def __init__(self, input_dim, hidden_dim, output_dim, learning_rate, device = 'cpu'):
-        self.device = device 
-        self.model = SurrogateModel(input_dim, hidden_dim, output_dim).to(self.device)
+    def __init__(self, input_dim, hidden_dim, num_nodes, learning_rate, epochs = 100, use_cuda = True):
+        self.device = torch.device('cuda' if torch.cuda.is_available() and use_cuda else 'cpu') 
+        self.model = SurrogateModel(input_dim, hidden_dim, num_nodes).to(self.device)
         self.optimizer = torch.optim.Adam(self.model.parameters(), lr=learning_rate)
         self.criteria = nn.MSELoss()
-        self.learning_rate = learning_rate
+        self.epochs = epochs
+
         
-    def train(self, input, output):
-        input = torch.Tensor(input.flatten()).to(self.device)
-        output = torch.Tensor([output]).to(self.device)
-        pred = self.model(input)
-        loss = self.criteria(pred, output)
-        print(f'Loss: {loss}')
-        self.optimizer.zero_grad()
-        loss.backward()
-        self.optimizer.step()
+    def train(self, datasets):
+        print("Training surrogate")
+        self.set_train()
+
+        self.model.train()
+        datasets.to(self.device)
+
+        dataloader = DataLoader(datasets, batch_size=2, shuffle=True)
+
+        for epoch in range(self.epochs):
+            losses = []
+            for batch_idx, (inputs, outputs) in enumerate(dataloader):
+                preds = self.model(inputs)
+                loss = self.criteria(preds, outputs)
+                losses.append(loss.item())
+                
+                print(f'Epoch {epoch} - Batch {batch_idx} - Loss: {loss.item()}')
+                
+                self.optimizer.zero_grad()
+                loss.backward()
+                self.optimizer.step()
+            print(f'Epoch {epoch} - Loss: {np.mean(losses)}')
+
+    def eval(self, inputs):
+        pass
 
     def predict(self, input):
         with torch.no_grad():
-            input = torch.Tensor(input.flatten()).to(self.device)
-            return self.model(input)
+            input.to(self.device)
+            pred = self.model(input)
+            return pred
+
+    def save_model(self):
+        pass
+
+    def load_model(self):
+        pass
 
     def save_pipeline(self, path):
         pass

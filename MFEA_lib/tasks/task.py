@@ -38,6 +38,9 @@ class IDPC_EDU_FUNC(AbstractTask):
         self.read_data()
         self.edge_index = []
         self.edge_attribute = []
+        self.edge_weight = []
+
+        # type 1
         for i in range(self.count_paths.shape[0]):
             for j in range(self.count_paths.shape[1]):
                 n = self.count_paths[i][j]
@@ -45,9 +48,22 @@ class IDPC_EDU_FUNC(AbstractTask):
                 self.edge_index.extend( [[i , j] for _ in range(n)] )
                 self.edge_attribute.extend( [self.edges.get(f'{i}_{j}_{k}') for k in range(n)] )
                 
-        self.edge_index = torch.tensor(self.edge_index, dtype= torch.long).reshape(2, -1)
-        self.edge_attribute = torch.tensor(self.edge_attribute, dtype= torch.long)
-    
+        # type 2
+        # for i in range(self.count_paths.shape[0]):
+        #     for j in range(self.count_paths.shape[1]):
+        #         n = self.count_paths[i][j]
+        #         if(n == 0):
+        #             continue
+        #         weight = [self.edges.get(f'{i}_{j}_{k}')[0] for k in range(n)]
+        #         self.edge_weight.append(sum(weight))
+        #         self.edge_index.append([i , j])
+        #         self.edge_attribute.extend( [self.edges.get(f'{i}_{j}_{k}') for k in range(n)] )
+
+        # self.edge_index = torch.tensor(self.edge_index, dtype= torch.long).reshape(2, -1)
+        # self.edge_attribute = torch.tensor(self.edge_attribute, dtype= torch.long)
+
+ 
+
     
     def read_data(self):
         with open(self.file, "r") as f:
