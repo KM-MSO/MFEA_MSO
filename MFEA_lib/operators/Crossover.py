@@ -198,7 +198,7 @@ class newSBX(AbstractCrossover):
 
         return oa, ob
 
-#@nb.njit
+@nb.njit
 def pmx_func(p1, p2, t1, t2,  dim_uss):
     oa = np.empty_like(p1)
     ob = np.empty_like(p1)
@@ -260,9 +260,9 @@ def pmx_func(p1, p2, t1, t2,  dim_uss):
     redundant_idx = np.array(redundant_idx)
     redundant_idx_b = np.array(redundant_idx_b)
     if(len(redundant_idx) != 0):
-        oa[redundant_idx] = redundant
+        oa[redundant_idx] = np.copy(redundant)
     if(len(redundant_idx_b) != 0):
-        ob[redundant_idx_b] = redundant_b
+        ob[redundant_idx_b] = np.copy(redundant_b)
     
     oa[t1:t2] = mid
     ob[t1:t2] = mid_b
@@ -290,7 +290,7 @@ def tpx_func(p1, p2, t1, t2):
     o1 = np.copy(p1)
     o2 = np.copy(p2)
 
-    o1[t1:t2], o2[t1:t2] = o2[t1:t2], o1[t1:t2]
+    o1[t1:t2], o2[t1:t2] = np.copy(o2[t1:t2]), np.copy(o1[t1:t2])
     
     return o1, o2
        
@@ -313,7 +313,7 @@ class TPX_Crossover(AbstractCrossover):
 
 class IDPCEDU_Crossover(AbstractCrossover):
     def __call__(self, pa: Individual, pb: Individual, skf_oa=None, skf_ob=None, *args, **kwargs) -> Tuple[Individual, Individual]:
-        genes_oa, genes_ob = np.empty_like(pa), np.empty_like(pb)
+        genes_oa, genes_ob = np.empty_like(pa.genes), np.empty_like(pb.genes)
 
         #PMX
         t1 = np.random.randint(0, self.dim_uss)

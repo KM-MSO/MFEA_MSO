@@ -24,14 +24,17 @@ class AbstractTask():
     
 
 @ray.remote
-def create_idpc(dir, file, tasks):
+def create_idpc(dir, file):
     with open(str(dir) + '/'  + file, "r") as f:
         lines = f.readlines()
         #get num_nodes and num_domains from the first line
         line0 = lines[0].split()
         num_nodes = int(line0[0])
         num_domains = int(line0[1])
-        
+        count_paths = np.zeros((num_nodes, num_nodes)).astype(np.int64)
+        #edges is a dictionary with key: s_t_k and value is a list with size 2 
+        edges = {}
+        # normal_edges = {}
         #get source and target from the seconde line
         line1 = lines[1].split()
         source = int(line1[0]) - 1
@@ -39,18 +42,11 @@ def create_idpc(dir, file, tasks):
         
         #get all edges
         lines = lines[2:]
-        count_paths = np.zeros((num_nodes, num_nodes)).astype(np.int64)
-        # edges = nb.typed.Dict().empty(
-        #         key_type= nb.types.unicode_type,
-        #         value_type= nb.typeof((0, 0)),
-        #     )
-        edges = {}
         for line in lines:
             data = [int(x) for x in line.split()]
             edges[f'{data[0] - 1}_{data[1] - 1}_{count_paths[data[0] - 1][data[1] - 1]}'] = tuple([data[2], data[3]])
             count_paths[data[0] - 1][data[1] - 1] += 1
-        tasks.append(IDPC_EDU_FUNC(dir, file, source, target, num_domains, num_nodes, count_paths, edges))
-    return 0 
+    return IDPC_EDU_FUNC(dir, file, source, target, num_domains, num_nodes, count_paths, edges)
 
 #----------------------------------------------------------------------------------------------------------------------------
 #a solution is an permutation start from 0 to n - 1, k is also counted from 0 but domain is counted from 1
@@ -65,7 +61,6 @@ class IDPC_EDU_FUNC(AbstractTask):
         self.num_edges: int = int(file_name[:-5].split('x')[-1])
         self.dim: int = int(file_name[5:].split('x')[0])
         self.name = file_name.split('.')[0]
-        # self.read_data()
         self.source, self.target, self.num_domains, self.num_nodes, self.count_paths, self.edges = source, target, num_domains, num_nodes, count_paths, edges
         self.edge_index = []
         self.edge_attribute = []
@@ -90,9 +85,12 @@ class IDPC_EDU_FUNC(AbstractTask):
             self.num_domains = int(line0[1])
             count_paths = np.zeros((self.num_nodes, self.num_nodes)).astype(np.int64)
             #edges is a dictionary with key: s_t_k and value is a list with size 2 
-            self.edges = {}
             # self.normal_edges = {}
             #get source and target from the seconde line
+            self.edges = nb.typed.Dict().empty(
+                key_type= nb.types.unicode_type,
+                value_type= nb.typeof((0, 0)),
+            )
             line1 = lines[1].split()
             self.source = int(line1[0]) - 1
             self.target = int(line1[1]) - 1
@@ -156,7 +154,7 @@ class IDPC_EDU_FUNC(AbstractTask):
                 stop = False
                 break
             if stop:
-                return MAX_INT
+                return 10000
         return cost
         
     def __call__(self, gene: np.ndarray):

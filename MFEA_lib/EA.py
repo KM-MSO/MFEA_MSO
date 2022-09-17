@@ -13,7 +13,7 @@ class Individual:
     def __init__(self, genes, dim= None) -> None: 
         self.skill_factor: int = None
         self.fcost: float = None
-        self.genes: np.ndarray = genes
+        self.genes: np.ndarray = np.copy(genes)
         
     def eval(self, task: AbstractTask) -> None:
         '''
@@ -142,6 +142,7 @@ class SubPopulation:
             self.update_rank()
 
     def __add__(self, other):
+        assert self.skill_factor == other.skill_factor
         assert self.task == other.task, 'Cannot add 2 sub-population do not have the same task'
         assert self.dim == other.dim, 'Cannot add 2 sub-population do not have the same dimensions'
         UnionSubPop = SubPopulation(
@@ -314,6 +315,7 @@ class Population:
 
     def __add__(self, other):
         assert self.nb_tasks == other.nb_tasks
+
         newPop = Population(
             IndClass= self.IndClass,
             dim = self.dim_uss,
