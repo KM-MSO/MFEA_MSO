@@ -4,7 +4,7 @@ from ..operators import Crossover, Mutation, Selection
 from ..tasks.task import AbstractTask
 from ..EA import *
 from ..tasks.surrogate import GraphDataset
-import time
+
 class model(AbstractModel.model):
     def compile(self, 
         IndClass: Type[Individual],
@@ -147,8 +147,12 @@ class betterModel(AbstractModel.model):
         
         # merge and update rank
         population = population + offsprings
+        
         population.update_rank()
 
+        # for subpop in population.ls_subPop:
+        #     print(np.min([ind.fcost for ind in subpop.ls_inds]))
+            
         # selection
         self.selection(population, [nb_inds_each_task] * len(self.tasks))
         # save history

@@ -316,16 +316,14 @@ class IDPCEDU_Crossover(AbstractCrossover):
         genes_oa, genes_ob = np.empty_like(pa), np.empty_like(pb)
 
         #PMX
-        t1, t2 = np.random.randint(0, self.dim_uss + 1, 2)
-        if t1 > t2:
-            t1, t2 = t2, t1
+        t1 = np.random.randint(0, self.dim_uss)
+        t2 = np.random.randint(t1 + 1, self.dim_uss + 1)
         genes_oa[0], genes_ob[0] = pmx_func(pa.genes[0], pb.genes[0], t1, t2, self.dim_uss)
 
         #TPX
-        t1, t2 = np.random.randint(0, self.dim_uss + 1, 2)
-        if t1 > t2:
-            t1, t2 = t2, t1
-            
+        t1 = np.random.randint(0, self.dim_uss)
+        t2 = np.random.randint(t1 + 1, self.dim_uss + 1)
+        
         genes_oa[1], genes_ob[1] = tpx_func(pa.genes[1], pb.genes[1], t1, t2)
 
         oa = self.IndClass(genes_oa)

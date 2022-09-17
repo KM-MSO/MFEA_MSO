@@ -1,9 +1,8 @@
 import numpy as np
 import numba as nb
 import sys
-import torch
 MAX_INT = sys.maxsize
-
+import ray
 class AbstractTask():
     def __init__(self, *args, **kwargs) -> None:
         pass
@@ -18,14 +17,47 @@ class AbstractTask():
         pass
 
     @staticmethod
-    #@nb.jit(nopython = True)
+    @nb.jit(nopython = True)
     def func(x):
         pass
+
+def foo(lines, num_nodes):
+    count_paths = np.zeros((num_nodes, num_nodes)).astype(np.int64)
+        #edges is a dictionary with key: s_t_k and value is a list with size 2 
+    edges = nb.typed.Dict().empty(
+            key_type= nb.types.unicode_type,
+            value_type= nb.typeof((0, 0)),
+        )
+    for line in lines:
+            data = [int(x) for x in line.split()]
+            edges[f'{data[0] - 1}_{data[1] - 1}_{count_paths[data[0] - 1][data[1] - 1]}'] = tuple([data[2], data[3]])
+            count_paths[data[0] - 1][data[1] - 1] += 1
+    return count_paths, edges
+
+@ray.remote
+def create_idpc(file):
+    with open(file, "r") as f:
+        lines = f.readlines()
+        #get num_nodes and num_domains from the first line
+        line0 = lines[0].split()
+        num_nodes = int(line0[0])
+        num_domains = int(line0[1])
+        
+        #get source and target from the seconde line
+        line1 = lines[1].split()
+        source = int(line1[0]) - 1
+        target = int(line1[1]) - 1
+        
+        #get all edges
+        lines = lines[2:]
+        
+            
+        return source, target, num_domains, num_nodes, foo(lines, num_nodes)
 
 #----------------------------------------------------------------------------------------------------------------------------
 #a solution is an permutation start from 0 to n - 1, k is also counted from 0 but domain is counted from 1
 class IDPC_EDU_FUNC(AbstractTask):        
-    def __init__(self, dataset_path, file_name):
+    def __init__(self, dataset_path, file_name, source, target, num_domains, num_nodes, count_paths, edges):
         self.file = str(dataset_path) + '/'  + file_name
         self.datas = {}
         self.source: int
@@ -35,7 +67,8 @@ class IDPC_EDU_FUNC(AbstractTask):
         self.num_edges: int = int(file_name[:-5].split('x')[-1])
         self.dim: int = int(file_name[5:].split('x')[0])
         self.name = file_name.split('.')[0]
-        self.read_data()
+        # self.read_data()
+        self.source, self.target, self.num_domains, self.num_nodes, self.count_paths, self.edges = source, target, num_domains, num_nodes, count_paths, edges
         self.edge_index = []
         self.edge_attribute = []
         for i in range(self.count_paths.shape[0]):
@@ -44,7 +77,8 @@ class IDPC_EDU_FUNC(AbstractTask):
 
                 self.edge_index.extend( [[i , j] for _ in range(n)] )
                 self.edge_attribute.extend( [self.edges.get(f'{i}_{j}_{k}') for k in range(n)] )
-                
+        import torch
+
         self.edge_index = torch.tensor(self.edge_index, dtype= torch.long).reshape(2, -1)
         self.edge_attribute = torch.tensor(self.edge_attribute, dtype= torch.long)
     
@@ -58,10 +92,7 @@ class IDPC_EDU_FUNC(AbstractTask):
             self.num_domains = int(line0[1])
             count_paths = np.zeros((self.num_nodes, self.num_nodes)).astype(np.int64)
             #edges is a dictionary with key: s_t_k and value is a list with size 2 
-            self.edges = nb.typed.Dict().empty(
-                key_type= nb.types.unicode_type,
-                value_type= nb.typeof((0, 0)),
-            )
+            self.edges = {}
             # self.normal_edges = {}
             #get source and target from the seconde line
             line1 = lines[1].split()
@@ -72,26 +103,25 @@ class IDPC_EDU_FUNC(AbstractTask):
             lines = lines[2:]
             for line in lines:
                 data = [int(x) for x in line.split()]
-                # self.normal_edges[f'{data[0] - 1}_{data[1] - 1}_{count_paths[data[0] - 1][data[1] - 1]}'] = tuple([data[2], data[3]])
                 self.edges[f'{data[0] - 1}_{data[1] - 1}_{count_paths[data[0] - 1][data[1] - 1]}'] = tuple([data[2], data[3]])
                 count_paths[data[0] - 1][data[1] - 1] += 1
             self.count_paths = count_paths
 
     @staticmethod
-    #@nb.njit(
-    #     nb.int64(
-    #         nb.typeof(np.array([[1]]).astype(np.int64)),
-    #         nb.int64,
-    #         nb.int64,
-    #         nb.int64,
-    #         nb.int64,
-    #         nb.typeof(nb.typed.Dict().empty(
-    #             key_type= nb.types.unicode_type,
-    #             value_type= nb.typeof((0, 0)),
-    #         )),
-    #         nb.typeof(np.array([[1]]).astype(np.int64)),
-    #     )
-    # )
+    @nb.njit(
+        nb.int64(
+            nb.typeof(np.array([[1]]).astype(np.int64)),
+            nb.int64,
+            nb.int64,
+            nb.int64,
+            nb.int64,
+            nb.typeof(nb.typed.Dict().empty(
+                key_type= nb.types.unicode_type,
+                value_type= nb.typeof((0, 0)),
+            )),
+            nb.typeof(np.array([[1]]).astype(np.int64)),
+        )
+    )
     def func(gene,
              source,
              target,

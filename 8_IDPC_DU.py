@@ -11,8 +11,12 @@ from MFEA_lib.operators.Crossover import *
 from MFEA_lib.operators.Mutation import *
 from MFEA_lib.operators.Selection import *
 from MFEA_lib.tasks.surrogate import SurrogatePipeline
-
+import time
+import ray
+ray.init()
+s = time.time()
 tasks, IndClass = IDPC_EDU_benchmark.get_tasks(1)
+print(time.time() - s)
 
 
 baseModel = MFEA_base.betterModel()

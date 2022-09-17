@@ -1,8 +1,9 @@
 import os
 import numpy as np
 from tqdm import tqdm
-from MFEA_lib.tasks.task import IDPC_EDU_FUNC
+from MFEA_lib.tasks.task import *
 from ...EA import Individual
+import ray
 path = os.path.dirname(os.path.realpath(__file__))
 
 class Ind_EDU(Individual):
@@ -17,7 +18,10 @@ class IDPC_EDU_benchmark:
         print('\rReading data...')
         tasks = []
         file_list = sorted(os.listdir(path + '/__references__/IDPC_DU/IDPC_EDU/data/set' + str(ID_set)))
-        for file_name in tqdm(file_list):
-            tasks.append(IDPC_EDU_FUNC(path + '/__references__/IDPC_DU/IDPC_EDU/data/set' + str(ID_set), file_name))
+        data = ray.get([create_idpc.remote(path + '/__references__/IDPC_DU/IDPC_EDU/data/set' + str(ID_set) + '/' + f) for f in file_list] )
+        for i in range(len(data)):
+            tasks.append(IDPC_EDU_FUNC(path + '/__references__/IDPC_DU/IDPC_EDU/data/set' + str(ID_set), file_list[i], *[data[i][j] for j in range(len(data[i]))]))
+        # for file_name in tqdm(file_list):
+        #     tasks.append(IDPC_EDU_FUNC(path + '/__references__/IDPC_DU/IDPC_EDU/data/set' + str(ID_set), file_name))
         return tasks, Ind_EDU
 
