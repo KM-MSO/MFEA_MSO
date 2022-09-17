@@ -300,7 +300,13 @@ class Population:
 
     def get_solves(self):
         return [subPop.getSolveInd() for subPop in self.ls_subPop]
-
+    
+    def get_all_inds(self):
+        all = []
+        for subPop in self.ls_subPop:
+            all.extend(subPop.ls_inds)
+        return all
+    
     def update_rank(self):
         for subPop in self:
             subPop.update_rank()

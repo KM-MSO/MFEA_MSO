@@ -284,7 +284,16 @@ class PMX_Crossover(AbstractCrossover):
         ob.skill_factor = skf_ob
         return oa, ob
 
-        
+
+@nb.njit
+def tpx_func(p1, p2, t1, t2):
+    o1 = np.copy(p1)
+    o2 = np.copy(p2)
+
+    o1[t1:t2], o2[t1:t2] = o2[t1:t2], o1[t1:t2]
+    
+    return o1, o2
+       
 
 class TPX_Crossover(AbstractCrossover):
     def __call__(self, pa: Individual, pb: Individual, skf_oa=None, skf_ob=None, *args, **kwargs) -> Tuple[Individual, Individual]:
@@ -292,10 +301,7 @@ class TPX_Crossover(AbstractCrossover):
         if t1 > t2:
             t1, t2 = t2, t1
 
-        genes_oa = np.copy(pa.genes)
-        genes_ob = np.copy(pb.genes)
-
-        genes_oa[t1:t2], genes_ob[t1:t2] = genes_ob[t1:t2], genes_oa[t1:t2]
+        genes_oa, genes_ob = tpx_func(pa.genes, pb.genes, t1, t2)
 
         oa = self.IndClass(genes_oa)
         ob = self.IndClass(genes_ob)
@@ -319,12 +325,13 @@ class IDPCEDU_Crossover(AbstractCrossover):
         t1, t2 = np.random.randint(0, self.dim_uss + 1, 2)
         if t1 > t2:
             t1, t2 = t2, t1
-        genes_oa[1], genes_ob[1] = pa.genes[1], pb.genes[1]
-        genes_oa[1, t1:t2], genes_ob[1, t1:t2] = genes_ob[1, t1:t2], genes_oa[1, t1:t2]
+            
+        genes_oa[1], genes_ob[1] = tpx_func(pa.genes[1], pb.genes[1], t1, t2)
 
         oa = self.IndClass(genes_oa)
         ob = self.IndClass(genes_ob)
 
         oa.skill_factor = skf_oa
         ob.skill_factor = skf_ob
+    
         return oa, ob
