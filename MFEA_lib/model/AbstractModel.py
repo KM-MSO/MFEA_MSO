@@ -12,6 +12,7 @@ from IPython.display import display, clear_output
 class model():
     def __init__(self, seed = None, percent_print = 0.5) -> None:
         # initial history of factorial cost
+        self.populations = []
         self.history_cost: list[float] = []
         self.solve: list[Individual]  
         self.seed = None 

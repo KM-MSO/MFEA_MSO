@@ -35,6 +35,10 @@ class GraphDataset(InMemoryDataset):
         return '{}{}'.format(self.__class__.__name__)
   
 
+class GNNModel(nn.Module):
+    def __init__(self):
+        pass
+
 class SurrogateModel(nn.Module):
     def __init__(self, input_dim, hidden_dim, output_dim):
         super().__init__()
