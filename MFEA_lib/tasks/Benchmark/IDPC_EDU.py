@@ -18,9 +18,9 @@ class IDPC_EDU_benchmark:
         print('\rReading data...')
         tasks = []
         file_list = sorted(os.listdir(path + '/__references__/IDPC_DU/IDPC_EDU/data/set' + str(ID_set)))
-        data = ray.get([create_idpc.remote(path + '/__references__/IDPC_DU/IDPC_EDU/data/set' + str(ID_set) + '/' + f) for f in file_list] )
-        for i in range(len(data)):
-            tasks.append(IDPC_EDU_FUNC(path + '/__references__/IDPC_DU/IDPC_EDU/data/set' + str(ID_set), file_list[i], *[data[i][j] for j in range(len(data[i]))]))
+        ray.get([create_idpc.remote(path + '/__references__/IDPC_DU/IDPC_EDU/data/set' + str(ID_set), f, tasks) for f in file_list] )
+        # for i in range(len(data)):
+        #     tasks.append(IDPC_EDU_FUNC(path + '/__references__/IDPC_DU/IDPC_EDU/data/set' + str(ID_set), file_list[i], *[data[i][j] for j in range(len(data[i]))]))
         # for file_name in tqdm(file_list):
         #     tasks.append(IDPC_EDU_FUNC(path + '/__references__/IDPC_DU/IDPC_EDU/data/set' + str(ID_set), file_name))
         return tasks, Ind_EDU
