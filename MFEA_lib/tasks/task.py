@@ -1,12 +1,8 @@
 import numpy as np
 import numba as nb
-import torch
 import sys
-import os
-from .surrogate import SurrogateModel, SurrogatePipeline, GraphDataset
+import torch
 MAX_INT = sys.maxsize
-
-
 
 class AbstractTask():
     def __init__(self, *args, **kwargs) -> None:
@@ -28,8 +24,8 @@ class AbstractTask():
 
 #----------------------------------------------------------------------------------------------------------------------------
 #a solution is an permutation start from 0 to n - 1, k is also counted from 0 but domain is counted from 1
-class IDPC_EDU_FUNC(AbstractTask):    
-    def __init__(self, dataset_path, file_name, use_surrogate = False):
+class IDPC_EDU_FUNC(AbstractTask):        
+    def __init__(self, dataset_path, file_name):
         self.file = str(dataset_path) + '/'  + file_name
         self.datas = {}
         self.source: int
@@ -37,24 +33,22 @@ class IDPC_EDU_FUNC(AbstractTask):
         self.num_domains: int
         self.num_nodes: int
         self.num_edges: int = int(file_name[:-5].split('x')[-1])
-        self.edges: np.ndarray
         self.dim: int = int(file_name[5:].split('x')[0])
         self.name = file_name.split('.')[0]
-        self.use_surrogate = use_surrogate
         self.read_data()
-        if self.use_surrogate:
-            self.graph_data = GraphDataset(edges= self.edges, count_paths= self.count_paths,
-                                           num_nodes= self.num_nodes, source = self.source, target = self.target)
-            import torch_geometric.nn as gnn
-            import torch.nn as nn
-            print(gnn.EdgeConv(nn.Linear(2, 64, device= 'cuda'))(self.graph_data.graph.x.cuda(), self.graph_data.graph.edge_index.cuda()).shape)
-            
-            self.surrogate_pipeline = SurrogatePipeline(input_dim=self.num_nodes*2, 
-                                                        hidden_dim=self.num_nodes, 
-                                                        output_dim=1, 
-                                                        learning_rate=1e-5,
-                                                        device='cuda' if torch.cuda.is_available() else 'cpu')
- 
+        self.edge_index = []
+        self.edge_attribute = []
+        for i in range(self.count_paths.shape[0]):
+            for j in range(self.count_paths.shape[1]):
+                n = self.count_paths[i][j]
+
+                self.edge_index.extend( [[i , j] for _ in range(n)] )
+                self.edge_attribute.extend( [self.edges.get(f'{i}_{j}_{k}') for k in range(n)] )
+                
+        self.edge_index = torch.tensor(self.edge_index, dtype= torch.long).reshape(2, -1)
+        self.edge_attribute = torch.tensor(self.edge_attribute, dtype= torch.long)
+    
+    
     def read_data(self):
         with open(self.file, "r") as f:
             lines = f.readlines()
@@ -68,6 +62,7 @@ class IDPC_EDU_FUNC(AbstractTask):
                 key_type= nb.types.unicode_type,
                 value_type= nb.typeof((0, 0)),
             )
+            # self.normal_edges = {}
             #get source and target from the seconde line
             line1 = lines[1].split()
             self.source = int(line1[0]) - 1
@@ -77,6 +72,7 @@ class IDPC_EDU_FUNC(AbstractTask):
             lines = lines[2:]
             for line in lines:
                 data = [int(x) for x in line.split()]
+                # self.normal_edges[f'{data[0] - 1}_{data[1] - 1}_{count_paths[data[0] - 1][data[1] - 1]}'] = tuple([data[2], data[3]])
                 self.edges[f'{data[0] - 1}_{data[1] - 1}_{count_paths[data[0] - 1][data[1] - 1]}'] = tuple([data[2], data[3]])
                 count_paths[data[0] - 1][data[1] - 1] += 1
             self.count_paths = count_paths
@@ -122,13 +118,11 @@ class IDPC_EDU_FUNC(AbstractTask):
                     continue
                 
                 k = gene[1][curr] % count_paths[curr][t] 
-                # key = get_key(curr, t, k)
                 key = '_'.join([str(curr), str(t), str(k)])
                 d = edges[key][1]
                 if left_domains[d]:
                     continue
                 cost += edges[key][0]
-                # path.append(key +  '_' + str(edges[key][0]) + '_' + str(d))
                 left_domains[d] = True
                 curr = t
                 stop = False
@@ -139,18 +133,10 @@ class IDPC_EDU_FUNC(AbstractTask):
         
     def __call__(self, gene: np.ndarray):
         # decode
-        # idx = np.argsort(gene[0])[:self.dim]
-        idx = np.arange(self.dim)
+        idx = np.sort(np.argsort(gene[0])[:self.dim])
+        
+        # idx = np.arange(self.dim)
         gene = np.ascontiguousarray(gene[:, idx])
-        # eval
-        if self.use_surrogate:
-            if os.environ.get("surrogate_status") == "train":
-                cost = __class__.func(gene, self.source, self.target,
-                                self.num_nodes, self.num_domains, self.edges, self.count_paths)
-                self.surrogate_pipeline.train(gene, cost)
-            else:
-                cost = self.surrogate_pipeline.predict(gene).item()
-        else:
-            cost = __class__.func(gene, self.source, self.target,
+        cost = __class__.func(gene, self.source, self.target,
                                 self.num_nodes, self.num_domains, self.edges, self.count_paths)
         return cost

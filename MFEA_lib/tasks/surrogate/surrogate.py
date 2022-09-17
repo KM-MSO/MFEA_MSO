@@ -3,27 +3,56 @@ import torch
 import torch_geometric.nn as gnn
 from torch_geometric.data import Data, InMemoryDataset
 import numpy as np
+import ray
 
 class GraphDataset(InMemoryDataset):
-    def __init__(self, edges: dict, count_paths: np.ndarray, num_nodes: int, source:int, target:int, transform= None):
-        x = [[0] for _ in range(num_nodes)]
-        x[source] = [-1]
-        x[target] = [1]
+    def __init__(self, tasks, root = './data', transform= None, pre_transform= None, pre_filter= None):
+        super().__init__(root, transform, pre_transform, pre_filter)
+        self.data = []
+        self.tasks= tasks
+       
+    @staticmethod 
+    # @ray.remote
+    def create_new_graph_instance(edge_index, edge_attribute, num_nodes: int, source:int, target:int, genes: np.ndarray, y: int):
+        x = [[0, genes[0, i], genes[1, i]] for i in range(num_nodes)]
+        x[source][0] = -1
+        x[target][0] = 1
+            
         x = torch.tensor(x, dtype= torch.float)
         
-        edge_index = []
-        edge_attribute = []
-        for i in range(count_paths.shape[0]):
-            for j in range(count_paths.shape[1]):
-                n = count_paths[i][j]
-
-                edge_index.extend( [[i , j] for _ in range(n)] )
-                edge_attribute.extend( [edges.get(f'{i}_{j}_{k}') for k in range(n)] )
-                
-        edge_index = torch.tensor(edge_index, dtype= torch.long).reshape(2, -1)
-        edge_attribute = torch.tensor(edge_attribute, dtype= torch.long)
         
-        self.graph = Data(x= x, edge_index= edge_index, edge_attr= edge_attribute)
+        
+        return Data(x= x, edge_index= edge_index, edge_attr= edge_attribute, y= torch.Tensor(y))
+    
+    def append(self, genes, costs, skfs):
+        for i in range(genes.shape[0]):
+            self.data.append(__class__.create_new_graph_instance(
+                edge_index = self.tasks[skfs[i]].edge_index,
+                edge_attribute= self.tasks[skfs[i]].edge_attribute,
+                num_nodes= self.tasks[skfs[i]].num_nodes, 
+                source= self.tasks[skfs[i]].source,
+                target= self.tasks[skfs[i]].target,
+                genes = genes[i], 
+                y = costs[i],
+            ))
+        # new_data =  [
+        #     __class__.create_new_graph_instance.remote(
+        #         self.tasks[skfs[i]].edge_index,
+        #         self.tasks[skfs[i]].edge_attribute,
+        #         self.tasks[skfs[i]].num_nodes, 
+        #         self.tasks[skfs[i]].source,
+        #         self.tasks[skfs[i]].target,
+        #         genes[i], 
+        #         costs[i],
+        #     ) for i in range(genes.shape[0])
+        # ]
+        # self.data.extend(ray.get(new_data))
+            
+    def len(self):
+        return len(self.data)
+            
+    def get(self, idx):
+        return self.data[idx]
         
     def _download(self):
         pass
@@ -54,13 +83,12 @@ class SurrogateModel(nn.Module):
         return x
     
 class SurrogatePipeline():
-    def __init__(self, input_dim, hidden_dim, output_dim, learning_rate, graph, device= None):
-        self.device = device if device else 'cpu'
+    def __init__(self, input_dim, hidden_dim, output_dim, learning_rate, device = 'cpu'):
+        self.device = device 
         self.model = SurrogateModel(input_dim, hidden_dim, output_dim).to(self.device)
         self.optimizer = torch.optim.Adam(self.model.parameters(), lr=learning_rate)
         self.criteria = nn.MSELoss()
         self.learning_rate = learning_rate
-        self.graph = graph
         
     def train(self, input, output):
         input = torch.Tensor(input.flatten()).to(self.device)

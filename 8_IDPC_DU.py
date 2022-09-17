@@ -10,19 +10,19 @@ from MFEA_lib.model.utils import *
 from MFEA_lib.operators.Crossover import *
 from MFEA_lib.operators.Mutation import *
 from MFEA_lib.operators.Selection import *
-
+from MFEA_lib.tasks.surrogate import SurrogatePipeline
 
 tasks, IndClass = IDPC_EDU_benchmark.get_tasks(1)
 
 
-baseModel = MFEA_surrogate.model()
+baseModel = MFEA_base.betterModel()
 baseModel.compile(
     IndClass= IndClass,
     tasks= tasks,
-    # crossover= newSBX(nc = 2, gamma= 0.4, alpha= 6),
     crossover= IDPCEDU_Crossover(),
     mutation= IDPCEDU_Mutation(),
-    selection= ElitismSelection()
+    selection= ElitismSelection(),
+    surrogate_pipeline = SurrogatePipeline(10, 10,10,10),
 )
 solve = baseModel.fit(
     nb_generations = 1000, rmp = 0.3, nb_inds_each_task= 100, 
