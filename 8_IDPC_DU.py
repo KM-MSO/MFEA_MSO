@@ -11,8 +11,12 @@ from MFEA_lib.operators.Crossover import *
 from MFEA_lib.operators.Mutation import *
 from MFEA_lib.operators.Selection import *
 from MFEA_lib.tasks.surrogate import SurrogatePipeline
-
+import time
+import ray
+ray.init()
+s = time.time()
 tasks, IndClass = IDPC_EDU_benchmark.get_tasks(1)
+print(f'Read in {time.time() - s} s')
 
 
 baseModel = MFEA_base.betterModel()
@@ -25,7 +29,7 @@ baseModel.compile(
     surrogate_pipeline = SurrogatePipeline(10, 10,10,10),
 )
 solve = baseModel.fit(
-    nb_generations = 1000, rmp = 0.3, nb_inds_each_task= 100, 
+    nb_generations = 1000, rmp = 1, nb_inds_each_task= 10, 
     bound_pop= [0, 1], evaluate_initial_skillFactor= True
 )
 
