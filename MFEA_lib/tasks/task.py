@@ -85,9 +85,9 @@ class IDPC_EDU_FUNC(AbstractTask):
         #         self.edge_weight.append(sum(weight))
         #         self.edge_index.append([i , j])
         #         self.edge_attribute.extend( [self.edges.get(f'{i}_{j}_{k}') for k in range(n)] )
-
-        # self.edge_index = torch.tensor(self.edge_index, dtype= torch.long).reshape(2, -1)
-        # self.edge_attribute = torch.tensor(self.edge_attribute, dtype= torch.long)
+        import torch
+        self.edge_index = torch.tensor(self.edge_index, dtype= torch.long).reshape(2, -1)
+        self.edge_attribute = torch.tensor(self.edge_attribute, dtype= torch.long)
 
 
     def read_data(self):

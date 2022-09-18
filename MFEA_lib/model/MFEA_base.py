@@ -1,10 +1,12 @@
+from re import A
 import numpy as np
 from . import AbstractModel
 from ..operators import Crossover, Mutation, Selection
 from ..tasks.task import AbstractTask
 from ..EA import *
 from ..tasks.surrogate import GraphDataset
-
+import random
+from scipy.stats import kendalltau
 class model(AbstractModel.model):
     def compile(self, 
         IndClass: Type[Individual],
@@ -89,7 +91,7 @@ class betterModel(AbstractModel.model):
             self.dataset = GraphDataset(tasks = tasks)
         return super().compile(IndClass, tasks, crossover, mutation, selection, *args, **kwargs)
     
-    def fit(self, nb_generations, rmp = 0.3, nb_inds_each_task = 100, evaluate_initial_skillFactor = True, *args, **kwargs) -> list[Individual]:
+    def fit(self, nb_generations, rmp = 0.3, nb_inds_each_task = 100, evaluate_initial_skillFactor = True, train_period = 5, start_eval = 6, *args, **kwargs) -> list[Individual]:
         super().fit(*args, **kwargs)
 
         # initialize population
@@ -109,6 +111,17 @@ class betterModel(AbstractModel.model):
         for epoch in range(nb_generations):
             genes, costs, skf, population= self.epoch_step(rmp, epoch, nb_inds_each_task, nb_generations, population)
             self.dataset.append(genes, costs,skf)
+            if (epoch + 1) % train_period == 0:
+                self.surrogate_pipeline.train(self.dataset)
+            if epoch + 1 > start_eval:
+                preds = []
+                gts = []
+                for d in self.dataset.latest_data:
+                    predict = self.surrogate_pipeline.predict(d).detach().cpu().numpy()
+                    preds.append(predict[0])
+                    gts.append(d.y.cpu().numpy()[0])
+                    # print(f'Predict {predict[0]}, gt: {d.y}') 
+                print('Kendall tau', kendalltau(preds, gts))
         print('\nEND!')
 
         #solve
@@ -149,7 +162,8 @@ class betterModel(AbstractModel.model):
         population = population + offsprings
         
         # population.update_rank()
-        sol = population.get_all_inds()
+        population.update_rank()
+        sol = random.sample(offsprings.get_all_inds(), 100)
         # selection
         self.selection(population, [nb_inds_each_task] * len(self.tasks))
         # save history
@@ -159,5 +173,5 @@ class betterModel(AbstractModel.model):
             assert self.history_cost[-1][i] == np.min([f.fcost for f in population.ls_subPop[i].ls_inds]), (self.history_cost[-1][i] , np.min([f.fcost for f in population.ls_subPop[i].ls_inds]))
 
         #print
-        self.render_process_terminal((cur_epoch+1)/nb_generations, ['Cost'], [self.history_cost[-1]], use_sys= True)
+        self.render_process((cur_epoch+1)/nb_generations, ['Cost'], [self.history_cost[-1]], use_sys= True)
         return np.stack([ind.genes for ind in sol]), np.hstack([ind.fcost for ind in sol]), np.hstack([ind.skill_factor for ind in sol]), population

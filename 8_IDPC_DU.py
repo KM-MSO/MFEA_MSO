@@ -26,7 +26,7 @@ baseModel.compile(
     crossover= IDPCEDU_Crossover(),
     mutation= IDPCEDU_Mutation(),
     selection= ElitismSelection(),
-    surrogate_pipeline = SurrogatePipeline(10, 10,10,10),
+    surrogate_pipeline = SurrogatePipeline(3, 3, learning_rate=4e-4, use_cuda= True),
 )
 solve = baseModel.fit(
     nb_generations = 1000, rmp = 1, nb_inds_each_task= 10, 
