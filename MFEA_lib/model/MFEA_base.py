@@ -7,6 +7,9 @@ from ..EA import *
 from ..tasks.surrogate import GraphDataset
 import random
 from scipy.stats import kendalltau
+import sys
+MAX_INT = sys
+
 class model(AbstractModel.model):
     def compile(self, 
         IndClass: Type[Individual],
@@ -110,18 +113,22 @@ class betterModel(AbstractModel.model):
         
         for epoch in range(nb_generations):
             genes, costs, skf, population= self.epoch_step(rmp, epoch, nb_inds_each_task, nb_generations, population)
-            self.dataset.append(genes, costs,skf)
-            if (epoch + 1) % train_period == 0:
+            if (epoch + 1) < nb_generations // 20:
+                self.dataset.append(genes, costs,skf)
+            if (epoch + 1) % train_period == 0 and (epoch + 1) < nb_generations // 5:
                 self.surrogate_pipeline.train(self.dataset)
             if epoch + 1 > start_eval:
                 preds = []
                 gts = []
                 for d in self.dataset.latest_data:
                     predict = self.surrogate_pipeline.predict(d).detach().cpu().numpy()
-                    preds.append(predict[0])
+                    if predict[0] > self.surrogate_pipeline.threshold:
+                        preds.append(predict[1])
+                    else:
+                        preds.append(MAX_INT)
                     gts.append(d.y.cpu().numpy()[0])
                     # print(f'Predict {predict[0]}, gt: {d.y}') 
-                print('Kendall tau', kendalltau(preds, gts))
+                print(f'Generation {epoch} | Evaluate surrogate | Kendall tau {kendalltau(preds, gts)}')
         print('\nEND!')
 
         #solve

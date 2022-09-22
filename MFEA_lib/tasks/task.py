@@ -23,7 +23,7 @@ class AbstractTask():
 
     
 
-@ray.remote
+#@ray.remote
 def create_idpc(dir, file):
     with open(str(dir) + '/'  + file, "r") as f:
         lines = f.readlines()
@@ -65,7 +65,7 @@ class IDPC_EDU_FUNC(AbstractTask):
         self.edge_index = []
         self.edge_attribute = []
         self.edge_weight = []
-
+        self.max_fitness = MAX_INT
         # type 1
         for i in range(self.count_paths.shape[0]):
             for j in range(self.count_paths.shape[1]):
@@ -117,7 +117,7 @@ class IDPC_EDU_FUNC(AbstractTask):
                 count_paths[data[0] - 1][data[1] - 1] += 1
             self.count_paths = count_paths
 
-    # @staticmethod
+    @staticmethod
     # @nb.njit(
     #     nb.int64(
     #         nb.typeof(np.array([[1]]).astype(np.int64)),
@@ -168,7 +168,7 @@ class IDPC_EDU_FUNC(AbstractTask):
                 stop = False
                 break
             if stop:
-                return 10000
+                return MAX_INT
         return cost
         
     def __call__(self, gene: np.ndarray):
