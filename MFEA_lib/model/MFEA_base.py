@@ -7,6 +7,7 @@ from ..EA import *
 from ..tasks.surrogate import GraphDataset
 import random
 from scipy.stats import kendalltau
+from sklearn.metrics import f1_score, confusion_matrix
 class model(AbstractModel.model):
     def compile(self, 
         IndClass: Type[Individual],
@@ -109,19 +110,26 @@ class betterModel(AbstractModel.model):
         self.render_process(0, ['Cost'], [self.history_cost[-1]], use_sys= True)
         
         for epoch in range(nb_generations):
-            genes, costs, skf, population= self.epoch_step(rmp, epoch, nb_inds_each_task, nb_generations, population)
-            self.dataset.append(genes, costs,skf)
-            if (epoch + 1) % train_period == 0:
-                self.surrogate_pipeline.train(self.dataset)
+            genes, costs, skf, bests, population= self.epoch_step(rmp, epoch, nb_inds_each_task, nb_generations, population)
+            self.dataset.append(genes, costs,skf, bests)
             if epoch + 1 > start_eval:
-                preds = []
+                reg_preds = []
+                cls_preds = []
+                cls_gts = []
                 gts = []
                 for d in self.dataset.latest_data:
-                    predict = self.surrogate_pipeline.predict(d).detach().cpu().numpy()
-                    preds.append(predict[0])
+                    reg_predict, cls_predict = self.surrogate_pipeline.predict(d)
+                    reg_preds.append(reg_predict.detach().cpu().numpy()[0])
+                    cls_preds.append(1 if cls_predict.detach().cpu().numpy()[0] > 0.5 else 0)
+                    cls_gts.append(d.thresh_hold.cpu().numpy()[0])
                     gts.append(d.y.cpu().numpy()[0])
-                    # print(f'Predict {predict[0]}, gt: {d.y}') 
-                print('Kendall tau', kendalltau(preds, gts))
+                
+                print(kendalltau(reg_preds, gts), f'F1: {f1_score(cls_gts, cls_preds)}')
+                print(confusion_matrix(cls_gts, cls_preds))
+            if (epoch + 1) % train_period == 0:
+                self.surrogate_pipeline.train(self.dataset)
+            
+                
         print('\nEND!')
 
         #solve
@@ -166,6 +174,7 @@ class betterModel(AbstractModel.model):
         sol = random.sample(offsprings.get_all_inds(), 100)
         # selection
         self.selection(population, [nb_inds_each_task] * len(self.tasks))
+        last_best = np.stack([self.history_cost[-1][ind.skill_factor] for ind in sol])
         # save history
         self.history_cost.append([ind.fcost for ind in population.get_solves()])
 
@@ -174,4 +183,5 @@ class betterModel(AbstractModel.model):
 
         #print
         self.render_process((cur_epoch+1)/nb_generations, ['Cost'], [self.history_cost[-1]], use_sys= True)
-        return np.stack([ind.genes for ind in sol]), np.hstack([ind.fcost for ind in sol]), np.hstack([ind.skill_factor for ind in sol]), population
+        return np.stack([ind.genes for ind in sol]), np.hstack([ind.fcost for ind in sol]), \
+                np.hstack([ind.skill_factor for ind in sol]), last_best, population

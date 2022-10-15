@@ -1,1 +1,2 @@
-from .surrogate import SurrogateModel, SurrogatePipeline, GraphDataset
+from .model import SurrogateModel, SurrogatePipeline
+from .dataset import GraphDataset
